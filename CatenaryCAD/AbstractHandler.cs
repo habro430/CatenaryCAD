@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CatenaryCAD
 {
-    public class Class1
+    public abstract class AbstractHandler
     {
     }
 }
