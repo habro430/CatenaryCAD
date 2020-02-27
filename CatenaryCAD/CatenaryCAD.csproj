@@ -33,15 +33,19 @@
   <ItemGroup>
     <Reference Include="imapimgd">
       <HintPath>..\..\..\..\..\..\Program Files\Nanosoft\nanoCAD x64 Plus 11.1\bin\imapimgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="mapibasetypes">
       <HintPath>..\..\..\..\..\..\Program Files\Nanosoft\nanoCAD x64 Plus 11.1\bin\mapibasetypes.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="mapimgd">
       <HintPath>..\..\..\..\..\..\Program Files\Nanosoft\nanoCAD x64 Plus 11.1\bin\mapimgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,8 +53,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractHandler.cs" />
+    <Compile Include="ConverterHelper.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Handlers\AbstractHandler.cs" />
+    <Compile Include="Handlers\IAbstractHandler.cs" />
+    <Compile Include="Handlers\MastHandler\MastHandler.cs" />
+    <Compile Include="Notifications.cs" />
+    <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Handlers\MastHandler\Parameters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
