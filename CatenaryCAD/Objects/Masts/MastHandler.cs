@@ -30,10 +30,10 @@ namespace CatenaryCAD.Objects
         {
             Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", PropertyFlags.RefreshAfterChange);
 
-            mast_type.DictionaryValues = InheritedMasts;
+            mast_type.CollectionValues = InheritedMasts;
 
             mast_type.Updated += mast_type_updated;
-            mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
+            mast_type.Value = mast_type.CollectionValues.Values.FirstOrDefault();
 
             Properties.Add(mast_type);
         }

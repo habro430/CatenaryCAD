@@ -14,7 +14,7 @@ namespace CatenaryCAD.Properties
         public override string Category { get; protected set; }
         public override PropertyFlags Properties { get; protected set; }
 
-        public Dictionary<string, T> DictionaryValues { set; get; }
+        public Dictionary<string, T> CollectionValues { set; get; }
 
         private T _value = default;
         public T Value
@@ -39,16 +39,16 @@ namespace CatenaryCAD.Properties
         public override Type GetValueType() => typeof(T);
         public override ICollection GetValuesCollection()
         {
-            if (DictionaryValues != null)
-                return DictionaryValues.Keys;
+            if (CollectionValues != null)
+                return CollectionValues.Keys;
             else
                 return null;
         }
         public override object GetValue()
         {
-            if (DictionaryValues != null)
+            if (CollectionValues != null)
             {
-                foreach (var dict in DictionaryValues)
+                foreach (var dict in CollectionValues)
                 {
                     if (dict.Value.Equals(Value))
                         return dict.Key;
@@ -60,7 +60,6 @@ namespace CatenaryCAD.Properties
             }
 
             return null;
-
         }
 
         public override bool SetValue(object val)
@@ -71,8 +70,8 @@ namespace CatenaryCAD.Properties
                 if (_value == null)
                 {
 
-                    if (DictionaryValues != null)
-                        Value = DictionaryValues[val.ToString()];
+                    if (CollectionValues != null)
+                        Value = CollectionValues[val.ToString()];
                     else
                     {
                         try
@@ -92,8 +91,8 @@ namespace CatenaryCAD.Properties
             }
             else
             {
-                if (DictionaryValues != null)
-                    Value = DictionaryValues[val.ToString()];
+                if (CollectionValues != null)
+                    Value = CollectionValues[val.ToString()];
                 else
                 {
                     try

@@ -76,8 +76,8 @@ namespace CatenaryCAD.Objects.Masts
             {
                 Property<Type> mast_subtype = new Property<Type>("02_mast_metall_type", "Марка стойки", "Стойка", PropertyFlags.RefreshAfterChange);
 
-                mast_subtype.DictionaryValues = InheritedMasts;
-                mast_subtype.Value = mast_subtype.DictionaryValues.Values.FirstOrDefault();
+                mast_subtype.CollectionValues = InheritedMasts;
+                mast_subtype.Value = mast_subtype.CollectionValues.Values.FirstOrDefault();
 
                 propertes.Add(mast_subtype);
             }
@@ -88,7 +88,7 @@ namespace CatenaryCAD.Objects.Masts
 
             Property<int> m_len = new Property<int>("03_mast_len", "Длинна", "Стойка", PropertyFlags.RefreshAfterChange);
 
-            m_len.DictionaryValues = new Dictionary<string, int>
+            m_len.CollectionValues = new Dictionary<string, int>
             {
                 ["10.0 м"] = 10000,
                 ["12.0 м"] = 12000,
@@ -97,7 +97,7 @@ namespace CatenaryCAD.Objects.Masts
             };
 
             m_len.Updated += len_updated;
-            m_len.Value = m_len.DictionaryValues.Values.FirstOrDefault();
+            m_len.Value = m_len.CollectionValues.Values.FirstOrDefault();
 
             propertes.Add( m_len);
 
