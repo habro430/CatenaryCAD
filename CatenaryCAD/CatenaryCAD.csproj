@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="imapimgd">
@@ -46,6 +48,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,17 +56,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConverterHelper.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Handlers\AbstractHandler.cs" />
-    <Compile Include="Handlers\IAbstractHandler.cs" />
-    <Compile Include="Handlers\MastHandler\MastHandler.cs" />
+    <Compile Include="Geometry\Matrix3D.cs" />
+    <Compile Include="Geometry\ObjParser\Extent.cs" />
+    <Compile Include="Geometry\ObjParser\Waveform.cs" />
+    <Compile Include="Geometry\ObjParser\Types\Face.cs" />
+    <Compile Include="Geometry\ObjParser\Types\IType.cs" />
+    <Compile Include="Geometry\ObjParser\Types\Vertex.cs" />
+    <Compile Include="Geometry\Point3D.cs" />
+    <Compile Include="Geometry\Vector3D.cs" />
+    <Compile Include="Objects\AbstractHandler.cs" />
+    <Compile Include="Objects\Basements\AbstractBasement.cs" />
+    <Compile Include="Objects\Basements\BasementAtribute.cs" />
+    <Compile Include="Objects\Masts\MastHandler.cs" />
+    <Compile Include="Objects\Masts\AbstractMast.cs" />
+    <Compile Include="Objects\Masts\ARMORED\Armored.cs" />
+    <Compile Include="Objects\Masts\MastAttribute.cs" />
+    <Compile Include="Objects\Masts\METALL\Metall.cs" />
+    <Compile Include="Objects\Masts\METALL\Types\М.cs" />
+    <Compile Include="Objects\Masts\ARMORED\Types\ССА.cs" />
+    <Compile Include="HashCode.cs" />
     <Compile Include="Notifications.cs" />
-    <Compile Include="Parameters.cs" />
+    <Compile Include="Props\AbstractProperty.cs" />
+    <Compile Include="Props\AdaptorProperty.cs" />
+    <Compile Include="Props\PropertyCollection.cs" />
+    <Compile Include="Props\Property.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Handlers\MastHandler\Parameters\" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
