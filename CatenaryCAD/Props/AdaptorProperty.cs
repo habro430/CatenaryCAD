@@ -1,10 +1,6 @@
 ﻿using Multicad;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
 
 namespace CatenaryCAD.Properties
 {
