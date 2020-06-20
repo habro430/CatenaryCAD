@@ -14,7 +14,7 @@ namespace CatenaryCAD.Properties
         public override string Category { get; protected set; }
         public override PropertyFlags Properties { get; protected set; }
 
-        public Dictionary<string, T> CollectionValues { set; get; }
+        public Dictionary<string, T> DictionaryValues { set; get; }
 
         private T _value = default;
         public T Value
@@ -39,16 +39,16 @@ namespace CatenaryCAD.Properties
         public override Type GetValueType() => typeof(T);
         public override ICollection GetValuesCollection()
         {
-            if (CollectionValues != null)
-                return CollectionValues.Keys;
+            if (DictionaryValues != null)
+                return DictionaryValues.Keys;
             else
                 return null;
         }
         public override object GetValue()
         {
-            if (CollectionValues != null)
+            if (DictionaryValues != null)
             {
-                foreach (var dict in CollectionValues)
+                foreach (var dict in DictionaryValues)
                 {
                     if (dict.Value.Equals(Value))
                         return dict.Key;
@@ -70,8 +70,8 @@ namespace CatenaryCAD.Properties
                 if (_value == null)
                 {
 
-                    if (CollectionValues != null)
-                        Value = CollectionValues[val.ToString()];
+                    if (DictionaryValues != null)
+                        Value = DictionaryValues[val.ToString()];
                     else
                     {
                         try
@@ -91,8 +91,8 @@ namespace CatenaryCAD.Properties
             }
             else
             {
-                if (CollectionValues != null)
-                    Value = CollectionValues[val.ToString()];
+                if (DictionaryValues != null)
+                    Value = DictionaryValues[val.ToString()];
                 else
                 {
                     try

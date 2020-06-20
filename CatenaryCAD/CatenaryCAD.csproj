@@ -57,14 +57,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="Geometry\Matrix3D.cs" />
-    <Compile Include="Geometry\ObjParser\Extent.cs" />
-    <Compile Include="Geometry\ObjParser\Waveform.cs" />
-    <Compile Include="Geometry\ObjParser\Types\Face.cs" />
-    <Compile Include="Geometry\ObjParser\Types\IType.cs" />
-    <Compile Include="Geometry\ObjParser\Types\Vertex.cs" />
-    <Compile Include="Geometry\Point3D.cs" />
-    <Compile Include="Geometry\Vector3D.cs" />
+    <Compile Include="Geometry\Core\GeometryCore.cs" />
+    <Compile Include="Geometry\Core\Matrix3D.cs" />
+    <Compile Include="Objects\Masts\ObjParser\Extent.cs" />
+    <Compile Include="Objects\Masts\ObjParser\Waveform.cs" />
+    <Compile Include="Objects\Masts\ObjParser\Types\Face.cs" />
+    <Compile Include="Objects\Masts\ObjParser\Types\IType.cs" />
+    <Compile Include="Objects\Masts\ObjParser\Types\Vertex.cs" />
+    <Compile Include="Geometry\Core\Point3D.cs" />
+    <Compile Include="Geometry\AbstractGeometry.cs" />
+    <Compile Include="Geometry\Polygon.cs" />
+    <Compile Include="Geometry\Core\Vector3D.cs" />
     <Compile Include="Objects\AbstractHandler.cs" />
     <Compile Include="Objects\Basements\AbstractBasement.cs" />
     <Compile Include="Objects\Basements\BasementAtribute.cs" />
