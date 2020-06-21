@@ -1,4 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Objects.Masts;
 using CatenaryCAD.Properties;
 using Multicad;
@@ -64,14 +65,30 @@ namespace CatenaryCAD.Objects
             Mast.Updated += () => { if (!TryModify()) return; };
         }
 
+
         public override void OnDraw(GeometryBuilder dc)
         {
             dc.Clear();
 
             if (Mast != null)
             {
+
                 if (!Convert.ToBoolean(McDocument.ActiveDocument.CustomProperties["view3d"]))
-                    Mast.GetGeometry2D(dc, this.DbEntity.Color, this.DbEntity.DScale);
+                {
+                    AbstractGeometry[] geometryarr = Mast.GetGeometry(GeometryType.Geometry2D);
+                    if (geometryarr != null)
+                    {
+                        foreach (var geometry in geometryarr)
+                        {
+                            foreach (var edge in geometry.Edges)
+                            {
+                                dc.DrawLine(geometry.Points[edge.Item1].ToNanoCAD(), geometry.Points[edge.Item2].ToNanoCAD());
+                            }
+                        }
+                    }
+                    else
+                        dc.DrawText(new TextGeom("ERR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+                }
                 else
                     Mast.GetGeometry3D(dc, this.DbEntity.Color, this.DbEntity.DScale);
             }
@@ -155,19 +172,22 @@ namespace CatenaryCAD.Objects
             
             if (Mast != null)
             {
-                return Properties.ToAdapterPropertyArray()
-                    .Concat(Mast.GetProperties().ToAdapterPropertyArray())
-                    .OrderBy(n => n.Name).ToArray();
+                return Properties
+                    .Concat(Mast.GetProperties())                    
+                    .OrderBy(n => n.ID).ToArray().ToAdapterProperty();
             }
             else
-                return Properties.ToAdapterPropertyArray().OrderBy(n => n.Name).ToArray();
+                return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
         }
 
-        public McDynamicProperty GetProperty(string name)
+        public McDynamicProperty GetProperty(string id)
         {
-            if (Properties.Exist(name))
-                return Properties[name].ToAdapterProperty();
-            else return null;
+            foreach (var prop in Properties)
+            {
+                if (prop.ID == id) 
+                    return prop.ToAdapterProperty();
+            }
+            return null;
         }
 
     }

@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace CatenaryCAD.Geometry
+namespace CatenaryCAD.Geometry.Core
 {
     [Serializable]
-    public struct Matrix3D : IEquatable<Matrix3D>
+    public struct Matrix : IEquatable<Matrix>
     {
         public readonly double M11;
         public readonly double M12;
@@ -25,7 +25,7 @@ namespace CatenaryCAD.Geometry
         public readonly double M43;
         public readonly double M44;
 
-        public Matrix3D(double m11, double m12, double m13, double m14,
+        public Matrix(double m11, double m12, double m13, double m14,
                         double m21, double m22, double m23, double m24,
                         double m31, double m32, double m33, double m34,
                         double m41, double m42, double m43, double m44)
@@ -51,7 +51,7 @@ namespace CatenaryCAD.Geometry
             M44 = m44;
         }
 
-        public static readonly Matrix3D Identity = new Matrix3D
+        public static readonly Matrix Identity = new Matrix
         (
             1f, 0f, 0f, 0f,
             0f, 1f, 0f, 0f,
@@ -59,14 +59,14 @@ namespace CatenaryCAD.Geometry
             0f, 0f, 0f, 1f
         );
 
-        public static bool operator ==(Matrix3D m1, Matrix3D m2)
+        public static bool operator ==(Matrix m1, Matrix m2)
         {
             return (m1.M11 == m2.M11 && m1.M22 == m2.M22 && m1.M33 == m2.M33 && m1.M44 == m2.M44 &&
                     m1.M12 == m2.M12 && m1.M13 == m2.M13 && m1.M14 == m2.M14 && m1.M21 == m2.M21 &&
                     m1.M23 == m2.M23 && m1.M24 == m2.M24 && m1.M31 == m2.M31 && m1.M32 == m2.M32 &&
                     m1.M34 == m2.M34 && m1.M41 == m2.M41 && m1.M42 == m2.M42 && m1.M43 == m2.M43);
         }
-        public static bool operator !=(Matrix3D m1, Matrix3D m2)
+        public static bool operator !=(Matrix m1, Matrix m2)
         {
             return (m1.M11 != m2.M11 || m1.M12 != m2.M12 || m1.M13 != m2.M13 || m1.M14 != m2.M14 ||
                     m1.M21 != m2.M21 || m1.M22 != m2.M22 || m1.M23 != m2.M23 || m1.M24 != m2.M24 ||
@@ -74,8 +74,8 @@ namespace CatenaryCAD.Geometry
                     m1.M41 != m2.M41 || m1.M42 != m2.M42 || m1.M43 != m2.M43 || m1.M44 != m2.M44);
         }
 
-        public bool Equals(Matrix3D m) => this == m;
-        public override bool Equals(object obj) => (obj is Matrix3D m) && (this == m);
+        public bool Equals(Matrix m) => this == m;
+        public override bool Equals(object obj) => (obj is Matrix m) && (this == m);
 
         public override int GetHashCode()
         {

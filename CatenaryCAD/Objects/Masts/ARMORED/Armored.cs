@@ -1,4 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Properties;
 using Multicad.CustomObjectBase;
 using Multicad.Geometry;
@@ -73,6 +74,10 @@ namespace CatenaryCAD.Objects.Masts
 
         public Armored()
         {
+            //генериуем геометрию для 2D режима
+            Geometry2D = new AbstractGeometry[] { new Circle(new Geometry.Core.Point(), 600, 20) };
+
+
             if (InheritedMasts.Count > 0)
             {
                 Property<Type> mast_subtype = new Property<Type>("02_mast_armored_type", "Марка стойки", "Стойка",  PropertyFlags.RefreshAfterChange);
@@ -123,15 +128,19 @@ namespace CatenaryCAD.Objects.Masts
             Updated?.Invoke();
         }
 
-        private PropertyCollection properties = new PropertyCollection();
-        public override PropertyCollection GetProperties() => properties;
+        private List<AbstractProperty> properties = new List<AbstractProperty>();
+        public override AbstractProperty[] GetProperties() => properties.ToArray();
 
         public override void GetGeometry2D(GeometryBuilder geometry, Color color, double scale)
         {
             geometry.Color = Multicad.Constants.Colors.ByObject;
             geometry.LineType = Multicad.Constants.LineTypes.ByObject;
 
-            geometry.DrawCircle(Point3d.Origin, 600);
+           
+            //foreach (var edge in circle.Edges)
+            //{
+            //    geometry.DrawLine(circle.Points[edge.Item1].ToNanoCAD(), circle.Points[edge.Item2].ToNanoCAD());
+            //}
 
         }
         public override void GetGeometry3D(GeometryBuilder geometry, Color color, double scale)

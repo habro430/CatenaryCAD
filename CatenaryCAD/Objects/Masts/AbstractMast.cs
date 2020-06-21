@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Properties;
+﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Properties;
 using Multicad.CustomObjectBase;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,19 @@ using System.Reflection;
 
 namespace CatenaryCAD.Objects.Masts
 {
+    public enum GeometryType
+    {
+        Geometry2D,
+        Geometry3D,
+    }
     [Serializable]
     public abstract class AbstractMast
     {
         public abstract event Action Updated;
+
+        protected virtual AbstractGeometry[] Geometry2D { get; set; }
+        protected virtual AbstractGeometry[] Geometry3D { get; set; }
+
 
         public static Dictionary<string, Type> GetInheritedMastsFor(Type abst_mast_type)
         {
@@ -31,7 +41,17 @@ namespace CatenaryCAD.Objects.Masts
             }).ToDictionary(p => p.atrr.Type, p => p.type);
         }
 
-        public abstract PropertyCollection GetProperties();
+        public abstract AbstractProperty[] GetProperties();
+        public virtual AbstractGeometry[] GetGeometry(GeometryType type)
+        {
+            switch(type)
+            {
+                case GeometryType.Geometry2D: return Geometry2D;
+                case GeometryType.Geometry3D: return Geometry3D;
+
+                default: return Geometry2D;
+            }
+        }
 
         public abstract void GetGeometry2D(GeometryBuilder geometry, Color colour, double scale);
         public abstract void GetGeometry3D(GeometryBuilder geometry, Color colour, double scale);

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace CatenaryCAD.Properties
 {
@@ -25,7 +27,13 @@ namespace CatenaryCAD.Properties
 
         public abstract Type GetValueType();
         public abstract ICollection GetValuesCollection();
+
         internal virtual AdapterProperty ToAdapterProperty() => new AdapterProperty(this);
-       
+
+    }
+    internal static partial class Extensions
+    {
+        internal static AdapterProperty[] ToAdapterProperty(this AbstractProperty[] props) 
+            => props.Select(prop => prop.ToAdapterProperty()).ToArray();
     }
 }

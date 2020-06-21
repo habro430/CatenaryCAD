@@ -1,4 +1,6 @@
-﻿using CatenaryCAD.Properties;
+﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Core;
+using CatenaryCAD.Properties;
 using Multicad.CustomObjectBase;
 using Multicad.Geometry;
 using System;
@@ -124,11 +126,13 @@ namespace CatenaryCAD.Objects.Masts
             Updated?.Invoke();
         }
 
-        private PropertyCollection propertes = new PropertyCollection();
-        public override PropertyCollection GetProperties() => propertes;
+        private List<AbstractProperty> propertes = new List<AbstractProperty>();
+        public override AbstractProperty[] GetProperties() => propertes.ToArray();
 
         public override void GetGeometry2D(GeometryBuilder geometry, Color color, double scale)
         {
+
+
             geometry.Color = Multicad.Constants.Colors.ByObject;
             geometry.LineType = Multicad.Constants.LineTypes.ByObject;
 
@@ -142,7 +146,6 @@ namespace CatenaryCAD.Objects.Masts
             };
 
             geometry.DrawPolyline(points);
-
         }
         public override void GetGeometry3D(GeometryBuilder geometry, Color color, double scale)
         {

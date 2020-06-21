@@ -49,6 +49,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,17 +60,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="Geometry\Core\GeometryCore.cs" />
-    <Compile Include="Geometry\Core\Matrix3D.cs" />
+    <Compile Include="Geometry\Circle.cs" />
+    <Compile Include="Geometry\Core\Matrix.cs" />
     <Compile Include="Objects\Masts\ObjParser\Extent.cs" />
     <Compile Include="Objects\Masts\ObjParser\Waveform.cs" />
     <Compile Include="Objects\Masts\ObjParser\Types\Face.cs" />
     <Compile Include="Objects\Masts\ObjParser\Types\IType.cs" />
     <Compile Include="Objects\Masts\ObjParser\Types\Vertex.cs" />
-    <Compile Include="Geometry\Core\Point3D.cs" />
+    <Compile Include="Geometry\Core\Point.cs" />
     <Compile Include="Geometry\AbstractGeometry.cs" />
-    <Compile Include="Geometry\Polygon.cs" />
-    <Compile Include="Geometry\Core\Vector3D.cs" />
+    <Compile Include="Geometry\Line.cs" />
+    <Compile Include="Geometry\Core\Vector.cs" />
     <Compile Include="Objects\AbstractHandler.cs" />
     <Compile Include="Objects\Basements\AbstractBasement.cs" />
     <Compile Include="Objects\Basements\BasementAtribute.cs" />
@@ -82,7 +85,6 @@
     <Compile Include="Notifications.cs" />
     <Compile Include="Props\AbstractProperty.cs" />
     <Compile Include="Props\AdaptorProperty.cs" />
-    <Compile Include="Props\PropertyCollection.cs" />
     <Compile Include="Props\Property.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
