@@ -1,6 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Properties;
-using Multicad.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,45 +26,50 @@ namespace CatenaryCAD.Objects.Masts
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
         static Metall() => InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Metall));
 
-        private static Mesh[] GetOrCreateFromCache(string key)
+        private static Mesh GetOrCreateFromCache(string key)
         {
             //есть ли 3d модель в кэше
             if (!GeometryCache.Contains(key))
             {
                 //если нет то читаем 3d модель из ресурсов, генерируем и кэшируем 
                 ResourceManager rm = new ResourceManager(typeof(Resources));
-                GeometryCache.Set(key, GenarateMeshFrom(rm.GetString(key)), new CacheItemPolicy());
+
+                //декодируем модель из base64
+                string model = Encoding.Default.GetString(Convert.FromBase64String(rm.GetString(key)));
+
+                //генерием модель и пишем в кэш
+                GeometryCache.Set(key, Mesh.GenerateFromObj(model), new CacheItemPolicy());
             }
 
             //читаем модель из кэша и возвращаем
-            return GeometryCache.Get(key) as Mesh[];
+            return GeometryCache.Get(key) as Mesh;
         }
-        
-        private static Mesh[] GenarateMeshFrom(string base64)
-        {
-            string[] model = Encoding.Default.GetString(Convert.FromBase64String(base64)).
-                                    Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            var obj = new Waveform();
-            obj.Load(model);
+        //private static Mesh[] GenarateMeshFrom(string base64)
+        //{
+        //    string[] model = Encoding.Default.GetString(Convert.FromBase64String(base64)).
+        //                            Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            List<Mesh> meshes = new List<Mesh>(obj.Faces.Count);
+        //    var obj = new Waveform();
+        //    obj.Load(model);
 
-            foreach (var face in obj.Faces)
-            {
-                if (face.Vertices.Count() != 4) throw new ArgumentException();
+        //    List<Mesh> meshes = new List<Mesh>(obj.Faces.Count);
 
-                Mesh mesh = new Mesh(2, 2);
-                mesh.Vertices[0, 1].Coordinate = (Point3d)obj.Vertices[face.Vertices[0] - 1];
-                mesh.Vertices[1, 1].Coordinate = (Point3d)obj.Vertices[face.Vertices[1] - 1];
-                mesh.Vertices[1, 0].Coordinate = (Point3d)obj.Vertices[face.Vertices[2] - 1];
-                mesh.Vertices[0, 0].Coordinate = (Point3d)obj.Vertices[face.Vertices[3] - 1];
+        //    foreach (var face in obj.Faces)
+        //    {
+        //        if (face.Vertices.Count() != 4) throw new ArgumentException();
 
-                meshes.Add(mesh);
-            }
+        //        Mesh mesh = new Mesh(2, 2);
+        //        mesh.Vertices[0, 1].Coordinate = (Point3d)obj.Vertices[face.Vertices[0] - 1];
+        //        mesh.Vertices[1, 1].Coordinate = (Point3d)obj.Vertices[face.Vertices[1] - 1];
+        //        mesh.Vertices[1, 0].Coordinate = (Point3d)obj.Vertices[face.Vertices[2] - 1];
+        //        mesh.Vertices[0, 0].Coordinate = (Point3d)obj.Vertices[face.Vertices[3] - 1];
 
-            return meshes.ToArray();
-        }
+        //        meshes.Add(mesh);
+        //    }
+
+        //    return meshes.ToArray();
+        //}
 
         public Metall()
         {
@@ -106,18 +110,19 @@ namespace CatenaryCAD.Objects.Masts
         }
         private void len_updated(int value)
         {
-            switch(value)
+            //читаем и генериуем геометрию для 3D режима в зависимости от длинны
+            switch (value)
             {
                 case 10000:
-                    //Geometry = GetOrCreateFromCache("m_10");
+                    Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_10") };
                     break;
 
                 case 12000:
-                    //Geometry = GetOrCreateFromCache("m_12");
+                    Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_12") };
                     break;
 
                 case 15000:
-                    //Geometry = GetOrCreateFromCache("m_15");
+                    Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_15") };
                     break;
             }
 
@@ -126,15 +131,5 @@ namespace CatenaryCAD.Objects.Masts
 
         private List<AbstractProperty> propertes = new List<AbstractProperty>();
         public override AbstractProperty[] GetProperties() => propertes.ToArray();
-
-        //public override void GetGeometry3D(GeometryBuilder geometry, Color color, double scale)
-        //{
-        //    foreach (var mesh in Geometry)
-        //    {
-        //        foreach (var edge in mesh.Edges.Edges)
-        //            edge.Color = color;
-        //        geometry.DrawMesh(mesh, -1);
-        //    }
-        //}
     }
 }

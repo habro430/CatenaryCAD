@@ -7,10 +7,6 @@ namespace CatenaryCAD.Objects.Basements
     public sealed class BasementAtribute : Attribute
     {
         public string Type { get; private set; }
-
-        public BasementAtribute(string type)
-        {
-            Type = type;
-        }
+        public BasementAtribute(string type) => Type = type;
     }
 }

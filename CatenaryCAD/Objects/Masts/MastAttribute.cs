@@ -7,10 +7,6 @@ namespace CatenaryCAD.Objects.Masts
     public sealed class MastAttribute : Attribute
     {
         public string Type { get; private set; }
-
-        public MastAttribute(string type)
-        {
-            Type = type;
-        }
+        public MastAttribute(string type) => Type = type;
     }
 }
