@@ -65,7 +65,7 @@ namespace CatenaryCAD.Objects
                     {
                         foreach (var edge in geometry.Edges)
                         {
-                            dc.DrawLine(geometry.Points[edge.Item1].ToNanoCAD(), geometry.Points[edge.Item2].ToNanoCAD());
+                            dc.DrawLine(geometry.Vertices[edge.Item1].ToMultiCAD(), geometry.Vertices[edge.Item2].ToMultiCAD());
                         }
                     }
                 }

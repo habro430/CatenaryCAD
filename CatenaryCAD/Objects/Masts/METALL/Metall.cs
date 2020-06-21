@@ -37,8 +37,8 @@ namespace CatenaryCAD.Objects.Masts
                 //декодируем модель из base64
                 string model = Encoding.Default.GetString(Convert.FromBase64String(rm.GetString(key)));
 
-                //генерием модель и пишем в кэш
-                GeometryCache.Set(key, Mesh.GenerateFromObj(model), new CacheItemPolicy());
+                //генерируем модель и пишем в кэш
+                GeometryCache.Set(key, Mesh.FromObj(model), new CacheItemPolicy());
             }
 
             //читаем модель из кэша и возвращаем

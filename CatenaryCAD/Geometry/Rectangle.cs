@@ -12,7 +12,7 @@ namespace CatenaryCAD.Geometry
         public Rectangle(Point center, double width, double height)
         {
 
-            Points = new Point[] 
+            Vertices = new Point[] 
             {
                 new Point(center.X - height / 2, center.Y + width / 2, 0),
                 new Point(center.X + height / 2, center.Y + width / 2, 0),

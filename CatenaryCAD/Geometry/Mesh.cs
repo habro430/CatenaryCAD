@@ -10,13 +10,13 @@ namespace CatenaryCAD.Geometry
     [Serializable]
     public sealed class Mesh:AbstractGeometry
     {
-        public Mesh(Point[]points, (int, int)[] edges)
+        public Mesh(Point[] vertices, (int, int)[] edges)
         {
-            Points = points;
+            Vertices = vertices;
             Edges = edges;
         }
 
-        public static Mesh GenerateFromObj(string model)
+        public static Mesh FromObj(string model)
         {
 
             throw new NotImplementedException();

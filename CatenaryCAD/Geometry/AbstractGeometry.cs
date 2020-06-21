@@ -10,11 +10,11 @@ namespace CatenaryCAD.Geometry
     [Serializable]
     public abstract class AbstractGeometry
     {
-        public virtual Point[] Points { get; protected set; }
+        public virtual Point[] Vertices { get; protected set; }
         public virtual (int, int)[] Edges { get; protected set; }
         public virtual AbstractGeometry TransformBy(Matrix m)
         {
-            Points = Points.TransformBy(m);
+            Vertices = Vertices.TransformBy(m);
             return this;
         }
     }
