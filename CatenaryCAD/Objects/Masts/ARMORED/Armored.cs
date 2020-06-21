@@ -40,7 +40,6 @@ namespace CatenaryCAD.Objects.Masts
             //читаем модель из кэша и возвращаем
             return GeometryCache.Get(key) as Mesh[];
         }
-
         private static Mesh[] GenarateMeshFrom(string base64)
         {
             string[] model = Encoding.Default.GetString(Convert.FromBase64String(base64)).
@@ -67,12 +66,10 @@ namespace CatenaryCAD.Objects.Masts
             return meshes.ToArray();
         }
 
-        private Mesh[] Geometry = null;
-
         public Armored()
         {
             //генериуем геометрию для 2D режима
-            Geometry2D = new AbstractGeometry[] { new Circle(new Geometry.Core.Point(), 600, 20) };
+            Geometry2D = new AbstractGeometry[] { new Circle(new Geometry.Core.Point(), 300, 20) };
 
 
             if (InheritedMasts.Count > 0)
@@ -110,15 +107,15 @@ namespace CatenaryCAD.Objects.Masts
             switch (value)
             {
                 case 10000:
-                    Geometry = GetOrCreateFromCache("a_10");
+                    //Geometry = GetOrCreateFromCache("a_10");
                     break;
 
                 case 12000:
-                    Geometry = GetOrCreateFromCache("a_12");
+                    //Geometry = GetOrCreateFromCache("a_12");
                     break;
 
                 case 15000:
-                    Geometry = GetOrCreateFromCache("a_15");
+                    //Geometry = GetOrCreateFromCache("a_15");
                     break;
             }
 
@@ -128,18 +125,6 @@ namespace CatenaryCAD.Objects.Masts
         private List<AbstractProperty> properties = new List<AbstractProperty>();
         public override AbstractProperty[] GetProperties() => properties.ToArray();
 
-        //public override void GetGeometry2D(GeometryBuilder geometry, Color color, double scale)
-        //{
-        //    geometry.Color = Multicad.Constants.Colors.ByObject;
-        //    geometry.LineType = Multicad.Constants.LineTypes.ByObject;
-
-           
-        //    //foreach (var edge in circle.Edges)
-        //    //{
-        //    //    geometry.DrawLine(circle.Points[edge.Item1].ToNanoCAD(), circle.Points[edge.Item2].ToNanoCAD());
-        //    //}
-
-        //}
         //public override void GetGeometry3D(GeometryBuilder geometry, Color color, double scale)
         //{
         //    foreach (var mesh in Geometry)

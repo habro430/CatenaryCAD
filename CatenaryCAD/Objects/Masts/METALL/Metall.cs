@@ -1,11 +1,8 @@
 ﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Properties;
-using Multicad.CustomObjectBase;
 using Multicad.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Resources;
 using System.Runtime.Caching;
@@ -36,7 +33,7 @@ namespace CatenaryCAD.Objects.Masts
             if (!GeometryCache.Contains(key))
             {
                 //если нет то читаем 3d модель из ресурсов, генерируем и кэшируем 
-                ResourceManager rm = new ResourceManager(typeof(Properties.Resources));
+                ResourceManager rm = new ResourceManager(typeof(Resources));
                 GeometryCache.Set(key, GenarateMeshFrom(rm.GetString(key)), new CacheItemPolicy());
             }
 
@@ -70,10 +67,11 @@ namespace CatenaryCAD.Objects.Masts
             return meshes.ToArray();
         }
 
-        private Mesh[] Geometry = null;
-
         public Metall()
         {
+            //генериуем геометрию для 2D режима
+            Geometry2D = new AbstractGeometry[] { new Rectangle(new Geometry.Core.Point(), 600, 600) };
+
             if (InheritedMasts.Count > 0)
             {
                 Property<Type> mast_subtype = new Property<Type>("02_mast_metall_type", "Марка стойки", "Стойка", PropertyFlags.RefreshAfterChange);
@@ -111,15 +109,15 @@ namespace CatenaryCAD.Objects.Masts
             switch(value)
             {
                 case 10000:
-                    Geometry = GetOrCreateFromCache("m_10");
+                    //Geometry = GetOrCreateFromCache("m_10");
                     break;
 
                 case 12000:
-                    Geometry = GetOrCreateFromCache("m_12");
+                    //Geometry = GetOrCreateFromCache("m_12");
                     break;
 
                 case 15000:
-                    Geometry = GetOrCreateFromCache("m_15");
+                    //Geometry = GetOrCreateFromCache("m_15");
                     break;
             }
 
@@ -129,24 +127,6 @@ namespace CatenaryCAD.Objects.Masts
         private List<AbstractProperty> propertes = new List<AbstractProperty>();
         public override AbstractProperty[] GetProperties() => propertes.ToArray();
 
-        //public override void GetGeometry2D(GeometryBuilder geometry, Color color, double scale)
-        //{
-
-
-        //    geometry.Color = Multicad.Constants.Colors.ByObject;
-        //    geometry.LineType = Multicad.Constants.LineTypes.ByObject;
-
-        //    Point3d[] points = new Point3d[5]
-        //    {
-        //        new Point3d(-600, 600,0),
-        //        new Point3d(600, 600,0),
-        //        new Point3d(600, -600,0),
-        //        new Point3d(-600, -600,0),
-        //        new Point3d(-600, 600,0)
-        //    };
-
-        //    geometry.DrawPolyline(points);
-        //}
         //public override void GetGeometry3D(GeometryBuilder geometry, Color color, double scale)
         //{
         //    foreach (var mesh in Geometry)
