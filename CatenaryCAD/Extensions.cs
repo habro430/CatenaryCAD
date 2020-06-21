@@ -11,12 +11,20 @@ using System.Text;
 using CatenaryCAD.Objects;
 using Multicad;
 using WaveformParser.Types;
+using CatenaryCAD.Objects.Masts;
 
 namespace CatenaryCAD
 {
     public static class Extensions
     {
-        public static List<Point3d> GetPoint3d(this List<Vertex> vrtx)
+        [Serializable]
+        public enum ViewType
+        {
+            Geometry2D,
+            Geometry3D,
+        }
+
+        internal static List<Point3d> GetPoint3d(this List<Vertex> vrtx)
         {
             var points = new List<Point3d>(vrtx.Count);
 
@@ -26,7 +34,7 @@ namespace CatenaryCAD
             return points;
         }
 
-        public static Vector3d Normalize(this Vector3d vector)
+        internal static Vector3d Normalize(this Vector3d vector)
         {
             return vector / vector.Length;
         }
@@ -34,8 +42,6 @@ namespace CatenaryCAD
         [CommandMethod("switch_3d", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void switch_3d()
         {
-            //if (Convert.ToBoolean(McDocument.ActiveDocument.CustomProperties["view3d"])) return;
-
             ObjectFilter filter = ObjectFilter.Create(true);
             filter.AddType(typeof(AbstractHandler));
 
@@ -44,7 +50,7 @@ namespace CatenaryCAD
             McsProgress progress = McContext.GetProgress();
             progress.SetRange(0, ids.Count);
 
-            McDocument.ActiveDocument.CustomProperties["view3d"] = true;
+            McDocument.ActiveDocument.CustomProperties["viewtype"] = ViewType.Geometry3D;
 
             for (int i =0; i< ids.Count; i++)
             {
@@ -62,7 +68,6 @@ namespace CatenaryCAD
         [CommandMethod("switch_2d", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void switch_2d()
         {
-            //if (!Convert.ToBoolean(McDocument.ActiveDocument.CustomProperties["view3d"])) return;
             ObjectFilter filter = ObjectFilter.Create(true);
             filter.AddType(typeof(AbstractHandler));
 
@@ -71,7 +76,7 @@ namespace CatenaryCAD
             McsProgress progress = McContext.GetProgress();
             progress.SetRange(0, ids.Count);
 
-            McDocument.ActiveDocument.CustomProperties["view3d"] = false;
+            McDocument.ActiveDocument.CustomProperties["viewtype"] = ViewType.Geometry2D; ;
 
             for (int i = 0; i < ids.Count; i++)
             {

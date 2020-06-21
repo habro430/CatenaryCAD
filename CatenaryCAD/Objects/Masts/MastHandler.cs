@@ -10,7 +10,7 @@ using Multicad.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Objects
 {
@@ -39,24 +39,6 @@ namespace CatenaryCAD.Objects
             Properties.Add(mast_type);
         }
 
-        //private void mast_type_updated(MastAttribute value)
-        //{
-            //Parameter<Type> mast_subtype = new Parameter<Type>("a2_mast_subtype", "Тип стойки", "Стойка", null, false, true);
-
-            //mast_subtype.DictionaryValues = MastsCache.Where(mat => mat.Key.Equals(value))
-            //                                          .SelectMany(a => a.Value)
-            //                                          .ToDictionary(key => key.Key.Type, val => val.Value);
-
-            //if (mast_subtype.DictionaryValues.Count > 0)
-            //{
-            //    mast_subtype.ValueUpdated += mast_type_updated;
-            //    mast_subtype.Value = mast_subtype.DictionaryValues.Values.FirstOrDefault();
-
-            //    Parameters.Add(mast_subtype);
-            //}
-            //else
-            //    Parameters.Add(new Parameter<string>("a2_mast_subtype", "Тип", "Стойка", string.Empty));
-        //}
         private void mast_type_updated(Type type)
         {
             if (!TryModify()) return;
@@ -70,31 +52,30 @@ namespace CatenaryCAD.Objects
         {
             dc.Clear();
 
+            dc.Color = Multicad.Constants.Colors.ByObject;
+            dc.LineType = Multicad.Constants.LineTypes.ByObject;
+
             if (Mast != null)
             {
-
-                if (!Convert.ToBoolean(McDocument.ActiveDocument.CustomProperties["view3d"]))
+                ViewType viewtype = (ViewType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? ViewType.Geometry2D);
+                AbstractGeometry[] geometryarr = Mast.GetGeometry(viewtype);
+                if (geometryarr != null)
                 {
-                    AbstractGeometry[] geometryarr = Mast.GetGeometry(GeometryType.Geometry2D);
-                    if (geometryarr != null)
+                    foreach (var geometry in geometryarr)
                     {
-                        foreach (var geometry in geometryarr)
+                        foreach (var edge in geometry.Edges)
                         {
-                            foreach (var edge in geometry.Edges)
-                            {
-                                dc.DrawLine(geometry.Points[edge.Item1].ToNanoCAD(), geometry.Points[edge.Item2].ToNanoCAD());
-                            }
+                            dc.DrawLine(geometry.Points[edge.Item1].ToNanoCAD(), geometry.Points[edge.Item2].ToNanoCAD());
                         }
                     }
-                    else
-                        dc.DrawText(new TextGeom("ERR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
                 }
                 else
-                    Mast.GetGeometry3D(dc, this.DbEntity.Color, this.DbEntity.DScale);
+                    dc.DrawText(new TextGeom("ERROR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+
             }
             else
             {
-                dc.DrawText(new TextGeom("ERR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+                dc.DrawText(new TextGeom("ERROR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
             }
 
         }

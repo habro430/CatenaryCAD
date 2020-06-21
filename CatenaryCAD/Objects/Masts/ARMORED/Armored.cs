@@ -1,11 +1,8 @@
 ﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Properties;
-using Multicad.CustomObjectBase;
 using Multicad.Geometry;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Resources;
 using System.Runtime.Caching;
@@ -131,26 +128,26 @@ namespace CatenaryCAD.Objects.Masts
         private List<AbstractProperty> properties = new List<AbstractProperty>();
         public override AbstractProperty[] GetProperties() => properties.ToArray();
 
-        public override void GetGeometry2D(GeometryBuilder geometry, Color color, double scale)
-        {
-            geometry.Color = Multicad.Constants.Colors.ByObject;
-            geometry.LineType = Multicad.Constants.LineTypes.ByObject;
+        //public override void GetGeometry2D(GeometryBuilder geometry, Color color, double scale)
+        //{
+        //    geometry.Color = Multicad.Constants.Colors.ByObject;
+        //    geometry.LineType = Multicad.Constants.LineTypes.ByObject;
 
            
-            //foreach (var edge in circle.Edges)
-            //{
-            //    geometry.DrawLine(circle.Points[edge.Item1].ToNanoCAD(), circle.Points[edge.Item2].ToNanoCAD());
-            //}
+        //    //foreach (var edge in circle.Edges)
+        //    //{
+        //    //    geometry.DrawLine(circle.Points[edge.Item1].ToNanoCAD(), circle.Points[edge.Item2].ToNanoCAD());
+        //    //}
 
-        }
-        public override void GetGeometry3D(GeometryBuilder geometry, Color color, double scale)
-        {
-            foreach (var mesh in Geometry)
-            {
-                foreach (var edge in mesh.Edges.Edges)
-                    edge.Color = color;
-                geometry.DrawMesh(mesh, -1);
-            }
-        }
+        //}
+        //public override void GetGeometry3D(GeometryBuilder geometry, Color color, double scale)
+        //{
+        //    foreach (var mesh in Geometry)
+        //    {
+        //        foreach (var edge in mesh.Edges.Edges)
+        //            edge.Color = color;
+        //        geometry.DrawMesh(mesh, -1);
+        //    }
+        //}
     }
 }

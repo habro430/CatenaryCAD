@@ -129,32 +129,32 @@ namespace CatenaryCAD.Objects.Masts
         private List<AbstractProperty> propertes = new List<AbstractProperty>();
         public override AbstractProperty[] GetProperties() => propertes.ToArray();
 
-        public override void GetGeometry2D(GeometryBuilder geometry, Color color, double scale)
-        {
+        //public override void GetGeometry2D(GeometryBuilder geometry, Color color, double scale)
+        //{
 
 
-            geometry.Color = Multicad.Constants.Colors.ByObject;
-            geometry.LineType = Multicad.Constants.LineTypes.ByObject;
+        //    geometry.Color = Multicad.Constants.Colors.ByObject;
+        //    geometry.LineType = Multicad.Constants.LineTypes.ByObject;
 
-            Point3d[] points = new Point3d[5]
-            {
-                new Point3d(-600, 600,0),
-                new Point3d(600, 600,0),
-                new Point3d(600, -600,0),
-                new Point3d(-600, -600,0),
-                new Point3d(-600, 600,0)
-            };
+        //    Point3d[] points = new Point3d[5]
+        //    {
+        //        new Point3d(-600, 600,0),
+        //        new Point3d(600, 600,0),
+        //        new Point3d(600, -600,0),
+        //        new Point3d(-600, -600,0),
+        //        new Point3d(-600, 600,0)
+        //    };
 
-            geometry.DrawPolyline(points);
-        }
-        public override void GetGeometry3D(GeometryBuilder geometry, Color color, double scale)
-        {
-            foreach (var mesh in Geometry)
-            {
-                foreach (var edge in mesh.Edges.Edges)
-                    edge.Color = color;
-                geometry.DrawMesh(mesh, -1);
-            }
-        }
+        //    geometry.DrawPolyline(points);
+        //}
+        //public override void GetGeometry3D(GeometryBuilder geometry, Color color, double scale)
+        //{
+        //    foreach (var mesh in Geometry)
+        //    {
+        //        foreach (var edge in mesh.Edges.Edges)
+        //            edge.Color = color;
+        //        geometry.DrawMesh(mesh, -1);
+        //    }
+        //}
     }
 }
