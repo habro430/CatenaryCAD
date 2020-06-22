@@ -1,17 +1,13 @@
-﻿using Multicad.Geometry;
-using Multicad.Runtime;
+﻿using CatenaryCAD.Objects;
+
+using Multicad;
 using Multicad.AplicationServices;
 using Multicad.DatabaseServices;
+using Multicad.Geometry;
+using Multicad.Runtime;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using CatenaryCAD.Objects;
-using Multicad;
-using WaveformParser.Types;
-using CatenaryCAD.Objects.Masts;
 
 namespace CatenaryCAD
 {
@@ -22,16 +18,6 @@ namespace CatenaryCAD
         {
             Geometry2D,
             Geometry3D,
-        }
-
-        internal static List<Point3d> GetPoint3d(this List<Vertex> vrtx)
-        {
-            var points = new List<Point3d>(vrtx.Count);
-
-            foreach (var vert in vrtx)
-                points.Add(new Point3d(vert.X, vert.Y, vert.Z));
-
-            return points;
         }
 
         internal static Vector3d Normalize(this Vector3d vector)

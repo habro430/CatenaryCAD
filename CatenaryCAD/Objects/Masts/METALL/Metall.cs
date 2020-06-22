@@ -1,13 +1,12 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Properties;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
 using System.Runtime.Caching;
 using System.Text;
-
-using WaveformParser;
 
 namespace CatenaryCAD.Objects.Masts
 {
@@ -44,32 +43,6 @@ namespace CatenaryCAD.Objects.Masts
             //читаем модель из кэша и возвращаем
             return GeometryCache.Get(key) as Mesh;
         }
-
-        //private static Mesh[] GenarateMeshFrom(string base64)
-        //{
-        //    string[] model = Encoding.Default.GetString(Convert.FromBase64String(base64)).
-        //                            Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-
-        //    var obj = new Waveform();
-        //    obj.Load(model);
-
-        //    List<Mesh> meshes = new List<Mesh>(obj.Faces.Count);
-
-        //    foreach (var face in obj.Faces)
-        //    {
-        //        if (face.Vertices.Count() != 4) throw new ArgumentException();
-
-        //        Mesh mesh = new Mesh(2, 2);
-        //        mesh.Vertices[0, 1].Coordinate = (Point3d)obj.Vertices[face.Vertices[0] - 1];
-        //        mesh.Vertices[1, 1].Coordinate = (Point3d)obj.Vertices[face.Vertices[1] - 1];
-        //        mesh.Vertices[1, 0].Coordinate = (Point3d)obj.Vertices[face.Vertices[2] - 1];
-        //        mesh.Vertices[0, 0].Coordinate = (Point3d)obj.Vertices[face.Vertices[3] - 1];
-
-        //        meshes.Add(mesh);
-        //    }
-
-        //    return meshes.ToArray();
-        //}
 
         public Metall()
         {

@@ -64,11 +64,6 @@
     <Compile Include="Geometry\Core\Matrix.cs" />
     <Compile Include="Geometry\Mesh.cs" />
     <Compile Include="Geometry\Rectangle.cs" />
-    <Compile Include="Objects\Masts\ObjParser\Extent.cs" />
-    <Compile Include="Objects\Masts\ObjParser\Waveform.cs" />
-    <Compile Include="Objects\Masts\ObjParser\Types\Face.cs" />
-    <Compile Include="Objects\Masts\ObjParser\Types\IType.cs" />
-    <Compile Include="Objects\Masts\ObjParser\Types\Vertex.cs" />
     <Compile Include="Geometry\Core\Point.cs" />
     <Compile Include="Geometry\AbstractGeometry.cs" />
     <Compile Include="Geometry\Line.cs" />

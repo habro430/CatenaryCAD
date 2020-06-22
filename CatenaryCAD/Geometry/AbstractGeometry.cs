@@ -1,9 +1,5 @@
 ﻿using CatenaryCAD.Geometry.Core;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
 
 namespace CatenaryCAD.Geometry
 {
