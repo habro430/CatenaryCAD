@@ -12,7 +12,8 @@ namespace CatenaryCAD
         public static Type[] CatenaryObjects { private set; get; }
         public void Initialize()
         {
-            var files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll");
+            
+            var files = Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "*.dll");
             var types = new List<Type>();
 
             foreach (var file in files)
@@ -20,6 +21,7 @@ namespace CatenaryCAD
                 Assembly asm =  Assembly.Load(file);
                 types.AddRange(asm.GetTypes()
                                     .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), false)));
+
             }
 
             CatenaryObjects = types.ToArray();

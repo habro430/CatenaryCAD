@@ -23,17 +23,17 @@ namespace CatenaryCAD.Objects
 
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
-        //при первом вызове класса кэшируем в словарь производные от AbstarctMast опоры в статику
         static MastHandler()
         {
-            //получаем все не абстрактные обьекты производные от AbstractMast и имеющие атрибут CatenaryObjectAttribute
+            //при первом вызове класса кэшируем в словарь производные от IMast опоры в статику
+            //получаем все не абстрактные обьекты производные от IMast и имеющие атрибут CatenaryObjectAttribute
             var masts = Main.CatenaryObjects
                 .Where(abstr => !abstr.IsAbstract)
                 .Where(interf => interf.GetInterface(typeof(IMast).FullName) != null)
-                .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), true))
+                .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), false))
                 .ToArray();
 
-            //получем словарь из CatenaryObjectAttribute и типа производного от AbstractMast класса
+            //получем словарь из CatenaryObjectAttribute и типа производного от IMast класса
             InheritedMasts = masts.Select((type) => new
             {
                 type,

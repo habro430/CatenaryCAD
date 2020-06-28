@@ -1,61 +1,30 @@
-﻿using BasicMasts.Properties;
-using CatenaryCAD.Geometry;
+﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Objects;
-using CatenaryCAD.Objects.Masts;
 using CatenaryCAD.Properties;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Resources;
-using System.Runtime.Caching;
-using System.Text;
-using static CatenaryCAD.Extensions;
 
 namespace BasicMasts
 {
     [Serializable]
-    [CatenaryObject("МеталлическаяBasic", "")]
-    public class Metall : IMast
+    [CatenaryObject("Металлическая", "")]
+    public class Metall : AbstractMast
     {
-        public event Action Updated;
-
-        private AbstractGeometry[] Geometry2D;
-        private AbstractGeometry[] Geometry3D;
-
-        private AbstractProperty[] Propertes;
-
-        //кэш 3d моделей загружаемых из ресурсов при первом доступе к ним
-        [NonSerialized]
-        private static ObjectCache GeometryCache = new MemoryCache(typeof(Metall).Name);
+        public override event Action Updated;
 
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
         static Metall() => InheritedMasts = Extensions.GetInheritedMastsFor(typeof(Metall));
 
-        private static Mesh GetOrCreateFromCache(string key)
-        {
-            //есть ли 3d модель в кэше
-            if (!GeometryCache.Contains(key))
-            {
-                //если нет то читаем 3d модель из ресурсов, генерируем и кэшируем 
-                ResourceManager rm = new ResourceManager(typeof(Resources));
-
-                //декодируем модель из base64
-                string model = Encoding.Default.GetString(Convert.FromBase64String(rm.GetString(key)));
-
-                //генерируем модель и пишем в кэш
-                GeometryCache.Set(key, Mesh.FromObj(model), new CacheItemPolicy());
-            }
-
-            //читаем модель из кэша и возвращаем
-            return GeometryCache.Get(key) as Mesh;
-        }
-
         public Metall()
         {
+            //генериуем геометрию для 2D режима
+            Geometry2D = new AbstractGeometry[] { new Rectangle(new Point(), 600, 600) };
+
             var tmp_props = new List<AbstractProperty>();
 
             if (InheritedMasts.Count > 0)
@@ -85,48 +54,30 @@ namespace BasicMasts
 
             };
 
-            m_len.Updated += len_updated;
+            m_len.Updated += (val) =>
+            {
+                //читаем и генериуем геометрию для 3D режима в зависимости от длинны
+                switch (val)
+                {
+                    case 10000:
+                        Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_10") };
+                        break;
+                    case 12000:
+                        Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_12") };
+                        break;
+                    case 15000:
+                        Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_15") };
+                        break;
+                }
+                Updated?.Invoke();
+            };
+
             m_len.Value = m_len.DictionaryValues.Values.FirstOrDefault();
 
             tmp_props.Add(m_len);
 
-
-            //генериуем геометрию для 2D режима
-            Geometry2D = new AbstractGeometry[] { new Rectangle(new Point(), 600, 600) };
             //сохраняем сгенерированный список параметров 
             Propertes = tmp_props.ToArray();
-        }
-        private void len_updated(int value)
-        {
-            //читаем и генериуем геометрию для 3D режима в зависимости от длинны
-            switch (value)
-            {
-                case 10000:
-                    Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_10") };
-                    break;
-
-                case 12000:
-                    Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_12") };
-                    break;
-
-                case 15000:
-                    Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_15") };
-                    break;
-            }
-
-            Updated?.Invoke();
-        }
-
-        public AbstractProperty[] GetProperties() => Propertes;
-        public AbstractGeometry[] GetGeometry(ViewType type)
-        {
-            switch (type)
-            {
-                case ViewType.Geometry2D: return Geometry2D;
-                case ViewType.Geometry3D: return Geometry3D;
-
-                default: return Geometry2D;
-            }
         }
     }
 }
