@@ -14,38 +14,25 @@ namespace CatenaryCAD.Objects.Masts
     {
         public abstract event Action Updated;
 
-        protected virtual AbstractGeometry[] Geometry2D { get; set; }
-        protected virtual AbstractGeometry[] Geometry3D { get; set; }
-
-
-        public static Dictionary<string, Type> GetInheritedMastsFor(Type abst_mast_type)
+        internal static Dictionary<string, Type> GetMastFromCatenaryObjects()
         {
-            //получаем все не абстрактные обьекты производные от 'abst_mast_type' и имеющие атрибут MastTypeAttribute
-            var masts = Assembly.GetExecutingAssembly().GetTypes()
+            //получаем все не абстрактные обьекты производные от AbstractMast и имеющие атрибут CatenaryObjectAttribute
+            var masts = Main.CatenaryObjects
                 .Where(abstr => !abstr.IsAbstract)
-                .Where(bastype => bastype.BaseType == abst_mast_type)
-                .Where(attr => Attribute.IsDefined(attr, typeof(MastAttribute), false))
+                .Where(bastype => bastype.BaseType == typeof(AbstractMast))
+                .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), false))
                 .ToArray();
 
-            //получем словарь из MastTypeAttribute и типа производного от 'abst_mast_type' класса
+            //получем словарь из CatenaryObjectAttribute и типа производного от AbstractMast класса
             return masts.Select((type) => new
             {
                 type,
-                atrr = type.GetCustomAttributes(typeof(MastAttribute), false)
-                            .FirstOrDefault() as MastAttribute
+                atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
+                            .FirstOrDefault() as CatenaryObjectAttribute
             }).ToDictionary(p => p.atrr.Type, p => p.type);
         }
 
         public abstract AbstractProperty[] GetProperties();
-        public virtual AbstractGeometry[] GetGeometry(ViewType type)
-        {
-            switch(type)
-            {
-                case ViewType.Geometry2D: return Geometry2D;
-                case ViewType.Geometry3D: return Geometry3D;
-
-                default: return Geometry2D;
-            }
-        }
+        public abstract AbstractGeometry[] GetGeometry(ViewType type);
     }
 }

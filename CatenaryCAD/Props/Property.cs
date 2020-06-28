@@ -16,7 +16,7 @@ namespace CatenaryCAD.Properties
 
         public Dictionary<string, T> DictionaryValues { set; get; }
 
-        private T _value = default;
+        private T _value = default(T);
         public T Value
         {
             get => _value;

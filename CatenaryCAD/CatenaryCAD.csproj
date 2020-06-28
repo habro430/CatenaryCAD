@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CatenaryCAD</RootNamespace>
     <AssemblyName>CatenaryCAD</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="imapimgd">
@@ -49,14 +52,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
@@ -68,37 +67,23 @@
     <Compile Include="Geometry\AbstractGeometry.cs" />
     <Compile Include="Geometry\Line.cs" />
     <Compile Include="Geometry\Core\Vector.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Objects\AbstractHandler.cs" />
     <Compile Include="Objects\Basements\AbstractBasement.cs" />
     <Compile Include="Objects\Basements\BasementAtribute.cs" />
+    <Compile Include="Objects\CatenaryObjectAttribute.cs" />
     <Compile Include="Objects\Masts\MastHandler.cs" />
     <Compile Include="Objects\Masts\AbstractMast.cs" />
-    <Compile Include="Objects\Masts\ARMORED\Armored.cs" />
-    <Compile Include="Objects\Masts\MastAttribute.cs" />
-    <Compile Include="Objects\Masts\METALL\Metall.cs" />
-    <Compile Include="Objects\Masts\METALL\Types\М.cs" />
-    <Compile Include="Objects\Masts\ARMORED\Types\ССА.cs" />
     <Compile Include="HashCode.cs" />
     <Compile Include="Notifications.cs" />
     <Compile Include="Props\AbstractProperty.cs" />
     <Compile Include="Props\AdaptorProperty.cs" />
     <Compile Include="Props\Property.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

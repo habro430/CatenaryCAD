@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CatenaryCAD.Objects.Masts
+namespace BasicMasts
 {
     [Serializable]
     [AttributeUsage(AttributeTargets.Class)]

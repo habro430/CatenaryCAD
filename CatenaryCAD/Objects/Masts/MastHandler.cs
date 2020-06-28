@@ -24,8 +24,7 @@ namespace CatenaryCAD.Objects
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
         //при первом вызове класса кэшируем в словарь производные от AbstarctMast опоры в статику
-        static MastHandler() => InheritedMasts =  AbstractMast.GetInheritedMastsFor(typeof(AbstractMast));
-
+        static MastHandler() => InheritedMasts =  AbstractMast.GetMastFromCatenaryObjects();
         
         public MastHandler()
         {

@@ -17,9 +17,9 @@ namespace CatenaryCAD.Geometry
             Edges = edges;
         }
 
-        public static Mesh FromObj(string model)
+        public static Mesh FromObj(string obj)
         {
-            string[] lines = model.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            string[] lines = obj.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
             List<Point> vertices = new List<Point>();
             List<(int, int)> edges = new List<(int, int)>();
@@ -36,7 +36,7 @@ namespace CatenaryCAD.Geometry
                 {
                     case "v":
                         double x, y, z;
-
+                        
                         success = double.TryParse(data[1], NumberStyles.Any, CultureInfo.InvariantCulture, out x);
                         if (!success) throw new ArgumentException("Невозможно преобразовать параметр X как число double");
 
