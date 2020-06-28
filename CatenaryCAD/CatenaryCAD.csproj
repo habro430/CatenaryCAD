@@ -76,12 +76,12 @@
     <Compile Include="Objects\IMast.cs" />
     <Compile Include="HashCode.cs" />
     <Compile Include="Notifications.cs" />
+    <Compile Include="Parts\IPart.cs" />
     <Compile Include="Props\IProperty.cs" />
     <Compile Include="Props\AdaptorProperty.cs" />
     <Compile Include="Props\Property.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using BasicMasts.Properties;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Objects;
+using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 
 using System;
@@ -54,7 +55,7 @@ namespace BasicMasts
             }
         }
 
-        public object[] GetParts()
+        public IPart[] GetParts()
         {
             throw new NotImplementedException();
         }

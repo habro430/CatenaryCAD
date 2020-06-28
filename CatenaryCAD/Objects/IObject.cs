@@ -1,4 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 
 using System;
@@ -9,7 +10,7 @@ namespace CatenaryCAD.Objects
     public interface IObject
     {
         public abstract event Action Updated;
-        public abstract Object[] GetParts();
+        public abstract IPart[] GetParts();
         public abstract IProperty[] GetProperties();
         public abstract AbstractGeometry[] GetGeometry(GeometryType type);
     }
