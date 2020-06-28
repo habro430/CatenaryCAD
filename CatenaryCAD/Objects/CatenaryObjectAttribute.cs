@@ -6,11 +6,11 @@ namespace CatenaryCAD.Objects
     [AttributeUsage(AttributeTargets.Class)]
     public class CatenaryObjectAttribute : Attribute
     {
-        public string Type { get; private set; }
+        public string Name { get; private set; }
         public string Description { get; private set; }
-        public CatenaryObjectAttribute(string type, string description)
+        public CatenaryObjectAttribute(string name, string description)
         {
-            Type = type;
+            Name = name;
             Description = description;
         }
     }

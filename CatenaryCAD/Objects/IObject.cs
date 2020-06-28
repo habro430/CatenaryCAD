@@ -10,7 +10,7 @@ namespace CatenaryCAD.Objects
     {
         public abstract event Action Updated;
         public abstract Object[] GetParts();
-        public abstract AbstractProperty[] GetProperties();
+        public abstract IProperty[] GetProperties();
         public abstract AbstractGeometry[] GetGeometry(GeometryType type);
     }
 }

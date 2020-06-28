@@ -38,7 +38,7 @@ namespace CatenaryCAD.Objects
                 type,
                 atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
                             .FirstOrDefault() as CatenaryObjectAttribute
-            }).ToDictionary(p => p.atrr.Type, p => p.type);
+            }).ToDictionary(p => p.atrr.Name, p => p.type);
 
         }
 

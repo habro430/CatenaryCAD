@@ -6,9 +6,9 @@ namespace CatenaryCAD.Properties
 {
     internal class AdapterProperty : McDynamicProperty
     {
-        private AbstractProperty property;
+        private IProperty property;
 
-        public AdapterProperty(AbstractProperty prop) => property = prop;
+        public AdapterProperty(IProperty prop) => property = prop;
         public override Type PropertyType => property.GetValueType();
 
         public override string Name => property.ID;

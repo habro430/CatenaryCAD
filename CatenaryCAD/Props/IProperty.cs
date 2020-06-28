@@ -14,26 +14,25 @@ namespace CatenaryCAD.Properties
         NotBrowsable = 4,
     }
 
-    [Serializable]
-    public abstract class AbstractProperty
+    public interface IProperty
     {
-        public abstract string ID {  get; protected set; }
-        public abstract string Name { get; protected set; }
-        public abstract string Category { get; protected set; }
-        public abstract PropertyFlags Properties { get; protected set; }
+        public abstract string ID {  get; }
+        public abstract string Name { get; }
+        public abstract string Category { get; }
+        public abstract PropertyFlags Properties { get; }
 
         public abstract object GetValue();
         public abstract bool SetValue(object value);
 
         public abstract Type GetValueType();
         public abstract ICollection GetValuesCollection();
-
-        internal virtual AdapterProperty ToAdapterProperty() => new AdapterProperty(this);
-
     }
     internal static partial class Extensions
     {
-        internal static AdapterProperty[] ToAdapterProperty(this AbstractProperty[] props) 
+        internal static AdapterProperty[] ToAdapterProperty(this IProperty[] props) 
             => props.Select(prop => prop.ToAdapterProperty()).ToArray();
+
+        internal static AdapterProperty ToAdapterProperty(this IProperty prop) => new AdapterProperty(prop);
+
     }
 }

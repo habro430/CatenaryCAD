@@ -19,7 +19,7 @@ namespace BasicMasts
         protected AbstractGeometry[] Geometry2D;
         protected AbstractGeometry[] Geometry3D;
 
-        protected AbstractProperty[] Propertes;
+        protected IProperty[] Propertes;
 
         [NonSerialized]
         private static ObjectCache GeometryCache = new MemoryCache(typeof(Armored).Name);
@@ -42,7 +42,7 @@ namespace BasicMasts
             return GeometryCache.Get(key) as Mesh;
         }
 
-        public AbstractProperty[] GetProperties() => Propertes;
+        public IProperty[] GetProperties() => Propertes;
         public AbstractGeometry[] GetGeometry(GeometryType type)
         {
             switch (type)

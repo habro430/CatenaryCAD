@@ -25,7 +25,7 @@ namespace BasicMasts
             //генериуем геометрию для 2D режима
             Geometry2D = new AbstractGeometry[] { new Circle(new Point(), 300, 20) };
 
-            var tmp_props = new List<AbstractProperty>();
+            var tmp_props = new List<IProperty>();
 
             if (InheritedMasts.Count > 0)
             {

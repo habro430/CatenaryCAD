@@ -5,14 +5,12 @@ using System.Collections.Generic;
 namespace CatenaryCAD.Properties
 {
     [Serializable]
-    public sealed class Property<T> : AbstractProperty
+    public sealed class Property<T> : IProperty
     {
         public event Action<T> Updated;
 
-        public override string ID { get; protected set; }
-        public override string Name { get; protected set; }
-        public override string Category { get; protected set; }
-        public override PropertyFlags Properties { get; protected set; }
+        private string id, name, category;
+        private PropertyFlags properties;
 
         public Dictionary<string, T> DictionaryValues { set; get; }
 
@@ -27,24 +25,29 @@ namespace CatenaryCAD.Properties
             }
         }
 
+        public string ID => id;
+        public string Name => name;
+        public string Category => category;
+        public PropertyFlags Properties => properties;
+
         public Property(string id, string name, string category, PropertyFlags props = PropertyFlags.None)
         {
-            ID = id;
-            Name = name;
-            Category = category;
+            this.id = id;
+            this.name = name;
+            this.category = category;
 
-            Properties = props;
+            this.properties = props;
         }
 
-        public override Type GetValueType() => typeof(T);
-        public override ICollection GetValuesCollection()
+        public Type GetValueType() => typeof(T);
+        public ICollection GetValuesCollection()
         {
             if (DictionaryValues != null)
                 return DictionaryValues.Keys;
             else
                 return null;
         }
-        public override object GetValue()
+        public object GetValue()
         {
             if (DictionaryValues != null)
             {
@@ -62,7 +65,7 @@ namespace CatenaryCAD.Properties
             return null;
         }
 
-        public override bool SetValue(object val)
+        public bool SetValue(object val)
         {
 
             if (Properties.HasFlag(PropertyFlags.ReadOnly))

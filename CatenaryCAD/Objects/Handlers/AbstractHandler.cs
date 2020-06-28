@@ -45,7 +45,7 @@ namespace CatenaryCAD.Objects
             }
         }
 
-        public List<AbstractProperty> Properties = new List<AbstractProperty>();
+        public List<IProperty> Properties = new List<IProperty>();
 
         public override hresult PlaceObject()
         {

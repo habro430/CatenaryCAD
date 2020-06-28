@@ -76,7 +76,7 @@
     <Compile Include="Objects\IMast.cs" />
     <Compile Include="HashCode.cs" />
     <Compile Include="Notifications.cs" />
-    <Compile Include="Props\AbstractProperty.cs" />
+    <Compile Include="Props\IProperty.cs" />
     <Compile Include="Props\AdaptorProperty.cs" />
     <Compile Include="Props\Property.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
