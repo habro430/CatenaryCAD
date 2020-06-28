@@ -1,6 +1,6 @@
 ﻿namespace CatenaryCAD.Objects
 {
-    public interface IMast : IObject
+    public interface IBracket : IObject
     {
 
     }

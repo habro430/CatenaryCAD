@@ -69,8 +69,10 @@
     <Compile Include="Geometry\Core\Vector.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Objects\Handlers\AbstractHandler.cs" />
+    <Compile Include="Objects\IAnchor.cs" />
     <Compile Include="Objects\IBasement.cs" />
     <Compile Include="Objects\CatenaryObjectAttribute.cs" />
+    <Compile Include="Objects\IBracket.cs" />
     <Compile Include="Objects\IObject.cs" />
     <Compile Include="Objects\Handlers\MastHandler.cs" />
     <Compile Include="Objects\IMast.cs" />
