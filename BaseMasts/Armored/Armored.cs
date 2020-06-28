@@ -1,5 +1,4 @@
-﻿using BasicMasts;
-using BasicMasts.Properties;
+﻿using BasicMasts.Properties;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Objects;
@@ -18,9 +17,9 @@ namespace BasicMasts
 {
     [Serializable]
     [CatenaryObject("ЖелезобетоннаяBasic", "")]
-    public class Armored : AbstractMast
+    public class Armored : IMast
     {
-        public override event Action Updated;
+        public event Action Updated;
 
         private AbstractGeometry[] Geometry2D;
         private AbstractGeometry[] Geometry3D;
@@ -34,7 +33,7 @@ namespace BasicMasts
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
-        static Armored() => InheritedMasts = BasicMasts.Extensions.GetInheritedMastsFor(typeof(Armored));
+        static Armored() => InheritedMasts = Extensions.GetInheritedMastsFor(typeof(Armored));
 
         private static Mesh GetOrCreateFromCache(string key)
         {
@@ -118,8 +117,8 @@ namespace BasicMasts
             Updated?.Invoke();
         }
 
-        public override AbstractProperty[] GetProperties() => Propertes;
-        public override AbstractGeometry[] GetGeometry(ViewType type)
+        public AbstractProperty[] GetProperties() => Propertes;
+        public AbstractGeometry[] GetGeometry(ViewType type)
         {
             switch (type)
             {

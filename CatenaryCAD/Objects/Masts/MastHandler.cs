@@ -19,12 +19,30 @@ namespace CatenaryCAD.Objects
 
     internal sealed class MastHandler : AbstractHandler, IMcDynamicProperties
     {
-        AbstractMast Mast;
+        IMast Mast;
 
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
         //при первом вызове класса кэшируем в словарь производные от AbstarctMast опоры в статику
-        static MastHandler() => InheritedMasts =  AbstractMast.GetMastFromCatenaryObjects();
+        static MastHandler()
+        {
+            //получаем все не абстрактные обьекты производные от AbstractMast и имеющие атрибут CatenaryObjectAttribute
+            var masts = Main.CatenaryObjects
+                .Where(abstr => !abstr.IsAbstract)
+                .Where(interf => interf.GetInterface(typeof(IMast).FullName) != null)
+                .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), true))
+                .ToArray();
+
+            //получем словарь из CatenaryObjectAttribute и типа производного от AbstractMast класса
+            InheritedMasts = masts.Select((type) => new
+            {
+                type,
+                atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
+                            .FirstOrDefault() as CatenaryObjectAttribute
+            }).ToDictionary(p => p.atrr.Type, p => p.type);
+
+        }
+
         
         public MastHandler()
         {
@@ -41,7 +59,7 @@ namespace CatenaryCAD.Objects
         private void mast_type_updated(Type type)
         {
             if (!TryModify()) return;
-            Mast = (AbstractMast)Activator.CreateInstance(type);
+            Mast = (IMast)Activator.CreateInstance(type);
 
             Mast.Updated += () => { if (!TryModify()) return; };
         }

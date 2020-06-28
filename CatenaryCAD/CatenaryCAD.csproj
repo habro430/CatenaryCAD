@@ -73,7 +73,7 @@
     <Compile Include="Objects\Basements\BasementAtribute.cs" />
     <Compile Include="Objects\CatenaryObjectAttribute.cs" />
     <Compile Include="Objects\Masts\MastHandler.cs" />
-    <Compile Include="Objects\Masts\AbstractMast.cs" />
+    <Compile Include="Objects\Masts\IMast.cs" />
     <Compile Include="HashCode.cs" />
     <Compile Include="Notifications.cs" />
     <Compile Include="Props\AbstractProperty.cs" />
