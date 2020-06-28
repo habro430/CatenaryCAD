@@ -1,6 +1,6 @@
 ﻿using BasicMasts.Properties;
 using CatenaryCAD.Geometry;
-using CatenaryCAD.Objects.Masts;
+using CatenaryCAD.Objects;
 using CatenaryCAD.Properties;
 
 using System;
@@ -43,15 +43,20 @@ namespace BasicMasts
         }
 
         public AbstractProperty[] GetProperties() => Propertes;
-        public AbstractGeometry[] GetGeometry(ViewType type)
+        public AbstractGeometry[] GetGeometry(GeometryType type)
         {
             switch (type)
             {
-                case ViewType.Geometry2D: return Geometry2D;
-                case ViewType.Geometry3D: return Geometry3D;
+                case GeometryType.Geometry2D: return Geometry2D;
+                case GeometryType.Geometry3D: return Geometry3D;
 
                 default: return Geometry2D;
             }
+        }
+
+        public object[] GetParts()
+        {
+            throw new NotImplementedException();
         }
     }
 }

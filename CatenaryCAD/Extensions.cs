@@ -14,7 +14,7 @@ namespace CatenaryCAD
     public static class Extensions
     {
         [Serializable]
-        public enum ViewType
+        public enum GeometryType
         {
             Geometry2D,
             Geometry3D,
@@ -36,7 +36,7 @@ namespace CatenaryCAD
             McsProgress progress = McContext.GetProgress();
             progress.SetRange(0, ids.Count);
 
-            McDocument.ActiveDocument.CustomProperties["viewtype"] = ViewType.Geometry3D;
+            McDocument.ActiveDocument.CustomProperties["viewtype"] = GeometryType.Geometry3D;
 
             for (int i =0; i< ids.Count; i++)
             {
@@ -62,7 +62,7 @@ namespace CatenaryCAD
             McsProgress progress = McContext.GetProgress();
             progress.SetRange(0, ids.Count);
 
-            McDocument.ActiveDocument.CustomProperties["viewtype"] = ViewType.Geometry2D; ;
+            McDocument.ActiveDocument.CustomProperties["viewtype"] = GeometryType.Geometry2D; ;
 
             for (int i = 0; i < ids.Count; i++)
             {

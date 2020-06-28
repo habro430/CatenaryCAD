@@ -51,10 +51,8 @@
     <ProjectReference Include="..\CatenaryCAD\CatenaryCAD.csproj">
       <Project>{40815505-2d4a-4e57-aeb1-d8b979586f7b}</Project>
       <Name>CatenaryCAD</Name>
-      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

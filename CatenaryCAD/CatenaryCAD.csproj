@@ -68,12 +68,12 @@
     <Compile Include="Geometry\Line.cs" />
     <Compile Include="Geometry\Core\Vector.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="Objects\AbstractHandler.cs" />
-    <Compile Include="Objects\Basements\AbstractBasement.cs" />
-    <Compile Include="Objects\Basements\BasementAtribute.cs" />
+    <Compile Include="Objects\Handlers\AbstractHandler.cs" />
+    <Compile Include="Objects\IBasement.cs" />
     <Compile Include="Objects\CatenaryObjectAttribute.cs" />
-    <Compile Include="Objects\Masts\MastHandler.cs" />
-    <Compile Include="Objects\Masts\IMast.cs" />
+    <Compile Include="Objects\IObject.cs" />
+    <Compile Include="Objects\Handlers\MastHandler.cs" />
+    <Compile Include="Objects\IMast.cs" />
     <Compile Include="HashCode.cs" />
     <Compile Include="Notifications.cs" />
     <Compile Include="Props\AbstractProperty.cs" />

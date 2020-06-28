@@ -1,6 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Core;
-using CatenaryCAD.Objects.Masts;
 using CatenaryCAD.Properties;
 using Multicad;
 using Multicad.CustomObjectBase;
@@ -74,7 +73,7 @@ namespace CatenaryCAD.Objects
 
             if (Mast != null)
             {
-                ViewType viewtype = (ViewType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? ViewType.Geometry2D);
+                GeometryType viewtype = (GeometryType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? GeometryType.Geometry2D);
                 AbstractGeometry[] geometryarr = Mast.GetGeometry(viewtype);
                 if (geometryarr != null)
                 {
