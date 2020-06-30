@@ -9,9 +9,9 @@ namespace CatenaryCAD.Objects
 {
     public interface IObject
     {
-        public abstract event Action Updated;
-        public abstract IPart[] GetParts();
-        public abstract IProperty[] GetProperties();
-        public abstract AbstractGeometry[] GetGeometry(GeometryType type);
+        public event Action Updated;
+        public IPart[] GetParts();
+        public IProperty[] GetProperties();
+        public AbstractGeometry[] GetGeometry(GeometryType type);
     }
 }

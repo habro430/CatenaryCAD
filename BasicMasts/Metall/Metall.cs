@@ -18,7 +18,7 @@ namespace BasicMasts
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
-        static Metall() => InheritedMasts = Extensions.GetInheritedMastsFor(typeof(Metall));
+        static Metall() => InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Metall));
 
         public Metall()
         {

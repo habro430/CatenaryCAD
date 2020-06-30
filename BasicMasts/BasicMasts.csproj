@@ -36,7 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Armored\Armored.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="AbstractMast.cs" />
     <Compile Include="MastAttribute.cs" />
     <Compile Include="Metall\Metall.cs" />
