@@ -18,8 +18,6 @@ namespace CatenaryCAD.Objects
 
     internal sealed class MastHandler : AbstractHandler, IMcDynamicProperties
     {
-        IMast Mast;
-
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
         static MastHandler()
@@ -40,29 +38,24 @@ namespace CatenaryCAD.Objects
                             .FirstOrDefault() as CatenaryObjectAttribute
             }).ToDictionary(p => p.atrr.Name, p => p.type);
 
-        }
-
-        
+        }        
         public MastHandler()
         {
             Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", PropertyFlags.RefreshAfterChange);
 
             mast_type.DictionaryValues = InheritedMasts;
 
-            mast_type.Updated += mast_type_updated;
+            mast_type.Updated += (type) =>
+            {
+                if (!TryModify()) return;
+                CatenaryObject = (IMast)Activator.CreateInstance(type);
+                CatenaryObject.Updated += () => { if (!TryModify()) return; };
+            };
+
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
 
             Properties.Add(mast_type);
         }
-
-        private void mast_type_updated(Type type)
-        {
-            if (!TryModify()) return;
-            Mast = (IMast)Activator.CreateInstance(type);
-
-            Mast.Updated += () => { if (!TryModify()) return; };
-        }
-
 
         public override void OnDraw(GeometryBuilder dc)
         {
@@ -71,10 +64,10 @@ namespace CatenaryCAD.Objects
             dc.Color = Multicad.Constants.Colors.ByObject;
             dc.LineType = Multicad.Constants.LineTypes.ByObject;
 
-            if (Mast != null)
+            if (CatenaryObject != null)
             {
                 GeometryType viewtype = (GeometryType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? GeometryType.Geometry2D);
-                AbstractGeometry[] geometryarr = Mast.GetGeometry(viewtype);
+                AbstractGeometry[] geometryarr = CatenaryObject.GetGeometry(viewtype);
                 if (geometryarr != null)
                 {
                     foreach (var geometry in geometryarr)
@@ -105,6 +98,8 @@ namespace CatenaryCAD.Objects
             }
             return true;
         }
+        
+        
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void insert_mast()
         {
@@ -162,30 +157,5 @@ namespace CatenaryCAD.Objects
                 }
             }
         }
-
-        public ICollection<McDynamicProperty> GetProperties(out bool exclusive)
-        {
-            exclusive = true;
-            
-            if (Mast != null)
-            {
-                return Properties
-                    .Concat(Mast.GetProperties())                    
-                    .OrderBy(n => n.ID).ToArray().ToAdapterProperty();
-            }
-            else
-                return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
-        }
-
-        public McDynamicProperty GetProperty(string id)
-        {
-            foreach (var prop in Properties)
-            {
-                if (prop.ID == id) 
-                    return prop.ToAdapterProperty();
-            }
-            return null;
-        }
-
     }
 }

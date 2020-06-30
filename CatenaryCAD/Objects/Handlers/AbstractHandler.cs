@@ -14,6 +14,8 @@ namespace CatenaryCAD.Objects
     [Serializable]
     internal abstract class AbstractHandler : McCustomBase
     {
+        public IObject CatenaryObject;
+
         public McObjectId ParentID = McObjectId.Null;
 
         private List<McObjectId> childids = new List<McObjectId>(5);
@@ -95,13 +97,27 @@ namespace CatenaryCAD.Objects
             return true;
         }
 
-        public void OnParentNotification(NotificationFlags notification)
+        public ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
+            exclusive = true;
 
+            if (CatenaryObject != null)
+            {
+                return Properties
+                    .Concat(CatenaryObject.GetProperties())
+                    .OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+            }
+            else
+                return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
         }
-        public void OnChildNotification()
+        public McDynamicProperty GetProperty(string id)
         {
-
+            foreach (var prop in Properties)
+            {
+                if (prop.ID == id)
+                    return prop.ToAdapterProperty();
+            }
+            return null;
         }
     }
 }

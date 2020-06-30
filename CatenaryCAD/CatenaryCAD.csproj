@@ -77,7 +77,6 @@
     <Compile Include="Objects\Handlers\MastHandler.cs" />
     <Compile Include="Objects\IMast.cs" />
     <Compile Include="HashCode.cs" />
-    <Compile Include="Notifications.cs" />
     <Compile Include="Parts\IPart.cs" />
     <Compile Include="Props\IProperty.cs" />
     <Compile Include="Props\AdaptorProperty.cs" />
