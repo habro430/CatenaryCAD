@@ -19,7 +19,8 @@ namespace CatenaryCAD.Objects
     internal sealed class MastHandler : AbstractHandler, IMcDynamicProperties
     {
         [NonSerialized]
-        private static readonly Dictionary<string, Type> InheritedMasts;
+        private static readonly Dictionary<string, Type> Masts;
+
         static MastHandler()
         {
             //при первом вызове класса кэшируем в словарь производные от IMast опоры в статику
@@ -27,11 +28,10 @@ namespace CatenaryCAD.Objects
             var masts = Main.CatenaryObjects
                 .Where(abstr => !abstr.IsAbstract)
                 .Where(interf => interf.GetInterface(typeof(IMast).FullName) != null)
-                .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), false))
-                .ToArray();
+                .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), false));
 
             //получем словарь из CatenaryObjectAttribute и типа производного от IMast класса
-            InheritedMasts = masts.Select((type) => new
+            Masts = masts.Select((type) => new
             {
                 type,
                 atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
@@ -43,7 +43,7 @@ namespace CatenaryCAD.Objects
         {
             Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", PropertyFlags.RefreshAfterChange);
 
-            mast_type.DictionaryValues = InheritedMasts;
+            mast_type.DictionaryValues = Masts;
 
             mast_type.Updated += (type) =>
             {
@@ -55,50 +55,7 @@ namespace CatenaryCAD.Objects
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
 
             Properties.Add(mast_type);
-        }
-
-        public override void OnDraw(GeometryBuilder dc)
-        {
-            dc.Clear();
-
-            dc.Color = Multicad.Constants.Colors.ByObject;
-            dc.LineType = Multicad.Constants.LineTypes.ByObject;
-
-            if (CatenaryObject != null)
-            {
-                GeometryType viewtype = (GeometryType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? GeometryType.Geometry2D);
-                AbstractGeometry[] geometryarr = CatenaryObject.GetGeometry(viewtype);
-                if (geometryarr != null)
-                {
-                    foreach (var geometry in geometryarr)
-                    {
-                        foreach (var edge in geometry.Edges)
-                        {
-                            dc.DrawLine(geometry.Vertices[edge.Item1].ToMultiCAD(), geometry.Vertices[edge.Item2].ToMultiCAD());
-                        }
-                    }
-                }
-                else
-                    dc.DrawText(new TextGeom("ERROR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
-
-            }
-            else
-            {
-                dc.DrawText(new TextGeom("ERROR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
-            }
-
-        }
-        public override bool OnGetOsnapPoints(OsnapMode osnapMode, Point3d pickPoint, Point3d lastPoint, List<Point3d> osnapPoints)
-        {
-           switch(osnapMode)
-            {
-                case OsnapMode.Center:
-                    osnapPoints.Add(Position);
-                    break;
-            }
-            return true;
-        }
-        
+        }        
         
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void insert_mast()

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Properties;
 using Multicad;
 using Multicad.CustomObjectBase;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Projects;
+using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Objects
 {
@@ -97,6 +100,53 @@ namespace CatenaryCAD.Objects
             return true;
         }
 
+        public override bool OnGetOsnapPoints(OsnapMode osnapMode, Point3d pickPoint, Point3d lastPoint, List<Point3d> osnapPoints)
+        {
+            switch (osnapMode)
+            {
+                case OsnapMode.Center:
+                    osnapPoints.Add(Position);
+                    break;
+            }
+            return true;
+        }
+
+        public override void OnDraw(GeometryBuilder dc)
+        {
+            dc.Clear();
+
+            dc.Color = Multicad.Constants.Colors.ByObject;
+            dc.LineType = Multicad.Constants.LineTypes.ByObject;
+
+            if (CatenaryObject != null)
+            {
+                GeometryType viewtype = (GeometryType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? GeometryType.Geometry2D);
+                AbstractGeometry[] geometryarr = CatenaryObject.GetGeometry(viewtype);
+
+                if (geometryarr != null)
+                {
+                    for (int igeom = 0; igeom < geometryarr.Length; igeom++)
+                    {
+                        var geometry = geometryarr[igeom];
+
+                        for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
+                        {
+                              dc.DrawLine(geometry.Vertices[geometry.Edges[iedge].Item1].ToMultiCAD(), 
+                                          geometry.Vertices[geometry.Edges[iedge].Item2].ToMultiCAD());
+                        }
+                    }
+                }
+                else
+                    dc.DrawText(new TextGeom("ERROR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+
+            }
+            else
+            {
+                dc.DrawText(new TextGeom("ERROR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+            }
+
+        }
+
         public ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
             exclusive = true;
@@ -112,11 +162,13 @@ namespace CatenaryCAD.Objects
         }
         public McDynamicProperty GetProperty(string id)
         {
-            foreach (var prop in Properties)
-            {
-                if (prop.ID == id)
-                    return prop.ToAdapterProperty();
-            }
+
+            //for (int i = 0; i < Properties.Count; i++)
+            //{
+            //    if (Properties[i].ID == id)
+            //        return Properties[i].ToAdapterProperty();
+            //}
+
             return null;
         }
     }
