@@ -23,7 +23,7 @@ namespace BasicMasts
         public Metall()
         {
             //генериуем геометрию для 2D режима
-            Geometry2D = new AbstractGeometry[] { new Rectangle(new Point(), 600, 600) };
+            Geometry2D = new AbstractGeometry[] { new Rectangle(new Point3(), 600, 600) };
 
             var tmp_props = new List<IProperty>();
 

@@ -23,7 +23,7 @@ namespace BasicMasts
         public Armored()
         {
             //генериуем геометрию для 2D режима
-            Geometry2D = new AbstractGeometry[] { new Circle(new Point(), 300, 20) };
+            Geometry2D = new AbstractGeometry[] { new Circle(new Point3(), 300, 20) };
 
             var tmp_props = new List<IProperty>();
 

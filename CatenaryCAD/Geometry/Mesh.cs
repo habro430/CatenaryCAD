@@ -11,7 +11,7 @@ namespace CatenaryCAD.Geometry
     [Serializable]
     public sealed class Mesh : AbstractGeometry
     {
-        public Mesh(Point[] vertices, (int, int)[] edges)
+        public Mesh(Point3[] vertices, (int, int)[] edges)
         {
             Vertices = vertices;
             Edges = edges;
@@ -21,7 +21,7 @@ namespace CatenaryCAD.Geometry
         {
             string[] lines = obj.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            List<Point> vertices = new List<Point>();
+            List<Point3> vertices = new List<Point3>();
             List<(int, int)> edges = new List<(int, int)>();
 
             for (int i = 0; i < lines.Length; i++)
@@ -46,7 +46,7 @@ namespace CatenaryCAD.Geometry
                         success = double.TryParse(data[3], NumberStyles.Any, CultureInfo.InvariantCulture, out z);
                         if (!success) throw new ArgumentException("Невозможно преобразовать параметр Z как число double");
 
-                        vertices.Add(new Point(x,y,z));
+                        vertices.Add(new Point3(x,y,z));
                         break;
 
                     case "f":
