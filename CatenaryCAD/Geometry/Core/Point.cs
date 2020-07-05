@@ -1,7 +1,6 @@
 ﻿using Multicad.Geometry;
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static System.Math;
 
@@ -59,8 +58,8 @@ namespace CatenaryCAD.Geometry.Core
         public static Point TransformBy(this Point p, Matrix m3d)
         {
             return new Point(p.X * m3d.M11 + p.Y * m3d.M21 + p.Z * m3d.M31 + m3d.M41,
-                               p.X * m3d.M12 + p.Y * m3d.M22 + p.Z * m3d.M32 + m3d.M42,
-                               p.X * m3d.M13 + p.Y * m3d.M23 + p.Z * m3d.M33 + m3d.M43);
+                             p.X * m3d.M12 + p.Y * m3d.M22 + p.Z * m3d.M32 + m3d.M42,
+                             p.X * m3d.M13 + p.Y * m3d.M23 + p.Z * m3d.M33 + m3d.M43);
         }
 
         public static Point[] TransformBy(this Point[] ps, Matrix m3d)
@@ -76,11 +75,9 @@ namespace CatenaryCAD.Geometry.Core
         internal static Point3d[] ToMCAD(this Point[] ps)
         {
             int count = ps.Count();
-
             Point3d[] point3Ds = new Point3d[count];
 
-            for(int i =0; i< count; i++)
-                point3Ds[i] = ps[i].ToMCAD();
+            Parallel.For(0, count, i => point3Ds[i] = ps[i].ToMCAD());
 
             return point3Ds;
         }

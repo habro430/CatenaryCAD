@@ -28,7 +28,7 @@ namespace CatenaryCAD.Geometry.Core
 
         public double Length => Sqrt((X * X) + (Y * Y) + (Z * Z));
         public Vector Negated => new Vector(-1 * X, -1 * Y, -1 * Z);
-        public Vector Normalized => new Vector(X / Length, Y / Length, Z / Length);
+        public Vector Normalize => new Vector(X / Length, Y / Length, Z / Length);
 
         #region Region operators
 
@@ -70,8 +70,8 @@ namespace CatenaryCAD.Geometry.Core
         public static Vector TransformBy(this Vector v, Matrix m3d)
         {
             return new Vector(v.X * m3d.M11 + v.Y * m3d.M21 + v.Z * m3d.M31 + m3d.M41,
-                                v.X * m3d.M12 + v.Y * m3d.M22 + v.Z * m3d.M32 + m3d.M42,
-                                v.X * m3d.M13 + v.Y * m3d.M23 + v.Z * m3d.M33 + m3d.M43);
+                              v.X * m3d.M12 + v.Y * m3d.M22 + v.Z * m3d.M32 + m3d.M42,
+                              v.X * m3d.M13 + v.Y * m3d.M23 + v.Z * m3d.M33 + m3d.M43);
         }
 
         public static Vector[] TransformBy(this Vector[] vs, Matrix m3d)
@@ -86,8 +86,7 @@ namespace CatenaryCAD.Geometry.Core
             int count = vs.Count();
             Vector3d[] vector3Ds = new Vector3d[count];
 
-            for (int i = 0; i < count; i++)
-                vector3Ds[i] = vs[i].ToMCAD();
+            Parallel.For(0, count, i => vector3Ds[i] = vs[i].ToMCAD());
 
             return vector3Ds;
         }
