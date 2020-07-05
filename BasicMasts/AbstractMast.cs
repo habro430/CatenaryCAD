@@ -64,12 +64,12 @@ namespace BasicMasts
         }
 
         public IProperty[] GetProperties() => Propertes;
-        public AbstractGeometry[] GetGeometry(GeometryType type)
+        public AbstractGeometry[] GetGeometry(NatureType type)
         {
             switch (type)
             {
-                case GeometryType.Geometry2D: return Geometry2D;
-                case GeometryType.Geometry3D: return Geometry3D;
+                case NatureType.Line: return Geometry2D;
+                case NatureType.Polygon: return Geometry3D;
 
                 default: return Geometry2D;
             }

@@ -72,20 +72,20 @@ namespace CatenaryCAD.Geometry.Core
         public static Vector GetVectorTo(this Point p1, Point p2) => p2 - p1;
         public static double GetDistanceTo(this Point p1, Point p2) => p1.GetVectorTo(p2).Length;
 
-        internal static Point3d ToMultiCAD(this Point p) => new Point3d(p.X, p.Y, p.Z);
-        internal static Point3d[] ToMultiCAD(this Point[] ps)
+        internal static Point3d ToMCAD(this Point p) => new Point3d(p.X, p.Y, p.Z);
+        internal static Point3d[] ToMCAD(this Point[] ps)
         {
             int count = ps.Count();
 
             Point3d[] point3Ds = new Point3d[count];
 
             for(int i =0; i< count; i++)
-                point3Ds[i] = ps[i].ToMultiCAD();
+                point3Ds[i] = ps[i].ToMCAD();
 
             return point3Ds;
         }
 
-        internal static Point ToCatenaryCAD(this Point3d p) => new Point(p.X, p.Y, p.Z);
+        internal static Point ToCCAD(this Point3d p) => new Point(p.X, p.Y, p.Z);
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using System.Linq;
 
 namespace CatenaryCAD.Properties
@@ -16,16 +15,16 @@ namespace CatenaryCAD.Properties
 
     public interface IProperty
     {
-        public abstract string ID {  get; }
-        public abstract string Name { get; }
-        public abstract string Category { get; }
-        public abstract PropertyFlags Properties { get; }
+        public string ID {  get; }
+        public string Name { get; }
+        public string Category { get; }
+        public PropertyFlags Properties { get; }
 
-        public abstract object GetValue();
-        public abstract bool SetValue(object value);
+        public object GetValue();
+        public bool SetValue(object value);
 
-        public abstract Type GetValueType();
-        public abstract ICollection GetValuesCollection();
+        public Type GetValueType();
+        public ICollection GetValuesCollection();
     }
     internal static partial class Extensions
     {

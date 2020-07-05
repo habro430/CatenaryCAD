@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CatenaryCAD.Geometry;
+﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Properties;
+
 using Multicad;
 using Multicad.CustomObjectBase;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
-using Multicad.Projects;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Objects
 {
     [Serializable]
-    internal abstract class AbstractHandler : McCustomBase
+    internal abstract class AbstractHandler : McCustomBase, IMcDynamicProperties
     {
         public IObject CatenaryObject;
 
@@ -120,7 +120,8 @@ namespace CatenaryCAD.Objects
 
             if (CatenaryObject != null)
             {
-                GeometryType viewtype = (GeometryType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? GeometryType.Geometry2D);
+                NatureType viewtype = (NatureType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? 
+                                         NatureType.Line);
                 AbstractGeometry[] geometryarr = CatenaryObject.GetGeometry(viewtype);
 
                 if (geometryarr != null)
@@ -131,8 +132,8 @@ namespace CatenaryCAD.Objects
 
                         for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
                         {
-                              dc.DrawLine(geometry.Vertices[geometry.Edges[iedge].Item1].ToMultiCAD(), 
-                                          geometry.Vertices[geometry.Edges[iedge].Item2].ToMultiCAD());
+                              dc.DrawLine(geometry.Vertices[geometry.Edges[iedge].Item1].ToMCAD(), 
+                                          geometry.Vertices[geometry.Edges[iedge].Item2].ToMCAD());
                         }
                     }
                 }

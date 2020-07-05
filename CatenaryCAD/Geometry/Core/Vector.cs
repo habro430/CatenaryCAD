@@ -1,5 +1,6 @@
 ﻿using Multicad.Geometry;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using static System.Math;
 
@@ -79,8 +80,18 @@ namespace CatenaryCAD.Geometry.Core
             return vs;
         }
 
-        internal static Vector3d ToNanoCAD(this Vector v) => new Vector3d(v.X, v.Y, v.Z);
-        internal static Vector ToCatenaryCAD(this Vector3d v) => new Vector(v.X, v.Y, v.Z);
+        internal static Vector3d ToMCAD(this Vector v) => new Vector3d(v.X, v.Y, v.Z);
+        internal static Vector3d[] ToMCAD(this Vector[] vs)
+        {
+            int count = vs.Count();
+            Vector3d[] vector3Ds = new Vector3d[count];
+
+            for (int i = 0; i < count; i++)
+                vector3Ds[i] = vs[i].ToMCAD();
+
+            return vector3Ds;
+        }
+        internal static Vector ToCCAD(this Vector3d v) => new Vector(v.X, v.Y, v.Z);
 
     }
 }
