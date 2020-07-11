@@ -1,5 +1,5 @@
-﻿using CatenaryCAD.Geometry.Core;
-using System;
+﻿using System;
+using System.Linq;
 
 namespace CatenaryCAD.Geometry
 {
@@ -8,9 +8,12 @@ namespace CatenaryCAD.Geometry
     {
         public virtual Point<T>[] Vertices { get; protected set; }
         public virtual (Point<T>, Point<T>)[] Edges { get; protected set; }
-        public virtual AbstractGeometry<T> TransformBy(Matrix3 m)
+        public virtual AbstractGeometry<T> TransformBy(Matrix m)
         {
-            //Vertices = Vertices.TransformBy(m);
+            for(int i =0; i< Vertices.Count(); i++)
+            {
+                Vertices[i].TransformBy(m);
+            }
             return this;
         }
     }

@@ -21,6 +21,13 @@ namespace CatenaryCAD.Geometry
         public static bool operator ==(Vector<T> p1, Vector<T> p2) => p1.Equals(p2);
         public static bool operator !=(Vector<T> p1, Vector<T> p2) => !p1.Equals(p2);
 
+        public bool IsNaN() => Value.IsNaN();
+
+        public Vector<T> TransformBy(Matrix m)
+        {
+            Value = Value.TransformBy(m);
+            return this;
+        }
 
         public bool Equals(T other) => Value.Equals(other);
         public override bool Equals(object obj) => obj is T p && this.Equals(p);

@@ -1,5 +1,4 @@
 ﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Objects;
 using CatenaryCAD.Properties;
 

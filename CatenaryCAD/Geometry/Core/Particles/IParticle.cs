@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CatenaryCAD.Geometry
-{ 
+{
     public interface IParticle<T> : IEquatable<T>
     {
         T Addition(T val);
@@ -19,5 +15,6 @@ namespace CatenaryCAD.Geometry
 
         bool IsNaN();
 
+        T TransformBy(Matrix m);
     }
 }

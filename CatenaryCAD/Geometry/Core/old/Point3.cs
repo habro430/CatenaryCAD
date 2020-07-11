@@ -53,36 +53,36 @@ namespace CatenaryCAD.Geometry.Core
         public override string ToString() => $"Point3D {{ X:{X}, Y:{Y}, Z:{Z} }}";
     }
 
-    public static partial class Extensions
-    {
-        public static Point3 TransformBy(this Point3 p, Matrix3 m3d)
-        {
-            return new Point3(p.X * m3d.M11 + p.Y * m3d.M21 + p.Z * m3d.M31 + m3d.M41,
-                             p.X * m3d.M12 + p.Y * m3d.M22 + p.Z * m3d.M32 + m3d.M42,
-                             p.X * m3d.M13 + p.Y * m3d.M23 + p.Z * m3d.M33 + m3d.M43);
-        }
+    //public static partial class Extensions
+    //{
+    //    public static Point3 TransformBy(this Point3 p, Matrix m3d)
+    //    {
+    //        return new Point3(p.X * m3d.M11 + p.Y * m3d.M21 + p.Z * m3d.M31 + m3d.M41,
+    //                         p.X * m3d.M12 + p.Y * m3d.M22 + p.Z * m3d.M32 + m3d.M42,
+    //                         p.X * m3d.M13 + p.Y * m3d.M23 + p.Z * m3d.M33 + m3d.M43);
+    //    }
 
-        public static Point3[] TransformBy(this Point3[] ps, Matrix3 m3d)
-        {
-            Parallel.For(0, ps.Length, i => ps[i] = ps[i].TransformBy(m3d));
-            return ps;
-        }
+    //    public static Point3[] TransformBy(this Point3[] ps, Matrix m3d)
+    //    {
+    //        Parallel.For(0, ps.Length, i => ps[i] = ps[i].TransformBy(m3d));
+    //        return ps;
+    //    }
 
-        public static Vector3 GetVectorTo(this Point3 p1, Point3 p2) => p2 - p1;
-        public static double GetDistanceTo(this Point3 p1, Point3 p2) => p1.GetVectorTo(p2).Length;
+    //    public static Vector3 GetVectorTo(this Point3 p1, Point3 p2) => p2 - p1;
+    //    public static double GetDistanceTo(this Point3 p1, Point3 p2) => p1.GetVectorTo(p2).Length;
 
-        internal static Point3d ToMCAD(this Point3 p) => new Point3d(p.X, p.Y, p.Z);
-        internal static Point3d[] ToMCAD(this Point3[] ps)
-        {
-            int count = ps.Count();
-            Point3d[] point3Ds = new Point3d[count];
+    //    internal static Point3d ToMCAD(this Point3 p) => new Point3d(p.X, p.Y, p.Z);
+    //    internal static Point3d[] ToMCAD(this Point3[] ps)
+    //    {
+    //        int count = ps.Count();
+    //        Point3d[] point3Ds = new Point3d[count];
 
-            Parallel.For(0, count, i => point3Ds[i] = ps[i].ToMCAD());
+    //        Parallel.For(0, count, i => point3Ds[i] = ps[i].ToMCAD());
 
-            return point3Ds;
-        }
+    //        return point3Ds;
+    //    }
 
-        internal static Point3 ToCCAD(this Point3d p) => new Point3(p.X, p.Y, p.Z);
+    //    internal static Point3 ToCCAD(this Point3d p) => new Point3(p.X, p.Y, p.Z);
 
-    }
+    //}
 }

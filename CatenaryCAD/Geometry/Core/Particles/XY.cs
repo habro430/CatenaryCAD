@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CatenaryCAD.Geometry
 {
     [Serializable]
     public struct XY : IParticle<XY>
     {
-        public double X;
-        public double Y;
+        public double X { get; private set; }
+        public double Y { get; private set; }
 
         public XY(double x, double y)
         {
@@ -41,6 +36,10 @@ namespace CatenaryCAD.Geometry
 
         public bool IsNaN() => double.IsNaN(X) || double.IsNaN(Y);
 
+        public XY TransformBy(Matrix m)
+        {
+            throw new NotImplementedException();
+        }
 
         public static XY operator +(XY p1, XY p2) => new XY(p1.X + p2.X, p1.Y + p2.Y);
         public static XY operator -(XY p1, XY p2) => new XY(p1.X - p2.X, p1.Y - p2.Y);

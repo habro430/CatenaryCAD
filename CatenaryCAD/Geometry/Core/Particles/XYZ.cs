@@ -10,9 +10,9 @@ namespace CatenaryCAD.Geometry
     [Serializable]
     public struct XYZ : IParticle<XYZ>
     {
-        public double X;
-        public double Y;
-        public double Z;
+        public double X { get; private set; }
+        public double Y { get; private set; }
+        public double Z { get; private set; }
 
         public XYZ(double x, double y, double z)
         {
@@ -45,6 +45,11 @@ namespace CatenaryCAD.Geometry
         public XYZ Multiply(double val) => this * new XYZ(val, val, val);
 
         public bool IsNaN() => double.IsNaN(X) || double.IsNaN(Y) || double.IsNaN(Z);
+
+        public XYZ TransformBy(Matrix m)
+        {
+            throw new NotImplementedException();
+        }
 
         public static XYZ operator +(XYZ p1, XYZ p2) => new XYZ(p1.X + p2.X, p1.Y + p2.Y, p1.Z + p2.Z);
         public static XYZ operator -(XYZ p1, XYZ p2) => new XYZ(p1.X - p2.X, p1.Y - p2.Y, p1.Z - p2.Z);

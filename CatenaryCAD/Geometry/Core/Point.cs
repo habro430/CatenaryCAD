@@ -23,6 +23,11 @@ namespace CatenaryCAD.Geometry
         public Vector<T> GetVectorTo(Point<T> p) => p - this;
         public bool IsNaN() => Value.IsNaN();
 
+        public Point<T> TransformBy(Matrix m)
+        {
+            Value = Value.TransformBy(m);
+            return this;
+        }
 
         public bool Equals(T other) => Value.Equals(other);
         public override bool Equals(object obj) => obj is T p && this.Equals(p);

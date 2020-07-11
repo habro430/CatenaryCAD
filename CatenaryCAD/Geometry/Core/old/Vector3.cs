@@ -65,32 +65,32 @@ namespace CatenaryCAD.Geometry.Core
         public override string ToString() => $"Vector3D {{ X:{X}, Y:{Y}, Z:{Round(Z, 3)} }}";
     }
 
-    public static partial class Extensions
-    {
-        public static Vector3 TransformBy(this Vector3 v, Matrix3 m3d)
-        {
-            return new Vector3(v.X * m3d.M11 + v.Y * m3d.M21 + v.Z * m3d.M31 + m3d.M41,
-                              v.X * m3d.M12 + v.Y * m3d.M22 + v.Z * m3d.M32 + m3d.M42,
-                              v.X * m3d.M13 + v.Y * m3d.M23 + v.Z * m3d.M33 + m3d.M43);
-        }
+    //public static partial class Extensions
+    //{
+    //    public static Vector3 TransformBy(this Vector3 v, Matrix m3d)
+    //    {
+    //        return new Vector3(v.X * m3d.M11 + v.Y * m3d.M21 + v.Z * m3d.M31 + m3d.M41,
+    //                          v.X * m3d.M12 + v.Y * m3d.M22 + v.Z * m3d.M32 + m3d.M42,
+    //                          v.X * m3d.M13 + v.Y * m3d.M23 + v.Z * m3d.M33 + m3d.M43);
+    //    }
 
-        public static Vector3[] TransformBy(this Vector3[] vs, Matrix3 m3d)
-        {
-            Parallel.For(0, vs.Length, i => vs[i] = vs[i].TransformBy(m3d));
-            return vs;
-        }
+    //    public static Vector3[] TransformBy(this Vector3[] vs, Matrix m3d)
+    //    {
+    //        Parallel.For(0, vs.Length, i => vs[i] = vs[i].TransformBy(m3d));
+    //        return vs;
+    //    }
 
-        internal static Vector3d ToMCAD(this Vector3 v) => new Vector3d(v.X, v.Y, v.Z);
-        internal static Vector3d[] ToMCAD(this Vector3[] vs)
-        {
-            int count = vs.Count();
-            Vector3d[] vector3Ds = new Vector3d[count];
+    //    internal static Vector3d ToMCAD(this Vector3 v) => new Vector3d(v.X, v.Y, v.Z);
+    //    internal static Vector3d[] ToMCAD(this Vector3[] vs)
+    //    {
+    //        int count = vs.Count();
+    //        Vector3d[] vector3Ds = new Vector3d[count];
 
-            Parallel.For(0, count, i => vector3Ds[i] = vs[i].ToMCAD());
+    //        Parallel.For(0, count, i => vector3Ds[i] = vs[i].ToMCAD());
 
-            return vector3Ds;
-        }
-        internal static Vector3 ToCCAD(this Vector3d v) => new Vector3(v.X, v.Y, v.Z);
+    //        return vector3Ds;
+    //    }
+    //    internal static Vector3 ToCCAD(this Vector3d v) => new Vector3(v.X, v.Y, v.Z);
 
-    }
+    //}
 }
