@@ -23,7 +23,7 @@ namespace BasicMasts
         public Metall()
         {
             //генериуем геометрию для 2D режима
-            Geometry2D = new AbstractGeometry[] { new Rectangle(new Point3(), 600, 600) };
+            Geometry2D = new AbstractGeometry<XY>[] { new Rectangle(new Point<XY>(), 600, 600) };
 
             var tmp_props = new List<IProperty>();
 
@@ -60,13 +60,13 @@ namespace BasicMasts
                 switch (val)
                 {
                     case 10000:
-                        Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_10") };
+                        Geometry3D = new AbstractGeometry<XYZ>[] { GetOrCreateFromCache("m_10") };
                         break;
                     case 12000:
-                        Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_12") };
+                        Geometry3D = new AbstractGeometry<XYZ>[] { GetOrCreateFromCache("m_12") };
                         break;
                     case 15000:
-                        Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("m_15") };
+                        Geometry3D = new AbstractGeometry<XYZ>[] { GetOrCreateFromCache("m_15") };
                         break;
                 }
                 Updated?.Invoke();

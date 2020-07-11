@@ -17,5 +17,7 @@ namespace CatenaryCAD.Geometry
         T Multiply(T val);
         T Multiply(double val);
 
+        bool IsNaN();
+
     }
 }

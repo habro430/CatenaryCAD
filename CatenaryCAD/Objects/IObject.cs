@@ -12,6 +12,6 @@ namespace CatenaryCAD.Objects
         public event Action Updated;
         public IPart[] GetParts();
         public IProperty[] GetProperties();
-        public AbstractGeometry[] GetGeometry(NatureType type);
+        public void GetGeometry(out AbstractGeometry<XY>[] xy, out AbstractGeometry<XYZ>[] xyz);
     }
 }

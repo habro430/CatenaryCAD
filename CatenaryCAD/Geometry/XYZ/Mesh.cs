@@ -9,9 +9,9 @@ namespace CatenaryCAD.Geometry
 {
 
     [Serializable]
-    public sealed class Mesh : AbstractGeometry
+    public sealed class Mesh : AbstractGeometry<XYZ>
     {
-        public Mesh(Point3[] vertices, (int, int)[] edges)
+        public Mesh(Point<XYZ>[] vertices, (Point<XYZ>, Point<XYZ>)[] edges)
         {
             Vertices = vertices;
             Edges = edges;
@@ -21,8 +21,9 @@ namespace CatenaryCAD.Geometry
         {
             string[] lines = obj.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            List<Point3> vertices = new List<Point3>();
-            List<(int, int)> edges = new List<(int, int)>();
+            List<Point<XYZ>> vertices = new List<Point<XYZ>>();
+            List<(Point<XYZ>, Point<XYZ>)> edges = new List<(Point<XYZ>, Point<XYZ>)>();
+
 
             for (int i = 0; i < lines.Length; i++)
             {
@@ -46,7 +47,7 @@ namespace CatenaryCAD.Geometry
                         success = double.TryParse(data[3], NumberStyles.Any, CultureInfo.InvariantCulture, out z);
                         if (!success) throw new ArgumentException("Невозможно преобразовать параметр Z как число double");
 
-                        vertices.Add(new Point3(x,y,z));
+                        vertices.Add(new Point<XYZ>((x,y,z)));
                         break;
 
                     case "f":
@@ -65,13 +66,13 @@ namespace CatenaryCAD.Geometry
                         }
 
                         
-                        (int, int)[] tmp_edges = new (int, int)[vcount];
+                        (Point<XYZ>, Point<XYZ>)[] tmp_edges = new (Point<XYZ>, Point<XYZ>)[vcount];
                         for (int iedge = 0; iedge < vcount; iedge++)
-                        {
+                        {                            
                             if (iedge < vcount - 1)
-                                tmp_edges[iedge] = (edge[iedge] - 1, edge[iedge + 1] - 1);
+                                tmp_edges[iedge] = (vertices[edge[iedge] - 1], vertices[edge[iedge + 1] - 1]);
                             else
-                                tmp_edges[iedge] = (edge[iedge] - 1, edge[0] - 1);
+                                tmp_edges[iedge] = (vertices[edge[iedge] - 1], vertices[edge[0] - 1]);
                         }
 
                         edges.AddRange(tmp_edges);

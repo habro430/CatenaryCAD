@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CatenaryCAD.Geometry
 {
+    [Serializable]
     public struct XYZ : IParticle<XYZ>
     {
         public double X;
@@ -42,6 +43,8 @@ namespace CatenaryCAD.Geometry
 
         public XYZ Multiply(XYZ val) => this * val;
         public XYZ Multiply(double val) => this * new XYZ(val, val, val);
+
+        public bool IsNaN() => double.IsNaN(X) || double.IsNaN(Y) || double.IsNaN(Z);
 
         public static XYZ operator +(XYZ p1, XYZ p2) => new XYZ(p1.X + p2.X, p1.Y + p2.Y, p1.Z + p2.Z);
         public static XYZ operator -(XYZ p1, XYZ p2) => new XYZ(p1.X - p2.X, p1.Y - p2.Y, p1.Z - p2.Z);

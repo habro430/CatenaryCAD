@@ -1,20 +1,15 @@
-﻿using CatenaryCAD.Geometry.Core;
+﻿using Multicad.Geometry;
 using System;
-using System.Runtime.CompilerServices;
 
 namespace CatenaryCAD.Geometry
 {
+    [Serializable]
     public class Vector<T> : IEquatable<T> where T : struct, IParticle<T>
     {
         public T Value = default(T);
 
         public Vector() { }
-        public Vector(T val)
-        {
-            if (!(val is XY) || !(val is XYZ)) throw new ArgumentException();
-
-            Value = val;
-        }
+        public Vector(T val) => Value = val;
 
 
         public static Vector<T> operator +(Vector<T> p, Vector<T> v) => new Vector<T>(p.Value.Addition(v.Value));
@@ -33,4 +28,10 @@ namespace CatenaryCAD.Geometry
         public override int GetHashCode() => Value.GetHashCode();
 
     }
+    internal static partial class Extensions
+    {
+        internal static Vector3d ToMCAD(this Vector<XY> p) => new Vector3d(p.Value.X, p.Value.Y, 0);
+        internal static Vector3d ToMCAD(this Vector<XYZ> p) => new Vector3d(p.Value.X, p.Value.Y, p.Value.Z);
+    }
+
 }

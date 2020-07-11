@@ -23,7 +23,7 @@ namespace BasicMasts
         public Armored()
         {
             //генериуем геометрию для 2D режима
-            Geometry2D = new AbstractGeometry[] { new Circle(new Point3(), 300, 20) };
+            Geometry2D = new AbstractGeometry<XY>[] { new Circle(new Point<XY>(), 300, 20) };
 
             var tmp_props = new List<IProperty>();
 
@@ -60,13 +60,13 @@ namespace BasicMasts
                 switch (val)
                 {
                     case 10000:
-                        Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("a_10") };
+                        Geometry3D = new AbstractGeometry<XYZ>[] { GetOrCreateFromCache("a_10") };
                         break;
                     case 12000:
-                        Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("a_12") };
+                        Geometry3D = new AbstractGeometry<XYZ>[] { GetOrCreateFromCache("a_12") };
                         break;
                     case 15000:
-                        Geometry3D = new AbstractGeometry[] { GetOrCreateFromCache("a_15") };
+                        Geometry3D = new AbstractGeometry<XYZ>[] { GetOrCreateFromCache("a_15") };
                         break;
                 }
                 Updated?.Invoke();

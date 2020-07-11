@@ -4,13 +4,13 @@ using System;
 namespace CatenaryCAD.Geometry
 {
     [Serializable]
-    public abstract class AbstractGeometry
+    public abstract class AbstractGeometry<T> where T : struct, IParticle<T>
     {
-        public virtual Point3[] Vertices { get; protected set; }
-        public virtual (int, int)[] Edges { get; protected set; }
-        public virtual AbstractGeometry TransformBy(Matrix3 m)
+        public virtual Point<T>[] Vertices { get; protected set; }
+        public virtual (Point<T>, Point<T>)[] Edges { get; protected set; }
+        public virtual AbstractGeometry<T> TransformBy(Matrix3 m)
         {
-            Vertices = Vertices.TransformBy(m);
+            //Vertices = Vertices.TransformBy(m);
             return this;
         }
     }

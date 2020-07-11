@@ -104,18 +104,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="Geometry\Circle.cs" />
+    <Compile Include="Geometry\XY\Circle.cs" />
     <Compile Include="Geometry\Core\old\Matrix3.cs" />
     <Compile Include="Geometry\Core\Particles\XY.cs" />
     <Compile Include="Geometry\Core\Particles\XYZ.cs" />
     <Compile Include="Geometry\Core\Point.cs" />
     <Compile Include="Geometry\Core\Vector.cs" />
     <Compile Include="Geometry\Core\Particles\IParticle.cs" />
-    <Compile Include="Geometry\Mesh.cs" />
-    <Compile Include="Geometry\Rectangle.cs" />
+    <Compile Include="Geometry\XYZ\Mesh.cs" />
+    <Compile Include="Geometry\XY\Rectangle.cs" />
     <Compile Include="Geometry\Core\old\Point3.cs" />
     <Compile Include="Geometry\AbstractGeometry.cs" />
-    <Compile Include="Geometry\Line.cs" />
+    <Compile Include="Geometry\XY\Line.cs" />
     <Compile Include="Geometry\Core\old\Vector3.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Objects\Handlers\AbstractHandler.cs" />

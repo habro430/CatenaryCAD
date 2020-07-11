@@ -20,8 +20,8 @@ namespace BasicMasts
     {
         public abstract event Action Updated;
 
-        protected AbstractGeometry[] Geometry2D;
-        protected AbstractGeometry[] Geometry3D;
+        protected AbstractGeometry<XY>[] Geometry2D;
+        protected AbstractGeometry<XYZ>[] Geometry3D;
 
         protected IProperty[] Propertes;
 
@@ -64,15 +64,10 @@ namespace BasicMasts
         }
 
         public IProperty[] GetProperties() => Propertes;
-        public AbstractGeometry[] GetGeometry(NatureType type)
+        public void GetGeometry(out AbstractGeometry<XY>[] xy, out AbstractGeometry<XYZ>[] xyz)
         {
-            switch (type)
-            {
-                case NatureType.Line: return Geometry2D;
-                case NatureType.Polygon: return Geometry3D;
-
-                default: return Geometry2D;
-            }
+            xy = Geometry2D;
+            xyz = Geometry3D;
         }
 
         public IPart[] GetParts()

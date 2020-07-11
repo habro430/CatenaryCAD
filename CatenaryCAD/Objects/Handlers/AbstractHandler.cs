@@ -122,28 +122,63 @@ namespace CatenaryCAD.Objects
             {
                 NatureType viewtype = (NatureType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? 
                                          NatureType.Line);
-                AbstractGeometry[] geometryarr = CatenaryObject.GetGeometry(viewtype);
 
-                if (geometryarr != null)
+                AbstractGeometry<XY>[] geometry_xy;
+                AbstractGeometry<XYZ>[] geometry_xyz;
+
+                CatenaryObject.GetGeometry(out geometry_xy, out geometry_xyz);
+
+                switch (viewtype)
                 {
-                    for (int igeom = 0; igeom < geometryarr.Length; igeom++)
-                    {
-                        var geometry = geometryarr[igeom];
+                    case NatureType.Line:
 
-                        for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
+                        if (geometry_xy != null)
                         {
-                              dc.DrawLine(geometry.Vertices[geometry.Edges[iedge].Item1].ToMCAD(), 
-                                          geometry.Vertices[geometry.Edges[iedge].Item2].ToMCAD());
-                        }
-                    }
-                }
-                else
-                    dc.DrawText(new TextGeom("ERROR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+                            for (int igeom = 0; igeom < geometry_xy.Length; igeom++)
+                            {
+                                var geometry = geometry_xy[igeom];
 
+                                for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
+                                {
+                                    //dc.DrawLine(geometry.Vertices[geometry.Edges[iedge].Item1].ToMCAD(),
+                                    //            geometry.Vertices[geometry.Edges[iedge].Item2].ToMCAD());
+                                    dc.DrawLine(geometry.Edges[iedge].Item1.ToMCAD(),
+                                                geometry.Edges[iedge].Item2.ToMCAD());
+                                }
+                            }
+                        }
+                        else
+                            dc.DrawText(new TextGeom("ERR XY", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+
+                        break;
+
+                    case NatureType.Polygon:
+
+                        if (geometry_xyz != null)
+                        {
+                            for (int igeom = 0; igeom < geometry_xyz.Length; igeom++)
+                            {
+                                var geometry = geometry_xyz[igeom];
+
+                                for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
+                                {
+                                    //dc.DrawLine(geometry.Vertices[geometry.Edges[iedge].Item1].ToMCAD(),
+                                    //            geometry.Vertices[geometry.Edges[iedge].Item2].ToMCAD());
+                                    dc.DrawLine(geometry.Edges[iedge].Item1.ToMCAD(),
+                                                geometry.Edges[iedge].Item2.ToMCAD());
+
+                                }
+                            }
+                        }
+                        else
+                            dc.DrawText(new TextGeom("ERR XYZ", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+
+                        break;
+                }
             }
             else
             {
-                dc.DrawText(new TextGeom("ERROR", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+                dc.DrawText(new TextGeom("ERR OBJ", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
             }
 
         }
