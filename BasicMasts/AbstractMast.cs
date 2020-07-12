@@ -11,7 +11,6 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.Caching;
 using System.Text;
-using static CatenaryCAD.Extensions;
 
 namespace BasicMasts
 {

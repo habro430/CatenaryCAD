@@ -1,5 +1,4 @@
 ﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Core;
 using CatenaryCAD.Properties;
 
 using Multicad;
@@ -8,10 +7,8 @@ using Multicad.DatabaseServices;
 using Multicad.Geometry;
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Objects
@@ -33,16 +30,19 @@ namespace CatenaryCAD.Objects
         /// </summary>
         public ConcurrentHashSet<McObjectId> ChildIDs { get; private set; } = new ConcurrentHashSet<McObjectId>();
 
-
         public bool AddChild(AbstractHandler handler)
         {
-            handler.ParentID = this.ID;
-            return ChildIDs.Add(handler.ID);
+            var answer = ChildIDs.Add(handler.ID);
+            if(answer) handler.ParentID = ID;
+
+            return answer;
         }
         public bool RemoveChild(AbstractHandler handler)
         {
-            handler.ParentID = McObjectId.Null;
-            return ChildIDs.TryRemove(handler.ID);
+            var answer = ChildIDs.TryRemove(handler.ID);
+            if (answer) handler.ParentID = McObjectId.Null;
+
+            return answer;
         }
 
         public override List<McObjectId> GetDependent() => ChildIDs.ToList();
@@ -86,22 +86,24 @@ namespace CatenaryCAD.Objects
         public override hresult PlaceObject()
         {
             hresult result = base.PlaceObject();
-
             DbEntity.AddToCurrentDocument();
 
             return result;
         }
         public virtual hresult PlaceObject(Point3d position, Vector3d direction)
         {
-            hresult result = base.PlaceObject();
-
             Position = position;
             Direction = direction;
 
-            DbEntity.AddToCurrentDocument();
-
-            return result;
+            return PlaceObject();
         }
+        public virtual hresult PlaceObject(Point3d position, Vector3d direction, AbstractHandler parent)
+        {
+            parent.AddChild(this);
+
+            return PlaceObject(position, direction);
+        }
+        
         public override void OnErase()
         {
             if (!ParentID.IsNull)

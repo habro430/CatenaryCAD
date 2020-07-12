@@ -53,7 +53,9 @@ namespace CatenaryCAD.Objects
         {
             if (ParentID.IsNull)
             {
-                if (ID.IsNull) return;
+                if (ID.IsNull) 
+                    return;
+
                 Transform(tfm);
             }
         }

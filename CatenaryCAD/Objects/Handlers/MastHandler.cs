@@ -75,12 +75,9 @@ namespace CatenaryCAD.Objects
                     BasementHandler basement = new BasementHandler();
 
                     mast.PlaceObject(Point3d.Origin, Vector3d.XAxis);
-                    basement.PlaceObject(Point3d.Origin, Vector3d.XAxis);
-
-                    mast.AddChild(basement);
+                    basement.PlaceObject(Point3d.Origin, Vector3d.XAxis, mast);
 
                     input.ExcludeObjects(new McObjectId[] { mast.ID, basement.ID });
-
 
                     input.MouseMove = (s, a) =>
                     {
