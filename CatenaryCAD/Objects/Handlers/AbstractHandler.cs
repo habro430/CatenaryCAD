@@ -17,12 +17,28 @@ namespace CatenaryCAD.Objects
     [Serializable]
     internal abstract class AbstractHandler : McCustomBase, IMcDynamicProperties
     {
+        /// <summary>
+        /// Обьект CatenaryCAD
+        /// </summary>
         public IObject CatenaryObject;
 
+        /// <summary>
+        /// Родительскисй объект для текущего
+        /// </summary>
         public McObjectId ParentID = McObjectId.Null;
 
         private List<McObjectId> childids = new List<McObjectId>(5);
+
+        /// <summary>
+        /// Дочернии объекты для текщего
+        /// </summary>
         public McObjectId[] ChildIDs => childids.ToArray();
+
+        public void AddChild(AbstractHandler handler)
+        {
+            childids.Add(handler.ID);
+            handler.ParentID = this.ID;
+        }
 
         public override List<McObjectId> GetDependent() => childids;
 
@@ -78,13 +94,10 @@ namespace CatenaryCAD.Objects
             if (!TryModify())
                 return;
 
-            
             direction = direction.TransformBy(m);
             position = position.TransformBy(m);
 
-            //DbEntity.Update();
-
-            if (ID != null)
+            if (!ID.IsNull)
             {
                 foreach (var child in childids)
                     (McObjectManager.GetObject(child) as AbstractHandler).Transform(m);
@@ -147,8 +160,8 @@ namespace CatenaryCAD.Objects
                                 }
                             }
                         }
-                        else
-                            dc.DrawText(new TextGeom("ERR XY", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+                        //else
+                        //    dc.DrawText(new TextGeom("ERR XY", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
 
                         break;
 
@@ -170,8 +183,8 @@ namespace CatenaryCAD.Objects
                                 }
                             }
                         }
-                        else
-                            dc.DrawText(new TextGeom("ERR XYZ", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
+                        //else
+                        //    dc.DrawText(new TextGeom("ERR XYZ", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
 
                         break;
                 }
@@ -189,9 +202,12 @@ namespace CatenaryCAD.Objects
 
             if (CatenaryObject != null)
             {
-                return Properties
-                    .Concat(CatenaryObject.GetProperties())
-                    .OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+                var props = CatenaryObject.GetProperties();
+
+                if(props != null)
+                    return Properties.Concat(props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+                else
+                    return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
             }
             else
                 return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();

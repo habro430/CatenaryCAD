@@ -1,8 +1,8 @@
 ﻿using CatenaryCAD.Properties;
-
 using Multicad;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
+using Multicad.Reinforcements;
 using Multicad.Runtime;
 
 using System;
@@ -11,9 +11,8 @@ using System.Linq;
 
 namespace CatenaryCAD.Objects
 {
-    [CustomEntity("{742ECCF0-0CEC-4791-B4BE-4E3568E2C43E}", "MAST", "Опора контактной сети")]
     [Serializable]
-
+    [CustomEntity("{742ECCF0-0CEC-4791-B4BE-4E3568E2C43E}", "MAST", "Опора контактной сети")]
     internal sealed class MastHandler : AbstractHandler
     {
         [NonSerialized]
@@ -68,31 +67,50 @@ namespace CatenaryCAD.Objects
                 input.AutoHighlight = false;
 
                 List<MastHandler> placed_masts = new List<MastHandler>();
+                List<BasementHandler> placed_basements = new List<BasementHandler>();
+
                 while (true)
                 {
                     MastHandler mast = new MastHandler();
-                    mast.PlaceObject(Point3d.Origin, Vector3d.XAxis);
+                    BasementHandler basement = new BasementHandler();
 
-                    input.ExcludeObject(mast.ID);
+                    mast.PlaceObject(Point3d.Origin, Vector3d.XAxis);
+                    basement.PlaceObject(Point3d.Origin, Vector3d.XAxis);
+
+                    mast.AddChild(basement);
+
+                    input.ExcludeObjects(new McObjectId[] { mast.ID, basement.ID });
+
 
                     input.MouseMove = (s, a) =>
                     {
                         mast.Position = a.Point;
+                        basement.Position = a.Point;
 
                         if (placed_masts.Count != 0)
                         {
                             mast.Direction = placed_masts[placed_masts.Count - 1].Position.GetVectorTo(a.Point);
+                            basement.Direction = placed_basements[placed_basements.Count - 1].Position.GetVectorTo(a.Point);
 
-                            if (placed_masts.Count >1)
+                            if (placed_masts.Count > 1)
+                            {
                                 placed_masts[placed_masts.Count - 1].Direction = (placed_masts[placed_masts.Count - 2].Direction + mast.Direction) / 2;
+                                placed_basements[placed_basements.Count - 1].Direction = (placed_basements[placed_basements.Count - 2].Direction + basement.Direction) / 2;
+
+                            }
                             else
+                            {
                                 placed_masts[placed_masts.Count - 1].Direction = mast.Direction;
+                                placed_basements[placed_basements.Count - 1].Direction = basement.Direction;
+
+                            }
 
                             placed_masts[placed_masts.Count - 1].DbEntity.Update();
-
+                            placed_basements[placed_basements.Count - 1].DbEntity.Update();
                         }
 
                         mast.DbEntity.Update();
+                        basement.DbEntity.Update();
                     };
 
                     InputResult result = null;
@@ -105,10 +123,13 @@ namespace CatenaryCAD.Objects
                     if (result.Result != InputResult.ResultCode.Normal)
                     {
                         McObjectManager.Erase(mast.ID);
+                        McObjectManager.Erase(basement.ID);
+
                         return;
                     }
 
                     placed_masts.Add(mast);
+                    placed_basements.Add(basement);
                 }
             }
         }
