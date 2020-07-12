@@ -21,31 +21,35 @@ namespace CatenaryCAD.Objects
         /// </summary>
         public IObject CatenaryObject;
 
+        private McObjectId parent = McObjectId.Null;
+        private ConcurrentHashSet<McObjectId> childrens = new ConcurrentHashSet<McObjectId>();
+
         /// <summary>
         /// Родительскисй объект для текущего
         /// </summary>
-        public McObjectId ParentID { get; private set; } = McObjectId.Null;
+        public McObjectId ParentID { get => parent; }
         /// <summary>
         /// Дочерние объекты для текущего
         /// </summary>
-        public ConcurrentHashSet<McObjectId> ChildIDs { get; private set; } = new ConcurrentHashSet<McObjectId>();
+        public McObjectId[] ChildrensID { get => childrens.ToArray(); }
+
 
         public bool AddChild(AbstractHandler handler)
         {
-            var answer = ChildIDs.Add(handler.ID);
-            if(answer) handler.ParentID = ID;
+            var answer = childrens.Add(handler.ID);
+            if(answer) handler.parent = ID;
 
             return answer;
         }
         public bool RemoveChild(AbstractHandler handler)
         {
-            var answer = ChildIDs.TryRemove(handler.ID);
-            if (answer) handler.ParentID = McObjectId.Null;
+            var answer = childrens.TryRemove(handler.ID);
+            if (answer) handler.parent = McObjectId.Null;
 
             return answer;
         }
 
-        public override List<McObjectId> GetDependent() => ChildIDs.ToList();
+        public override List<McObjectId> GetDependent() => childrens.ToList();
 
         private Point3d position = Point3d.Origin;
         private Vector3d direction = Vector3d.XAxis;
@@ -109,7 +113,7 @@ namespace CatenaryCAD.Objects
             if (!ParentID.IsNull)
                 ParentID.GetObjectOfType<AbstractHandler>().RemoveChild(this);
 
-            foreach (var child in ChildIDs)
+            foreach (var child in childrens)
                 McObjectManager.Erase(child);
         }
 
@@ -133,7 +137,7 @@ namespace CatenaryCAD.Objects
 
             if (!ID.IsNull)
             {
-                foreach (var child in ChildIDs)
+                foreach (var child in childrens)
                     (McObjectManager.GetObject(child) as AbstractHandler).Transform(m);
             }
         }
