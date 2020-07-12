@@ -28,7 +28,7 @@ namespace BasicMasts
 
             if (InheritedMasts.Count > 0)
             {
-                Property<Type> mast_subtype = new Property<Type>("02_mast_metall_type", "Марка стойки", "Стойка", PropertyFlags.RefreshAfterChange);
+                Property<Type> mast_subtype = new Property<Type>("02_mast_metall_type", "Марка стойки", "Стойка", ConfigFlags.RefreshAfterChange);
 
                 mast_subtype.DictionaryValues = InheritedMasts;
                 mast_subtype.Value = mast_subtype.DictionaryValues.Values.FirstOrDefault();
@@ -43,7 +43,7 @@ namespace BasicMasts
                 tmp_props.Add(mast_subtype);
             }
 
-            Property<int> m_len = new Property<int>("03_mast_len", "Длинна", "Стойка", PropertyFlags.RefreshAfterChange);
+            Property<int> m_len = new Property<int>("03_mast_len", "Длинна", "Стойка", ConfigFlags.RefreshAfterChange);
 
             m_len.DictionaryValues = new Dictionary<string, int>
             {

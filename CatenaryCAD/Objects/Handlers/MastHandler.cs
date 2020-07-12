@@ -38,7 +38,7 @@ namespace CatenaryCAD.Objects
         }        
         public MastHandler()
         {
-            Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", PropertyFlags.RefreshAfterChange);
+            Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", ConfigFlags.RefreshAfterChange);
 
             mast_type.DictionaryValues = Masts;
 
@@ -82,7 +82,7 @@ namespace CatenaryCAD.Objects
                     input.MouseMove = (s, a) =>
                     {
                         mast.Position = a.Point;
-                        basement.Position = a.Point;
+                        //basement.Position = a.Point;
 
                         if (placed_masts.Count != 0)
                         {

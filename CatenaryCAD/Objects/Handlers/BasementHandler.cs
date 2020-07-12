@@ -33,7 +33,7 @@ namespace CatenaryCAD.Objects
         }
         public BasementHandler()
         {
-            Property<Type> basement_type = new Property<Type>("01_basement_type", "Тип фундамента", "Фундамент", PropertyFlags.RefreshAfterChange);
+            Property<Type> basement_type = new Property<Type>("01_basement_type", "Тип фундамента", "Фундамент", ConfigFlags.RefreshAfterChange);
 
             basement_type.DictionaryValues = Basements;
 
@@ -51,7 +51,7 @@ namespace CatenaryCAD.Objects
 
         public override void OnTransform(Matrix3d tfm)
         {
-            if (ParentID.IsNull)
+            if (Parent == null)
             {
                 if (ID.IsNull) 
                     return;

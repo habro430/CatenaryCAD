@@ -21,35 +21,79 @@ namespace CatenaryCAD.Objects
         /// </summary>
         public IObject CatenaryObject;
 
-        private McObjectId parent = McObjectId.Null;
-        private ConcurrentHashSet<McObjectId> childrens = new ConcurrentHashSet<McObjectId>();
+        private McObjectId parentid = McObjectId.Null;
+        private ConcurrentHashSet<McObjectId> childrensid = new ConcurrentHashSet<McObjectId>();
+        private ConcurrentHashSet<McObjectId> dependentsid = new ConcurrentHashSet<McObjectId>();
 
         /// <summary>
-        /// Родительскисй объект для текущего
+        /// Родительскисй объект для данного объекта
         /// </summary>
-        public McObjectId ParentID { get => parent; }
+        public AbstractHandler Parent { 
+            get => parentid.GetObjectOfType<AbstractHandler>(); 
+        
+        }
         /// <summary>
-        /// Дочерние объекты для текущего
+        /// Дочерние объекты для данного объекта
         /// </summary>
-        public McObjectId[] ChildrensID { get => childrens.ToArray(); }
+        public AbstractHandler[] Childrens { 
+            get => childrensid
+                .Select(obj => obj.GetObjectOfType<AbstractHandler>())
+                .ToArray(); 
+        }
+
+        /// <summary>
+        /// Зависимые объекты от данного объекта
+        /// </summary>
+        public AbstractHandler[] Dependents { 
+            get => dependentsid
+                .Select(obj => obj.GetObjectOfType<AbstractHandler>())
+                .ToArray();
+        }
 
 
+
+        public override List<McObjectId> GetDependent() => childrensid.Concat(dependentsid).ToList();
+
+        /// <summary>
+        /// Добавить дочерний обьект
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <returns></returns>
         public bool AddChild(AbstractHandler handler)
         {
-            var answer = childrens.Add(handler.ID);
-            if(answer) handler.parent = ID;
+            var answer = childrensid.Add(handler.ID);
+            if(answer) handler.parentid = ID;
 
             return answer;
         }
+        /// <summary>
+        /// Удалить дочерний обьект
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <returns></returns>
         public bool RemoveChild(AbstractHandler handler)
         {
-            var answer = childrens.TryRemove(handler.ID);
-            if (answer) handler.parent = McObjectId.Null;
+            var answer = childrensid.TryRemove(handler.ID);
+            if (answer) handler.parentid = McObjectId.Null;
 
             return answer;
         }
+        
+        /// <summary>
+        /// Добавить зависимый обьект
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <returns></returns>
+        public bool AddDependent(AbstractHandler handler) => dependentsid.Add(handler.ID);
 
-        public override List<McObjectId> GetDependent() => childrens.ToList();
+        /// <summary>
+        /// Удалить зависимый обьект
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <returns></returns>
+        public bool RemoveDependent(AbstractHandler handler) => dependentsid.TryRemove(handler.ID);
+
+
 
         private Point3d position = Point3d.Origin;
         private Vector3d direction = Vector3d.XAxis;
@@ -60,12 +104,7 @@ namespace CatenaryCAD.Objects
         public Point3d Position
         {
             get => position;
-            set
-            {
-                if (!TryModify()) return;
-
-                position = value;
-            }
+            set => Transform(Matrix3d.Displacement(position.GetVectorTo(value)));
         }
 
         /// <summary>
@@ -108,12 +147,15 @@ namespace CatenaryCAD.Objects
             return PlaceObject(position, direction);
         }
         
+        /// <summary>
+        /// Функция вызываема событием при удалении обьекта из документа
+        /// </summary>
         public override void OnErase()
         {
-            if (!ParentID.IsNull)
-                ParentID.GetObjectOfType<AbstractHandler>().RemoveChild(this);
+            if (!parentid.IsNull)
+                Parent.RemoveChild(this);
 
-            foreach (var child in childrens)
+            foreach (var child in childrensid)
                 McObjectManager.Erase(child);
         }
 
@@ -137,7 +179,7 @@ namespace CatenaryCAD.Objects
 
             if (!ID.IsNull)
             {
-                foreach (var child in childrens)
+                foreach (var child in childrensid)
                     (McObjectManager.GetObject(child) as AbstractHandler).Transform(m);
             }
         }

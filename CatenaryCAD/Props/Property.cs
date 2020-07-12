@@ -10,7 +10,7 @@ namespace CatenaryCAD.Properties
         public event Action<T> Updated;
 
         private string id, name, category;
-        private PropertyFlags properties;
+        private ConfigFlags properties;
 
         public Dictionary<string, T> DictionaryValues { set; get; }
 
@@ -28,9 +28,9 @@ namespace CatenaryCAD.Properties
         public string ID => id;
         public string Name => name;
         public string Category => category;
-        public PropertyFlags Properties => properties;
+        public ConfigFlags Properties => properties;
 
-        public Property(string id, string name, string category, PropertyFlags props = PropertyFlags.None)
+        public Property(string id, string name, string category, ConfigFlags props = ConfigFlags.None)
         {
             this.id = id;
             this.name = name;
@@ -68,7 +68,7 @@ namespace CatenaryCAD.Properties
         public bool SetValue(object val)
         {
 
-            if (Properties.HasFlag(PropertyFlags.ReadOnly))
+            if (Properties.HasFlag(ConfigFlags.ReadOnly))
             {
                 if (_value == null)
                 {
