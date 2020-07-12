@@ -70,9 +70,7 @@ namespace BasicMasts
             xyz = Geometry3D;
         }
 
-        public IPart[] GetParts()
-        {
-            throw new NotImplementedException();
-        }
+        public IPart[] GetParts() => throw new NotImplementedException();
+
     }
 }

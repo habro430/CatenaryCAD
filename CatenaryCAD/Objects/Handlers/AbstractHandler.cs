@@ -8,8 +8,10 @@ using Multicad.DatabaseServices;
 using Multicad.Geometry;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Objects
@@ -25,26 +27,32 @@ namespace CatenaryCAD.Objects
         /// <summary>
         /// Родительскисй объект для текущего
         /// </summary>
-        public McObjectId ParentID = McObjectId.Null;
-
-        private List<McObjectId> childids = new List<McObjectId>(5);
-
+        public McObjectId ParentID { get; private set; } = McObjectId.Null;
         /// <summary>
-        /// Дочернии объекты для текщего
+        /// Дочерние объекты для текущего
         /// </summary>
-        public McObjectId[] ChildIDs => childids.ToArray();
+        public ConcurrentHashSet<McObjectId> ChildIDs { get; private set; } = new ConcurrentHashSet<McObjectId>();
 
-        public void AddChild(AbstractHandler handler)
+
+        public bool AddChild(AbstractHandler handler)
         {
-            childids.Add(handler.ID);
             handler.ParentID = this.ID;
+            return ChildIDs.Add(handler.ID);
+        }
+        public bool RemoveChild(AbstractHandler handler)
+        {
+            handler.ParentID = McObjectId.Null;
+            return ChildIDs.TryRemove(handler.ID);
         }
 
-        public override List<McObjectId> GetDependent() => childids;
+        public override List<McObjectId> GetDependent() => ChildIDs.ToList();
 
         private Point3d position = Point3d.Origin;
         private Vector3d direction = Vector3d.XAxis;
 
+        /// <summary>
+        /// Позиция текущего объекта
+        /// </summary>
         public Point3d Position
         {
             get => position;
@@ -55,6 +63,10 @@ namespace CatenaryCAD.Objects
                 position = value;
             }
         }
+
+        /// <summary>
+        /// Направление текущего объекта
+        /// </summary>
         public Vector3d Direction
         {
             get => direction;
@@ -66,6 +78,9 @@ namespace CatenaryCAD.Objects
             }
         }
 
+        /// <summary>
+        /// Список параметров объекта
+        /// </summary>
         public List<IProperty> Properties = new List<IProperty>();
 
         public override hresult PlaceObject()
@@ -87,8 +102,25 @@ namespace CatenaryCAD.Objects
 
             return result;
         }
+        public override void OnErase()
+        {
+            if (!ParentID.IsNull)
+                ParentID.GetObjectOfType<AbstractHandler>().RemoveChild(this);
 
+            foreach (var child in ChildIDs)
+                McObjectManager.Erase(child);
+        }
+
+        /// <summary>
+        /// Функция вызываемая событием при пользовательской трансформации обьекта
+        /// </summary>
+        /// <param name="tfm"></param>
         public override void OnTransform(Matrix3d tfm) =>Transform(tfm);
+
+        /// <summary>
+        /// Функция транформации объекта
+        /// </summary>
+        /// <param name="m"></param>
         public virtual void Transform(Matrix3d m)
         {
             if (!TryModify())
@@ -99,7 +131,7 @@ namespace CatenaryCAD.Objects
 
             if (!ID.IsNull)
             {
-                foreach (var child in childids)
+                foreach (var child in ChildIDs)
                     (McObjectManager.GetObject(child) as AbstractHandler).Transform(m);
             }
         }
@@ -153,15 +185,11 @@ namespace CatenaryCAD.Objects
 
                                 for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
                                 {
-                                    //dc.DrawLine(geometry.Vertices[geometry.Edges[iedge].Item1].ToMCAD(),
-                                    //            geometry.Vertices[geometry.Edges[iedge].Item2].ToMCAD());
                                     dc.DrawLine(geometry.Edges[iedge].Item1.ToMCAD(),
                                                 geometry.Edges[iedge].Item2.ToMCAD());
                                 }
                             }
                         }
-                        //else
-                        //    dc.DrawText(new TextGeom("ERR XY", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
 
                         break;
 
@@ -175,16 +203,12 @@ namespace CatenaryCAD.Objects
 
                                 for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
                                 {
-                                    //dc.DrawLine(geometry.Vertices[geometry.Edges[iedge].Item1].ToMCAD(),
-                                    //            geometry.Vertices[geometry.Edges[iedge].Item2].ToMCAD());
                                     dc.DrawLine(geometry.Edges[iedge].Item1.ToMCAD(),
                                                 geometry.Edges[iedge].Item2.ToMCAD());
 
                                 }
                             }
                         }
-                        //else
-                        //    dc.DrawText(new TextGeom("ERR XYZ", Point3d.Origin, Vector3d.XAxis, HorizTextAlign.Center, VertTextAlign.Center, "normal", 1000, 1000));
 
                         break;
                 }
@@ -204,13 +228,13 @@ namespace CatenaryCAD.Objects
             {
                 var props = CatenaryObject.GetProperties();
 
-                if(props != null)
+                if (props != null)
+                {
                     return Properties.Concat(props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
-                else
-                    return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+                }
             }
-            else
-                return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+                
+            return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
         }
         public McDynamicProperty GetProperty(string id)
         {

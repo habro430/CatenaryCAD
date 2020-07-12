@@ -18,14 +18,7 @@ namespace BasicBasements
             xyz = null;
         }
 
-        public IPart[] GetParts()
-        {
-            return null;
-        }
-
-        public IProperty[] GetProperties()
-        {
-            return null;
-        }
+        public IPart[] GetParts() => throw new NotImplementedException();
+        public IProperty[] GetProperties() => null;
     }
 }

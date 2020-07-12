@@ -51,8 +51,11 @@ namespace CatenaryCAD.Objects
 
         public override void OnTransform(Matrix3d tfm)
         {
-            if(ID.IsNull) return;
-            if(ParentID.IsNull) Transform(tfm);
+            if (ParentID.IsNull)
+            {
+                if (ID.IsNull) return;
+                Transform(tfm);
+            }
         }
 
     }

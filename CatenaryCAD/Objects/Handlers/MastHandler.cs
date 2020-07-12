@@ -123,7 +123,6 @@ namespace CatenaryCAD.Objects
                     if (result.Result != InputResult.ResultCode.Normal)
                     {
                         McObjectManager.Erase(mast.ID);
-                        McObjectManager.Erase(basement.ID);
 
                         return;
                     }
