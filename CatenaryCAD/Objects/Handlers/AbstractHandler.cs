@@ -50,8 +50,6 @@ namespace CatenaryCAD.Objects
                 .ToArray();
         }
 
-
-
         public override List<McObjectId> GetDependent() => childrensid.Concat(dependentsid).ToList();
 
         /// <summary>
@@ -104,7 +102,12 @@ namespace CatenaryCAD.Objects
         public Point3d Position
         {
             get => position;
-            set => Transform(Matrix3d.Displacement(position.GetVectorTo(value)));
+            set
+            {
+                if (!TryModify()) return;
+                position = value;
+            }
+            //set => Transform(Matrix3d.Displacement(position.GetVectorTo(value)));
         }
 
         /// <summary>
@@ -116,7 +119,6 @@ namespace CatenaryCAD.Objects
             set
             {
                 if (!TryModify()) return;
-
                 direction = value.GetNormal();
             }
         }

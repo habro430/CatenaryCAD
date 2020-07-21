@@ -2,11 +2,11 @@
 using Multicad;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
-using Multicad.Reinforcements;
 using Multicad.Runtime;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace CatenaryCAD.Objects
@@ -67,7 +67,6 @@ namespace CatenaryCAD.Objects
                 input.AutoHighlight = false;
 
                 List<MastHandler> placed_masts = new List<MastHandler>();
-                List<BasementHandler> placed_basements = new List<BasementHandler>();
 
                 while (true)
                 {
@@ -81,30 +80,17 @@ namespace CatenaryCAD.Objects
 
                     input.MouseMove = (s, a) =>
                     {
-                        mast.Position = a.Point;
-                        //basement.Position = a.Point;
-
+                        mast.Transform(Matrix3d.Displacement(mast.Position.GetVectorTo(a.Point)));
+                        
                         if (placed_masts.Count != 0)
                         {
-                            mast.Direction = placed_masts[placed_masts.Count - 1].Position.GetVectorTo(a.Point);
-                            basement.Direction = placed_basements[placed_basements.Count - 1].Position.GetVectorTo(a.Point);
+                            double angle = placed_masts[placed_masts.Count - 1].Position
+                                            .GetVectorTo(a.Point)
+                                            .GetAngleTo(mast.Direction, Vector3d.ZAxis);
 
-                            if (placed_masts.Count > 1)
-                            {
-                                placed_masts[placed_masts.Count - 1].Direction = (placed_masts[placed_masts.Count - 2].Direction + mast.Direction) / 2;
-                                placed_basements[placed_basements.Count - 1].Direction = (placed_basements[placed_basements.Count - 2].Direction + basement.Direction) / 2;
-
-                            }
-                            else
-                            {
-                                placed_masts[placed_masts.Count - 1].Direction = mast.Direction;
-                                placed_basements[placed_basements.Count - 1].Direction = basement.Direction;
-
-                            }
-
-                            placed_masts[placed_masts.Count - 1].DbEntity.Update();
-                            placed_basements[placed_basements.Count - 1].DbEntity.Update();
+                            mast.Transform(Matrix3d.Rotation(-angle, Vector3d.ZAxis, mast.Position));
                         }
+
 
                         mast.DbEntity.Update();
                         basement.DbEntity.Update();
@@ -125,7 +111,6 @@ namespace CatenaryCAD.Objects
                     }
 
                     placed_masts.Add(mast);
-                    placed_basements.Add(basement);
                 }
             }
         }
