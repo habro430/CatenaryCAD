@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Objects
 {
@@ -52,8 +53,29 @@ namespace CatenaryCAD.Objects
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
 
             Properties.Add(mast_type);
-        }        
-        
+        }
+
+        public override ICollection<McDynamicProperty> GetProperties(out bool exclusive)
+        {
+            exclusive = true;
+
+            if (CatenaryObject != null)
+            {
+                var mast_props = CatenaryObject.GetProperties();
+                if (mast_props != null)
+                {
+                    var basement_props = Childrens.Where(child => child is BasementHandler).FirstOrDefault().Properties;
+                    NatureType viewtype = (NatureType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? NatureType.Line);
+
+                    if (basement_props != null && viewtype == NatureType.Line)
+                        return Properties.Concat(mast_props).Concat(basement_props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+                    else
+                        return Properties.Concat(mast_props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+                }
+            }
+            return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+        }
+
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void insert_mast()
         {
@@ -66,7 +88,7 @@ namespace CatenaryCAD.Objects
                 input.DashLine = true;
                 input.AutoHighlight = false;
 
-                List<MastHandler> placed_masts = new List<MastHandler>();
+                MastHandler last_mast = null;
 
                 while (true)
                 {
@@ -82,15 +104,14 @@ namespace CatenaryCAD.Objects
                     {
                         mast.Transform(Matrix3d.Displacement(mast.Position.GetVectorTo(a.Point)));
                         
-                        if (placed_masts.Count != 0)
+                        if (last_mast != null)
                         {
-                            double angle = placed_masts[placed_masts.Count - 1].Position
+                            double angle = last_mast.Position
                                             .GetVectorTo(a.Point)
                                             .GetAngleTo(mast.Direction, Vector3d.ZAxis);
 
                             mast.Transform(Matrix3d.Rotation(-angle, Vector3d.ZAxis, mast.Position));
                         }
-
 
                         mast.DbEntity.Update();
                         basement.DbEntity.Update();
@@ -98,10 +119,10 @@ namespace CatenaryCAD.Objects
 
                     InputResult result = null;
 
-                    if (placed_masts.Count == 0)
+                    if (last_mast == null)
                         result = input.GetPoint("Укажите точку для размещения обьекта:");
                     else
-                        result = input.GetDistance("Укажите точку для размещения обьекта:", placed_masts.Last().Position);
+                        result = input.GetDistance("Укажите точку для размещения обьекта:", last_mast.Position);
 
                     if (result.Result != InputResult.ResultCode.Normal)
                     {
@@ -110,7 +131,7 @@ namespace CatenaryCAD.Objects
                         return;
                     }
 
-                    placed_masts.Add(mast);
+                    last_mast = mast;
                 }
             }
         }

@@ -270,7 +270,7 @@ namespace CatenaryCAD.Objects
 
         }
 
-        public ICollection<McDynamicProperty> GetProperties(out bool exclusive)
+        public virtual ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
             exclusive = true;
 
