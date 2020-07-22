@@ -124,7 +124,7 @@ namespace CatenaryCAD.Objects
         }
 
         /// <summary>
-        /// Список параметров объекта
+        /// Список параметров AbstractHandler
         /// </summary>
         protected List<IProperty> Properties = new List<IProperty>();
         /// <summary>
