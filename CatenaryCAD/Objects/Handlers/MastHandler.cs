@@ -59,21 +59,13 @@ namespace CatenaryCAD.Objects
         {
             exclusive = true;
 
-            if (CatenaryObject != null)
-            {
-                var mast_props = CatenaryObject.GetProperties();
-                if (mast_props != null)
-                {
-                    var basement_props = Childrens.Where(child => child is BasementHandler).FirstOrDefault().Properties;
-                    NatureType viewtype = (NatureType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? NatureType.Line);
+            var basement_props = Childrens.Where(child => child is BasementHandler).FirstOrDefault().GetPropertiesComplex();
+            NatureType viewtype = (NatureType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? NatureType.Line);
 
-                    if (basement_props != null && viewtype == NatureType.Line)
-                        return Properties.Concat(mast_props).Concat(basement_props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
-                    else
-                        return Properties.Concat(mast_props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
-                }
-            }
-            return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+            if (basement_props != null && viewtype == NatureType.Line)
+                return GetPropertiesComplex().Concat(basement_props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+            else
+                return GetPropertiesComplex().OrderBy(n => n.ID).ToArray().ToAdapterProperty();
         }
 
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]

@@ -126,7 +126,21 @@ namespace CatenaryCAD.Objects
         /// <summary>
         /// Список параметров объекта
         /// </summary>
-        public List<IProperty> Properties = new List<IProperty>();
+        protected List<IProperty> Properties = new List<IProperty>();
+        /// <summary>
+        /// Возвращает сложенные списки параметров IObject и AbstractHandler
+        /// </summary>
+        /// <returns></returns>
+        public IProperty[] GetPropertiesComplex()
+        {
+            if (CatenaryObject != null)
+            {
+                var props = CatenaryObject.GetProperties();
+                if (props != null)
+                    return Properties.Concat(props).OrderBy(n => n.ID).ToArray();
+            }
+            return Properties.OrderBy(n => n.ID).ToArray();
+        }
 
         public override hresult PlaceObject()
         {
@@ -269,22 +283,10 @@ namespace CatenaryCAD.Objects
             }
 
         }
-
         public virtual ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
             exclusive = true;
-
-            if (CatenaryObject != null)
-            {
-                var props = CatenaryObject.GetProperties();
-
-                if (props != null)
-                {
-                    return Properties.Concat(props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
-                }
-            }
-                
-            return Properties.OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+            return GetPropertiesComplex().ToAdapterProperty();
         }
         public McDynamicProperty GetProperty(string id)
         {
