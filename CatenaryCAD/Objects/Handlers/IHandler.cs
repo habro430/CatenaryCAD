@@ -12,14 +12,13 @@ namespace CatenaryCAD.Objects.Handlers
     internal interface IHandler
     {
         /// <summary>
-        /// Объект CatenaryCAD
+        /// Объект <see cref="CatenaryCAD"/>
         /// </summary>
         public IObject CatenaryObject { get; set; }
         /// <summary>
-        /// Уникальный идентификатор обработчика
+        /// Уникальный идентификатор <see cref="McObjectId"/> обработчика <see cref="IHandler"/>
         /// </summary>
-        /// <returns>ID обработчика</returns>
-        public McObjectId GetID();
+        public McObjectId Identifier { get; }
 
         #region Parent & Childrens region
         /// <summary>
@@ -72,7 +71,7 @@ namespace CatenaryCAD.Objects.Handlers
 
         #region Properties region
         /// <summary>
-        /// Получить параметры <see cref="IHandler"/> + <see cref="IObject"/> 
+        /// Получить параметры обработчика <see cref="IHandler"/> и объекта <see cref="IObject"/> 
         /// </summary>
         /// <returns>Отсортированный по <see cref="IProperty.ID"/> массив параметров <see cref="IProperty"/>[]</returns>
         public IProperty[] GetProperties();

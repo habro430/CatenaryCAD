@@ -18,7 +18,7 @@ namespace CatenaryCAD.Objects
     internal abstract class AbstractHandler : McCustomBase, IMcDynamicProperties, IHandler
     {
         public IObject CatenaryObject { get; set; }
-        public McObjectId GetID() => this.ID;
+        public McObjectId Identifier => ID;
 
         #region Parent & Childrens region
         private McObjectId parentid = McObjectId.Null;
@@ -30,14 +30,14 @@ namespace CatenaryCAD.Objects
                                                     .ToArray();
         public bool AddChild(IHandler handler)
         {
-            var answer = childrensid.Add(handler.GetID());
+            var answer = childrensid.Add(handler.Identifier);
             if(answer) (handler as AbstractHandler).parentid = ID;
 
             return answer;
         }
         public bool RemoveChild(IHandler handler)
         {
-            var answer = childrensid.TryRemove(handler.GetID());
+            var answer = childrensid.TryRemove(handler.Identifier);
             if (answer) (handler as AbstractHandler).parentid = McObjectId.Null;
 
             return answer;
@@ -50,8 +50,8 @@ namespace CatenaryCAD.Objects
         public IHandler[] GetDependents() => dependentsid
                                                     .Select(obj => obj.GetObjectOfType<AbstractHandler>())
                                                     .ToArray();
-        public bool AddDependent(IHandler handler) => dependentsid.Add(handler.GetID());
-        public bool RemoveDependent(IHandler handler) => dependentsid.TryRemove(handler.GetID());
+        public bool AddDependent(IHandler handler) => dependentsid.Add(handler.Identifier);
+        public bool RemoveDependent(IHandler handler) => dependentsid.TryRemove(handler.Identifier);
         #endregion
 
         #region Properties region
