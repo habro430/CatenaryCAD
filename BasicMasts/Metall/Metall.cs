@@ -24,8 +24,6 @@ namespace BasicMasts
             //генериуем геометрию для 2D режима
             Geometry2D = new AbstractGeometry<XY>[] { new Rectangle(new Point<XY>(), 600, 600) };
 
-            var tmp_props = new List<IProperty>();
-
             if (InheritedMasts.Count > 0)
             {
                 Property<Type> mast_subtype = new Property<Type>("02_mast_metall_type", "Марка стойки", "Стойка", ConfigFlags.RefreshAfterChange);
@@ -33,14 +31,14 @@ namespace BasicMasts
                 mast_subtype.DictionaryValues = InheritedMasts;
                 mast_subtype.Value = mast_subtype.DictionaryValues.Values.FirstOrDefault();
 
-                tmp_props.Add(mast_subtype);
+                Propertes.Add(mast_subtype);
             }
             else
             {
                 Property<string> mast_subtype = new Property<string>("02_mast_metall_type", "Марка стойки", "Стойка");
                 mast_subtype.Value = string.Empty;
 
-                tmp_props.Add(mast_subtype);
+                Propertes.Add(mast_subtype);
             }
 
             Property<int> m_len = new Property<int>("03_mast_len", "Длинна", "Стойка", ConfigFlags.RefreshAfterChange);
@@ -73,10 +71,7 @@ namespace BasicMasts
 
             m_len.Value = m_len.DictionaryValues.Values.FirstOrDefault();
 
-            tmp_props.Add(m_len);
-
-            //сохраняем сгенерированный список параметров 
-            Propertes = tmp_props.ToArray();
+            Propertes.Add(m_len);
         }
     }
 }

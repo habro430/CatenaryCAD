@@ -21,42 +21,30 @@ namespace CatenaryCAD.Objects
         /// </summary>
         public IObject CatenaryObject;
 
+
+        #region Parent & Childrens region
+
         private McObjectId parentid = McObjectId.Null;
         private ConcurrentHashSet<McObjectId> childrensid = new ConcurrentHashSet<McObjectId>();
-        private ConcurrentHashSet<McObjectId> dependentsid = new ConcurrentHashSet<McObjectId>();
 
         /// <summary>
-        /// Родительскисй объект для данного объекта
+        /// Родительский объект <see cref="AbstractHandler"/>
         /// </summary>
-        public AbstractHandler Parent { 
-            get => parentid.GetObjectOfType<AbstractHandler>(); 
-        
-        }
-        /// <summary>
-        /// Дочерние объекты для данного объекта
-        /// </summary>
-        public AbstractHandler[] Childrens { 
-            get => childrensid
-                .Select(obj => obj.GetObjectOfType<AbstractHandler>())
-                .ToArray(); 
-        }
+        public AbstractHandler Parent => parentid.GetObjectOfType<AbstractHandler>();
 
         /// <summary>
-        /// Зависимые объекты от данного объекта
+        /// Получить дочерние объекты <see cref="AbstractHandler"/>
         /// </summary>
-        public AbstractHandler[] Dependents { 
-            get => dependentsid
-                .Select(obj => obj.GetObjectOfType<AbstractHandler>())
-                .ToArray();
-        }
-
-        public override List<McObjectId> GetDependent() => childrensid.Concat(dependentsid).ToList();
+        /// <returns>Массив из дочерних объектов <see cref="AbstractHandler"/>[]</returns>
+        public AbstractHandler[] GetChildrens() => childrensid
+                                                    .Select(obj => obj.GetObjectOfType<AbstractHandler>())
+                                                    .ToArray();
 
         /// <summary>
-        /// Добавить дочерний обьект
+        /// Добавить дочерний объект <see cref="AbstractHandler"/> в <see cref="AbstractHandler"/>
         /// </summary>
-        /// <param name="handler"></param>
-        /// <returns></returns>
+        /// <param name="handler">Дочерний объект <see cref="AbstractHandler"/></param>
+        /// <returns>Если дочерний объект добавлен то <c>true</c>, иначе <c>false</c></returns>
         public bool AddChild(AbstractHandler handler)
         {
             var answer = childrensid.Add(handler.ID);
@@ -64,11 +52,12 @@ namespace CatenaryCAD.Objects
 
             return answer;
         }
+        
         /// <summary>
-        /// Удалить дочерний обьект
+        /// Удалить дочерний объект <see cref="AbstractHandler"/> из <see cref="AbstractHandler"/>
         /// </summary>
-        /// <param name="handler"></param>
-        /// <returns></returns>
+        /// <param name="handler">Дочерний объект <see cref="AbstractHandler"/></param>
+        /// <returns>Если дочерний объект удален то <c>true</c>, иначе <c>false</c></returns>
         public bool RemoveChild(AbstractHandler handler)
         {
             var answer = childrensid.TryRemove(handler.ID);
@@ -76,22 +65,73 @@ namespace CatenaryCAD.Objects
 
             return answer;
         }
-        
+       
+        #endregion
+
+        #region Dependents region
+
+        private ConcurrentHashSet<McObjectId> dependentsid = new ConcurrentHashSet<McObjectId>();
+
         /// <summary>
-        /// Добавить зависимый обьект
+        /// Получить зависимые обьекты <see cref="AbstractHandler"/>
         /// </summary>
-        /// <param name="handler"></param>
-        /// <returns></returns>
+        /// <returns>Массив из зависимых объектов <see cref="AbstractHandler"/>[]</returns>
+        public AbstractHandler[] GetDependents() => dependentsid
+                                                    .Select(obj => obj.GetObjectOfType<AbstractHandler>())
+                                                    .ToArray();
+
+        /// <summary>
+        /// Добавить зависимый объект <see cref="AbstractHandler"/> в <see cref="AbstractHandler"/>
+        /// </summary>
+        /// <param name="handler">Зависимый объект <see cref="AbstractHandler"/></param>
+        /// <returns>Если зависимый объект добавлен то <c>true</c>, иначе <c>false</c></returns>
         public bool AddDependent(AbstractHandler handler) => dependentsid.Add(handler.ID);
 
         /// <summary>
-        /// Удалить зависимый обьект
+        /// Удалить зависимый обьект <see cref="AbstractHandler"/> из <see cref="AbstractHandler"/>
         /// </summary>
-        /// <param name="handler"></param>
-        /// <returns></returns>
+        /// <param name="handler">Зависимый объект <see cref="AbstractHandler"/></param>
+        /// <returns>Если зависимый объект удален то <c>true</c>, иначе <c>false</c></returns>
         public bool RemoveDependent(AbstractHandler handler) => dependentsid.TryRemove(handler.ID);
+        
+        #endregion
 
+        #region Properties region
 
+        private ConcurrentHashSet<IProperty> properties = new ConcurrentHashSet<IProperty>();
+
+        /// <summary>
+        /// Получить параметры <see cref="AbstractHandler"/> + <see cref="IObject"/> 
+        /// </summary>
+        /// <returns>Отсортированный по <see cref="IProperty.ID"/> массив параметров <see cref="IProperty"/>[]</returns>
+        public IProperty[] GetProperties()
+        {
+            if (CatenaryObject != null)
+            {
+                var props = CatenaryObject.GetProperties();
+
+                if (props != null)
+                    return properties.Concat(props).OrderBy(n => n.ID).ToArray();
+            }
+            return properties.OrderBy(n => n.ID).ToArray();
+        }
+        
+        /// <summary>
+        /// Добавить параметр <see cref="IProperty"/> в <see cref="AbstractHandler"/>
+        /// </summary>
+        /// <param name="property">Зависимый объект <see cref="IProperty"/></param>
+        /// <returns>Если зависимый объект добавлен то <c>true</c>, иначе <c>false</c></returns>
+        public bool AddProperty(IProperty property) => properties.Add(property);
+
+        /// <summary>
+        /// Удалить параметр <see cref="IProperty"/> из <see cref="AbstractHandler"/>
+        /// </summary>
+        /// <param name="property">Зависимый объект <see cref="AbstractHandler"/></param>
+        /// <returns>Если зависимый объект удален то <c>true</c>, иначе <c>false</c></returns>
+        public bool RemoveProperty(IProperty property) => properties.TryRemove(property);
+        #endregion
+
+        #region Position & Direction region
 
         private Point3d position = Point3d.Origin;
         private Vector3d direction = Vector3d.XAxis;
@@ -123,24 +163,7 @@ namespace CatenaryCAD.Objects
             }
         }
 
-        /// <summary>
-        /// Список параметров AbstractHandler
-        /// </summary>
-        protected List<IProperty> Properties = new List<IProperty>();
-        /// <summary>
-        /// Возвращает сложенные списки параметров IObject и AbstractHandler
-        /// </summary>
-        /// <returns></returns>
-        public IProperty[] GetPropertiesComplex()
-        {
-            if (CatenaryObject != null)
-            {
-                var props = CatenaryObject.GetProperties();
-                if (props != null)
-                    return Properties.Concat(props).OrderBy(n => n.ID).ToArray();
-            }
-            return Properties.OrderBy(n => n.ID).ToArray();
-        }
+        #endregion
 
         public override hresult PlaceObject()
         {
@@ -208,6 +231,7 @@ namespace CatenaryCAD.Objects
 
             return true;
         }
+        public override List<McObjectId> GetDependent() => childrensid.Concat(dependentsid).ToList();
 
         public override bool OnGetOsnapPoints(OsnapMode osnapMode, Point3d pickPoint, Point3d lastPoint, List<Point3d> osnapPoints)
         {
@@ -286,7 +310,7 @@ namespace CatenaryCAD.Objects
         public virtual ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
             exclusive = true;
-            return GetPropertiesComplex().ToAdapterProperty();
+            return GetProperties().ToAdapterProperty();
         }
         public McDynamicProperty GetProperty(string id)
         {

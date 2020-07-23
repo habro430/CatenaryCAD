@@ -52,20 +52,20 @@ namespace CatenaryCAD.Objects
 
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
 
-            Properties.Add(mast_type);
+            AddProperty(mast_type);
         }
 
         public override ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
             exclusive = true;
 
-            var basement_props = Childrens.Where(child => child is BasementHandler).FirstOrDefault().GetPropertiesComplex();
+            var basement_props = GetChildrens().Where(child => child is BasementHandler).FirstOrDefault().GetProperties();
             NatureType viewtype = (NatureType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? NatureType.Line);
 
             if (basement_props != null && viewtype == NatureType.Line)
-                return GetPropertiesComplex().Concat(basement_props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+                return GetProperties().Concat(basement_props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
             else
-                return GetPropertiesComplex().OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+                return GetProperties().OrderBy(n => n.ID).ToArray().ToAdapterProperty();
         }
 
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]

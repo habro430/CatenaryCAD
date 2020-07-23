@@ -46,7 +46,7 @@ namespace CatenaryCAD.Objects
 
             basement_type.Value = basement_type.DictionaryValues.Values.FirstOrDefault();
 
-            Properties.Add(basement_type);
+            AddProperty(basement_type);
         }
 
         public override void OnTransform(Matrix3d tfm)
