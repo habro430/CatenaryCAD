@@ -18,26 +18,27 @@ namespace CatenaryCAD.Objects
     internal abstract class AbstractHandler : McCustomBase, IMcDynamicProperties, IHandler
     {
         public IObject CatenaryObject { get; set; }
+        public McObjectId GetID() => this.ID;
 
         #region Parent & Childrens region
         private McObjectId parentid = McObjectId.Null;
         private ConcurrentHashSet<McObjectId> childrensid = new ConcurrentHashSet<McObjectId>();
 
-        public AbstractHandler Parent => parentid.GetObjectOfType<AbstractHandler>();
-        public AbstractHandler[] GetChildrens() => childrensid
+        public IHandler Parent => parentid.GetObjectOfType<AbstractHandler>();
+        public IHandler[] GetChildrens() => childrensid
                                                     .Select(obj => obj.GetObjectOfType<AbstractHandler>())
                                                     .ToArray();
-        public bool AddChild(AbstractHandler handler)
+        public bool AddChild(IHandler handler)
         {
-            var answer = childrensid.Add(handler.ID);
-            if(answer) handler.parentid = ID;
+            var answer = childrensid.Add(handler.GetID());
+            if(answer) (handler as AbstractHandler).parentid = ID;
 
             return answer;
         }
-        public bool RemoveChild(AbstractHandler handler)
+        public bool RemoveChild(IHandler handler)
         {
-            var answer = childrensid.TryRemove(handler.ID);
-            if (answer) handler.parentid = McObjectId.Null;
+            var answer = childrensid.TryRemove(handler.GetID());
+            if (answer) (handler as AbstractHandler).parentid = McObjectId.Null;
 
             return answer;
         }
@@ -46,11 +47,11 @@ namespace CatenaryCAD.Objects
         #region Dependents region
         private ConcurrentHashSet<McObjectId> dependentsid = new ConcurrentHashSet<McObjectId>();
 
-        public AbstractHandler[] GetDependents() => dependentsid
+        public IHandler[] GetDependents() => dependentsid
                                                     .Select(obj => obj.GetObjectOfType<AbstractHandler>())
                                                     .ToArray();
-        public bool AddDependent(AbstractHandler handler) => dependentsid.Add(handler.ID);
-        public bool RemoveDependent(AbstractHandler handler) => dependentsid.TryRemove(handler.ID);
+        public bool AddDependent(IHandler handler) => dependentsid.Add(handler.GetID());
+        public bool RemoveDependent(IHandler handler) => dependentsid.TryRemove(handler.GetID());
         #endregion
 
         #region Properties region
