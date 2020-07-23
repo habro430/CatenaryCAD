@@ -1,4 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Objects.Handlers;
 using CatenaryCAD.Properties;
 
 using Multicad;
@@ -14,37 +15,18 @@ using static CatenaryCAD.Extensions;
 namespace CatenaryCAD.Objects
 {
     [Serializable]
-    internal abstract class AbstractHandler : McCustomBase, IMcDynamicProperties
+    internal abstract class AbstractHandler : McCustomBase, IMcDynamicProperties, IHandler
     {
-        /// <summary>
-        /// Обьект CatenaryCAD
-        /// </summary>
-        public IObject CatenaryObject;
-
+        public IObject CatenaryObject { get; set; }
 
         #region Parent & Childrens region
-
         private McObjectId parentid = McObjectId.Null;
         private ConcurrentHashSet<McObjectId> childrensid = new ConcurrentHashSet<McObjectId>();
 
-        /// <summary>
-        /// Родительский объект <see cref="AbstractHandler"/>
-        /// </summary>
         public AbstractHandler Parent => parentid.GetObjectOfType<AbstractHandler>();
-
-        /// <summary>
-        /// Получить дочерние объекты <see cref="AbstractHandler"/>
-        /// </summary>
-        /// <returns>Массив из дочерних объектов <see cref="AbstractHandler"/>[]</returns>
         public AbstractHandler[] GetChildrens() => childrensid
                                                     .Select(obj => obj.GetObjectOfType<AbstractHandler>())
                                                     .ToArray();
-
-        /// <summary>
-        /// Добавить дочерний объект <see cref="AbstractHandler"/> в <see cref="AbstractHandler"/>
-        /// </summary>
-        /// <param name="handler">Дочерний объект <see cref="AbstractHandler"/></param>
-        /// <returns>Если дочерний объект добавлен то <c>true</c>, иначе <c>false</c></returns>
         public bool AddChild(AbstractHandler handler)
         {
             var answer = childrensid.Add(handler.ID);
@@ -52,12 +34,6 @@ namespace CatenaryCAD.Objects
 
             return answer;
         }
-        
-        /// <summary>
-        /// Удалить дочерний объект <see cref="AbstractHandler"/> из <see cref="AbstractHandler"/>
-        /// </summary>
-        /// <param name="handler">Дочерний объект <see cref="AbstractHandler"/></param>
-        /// <returns>Если дочерний объект удален то <c>true</c>, иначе <c>false</c></returns>
         public bool RemoveChild(AbstractHandler handler)
         {
             var answer = childrensid.TryRemove(handler.ID);
@@ -65,45 +41,21 @@ namespace CatenaryCAD.Objects
 
             return answer;
         }
-       
         #endregion
 
         #region Dependents region
-
         private ConcurrentHashSet<McObjectId> dependentsid = new ConcurrentHashSet<McObjectId>();
 
-        /// <summary>
-        /// Получить зависимые обьекты <see cref="AbstractHandler"/>
-        /// </summary>
-        /// <returns>Массив из зависимых объектов <see cref="AbstractHandler"/>[]</returns>
         public AbstractHandler[] GetDependents() => dependentsid
                                                     .Select(obj => obj.GetObjectOfType<AbstractHandler>())
                                                     .ToArray();
-
-        /// <summary>
-        /// Добавить зависимый объект <see cref="AbstractHandler"/> в <see cref="AbstractHandler"/>
-        /// </summary>
-        /// <param name="handler">Зависимый объект <see cref="AbstractHandler"/></param>
-        /// <returns>Если зависимый объект добавлен то <c>true</c>, иначе <c>false</c></returns>
         public bool AddDependent(AbstractHandler handler) => dependentsid.Add(handler.ID);
-
-        /// <summary>
-        /// Удалить зависимый обьект <see cref="AbstractHandler"/> из <see cref="AbstractHandler"/>
-        /// </summary>
-        /// <param name="handler">Зависимый объект <see cref="AbstractHandler"/></param>
-        /// <returns>Если зависимый объект удален то <c>true</c>, иначе <c>false</c></returns>
         public bool RemoveDependent(AbstractHandler handler) => dependentsid.TryRemove(handler.ID);
-        
         #endregion
 
         #region Properties region
-
         private ConcurrentHashSet<IProperty> properties = new ConcurrentHashSet<IProperty>();
 
-        /// <summary>
-        /// Получить параметры <see cref="AbstractHandler"/> + <see cref="IObject"/> 
-        /// </summary>
-        /// <returns>Отсортированный по <see cref="IProperty.ID"/> массив параметров <see cref="IProperty"/>[]</returns>
         public IProperty[] GetProperties()
         {
             if (CatenaryObject != null)
@@ -116,18 +68,7 @@ namespace CatenaryCAD.Objects
             return properties.OrderBy(n => n.ID).ToArray();
         }
         
-        /// <summary>
-        /// Добавить параметр <see cref="IProperty"/> в <see cref="AbstractHandler"/>
-        /// </summary>
-        /// <param name="property">Зависимый объект <see cref="IProperty"/></param>
-        /// <returns>Если зависимый объект добавлен то <c>true</c>, иначе <c>false</c></returns>
         public bool AddProperty(IProperty property) => properties.Add(property);
-
-        /// <summary>
-        /// Удалить параметр <see cref="IProperty"/> из <see cref="AbstractHandler"/>
-        /// </summary>
-        /// <param name="property">Зависимый объект <see cref="AbstractHandler"/></param>
-        /// <returns>Если зависимый объект удален то <c>true</c>, иначе <c>false</c></returns>
         public bool RemoveProperty(IProperty property) => properties.TryRemove(property);
         #endregion
 
@@ -136,9 +77,6 @@ namespace CatenaryCAD.Objects
         private Point3d position = Point3d.Origin;
         private Vector3d direction = Vector3d.XAxis;
 
-        /// <summary>
-        /// Позиция текущего объекта
-        /// </summary>
         public Point3d Position
         {
             get => position;
@@ -149,10 +87,6 @@ namespace CatenaryCAD.Objects
             }
             //set => Transform(Matrix3d.Displacement(position.GetVectorTo(value)));
         }
-
-        /// <summary>
-        /// Направление текущего объекта
-        /// </summary>
         public Vector3d Direction
         {
             get => direction;
@@ -162,7 +96,6 @@ namespace CatenaryCAD.Objects
                 direction = value.GetNormal();
             }
         }
-
         #endregion
 
         public override hresult PlaceObject()
@@ -186,9 +119,6 @@ namespace CatenaryCAD.Objects
             return PlaceObject(position, direction);
         }
         
-        /// <summary>
-        /// Функция вызываема событием при удалении обьекта из документа
-        /// </summary>
         public override void OnErase()
         {
             if (!parentid.IsNull)
@@ -198,16 +128,8 @@ namespace CatenaryCAD.Objects
                 McObjectManager.Erase(child);
         }
 
-        /// <summary>
-        /// Функция вызываемая событием при пользовательской трансформации обьекта
-        /// </summary>
-        /// <param name="tfm"></param>
         public override void OnTransform(Matrix3d tfm) =>Transform(tfm);
 
-        /// <summary>
-        /// Функция транформации объекта
-        /// </summary>
-        /// <param name="m"></param>
         public virtual void Transform(Matrix3d m)
         {
             if (!TryModify())

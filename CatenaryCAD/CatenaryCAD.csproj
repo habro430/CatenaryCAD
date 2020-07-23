@@ -121,6 +121,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Objects\Handlers\AbstractHandler.cs" />
     <Compile Include="Objects\Handlers\BasementHandler.cs" />
+    <Compile Include="Objects\Handlers\IHandler.cs" />
     <Compile Include="Objects\IAnchor.cs" />
     <Compile Include="Objects\IBasement.cs" />
     <Compile Include="Objects\CatenaryObjectAttribute.cs" />
