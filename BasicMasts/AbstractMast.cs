@@ -66,13 +66,9 @@ namespace BasicMasts
 
         public IProperty[] GetProperties() => Properties.ToArray();
 
-        public void GetGeometry(out AbstractGeometry<XY>[] xy, out AbstractGeometry<XYZ>[] xyz)
-        {
-            xy = Geometry2D;
-            xyz = Geometry3D;
-        }
-
         public IPart[] GetParts() => throw new NotImplementedException();
 
+        public AbstractGeometry<XYZ>[] GetGeometryForLayout() => Geometry3D;
+        public AbstractGeometry<XY>[] GetGeometryForScheme() => Geometry2D;
     }
 }

@@ -32,16 +32,11 @@ namespace BasicBasements
 
             Properties.Add(prop);
         }
-        public void GetGeometry(out AbstractGeometry<XY>[] xy, out AbstractGeometry<XYZ>[] xyz)
-        {
-            xy = geom;
-            xyz = null;
-        }
 
         public IPart[] GetParts() => throw new NotImplementedException();
-
         public IProperty[] GetProperties() => Properties.ToArray();
 
-
+        public AbstractGeometry<XYZ>[] GetGeometryForLayout() => null;
+        public AbstractGeometry<XY>[] GetGeometryForScheme() => geom;
     }
 }

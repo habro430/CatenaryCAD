@@ -29,7 +29,7 @@ namespace CatenaryCAD.Properties
 
     internal static partial class Extensions
     {
-        internal static AdapterProperty[] ToAdapterProperty(this IProperty[] props) 
+        internal static AdapterProperty[] ToAdapterProperty(this IOrderedEnumerable<IProperty> props)
             => props.Select(prop => prop.ToAdapterProperty()).ToArray();
 
         internal static AdapterProperty ToAdapterProperty(this IProperty prop) => new AdapterProperty(prop);

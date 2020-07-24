@@ -14,10 +14,10 @@ namespace CatenaryCAD
     public static class Extensions
     {
         [Serializable]
-        public enum NatureType
+        public enum OperationalMode
         {
-            Line,
-            Polygon,
+            Scheme,
+            Layout,
         }
 
         internal static Vector3d Normalize(this Vector3d vector)
@@ -36,7 +36,7 @@ namespace CatenaryCAD
             McsProgress progress = McContext.GetProgress();
             progress.SetRange(0, ids.Count);
 
-            McDocument.ActiveDocument.CustomProperties["viewtype"] = NatureType.Polygon;
+            McDocument.ActiveDocument.CustomProperties["OperationalMode"] = OperationalMode.Layout;
 
             for (int i =0; i< ids.Count; i++)
             {
@@ -62,7 +62,7 @@ namespace CatenaryCAD
             McsProgress progress = McContext.GetProgress();
             progress.SetRange(0, ids.Count);
 
-            McDocument.ActiveDocument.CustomProperties["viewtype"] = NatureType.Line; ;
+            McDocument.ActiveDocument.CustomProperties["OperationalMode"] = OperationalMode.Scheme; ;
 
             for (int i = 0; i < ids.Count; i++)
             {

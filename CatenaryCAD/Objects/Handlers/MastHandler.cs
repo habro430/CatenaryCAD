@@ -62,12 +62,12 @@ namespace CatenaryCAD.Objects
             var basement = GetChildrens().Where(child => child is BasementHandler).FirstOrDefault();
             var basement_props =  basement?.GetProperties();
 
-            NatureType viewtype = (NatureType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? NatureType.Line);
+            OperationalMode mode = (OperationalMode)(McDocument.ActiveDocument.CustomProperties["OperationalMode"] ?? OperationalMode.Scheme);
 
-            if (basement_props != null && viewtype == NatureType.Line)
-                return GetProperties().Concat(basement_props).OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+            if (basement_props != null && mode == OperationalMode.Scheme)
+                return GetProperties().Concat(basement_props).OrderBy(n => n.ID).ToAdapterProperty();
             else
-                return GetProperties().OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+                return GetProperties().OrderBy(n => n.ID).ToAdapterProperty();
         }
 
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]

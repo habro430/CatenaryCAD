@@ -12,6 +12,8 @@ namespace CatenaryCAD.Objects
         /// <summary>
         /// Событие сигнализируещее об обновлении <see cref="IObject"/>
         /// </summary>
+        /// <remarks>При обновлении объекта, обработчик <see cref="IHandler"/> получает команду на сохранение 
+        /// изменений для undo и redo, а так же ставит объект <see cref="IObject"/> в очередь на перерисовку.</remarks>
         public event Action Updated;
 
         /// <summary>
@@ -26,6 +28,17 @@ namespace CatenaryCAD.Objects
         /// <returns>Массив параметров <see cref="IProperty"/>[]</returns>
         public IProperty[] GetProperties();
 
-        public void GetGeometry(out AbstractGeometry<XY>[] xy, out AbstractGeometry<XYZ>[] xyz);
+        /// <summary>
+        /// Получить 3D геометрию для режима работы <see cref="OperationalMode.Layout"/>
+        /// </summary>
+        /// <returns>3D геометрия</returns>
+        public AbstractGeometry<XYZ>[] GetGeometryForLayout();
+
+        /// <summary>
+        /// Получить 2D геометрию для режима работы <see cref="OperationalMode.Scheme"/>
+        /// </summary>
+        /// <returns>2D геометрия</returns>
+        public AbstractGeometry<XY>[] GetGeometryForScheme();
+
     }
 }

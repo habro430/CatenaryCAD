@@ -157,23 +157,20 @@ namespace CatenaryCAD.Objects
 
             if (CatenaryObject != null)
             {
-                NatureType viewtype = (NatureType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? 
-                                         NatureType.Line);
+                var mode = (OperationalMode)(McDocument.ActiveDocument
+                            .CustomProperties["OperationalMode"] ?? OperationalMode.Scheme);
 
-                AbstractGeometry<XY>[] geometry_xy;
-                AbstractGeometry<XYZ>[] geometry_xyz;
-
-                CatenaryObject.GetGeometry(out geometry_xy, out geometry_xyz);
-
-                switch (viewtype)
+                switch (mode)
                 {
-                    case NatureType.Line:
+                    case OperationalMode.Scheme:
 
-                        if (geometry_xy != null)
+                        var geometry_scheme = CatenaryObject.GetGeometryForScheme();
+
+                        if (geometry_scheme != null)
                         {
-                            for (int igeom = 0; igeom < geometry_xy.Length; igeom++)
+                            for (int igeom = 0; igeom < geometry_scheme.Length; igeom++)
                             {
-                                var geometry = geometry_xy[igeom];
+                                var geometry = geometry_scheme[igeom];
 
                                 for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
                                 {
@@ -185,13 +182,15 @@ namespace CatenaryCAD.Objects
 
                         break;
 
-                    case NatureType.Polygon:
+                    case OperationalMode.Layout:
 
-                        if (geometry_xyz != null)
+                        var geometry_layout = CatenaryObject.GetGeometryForLayout(); ;
+
+                        if (geometry_layout != null)
                         {
-                            for (int igeom = 0; igeom < geometry_xyz.Length; igeom++)
+                            for (int igeom = 0; igeom < geometry_layout.Length; igeom++)
                             {
-                                var geometry = geometry_xyz[igeom];
+                                var geometry = geometry_layout[igeom];
 
                                 for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
                                 {
@@ -214,7 +213,7 @@ namespace CatenaryCAD.Objects
         public virtual ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
             exclusive = true;
-            return GetProperties().OrderBy(n => n.ID).ToArray().ToAdapterProperty();
+            return GetProperties().OrderBy(n => n.ID).ToAdapterProperty();
         }
         public McDynamicProperty GetProperty(string id)
         {
