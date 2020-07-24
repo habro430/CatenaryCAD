@@ -1,8 +1,10 @@
-﻿using CatenaryCAD.Geometry;
+﻿using CatenaryCAD;
+using CatenaryCAD.Geometry;
 using CatenaryCAD.Objects;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 using System;
+using System.Linq;
 
 namespace BasicBasements
 {
@@ -14,7 +16,8 @@ namespace BasicBasements
 
         AbstractGeometry<XY>[] geom = new AbstractGeometry<XY>[] { new Rectangle(new Point<XY>(), 100, 100) };
 
-        IProperty[] props;
+        protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
+
         public AbstractBasement()
         {
             var prop = new Property<int>("01_basement_size", "basement_size", "Фундамент", ConfigFlags.None);
@@ -27,7 +30,7 @@ namespace BasicBasements
                 Updated?.Invoke();
             };
 
-            props = new IProperty[] { prop };
+            Properties.Add(prop);
         }
         public void GetGeometry(out AbstractGeometry<XY>[] xy, out AbstractGeometry<XYZ>[] xyz)
         {
@@ -36,7 +39,8 @@ namespace BasicBasements
         }
 
         public IPart[] GetParts() => throw new NotImplementedException();
-        public IProperty[] GetProperties() => props;
+
+        public IProperty[] GetProperties() => Properties.ToArray();
 
 
     }

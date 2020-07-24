@@ -32,14 +32,14 @@ namespace BasicMasts
                 mast_subtype.DictionaryValues = InheritedMasts;
                 mast_subtype.Value = mast_subtype.DictionaryValues.Values.FirstOrDefault();
 
-                Propertes.Add(mast_subtype);
+                Properties.Add(mast_subtype);
             }
             else
             {
                 Property<string> mast_subtype = new Property<string>("02_mast_armored_type", "Марка стойки", "Стойка");
                 mast_subtype.Value = string.Empty;
 
-                Propertes.Add(mast_subtype);
+                Properties.Add(mast_subtype);
             }
 
             Property<int> m_len = new Property<int>("03_mast_len", "Длинна", "Стойка", ConfigFlags.RefreshAfterChange);
@@ -71,7 +71,7 @@ namespace BasicMasts
             };
             m_len.Value = m_len.DictionaryValues.Values.FirstOrDefault();
 
-            Propertes.Add(m_len);
+            Properties.Add(m_len);
         }
     }
 }

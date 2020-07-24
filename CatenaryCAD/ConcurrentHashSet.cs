@@ -9,7 +9,7 @@ namespace CatenaryCAD
     // The contents of this file is taken from https://github.com/i3arnon/ConcurrentHashSet/blob/master/src/ConcurrentHashSet/ConcurrentHashSet.cs
     // To be replaced by the framework implementation when released for the appropriate builds
 
-    // The author licenses this file to you under the MIT license.
+    // The Bar Arnon licenses this file to you under the MIT license.
     // See the LICENSE file in the project root for more information.
 
     /// <summary>

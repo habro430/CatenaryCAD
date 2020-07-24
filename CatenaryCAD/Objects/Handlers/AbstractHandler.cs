@@ -1,5 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Objects.Handlers;
+using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 
 using Multicad;
@@ -21,42 +21,23 @@ namespace CatenaryCAD.Objects
         public McObjectId Identifier => ID;
 
         #region Parent & Childrens region
-        private McObjectId parentid = McObjectId.Null;
-        private ConcurrentHashSet<McObjectId> childrensid = new ConcurrentHashSet<McObjectId>();
+
+        protected McObjectId parentid = McObjectId.Null;
+        protected ConcurrentHashSet<McObjectId> Childrens = new ConcurrentHashSet<McObjectId>();
 
         public IHandler Parent => parentid.GetObjectOfType<AbstractHandler>();
-        public IHandler[] GetChildrens() => childrensid
-                                                    .Select(obj => obj.GetObjectOfType<AbstractHandler>())
-                                                    .ToArray();
-        public bool AddChild(IHandler handler)
-        {
-            var answer = childrensid.Add(handler.Identifier);
-            if(answer) (handler as AbstractHandler).parentid = ID;
+        public IHandler[] GetChildrens() => Childrens
+                    .Select(obj => obj.GetObjectOfType<AbstractHandler>())
+                    .ToArray();
 
-            return answer;
-        }
-        public bool RemoveChild(IHandler handler)
-        {
-            var answer = childrensid.TryRemove(handler.Identifier);
-            if (answer) (handler as AbstractHandler).parentid = McObjectId.Null;
-
-            return answer;
-        }
         #endregion
 
-        #region Dependents region
-        private ConcurrentHashSet<McObjectId> dependentsid = new ConcurrentHashSet<McObjectId>();
-
-        public IHandler[] GetDependents() => dependentsid
+        protected ConcurrentHashSet<McObjectId> Dependents = new ConcurrentHashSet<McObjectId>();
+        public IHandler[] GetDependents() => Dependents
                                                     .Select(obj => obj.GetObjectOfType<AbstractHandler>())
                                                     .ToArray();
-        public bool AddDependent(IHandler handler) => dependentsid.Add(handler.Identifier);
-        public bool RemoveDependent(IHandler handler) => dependentsid.TryRemove(handler.Identifier);
-        #endregion
 
-        #region Properties region
-        private ConcurrentHashSet<IProperty> properties = new ConcurrentHashSet<IProperty>();
-
+        protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
         public IProperty[] GetProperties()
         {
             if (CatenaryObject != null)
@@ -64,14 +45,13 @@ namespace CatenaryCAD.Objects
                 var props = CatenaryObject.GetProperties();
 
                 if (props != null)
-                    return properties.Concat(props).OrderBy(n => n.ID).ToArray();
+                    return Properties.Concat(props).ToArray();
             }
-            return properties.OrderBy(n => n.ID).ToArray();
+            return Properties.ToArray();
         }
-        
-        public bool AddProperty(IProperty property) => properties.Add(property);
-        public bool RemoveProperty(IProperty property) => properties.TryRemove(property);
-        #endregion
+
+        protected ConcurrentHashSet<IPart> Parts = new ConcurrentHashSet<IPart>();
+        public IPart[] GetParts() => throw new NotImplementedException();
 
         #region Position & Direction region
 
@@ -115,7 +95,8 @@ namespace CatenaryCAD.Objects
         }
         public virtual hresult PlaceObject(Point3d position, Vector3d direction, AbstractHandler parent)
         {
-            parent.AddChild(this);
+            var answer = parent.Childrens.Add(this.Identifier);
+            if (answer) (this as AbstractHandler).parentid = parent.ID;
 
             return PlaceObject(position, direction);
         }
@@ -123,9 +104,9 @@ namespace CatenaryCAD.Objects
         public override void OnErase()
         {
             if (!parentid.IsNull)
-                Parent.RemoveChild(this);
-
-            foreach (var child in childrensid)
+                (Parent as AbstractHandler).Childrens.TryRemove(this.Identifier);
+            
+            foreach (var child in Childrens)
                 McObjectManager.Erase(child);
         }
 
@@ -141,7 +122,7 @@ namespace CatenaryCAD.Objects
 
             if (!ID.IsNull)
             {
-                foreach (var child in childrensid)
+                foreach (var child in Childrens)
                     (McObjectManager.GetObject(child) as AbstractHandler).Transform(m);
             }
         }
@@ -154,7 +135,7 @@ namespace CatenaryCAD.Objects
 
             return true;
         }
-        public override List<McObjectId> GetDependent() => childrensid.Concat(dependentsid).ToList();
+        public override List<McObjectId> GetDependent() => Childrens.Concat(Dependents).ToList();
 
         public override bool OnGetOsnapPoints(OsnapMode osnapMode, Point3d pickPoint, Point3d lastPoint, List<Point3d> osnapPoints)
         {
@@ -233,7 +214,7 @@ namespace CatenaryCAD.Objects
         public virtual ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
             exclusive = true;
-            return GetProperties().ToAdapterProperty();
+            return GetProperties().OrderBy(n => n.ID).ToArray().ToAdapterProperty();
         }
         public McDynamicProperty GetProperty(string id)
         {

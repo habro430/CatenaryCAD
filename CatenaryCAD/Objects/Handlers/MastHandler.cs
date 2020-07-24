@@ -52,14 +52,16 @@ namespace CatenaryCAD.Objects
 
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
 
-            AddProperty(mast_type);
+            Properties.Add(mast_type);
         }
 
         public override ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
             exclusive = true;
 
-            var basement_props = GetChildrens().Where(child => child is BasementHandler).FirstOrDefault().GetProperties();
+            var basement = GetChildrens().Where(child => child is BasementHandler).FirstOrDefault();
+            var basement_props =  basement?.GetProperties();
+
             NatureType viewtype = (NatureType)(McDocument.ActiveDocument.CustomProperties["viewtype"] ?? NatureType.Line);
 
             if (basement_props != null && viewtype == NatureType.Line)

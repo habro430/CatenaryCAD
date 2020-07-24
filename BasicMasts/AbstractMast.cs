@@ -23,8 +23,8 @@ namespace BasicMasts
 
         protected AbstractGeometry<XY>[] Geometry2D;
         protected AbstractGeometry<XYZ>[] Geometry3D;
-        
-        protected ConcurrentHashSet<IProperty> Propertes = new ConcurrentHashSet<IProperty>();
+
+        protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
 
         [NonSerialized]
         private static ObjectCache GeometryCache = new MemoryCache(typeof(Armored).Name);
@@ -64,7 +64,8 @@ namespace BasicMasts
             }).ToDictionary(p => p.atrr.Type, p => p.type);
         }
 
-        public IProperty[] GetProperties() => Propertes.ToArray();
+        public IProperty[] GetProperties() => Properties.ToArray();
+
         public void GetGeometry(out AbstractGeometry<XY>[] xy, out AbstractGeometry<XYZ>[] xyz)
         {
             xy = Geometry2D;
