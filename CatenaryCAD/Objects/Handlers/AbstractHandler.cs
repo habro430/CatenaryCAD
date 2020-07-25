@@ -10,6 +10,8 @@ using Multicad.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Objects
@@ -95,15 +97,15 @@ namespace CatenaryCAD.Objects
         }
         public virtual hresult PlaceObject(Point3d position, Vector3d direction, AbstractHandler parent)
         {
-            var answer = parent.Childrens.Add(this.Identifier);
-            if (answer) (this as AbstractHandler).parentid = parent.ID;
+            var answer = parent.Childrens.Add(Identifier);
+            if (answer) this.parentid = parent.Identifier;
 
             return PlaceObject(position, direction);
         }
         
         public override void OnErase()
         {
-            if (!parentid.IsNull)
+            if (Parent != null)
                 (Parent as AbstractHandler).Childrens.TryRemove(this.Identifier);
             
             foreach (var child in Childrens)
@@ -122,8 +124,13 @@ namespace CatenaryCAD.Objects
 
             if (!ID.IsNull)
             {
+                ConcurrentHashSet<McObjectId>.ClearMcObjectIdNull(Childrens);
+
                 foreach (var child in Childrens)
-                    (McObjectManager.GetObject(child) as AbstractHandler).Transform(m);
+                {
+                    var handler = child.GetObjectOfType<AbstractHandler>();
+                    if (handler != null) handler.Transform(m);
+                }
             }
         }
 

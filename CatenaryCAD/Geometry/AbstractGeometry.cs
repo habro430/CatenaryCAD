@@ -17,7 +17,11 @@ namespace CatenaryCAD.Geometry
             return this;
         }
 
-        public virtual Point<T> Raycast(Vector<T> ray)
+        public virtual Point<T> RayCastingTo(Vector<T> ray)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual Point<T>[] RayCastingThrough(Vector<T> ray)
         {
             throw new NotImplementedException();
         }

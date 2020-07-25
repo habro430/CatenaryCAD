@@ -13,7 +13,7 @@ using static CatenaryCAD.Extensions;
 namespace CatenaryCAD.Objects
 {
     [Serializable]
-    [CustomEntity("{742ECCF0-0CEC-4791-B4BE-4E3568E2C43E}", "MAST", "Опора контактной сети")]
+    [CustomEntity("{742ECCF0-0CEC-4791-B4BE-4E3568E2C43E}", "MAST", "Стойка опоры контактной сети")]
     internal sealed class MastHandler : AbstractHandler
     {
         [NonSerialized]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Multicad;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,7 +24,7 @@ namespace CatenaryCAD
     [Serializable, DebuggerDisplay("Count = {Count}")]
     public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
     {
-        private const int DefaultCapacity = 31;
+        private const int DefaultCapacity = 8;
         private const int MaxLockNumber = 1024;
 
         private readonly IEqualityComparer<T> _comparer;
@@ -253,7 +254,7 @@ namespace CatenaryCAD
 
             _growLockArray = growLockArray;
             _budget = buckets.Length / locks.Length;
-            _comparer = comparer ?? EqualityComparer<T>.Default;
+            _comparer = comparer ?? System.Collections.Generic.EqualityComparer<T>.Default;
         }
 
         /// <summary>
@@ -722,6 +723,63 @@ namespace CatenaryCAD
                     index++; //this should never flow, CopyToItems is only called when there's no overflow risk
                 }
             }
+        }
+
+        internal static void ClearMcObjectIdNull(ConcurrentHashSet<McObjectId> sets)
+        {
+            var buckets = sets._tables.Buckets;
+            for (int i = 0; i < buckets.Length; i++)
+            {
+                var current = Volatile.Read(ref buckets[i]);
+
+                if (current == null) continue;
+                if (current.Item.IsNull) sets.TryRemoveByHashCode(current.Hashcode);
+
+            }
+        }
+        internal bool TryRemoveByHashCode(int hashcode)
+        {
+            while (true)
+            {
+                var tables = _tables;
+
+                GetBucketAndLockNo(hashcode, out int bucketNo, out int lockNo, tables.Buckets.Length, tables.Locks.Length);
+
+                lock (tables.Locks[lockNo])
+                {
+                    // If the table just got resized, we may not be holding the right lock, and must retry.
+                    // This should be a rare occurrence.
+                    if (tables != _tables)
+                    {
+                        continue;
+                    }
+
+                    Node previous = null;
+                    for (var current = tables.Buckets[bucketNo]; current != null; current = current.Next)
+                    {
+                        Debug.Assert((previous == null && current == tables.Buckets[bucketNo]) || previous.Next == current);
+
+                        if (hashcode == current.Hashcode)
+                        {
+                            if (previous == null)
+                            {
+                                Volatile.Write(ref tables.Buckets[bucketNo], current.Next);
+                            }
+                            else
+                            {
+                                previous.Next = current.Next;
+                            }
+
+                            tables.CountPerLock[lockNo]--;
+                            return true;
+                        }
+                        previous = current;
+                    }
+                }
+
+                return false;
+            }
+
         }
 
         [Serializable]

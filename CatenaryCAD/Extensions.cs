@@ -8,6 +8,7 @@ using Multicad.Runtime;
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace CatenaryCAD
 {
@@ -19,7 +20,6 @@ namespace CatenaryCAD
             Scheme,
             Layout,
         }
-
         internal static Vector3d Normalize(this Vector3d vector)
         {
             return vector / vector.Length;
