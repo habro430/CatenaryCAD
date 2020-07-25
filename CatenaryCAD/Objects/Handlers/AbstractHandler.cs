@@ -222,16 +222,7 @@ namespace CatenaryCAD.Objects
             exclusive = true;
             return GetProperties().OrderBy(n => n.ID).ToAdapterProperty();
         }
-        public McDynamicProperty GetProperty(string id)
-        {
-
-            //for (int i = 0; i < Properties.Count; i++)
-            //{
-            //    if (Properties[i].ID == id)
-            //        return Properties[i].ToAdapterProperty();
-            //}
-
-            return null;
-        }
+        public McDynamicProperty GetProperty(string id) => null;
+            //GetProperties().Where(n => n.ID == id).FirstOrDefault().ToAdapterProperty() ;
     }
 }
