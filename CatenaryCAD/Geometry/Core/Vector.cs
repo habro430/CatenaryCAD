@@ -7,6 +7,7 @@ namespace CatenaryCAD.Geometry
     public class Vector<T> : IEquatable<T> where T : struct, IParticle<T>
     {
         public T Value = default(T);
+        public double Lenght => Math.Sqrt(Value.DotProduct(Value));
 
         public Vector() { }
         public Vector(T val) => Value = val;
@@ -20,6 +21,8 @@ namespace CatenaryCAD.Geometry
 
         public static bool operator ==(Vector<T> p1, Vector<T> p2) => p1.Equals(p2);
         public static bool operator !=(Vector<T> p1, Vector<T> p2) => !p1.Equals(p2);
+
+        public Vector<T> ProjectOn(Vector<T> other) => other * (Value.DotProduct(other.Value) / other.Value.DotProduct(other.Value));
 
         public bool IsNaN() => Value.IsNaN();
 

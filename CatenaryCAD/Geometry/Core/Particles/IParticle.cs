@@ -8,10 +8,13 @@ namespace CatenaryCAD.Geometry
         T Subtraction(T val);
 
         T Division(T val);
-        T Division(double val);
+        T Division(double scalar);
 
         T Multiply(T val);
-        T Multiply(double val);
+        T Multiply(double scalar);
+
+        double DotProduct(T val);
+        T Function(Func<double, double> scalar);
 
         bool IsNaN();
 

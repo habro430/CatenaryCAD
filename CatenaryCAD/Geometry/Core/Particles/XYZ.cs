@@ -34,15 +34,18 @@ namespace CatenaryCAD.Geometry
         public bool Equals(XYZ other) => X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z);
         public override bool Equals(object obj) => obj is XYZ p && this.Equals(p);
 
-
         public XYZ Addition(XYZ val) => this + val;
         public XYZ Subtraction(XYZ val) => this - val;
 
         public XYZ Division(XYZ val) => this / val;
-        public XYZ Division(double val) => this / new XYZ(val, val, val);
+        public XYZ Division(double scalar) => this / new XYZ(scalar, scalar, scalar);
 
         public XYZ Multiply(XYZ val) => this * val;
-        public XYZ Multiply(double val) => this * new XYZ(val, val, val);
+        public XYZ Multiply(double scalar) => this * new XYZ(scalar, scalar, scalar);
+
+        public double DotProduct(XYZ other) => (this.X * other.X) + (this.Y * other.Y) + (this.Z * other.Z);
+
+        public XYZ Function(Func<double, double> scalar) => new XYZ(scalar(X), scalar(Y), scalar(Z));
 
         public bool IsNaN() => double.IsNaN(X) || double.IsNaN(Y) || double.IsNaN(Z);
 
@@ -50,6 +53,7 @@ namespace CatenaryCAD.Geometry
         {
             throw new NotImplementedException();
         }
+
 
         public static XYZ operator +(XYZ p1, XYZ p2) => new XYZ(p1.X + p2.X, p1.Y + p2.Y, p1.Z + p2.Z);
         public static XYZ operator -(XYZ p1, XYZ p2) => new XYZ(p1.X - p2.X, p1.Y - p2.Y, p1.Z - p2.Z);

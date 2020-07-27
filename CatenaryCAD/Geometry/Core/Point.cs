@@ -21,6 +21,8 @@ namespace CatenaryCAD.Geometry
         public static bool operator !=(Point<T> p1, Point<T> p2) => !p1.Equals(p2);
 
         public Vector<T> GetVectorTo(Point<T> p) => p - this;
+        public double GetDistanceTo(Point<T> p) => GetVectorTo(p).Lenght;
+
         public bool IsNaN() => Value.IsNaN();
 
         public Point<T> TransformBy(Matrix m)
