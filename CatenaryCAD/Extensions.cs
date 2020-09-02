@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Objects;
+﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Objects;
 
 using Multicad;
 using Multicad.AplicationServices;
@@ -20,10 +21,6 @@ namespace CatenaryCAD
             Scheme,
             Layout,
         }
-        internal static Vector3d Normalize(this Vector3d vector)
-        {
-            return vector / vector.Length;
-        }
 
         [CommandMethod("switch_3d", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void switch_3d()
@@ -38,7 +35,7 @@ namespace CatenaryCAD
 
             McDocument.ActiveDocument.CustomProperties["OperationalMode"] = OperationalMode.Layout;
 
-            for (int i =0; i< ids.Count; i++)
+            for (int i = 0; i < ids.Count; i++)
             {
                 AbstractHandler handler = ids[i].GetObjectOfType<AbstractHandler>();
                 if (handler != null)

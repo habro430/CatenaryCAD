@@ -1,4 +1,6 @@
 ﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Meshes;
+using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Objects;
 using CatenaryCAD.Properties;
 
@@ -22,7 +24,7 @@ namespace BasicMasts
         public Metall()
         {
             //генериуем геометрию для 2D режима
-            Geometry2D = new AbstractGeometry<XY>[] { new Rectangle(new Point<XY>(), 600, 600) };
+            Geometry2D = new IShape[] { new Rectangle(new Point2D(), 600, 600) };
 
             if (InheritedMasts.Count > 0)
             {
@@ -57,13 +59,13 @@ namespace BasicMasts
                 switch (val)
                 {
                     case 10000:
-                        Geometry3D = new AbstractGeometry<XYZ>[] { GetOrCreateFromCache("m_10") };
+                        Geometry3D = new IMesh[] { GetOrCreateFromCache("m_10") };
                         break;
                     case 12000:
-                        Geometry3D = new AbstractGeometry<XYZ>[] { GetOrCreateFromCache("m_12") };
+                        Geometry3D = new IMesh[] { GetOrCreateFromCache("m_12") };
                         break;
                     case 15000:
-                        Geometry3D = new AbstractGeometry<XYZ>[] { GetOrCreateFromCache("m_15") };
+                        Geometry3D = new IMesh[] { GetOrCreateFromCache("m_15") };
                         break;
                 }
                 Updated?.Invoke();

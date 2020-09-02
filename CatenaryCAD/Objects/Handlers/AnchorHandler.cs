@@ -56,7 +56,7 @@ namespace CatenaryCAD.Objects
                 if (ID.IsNull)
                     return;
 
-                Transform(tfm);
+                TransformBy(tfm);
             }
         }
         [CommandMethod("insert_anchor", CommandFlags.NoCheck | CommandFlags.NoPrefix)]

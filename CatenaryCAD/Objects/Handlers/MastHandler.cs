@@ -96,7 +96,7 @@ namespace CatenaryCAD.Objects
 
                     input.MouseMove = (s, a) =>
                     {
-                        mast.Transform(Matrix3d.Displacement(mast.Position.GetVectorTo(a.Point)));
+                        mast.TransformBy(Matrix3d.Displacement(mast.Position.GetVectorTo(a.Point)));
                         
                         if (last_mast != null)
                         {
@@ -104,7 +104,7 @@ namespace CatenaryCAD.Objects
                                             .GetVectorTo(a.Point)
                                             .GetAngleTo(mast.Direction, Vector3d.ZAxis);
 
-                            mast.Transform(Matrix3d.Rotation(-angle, Vector3d.ZAxis, mast.Position));
+                            mast.TransformBy(Matrix3d.Rotation(-angle, Vector3d.ZAxis, mast.Position));
                         }
 
                         mast.DbEntity.Update();

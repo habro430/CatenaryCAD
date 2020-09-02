@@ -24,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -105,19 +106,27 @@
   <ItemGroup>
     <Compile Include="ConcurrentHashSet.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Geometry\XY\Circle.cs" />
-    <Compile Include="Geometry\Core\Matrix.cs" />
-    <Compile Include="Geometry\Core\Particles\XY.cs" />
-    <Compile Include="Geometry\Core\Particles\XYZ.cs" />
-    <Compile Include="Geometry\Core\Point.cs" />
-    <Compile Include="Geometry\Core\Vector.cs" />
-    <Compile Include="Geometry\Core\Particles\IParticle.cs" />
-    <Compile Include="Geometry\XYZ\Mesh.cs" />
-    <Compile Include="Geometry\XY\Rectangle.cs" />
-    <Compile Include="Geometry\Core\old\Point3.cs" />
-    <Compile Include="Geometry\AbstractGeometry.cs" />
-    <Compile Include="Geometry\XY\Line.cs" />
-    <Compile Include="Geometry\Core\old\Vector3.cs" />
+    <Compile Include="Geometry\2D\Edge2D.cs" />
+    <Compile Include="Geometry\2D\Matrix2D.cs" />
+    <Compile Include="Geometry\2D\Point2D.cs" />
+    <Compile Include="Geometry\2D\Ray2D.cs" />
+    <Compile Include="Geometry\2D\Shapes\Circle.cs" />
+    <Compile Include="Geometry\2D\Shapes\Line.cs" />
+    <Compile Include="Geometry\2D\Shapes\Rectangle.cs" />
+    <Compile Include="Geometry\3D\Meshes\IMesh.cs" />
+    <Compile Include="Geometry\2D\Shapes\IShape.cs" />
+    <Compile Include="Geometry\2D\Vector2D.cs" />
+    <Compile Include="Geometry\3D\Matrix3D.cs" />
+    <Compile Include="Geometry\3D\Meshes\Mesh.cs" />
+    <Compile Include="Geometry\3D\Point3D.cs" />
+    <Compile Include="Geometry\3D\Ray3D.cs" />
+    <Compile Include="Geometry\3D\Vector3D.cs" />
+    <Compile Include="Geometry\3D\Edge3D.cs" />
+    <Compile Include="Geometry\3D\Face3D.cs" />
+    <Compile Include="Geometry\Interfaces\IMatrix.cs" />
+    <Compile Include="Geometry\Interfaces\IPoint.cs" />
+    <Compile Include="Geometry\Interfaces\IRay.cs" />
+    <Compile Include="Geometry\Interfaces\IVector.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Objects\Handlers\AbstractHandler.cs" />
     <Compile Include="Objects\Handlers\AnchorHandler.cs" />
@@ -151,5 +160,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

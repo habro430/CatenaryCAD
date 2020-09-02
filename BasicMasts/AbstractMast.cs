@@ -1,6 +1,8 @@
 ﻿using BasicMasts.Properties;
 using CatenaryCAD;
 using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Meshes;
+using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Objects;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
@@ -21,8 +23,8 @@ namespace BasicMasts
     {
         public abstract event Action Updated;
 
-        protected AbstractGeometry<XY>[] Geometry2D;
-        protected AbstractGeometry<XYZ>[] Geometry3D;
+        protected IShape[] Geometry2D;
+        protected IMesh[] Geometry3D;
 
         protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
 
@@ -68,7 +70,7 @@ namespace BasicMasts
 
         public IPart[] GetParts() => throw new NotImplementedException();
 
-        public AbstractGeometry<XYZ>[] GetGeometryForLayout() => Geometry3D;
-        public AbstractGeometry<XY>[] GetGeometryForScheme() => Geometry2D;
+        public IMesh[] GetGeometryForLayout() => Geometry3D;
+        public IShape[] GetGeometryForScheme() => Geometry2D;
     }
 }

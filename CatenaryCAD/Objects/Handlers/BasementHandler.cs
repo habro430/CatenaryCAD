@@ -56,7 +56,7 @@ namespace CatenaryCAD.Objects
                 if (ID.IsNull) 
                     return;
 
-                Transform(tfm);
+                TransformBy(tfm);
             }
         }
 

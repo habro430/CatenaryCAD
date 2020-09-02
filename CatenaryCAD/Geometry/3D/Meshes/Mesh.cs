@@ -1,43 +1,35 @@
-﻿using CatenaryCAD.Geometry.Core;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 
-namespace CatenaryCAD.Geometry
+namespace CatenaryCAD.Geometry.Meshes
 {
-
     [Serializable]
-    public sealed class Mesh : AbstractGeometry<XYZ>
+    public class Mesh : IMesh
     {
-        public Mesh(Point<XYZ>[] vertices, (Point<XYZ>, Point<XYZ>)[] edges)
-        {
-            Vertices = vertices;
-            Edges = edges;
-        }
+        public Face3D[] Faces { private set; get; }
+        public Mesh(params Face3D[] faces) => Faces = faces;
 
         public static Mesh FromObj(string obj)
         {
             string[] lines = obj.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            List<Point<XYZ>> vertices = new List<Point<XYZ>>();
-            List<(Point<XYZ>, Point<XYZ>)> edges = new List<(Point<XYZ>, Point<XYZ>)>();
-
+            List<Point3D> vertices = new List<Point3D>();
+            List<Face3D> faces = new List<Face3D>();
 
             for (int i = 0; i < lines.Length; i++)
             {
                 if (lines[i] == null)
                     continue;
 
-                String[] data = lines[i].Split(' ');
+                string[] data = lines[i].Split(' ');
 
                 bool success;
                 switch (data[0])
                 {
-                    case "v":
+                    case "v": //парсер вершин
                         double x, y, z;
-                        
+
                         success = double.TryParse(data[1], NumberStyles.Any, CultureInfo.InvariantCulture, out x);
                         if (!success) throw new ArgumentException("Невозможно преобразовать параметр X как число double");
 
@@ -47,11 +39,11 @@ namespace CatenaryCAD.Geometry
                         success = double.TryParse(data[3], NumberStyles.Any, CultureInfo.InvariantCulture, out z);
                         if (!success) throw new ArgumentException("Невозможно преобразовать параметр Z как число double");
 
-                        vertices.Add(new Point<XYZ>((x,y,z)));
+                        vertices.Add(new Point3D(x, y, z));
                         break;
 
-                    case "f":
-                        int vcount = data.Count() - 1;
+                    case "f": // парсер многоугольника
+                        int vcount = data.Length - 1;
                         int[] edge = new int[vcount];
 
                         for (int ivert = 0; ivert < vcount; ivert++)
@@ -65,23 +57,35 @@ namespace CatenaryCAD.Geometry
                             edge[ivert] = vindex;
                         }
 
-                        
-                        (Point<XYZ>, Point<XYZ>)[] tmp_edges = new (Point<XYZ>, Point<XYZ>)[vcount];
+
+                        Edge3D[] edges = new Edge3D[vcount];
                         for (int iedge = 0; iedge < vcount; iedge++)
-                        {                            
+                        {
                             if (iedge < vcount - 1)
-                                tmp_edges[iedge] = (vertices[edge[iedge] - 1], vertices[edge[iedge + 1] - 1]);
+                                edges[iedge] = new Edge3D(vertices[edge[iedge] - 1], vertices[edge[iedge + 1] - 1]);
                             else
-                                tmp_edges[iedge] = (vertices[edge[iedge] - 1], vertices[edge[0] - 1]);
+                                edges[iedge] = new Edge3D(vertices[edge[iedge] - 1], vertices[edge[0] - 1]);
                         }
 
-                        edges.AddRange(tmp_edges);
+                        faces.Add(new Face3D(edges));
 
                         break;
                 }
             }
 
-            return new Mesh(vertices.ToArray(), edges.ToArray());
+            return new Mesh(faces.ToArray());
+        }
+
+        public IMesh TransformBy(in Matrix3D m)
+        {
+            int count = Faces.Length;
+
+            Face3D[] new_faces = new Face3D[count];
+
+            for (int i = 0; i < count; i++)
+                new_faces[i] = Faces[i].TransformBy(m);
+
+            return new Mesh(new_faces);
         }
     }
 }

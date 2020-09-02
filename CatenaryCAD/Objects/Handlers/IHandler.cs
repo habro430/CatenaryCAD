@@ -60,7 +60,7 @@ namespace CatenaryCAD.Objects
         /// Функция транформации обработчика
         /// </summary>
         /// <param name="m">Матрица трансформации</param>
-        public void Transform(Matrix3d m);
+        public void TransformBy(Matrix3d m);
 
     }
 }

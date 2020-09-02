@@ -13,6 +13,9 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using static CatenaryCAD.Extensions;
+using Point3d = Multicad.Geometry.Point3d;
+using Vector3d = Multicad.Geometry.Vector3d;
+using Matrix3d = Multicad.Geometry.Matrix3d;
 
 namespace CatenaryCAD.Objects
 {
@@ -112,9 +115,9 @@ namespace CatenaryCAD.Objects
                 McObjectManager.Erase(child);
         }
 
-        public override void OnTransform(Matrix3d tfm) =>Transform(tfm);
+        public override void OnTransform(Matrix3d tfm) =>TransformBy(tfm);
 
-        public virtual void Transform(Matrix3d m)
+        public virtual void TransformBy(Matrix3d m)
         {
             if (!TryModify())
                 return;
@@ -129,7 +132,7 @@ namespace CatenaryCAD.Objects
                 foreach (var child in Childrens)
                 {
                     var handler = child.GetObjectOfType<AbstractHandler>();
-                    if (handler != null) handler.Transform(m);
+                    if (handler != null) handler.TransformBy(m);
                 }
             }
         }
@@ -179,11 +182,9 @@ namespace CatenaryCAD.Objects
                             {
                                 var geometry = geometry_scheme[igeom];
 
-                                for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
-                                {
-                                    dc.DrawLine(geometry.Edges[iedge].Item1.ToMCAD(),
-                                                geometry.Edges[iedge].Item2.ToMCAD());
-                                }
+                                foreach (var edge in geometry.Edges)
+                                    dc.DrawLine(edge.First.ToMultiCAD(),
+                                                edge.Second.ToMultiCAD());
                             }
                         }
 
@@ -199,12 +200,10 @@ namespace CatenaryCAD.Objects
                             {
                                 var geometry = geometry_layout[igeom];
 
-                                for (int iedge = 0; iedge < geometry.Edges.Length; iedge++)
-                                {
-                                    dc.DrawLine(geometry.Edges[iedge].Item1.ToMCAD(),
-                                                geometry.Edges[iedge].Item2.ToMCAD());
-
-                                }
+                                foreach( var face in geometry.Faces)
+                                    foreach(var edge in face.Edges)
+                                        dc.DrawLine(edge.First.ToMultiCAD(),
+                                                    edge.Second.ToMultiCAD());
                             }
                         }
 

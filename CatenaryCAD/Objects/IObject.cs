@@ -1,4 +1,6 @@
 ﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Meshes;
+using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 
@@ -32,13 +34,13 @@ namespace CatenaryCAD.Objects
         /// Получить 3D геометрию для режима работы <see cref="OperationalMode.Layout"/>
         /// </summary>
         /// <returns>3D геометрия</returns>
-        public AbstractGeometry<XYZ>[] GetGeometryForLayout();
+        public IMesh[] GetGeometryForLayout();
 
         /// <summary>
         /// Получить 2D геометрию для режима работы <see cref="OperationalMode.Scheme"/>
         /// </summary>
         /// <returns>2D геометрия</returns>
-        public AbstractGeometry<XY>[] GetGeometryForScheme();
+        public IShape[] GetGeometryForScheme();
 
     }
 }

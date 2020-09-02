@@ -1,5 +1,7 @@
 ﻿using CatenaryCAD;
 using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Meshes;
+using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Objects;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
@@ -14,7 +16,7 @@ namespace BasicBasements
     {
         public event Action Updated;
 
-        AbstractGeometry<XY>[] geom = new AbstractGeometry<XY>[] { new Rectangle(new Point<XY>(), 100, 100) };
+        IShape[] geom = new IShape[] { new Rectangle(new Point2D(), 100, 100) };
 
         protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
 
@@ -25,7 +27,7 @@ namespace BasicBasements
             prop.Value = 100;
             prop.Updated += (val) =>
             {
-                geom[0] = new Rectangle(new Point<XY>(), val, val);
+                geom[0] = new Rectangle(new Point2D(), val, val);
 
                 Updated?.Invoke();
             };
@@ -36,7 +38,7 @@ namespace BasicBasements
         public IPart[] GetParts() => throw new NotImplementedException();
         public IProperty[] GetProperties() => Properties.ToArray();
 
-        public AbstractGeometry<XYZ>[] GetGeometryForLayout() => null;
-        public AbstractGeometry<XY>[] GetGeometryForScheme() => geom;
+        public IMesh[] GetGeometryForLayout() => null;
+        public IShape[] GetGeometryForScheme() => geom;
     }
 }
