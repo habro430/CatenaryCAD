@@ -12,7 +12,6 @@ using System.Linq;
 namespace BasicBasements
 {
     [Serializable]
-    [DisplayName ]
     [CatenaryObject("TestBasement", "")]
     public class AbstractBasement : IBasement
     {
