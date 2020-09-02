@@ -223,5 +223,6 @@ namespace CatenaryCAD.Objects
         }
         public McDynamicProperty GetProperty(string id) => null;
             //GetProperties().Where(n => n.ID == id).FirstOrDefault().ToAdapterProperty() ;
+
     }
 }

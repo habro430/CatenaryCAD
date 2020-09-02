@@ -21,21 +21,13 @@ namespace CatenaryCAD.Objects
 
         static MastHandler()
         {
-            //при первом вызове класса кэшируем в словарь производные от IMast опоры в статику
-            //получаем все не абстрактные обьекты производные от IMast и имеющие атрибут CatenaryObjectAttribute
-            var masts = Main.CachedCatenaryObjects
-                .Where(abstr => !abstr.IsAbstract)
-                .Where(interf => interf.GetInterface(typeof(IMast).FullName) != null)
-                .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), false));
-
             //получем словарь из CatenaryObjectAttribute и типа производного от IMast класса
-            Masts = masts.Select((type) => new
+            Masts = Main.GetCatenaryObjectTypesFor(typeof(IMast)).Select((type) => new
             {
                 type,
                 atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
                             .FirstOrDefault() as CatenaryObjectAttribute
             }).ToDictionary(p => p.atrr.Name, p => p.type);
-
         }        
         public MastHandler()
         {

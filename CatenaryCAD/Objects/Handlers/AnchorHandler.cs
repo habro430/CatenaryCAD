@@ -16,21 +16,13 @@ namespace CatenaryCAD.Objects
         private static readonly Dictionary<string, Type> Anchors;
         static AnchorHandler()
         {
-            //при первом вызове класса кэшируем в словарь производные от IAnchor опоры в статику
-            //получаем все не абстрактные обьекты производные от IAnchor и имеющие атрибут CatenaryObjectAttribute
-            var anchors = Main.CachedCatenaryObjects
-                .Where(abstr => !abstr.IsAbstract)
-                .Where(interf => interf.GetInterface(typeof(IAnchor).FullName) != null)
-                .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), false));
-
-            //получем словарь из CatenaryObjectAttribute и типа производного от IMast класса
-            Anchors = anchors.Select((type) => new
+            //получем словарь из CatenaryObjectAttribute и типа производного от IAnchor класса
+            Anchors = Main.GetCatenaryObjectTypesFor(typeof(IAnchor)).Select((type) => new
             {
                 type,
                 atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
                             .FirstOrDefault() as CatenaryObjectAttribute
             }).ToDictionary(p => p.atrr.Name, p => p.type);
-
         }
         public AnchorHandler()
         {

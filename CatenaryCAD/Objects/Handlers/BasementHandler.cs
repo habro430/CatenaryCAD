@@ -15,21 +15,13 @@ namespace CatenaryCAD.Objects
         private static readonly Dictionary<string, Type> Basements;
         static BasementHandler()
         {
-            //при первом вызове класса кэшируем в словарь производные от IBasement опоры в статику
-            //получаем все не абстрактные обьекты производные от IBasement и имеющие атрибут CatenaryObjectAttribute
-            var basements = Main.CachedCatenaryObjects
-                .Where(abstr => !abstr.IsAbstract)
-                .Where(interf => interf.GetInterface(typeof(IBasement).FullName) != null)
-                .Where(attr => Attribute.IsDefined(attr, typeof(CatenaryObjectAttribute), false));
-
-            //получем словарь из CatenaryObjectAttribute и типа производного от IMast класса
-            Basements = basements.Select((type) => new
+            //получем словарь из CatenaryObjectAttribute и типа производного от IBasement класса
+            Basements = Main.GetCatenaryObjectTypesFor(typeof(IBasement)).Select((type) => new
             {
                 type,
                 atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
                             .FirstOrDefault() as CatenaryObjectAttribute
             }).ToDictionary(p => p.atrr.Name, p => p.type);
-
         }
         public BasementHandler()
         {

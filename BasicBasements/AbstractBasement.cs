@@ -6,11 +6,13 @@ using CatenaryCAD.Objects;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 using System;
+using System.ComponentModel;
 using System.Linq;
 
 namespace BasicBasements
 {
     [Serializable]
+    [DisplayName ]
     [CatenaryObject("TestBasement", "")]
     public class AbstractBasement : IBasement
     {
