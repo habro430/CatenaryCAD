@@ -1,4 +1,4 @@
-﻿namespace CatenaryCAD.Geometry.Interfaces
+﻿namespace CatenaryCAD.Geometry
 {
     public interface IVector
     {

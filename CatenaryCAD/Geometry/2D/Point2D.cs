@@ -1,5 +1,4 @@
-﻿using CatenaryCAD.Geometry.Interfaces;
-using Multicad.Geometry;
+﻿using Multicad.Geometry;
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;

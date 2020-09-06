@@ -1,4 +1,5 @@
 ﻿using BasicMasts.Properties;
+
 using CatenaryCAD;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;

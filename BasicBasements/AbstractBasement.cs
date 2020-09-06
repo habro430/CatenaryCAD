@@ -3,16 +3,18 @@ using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Objects;
+using CatenaryCAD.Objects.Attributes;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 using System;
-using System.ComponentModel;
+
 using System.Linq;
 
 namespace BasicBasements
 {
     [Serializable]
-    [CatenaryObject("TestBasement", "")]
+    [Name("TestBasementName")]
+    [Description("")]
     public class AbstractBasement : IBasement
     {
         public event Action Updated;

@@ -3,6 +3,7 @@ using Multicad;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Runtime;
+using CatenaryCAD.Objects.Attributes;
 
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,23 @@ namespace CatenaryCAD.Objects
 
         static MastHandler()
         {
-            //получем словарь из CatenaryObjectAttribute и типа производного от IMast класса
-            Masts = Main.GetCatenaryObjectTypesFor(typeof(IMast)).Select((type) => new
-            {
-                type,
-                atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
-                            .FirstOrDefault() as CatenaryObjectAttribute
-            }).ToDictionary(p => p.atrr.Name, p => p.type);
-        }        
+            //получаем словарь из имени и типа производного от IMast класса
+            Masts = Main.GetCatenaryObjectFor(typeof(IMast))
+                .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false)
+                                      .FirstOrDefault() as NonBrowsableAttribute == null)
+                .Select((type) => new
+                {
+                    type,
+                    atrr = type.GetCustomAttributes(typeof(NameAttribute), false)
+                               .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)
+                }).ToDictionary(p => p.atrr.Name, p => p.type);
+        }    
+        static Dictionary<string, Type> masts()
+        {
+
+            throw new NotImplementedException();
+        }
+
         public MastHandler()
         {
             Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", ConfigFlags.RefreshAfterChange);

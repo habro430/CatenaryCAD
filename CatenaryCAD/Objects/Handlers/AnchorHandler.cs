@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Properties;
+﻿using CatenaryCAD.Objects.Attributes;
+using CatenaryCAD.Properties;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Runtime;
@@ -16,13 +17,17 @@ namespace CatenaryCAD.Objects
         private static readonly Dictionary<string, Type> Anchors;
         static AnchorHandler()
         {
-            //получем словарь из CatenaryObjectAttribute и типа производного от IAnchor класса
-            Anchors = Main.GetCatenaryObjectTypesFor(typeof(IAnchor)).Select((type) => new
-            {
-                type,
-                atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
-                            .FirstOrDefault() as CatenaryObjectAttribute
-            }).ToDictionary(p => p.atrr.Name, p => p.type);
+            //получем словарь из имени и типа производного от IAnchor класса
+            Anchors = Main.GetCatenaryObjectFor(typeof(IAnchor))
+                .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false)
+                      .FirstOrDefault() as NonBrowsableAttribute == null)
+                .Select((type) => new
+
+                {
+                    type,
+                    atrr = type.GetCustomAttributes(typeof(NameAttribute), false)
+                               .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)
+                }).ToDictionary(p => p.atrr.Name, p => p.type);
         }
         public AnchorHandler()
         {

@@ -1,6 +1,4 @@
-﻿using CatenaryCAD.Geometry.Interfaces;
-using System;
-using System.Runtime.Remoting.Services;
+﻿using System;
 
 namespace CatenaryCAD.Geometry.Shapes
 {

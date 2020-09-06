@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Properties;
+﻿using CatenaryCAD.Objects.Attributes;
+using CatenaryCAD.Properties;
 using Multicad.Geometry;
 using Multicad.Runtime;
 using System;
@@ -13,15 +14,19 @@ namespace CatenaryCAD.Objects
     {
         [NonSerialized]
         private static readonly Dictionary<string, Type> Basements;
+
         static BasementHandler()
         {
-            //получем словарь из CatenaryObjectAttribute и типа производного от IBasement класса
-            Basements = Main.GetCatenaryObjectTypesFor(typeof(IBasement)).Select((type) => new
-            {
-                type,
-                atrr = type.GetCustomAttributes(typeof(CatenaryObjectAttribute), false)
-                            .FirstOrDefault() as CatenaryObjectAttribute
-            }).ToDictionary(p => p.atrr.Name, p => p.type);
+            //получем словарь из имени и типа производного от IBasement класса
+            Basements = Main.GetCatenaryObjectFor(typeof(IBasement))
+                .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false)
+                      .FirstOrDefault() as NonBrowsableAttribute == null)
+                .Select((type) => new
+                {
+                    type,
+                    atrr = type.GetCustomAttributes(typeof(NameAttribute), false)
+                               .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)
+                }).ToDictionary(p => p.atrr.Name, p => p.type);
         }
         public BasementHandler()
         {

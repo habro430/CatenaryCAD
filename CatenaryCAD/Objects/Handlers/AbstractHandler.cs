@@ -1,21 +1,17 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
-
 using Multicad;
 using Multicad.CustomObjectBase;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
 using static CatenaryCAD.Extensions;
+using Matrix3d = Multicad.Geometry.Matrix3d;
 using Point3d = Multicad.Geometry.Point3d;
 using Vector3d = Multicad.Geometry.Vector3d;
-using Matrix3d = Multicad.Geometry.Matrix3d;
 
 namespace CatenaryCAD.Objects
 {

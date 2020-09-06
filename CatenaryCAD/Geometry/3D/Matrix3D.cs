@@ -1,5 +1,4 @@
-﻿using CatenaryCAD.Geometry.Interfaces;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry

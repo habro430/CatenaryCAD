@@ -3,6 +3,7 @@ using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Objects;
+using CatenaryCAD.Objects.Attributes;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 using System;
@@ -11,7 +12,8 @@ using System.Linq;
 namespace BasicBasements
 {
     [Serializable]
-    [CatenaryObject("TestAnchor", "")]
+    [Name("TestAnchor")]
+    [Description("")]
     public class AbstractAnchor : IAnchor
     {
         public event Action Updated;
