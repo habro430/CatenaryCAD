@@ -24,20 +24,14 @@ namespace CatenaryCAD.Objects
         {
             //получаем словарь из имени и типа производного от IMast класса
             Masts = Main.GetCatenaryObjectFor(typeof(IMast))
-                .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false)
-                                      .FirstOrDefault() as NonBrowsableAttribute == null)
+                .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false).FirstOrDefault() == null)
                 .Select((type) => new
                 {
                     type,
-                    atrr = type.GetCustomAttributes(typeof(NameAttribute), false)
-                               .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)
-                }).ToDictionary(p => p.atrr.Name, p => p.type);
+                    atrr = (type.GetCustomAttributes(typeof(NameAttribute), false)
+                               .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)).Name
+                }).ToDictionary(p => p.atrr, p => p.type);
         }    
-        static Dictionary<string, Type> masts()
-        {
-
-            throw new NotImplementedException();
-        }
 
         public MastHandler()
         {

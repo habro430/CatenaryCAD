@@ -12,7 +12,7 @@ namespace BasicMasts
 {
     [Serializable]
     [Name("Железобетонная")]
-    [Description("Представляет базовую модель железобетонной опоры")]
+    [Description("Представляет базовую модель железобетонной стойки")]
 
     public class Armored : AbstractMast
     {

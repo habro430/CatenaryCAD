@@ -12,7 +12,7 @@ namespace BasicMasts
 {
     [Serializable]
     [Name("Металлическая")]
-    [Description("Представляет базовую модель металлической опоры")]
+    [Description("Представляет базовую модель металлической стойки")]
 
     public class Metall : AbstractMast
     {

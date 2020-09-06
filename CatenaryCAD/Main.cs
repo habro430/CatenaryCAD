@@ -10,9 +10,22 @@ namespace CatenaryCAD
     internal sealed class Main : Multicad.Runtime.IExtensionApplication
     {
         /// <summary>
-        /// Кэшированные объекты подгруженные из плагинов *.dll и производные от IObject 
+        /// Кэшированные производные от IObject объекты
         /// </summary>
         public static Type[] CatenaryObjects { private set; get; }
+
+        /// <summary>
+        /// Загружает производные от IObject объекты из плагинов *.dll раположенных в <paramref name="directory"/>
+        /// </summary>
+        public static Type[] GetCatenaryObject(string directory)
+        {
+            var files = Directory.GetFiles(directory, "*.dll");
+
+            return files.Where((file) => file != Assembly.GetExecutingAssembly().Location)
+                        .Select((file) => Assembly.Load(file).GetTypes()
+                        .Where(interf => interf.GetInterface(typeof(IObject).FullName) != null))
+                        .SelectMany((arr)=> arr).ToArray();
+        }
 
         /// <summary>
         /// Возвращает из числа кэшированных объектов в <see cref="CatenaryObjects"/> 
@@ -27,16 +40,7 @@ namespace CatenaryCAD
 
         public void Initialize()
         {
-            var files = Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "*.dll");
-            var types = new List<Type>();
-
-            foreach (var file in files)
-            {
-                Assembly asm = Assembly.Load(file);
-                types.AddRange(asm.GetTypes()
-                        .Where(interf => interf.GetInterface(typeof(IObject).FullName) != null));
-            }
-            CatenaryObjects = types.ToArray();
+            CatenaryObjects = GetCatenaryObject(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) ;
         }
 
         public void Terminate()

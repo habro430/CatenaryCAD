@@ -19,14 +19,13 @@ namespace CatenaryCAD.Objects
         {
             //получем словарь из имени и типа производного от IBasement класса
             Basements = Main.GetCatenaryObjectFor(typeof(IBasement))
-                .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false)
-                      .FirstOrDefault() as NonBrowsableAttribute == null)
+                .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false).FirstOrDefault() == null)
                 .Select((type) => new
                 {
                     type,
-                    atrr = type.GetCustomAttributes(typeof(NameAttribute), false)
-                               .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)
-                }).ToDictionary(p => p.atrr.Name, p => p.type);
+                    name = (type.GetCustomAttributes(typeof(NameAttribute), false)
+                               .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)).Name,
+                }).ToDictionary(p => p.name, p => p.type);
         }
         public BasementHandler()
         {
