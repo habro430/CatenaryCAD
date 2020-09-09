@@ -18,12 +18,15 @@ namespace CatenaryCAD.Objects
     internal sealed class MastHandler : AbstractHandler
     {
         [NonSerialized]
-        private static readonly Dictionary<string, Type> Masts;
+        private static readonly Type[] Masts;
 
-        static MastHandler()
+        static MastHandler() => Masts = Main.GetCatenaryObjects(typeof(IMast));
+
+        public MastHandler()
         {
-            //получаем словарь из имени и типа производного от IMast класса
-            Masts = Main.GetCatenaryObjectFor(typeof(IMast))
+            Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", ConfigFlags.RefreshAfterChange);
+
+            mast_type.DictionaryValues = Masts
                 .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false).FirstOrDefault() == null)
                 .Select((type) => new
                 {
@@ -31,13 +34,6 @@ namespace CatenaryCAD.Objects
                     atrr = (type.GetCustomAttributes(typeof(NameAttribute), false)
                                .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)).Name
                 }).ToDictionary(p => p.atrr, p => p.type);
-        }    
-
-        public MastHandler()
-        {
-            Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", ConfigFlags.RefreshAfterChange);
-
-            mast_type.DictionaryValues = Masts;
 
             mast_type.Updated += (type) =>
             {
@@ -58,11 +54,14 @@ namespace CatenaryCAD.Objects
             var basement = GetChildrens().Where(child => child is BasementHandler).FirstOrDefault();
             var basement_props =  basement?.GetProperties();
 
+            //проверяем режим работы если режим работы не определен то по умолчанию используем OperationalMode.Scheme
             OperationalMode mode = (OperationalMode)(McDocument.ActiveDocument.CustomProperties["OperationalMode"] ?? OperationalMode.Scheme);
 
             if (basement_props != null && mode == OperationalMode.Scheme)
+                //если режим работы OperationalMode.Scheme то выдаем отсортированные по ID параметры basement + mast
                 return GetProperties().Concat(basement_props).OrderBy(n => n.ID).ToAdapterProperty();
             else
+                //в противном случае только отсортированные по ID параметры mast
                 return GetProperties().OrderBy(n => n.ID).ToAdapterProperty();
         }
 

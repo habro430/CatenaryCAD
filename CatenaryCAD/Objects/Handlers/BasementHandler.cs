@@ -13,12 +13,14 @@ namespace CatenaryCAD.Objects
     internal sealed class BasementHandler : AbstractHandler
     {
         [NonSerialized]
-        private static readonly Dictionary<string, Type> Basements;
+        private static readonly Type[] Basements;
+        static BasementHandler() => Basements = Main.GetCatenaryObjects(typeof(IBasement));
 
-        static BasementHandler()
+        public BasementHandler()
         {
-            //получем словарь из имени и типа производного от IBasement класса
-            Basements = Main.GetCatenaryObjectFor(typeof(IBasement))
+            Property<Type> basement_type = new Property<Type>("01_basement_type", "Тип фундамента", "Фундамент", ConfigFlags.RefreshAfterChange);
+
+            basement_type.DictionaryValues = Basements
                 .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false).FirstOrDefault() == null)
                 .Select((type) => new
                 {
@@ -26,12 +28,6 @@ namespace CatenaryCAD.Objects
                     name = (type.GetCustomAttributes(typeof(NameAttribute), false)
                                .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)).Name,
                 }).ToDictionary(p => p.name, p => p.type);
-        }
-        public BasementHandler()
-        {
-            Property<Type> basement_type = new Property<Type>("01_basement_type", "Тип фундамента", "Фундамент", ConfigFlags.RefreshAfterChange);
-
-            basement_type.DictionaryValues = Basements;
 
             basement_type.Updated += (type) =>
             {
