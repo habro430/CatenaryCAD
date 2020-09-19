@@ -2,19 +2,19 @@
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Objects;
-using CatenaryCAD.Objects.Attributes;
+using CatenaryCAD.Models;
+using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 using System;
 using System.Linq;
 
-namespace BasicBasements
+namespace BasicFoundations
 {
     [Serializable]
-    [Name("TestAnchor")]
-    [Description("")]
-    public class AbstractAnchor : IAnchor
+    [ModelName("TestAnchor1")]
+    [ModelDescription("")]
+    public class TestAnchor1 : IAnchor
     {
         public event Action Updated;
 
@@ -23,9 +23,9 @@ namespace BasicBasements
 
         protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
 
-        public AbstractAnchor()
+        public TestAnchor1()
         {
-
+            
         }
 
         public IPart[] GetParts() => throw new NotImplementedException();

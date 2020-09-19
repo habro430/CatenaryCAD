@@ -5,5 +5,6 @@
         Edge2D[] Edges { get; }
 
         IShape TransformBy(in Matrix2D m);
+
     }
 }

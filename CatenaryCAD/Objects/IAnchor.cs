@@ -1,6 +1,6 @@
-﻿namespace CatenaryCAD.Objects
+﻿namespace CatenaryCAD.Models
 {
-    public interface IAnchor : IObject
+    public interface IAnchor : IModel
     {
 
     }

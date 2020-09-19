@@ -82,8 +82,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractBasement.cs" />
-    <Compile Include="BasementAttribute.cs" />
+    <Compile Include="TestFoundation2.cs" />
+    <Compile Include="TestFoundation1.cs" />
+    <Compile Include="FoundationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

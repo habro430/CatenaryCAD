@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace BasicBasements
+namespace BasicFoundations
 {
     [Serializable]
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class BasementAttribute : Attribute
+    public sealed class FoundationAttribute : Attribute
     {
         public string Type { get; private set; }
-        public BasementAttribute(string type) => Type = type;
+        public FoundationAttribute(string type) => Type = type;
     }
 }

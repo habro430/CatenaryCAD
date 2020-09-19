@@ -1,6 +1,6 @@
 ﻿namespace CatenaryCAD.Models
 {
-    public interface IMast : IModel
+    public interface IFoundation : IModel
     {
 
     }

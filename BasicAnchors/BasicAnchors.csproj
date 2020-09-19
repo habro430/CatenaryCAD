@@ -85,7 +85,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractAnchor.cs" />
+    <Compile Include="TestAnchor1.cs" />
+    <Compile Include="TestAnchor2.cs" />
     <Compile Include="AnchorAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

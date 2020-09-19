@@ -1,7 +1,7 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Objects.Attributes;
+using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Properties;
 
 using System;
@@ -11,9 +11,9 @@ using System.Linq;
 namespace BasicMasts
 {
     [Serializable]
-    [Name("Железобетонная")]
-    [Description("Представляет базовую модель железобетонной стойки")]
-
+    [ModelName("Железобетонная")]
+    [ModelDescription("Представляет базовую модель железобетонной стойки")]
+    
     public class Armored : AbstractMast
     {
         public override event Action Updated;

@@ -1,6 +1,6 @@
-﻿namespace CatenaryCAD.Objects
+﻿namespace CatenaryCAD.Models
 {
-    public interface IBracket : IObject
+    public interface IBracket : IModel
     {
 
     }

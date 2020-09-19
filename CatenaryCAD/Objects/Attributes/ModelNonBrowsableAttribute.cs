@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace CatenaryCAD.Objects.Attributes
+namespace CatenaryCAD.Models.Attributes
 {
     [Serializable]
     [AttributeUsage(AttributeTargets.Class)]
-    public class NonBrowsableAttribute : Attribute
+    public class ModelNonBrowsableAttribute : Attribute
     {
     }
 }

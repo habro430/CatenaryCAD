@@ -2,20 +2,20 @@
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Objects;
-using CatenaryCAD.Objects.Attributes;
+using CatenaryCAD.Models;
+using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 using System;
 
 using System.Linq;
 
-namespace BasicBasements
+namespace BasicFoundations
 {
     [Serializable]
-    [Name("TestBasementName")]
-    [Description("")]
-    public class AbstractBasement : IBasement
+    [ModelName("TestFoundation2")]
+    [ModelDescription("")]
+    public class TestFoundation2 : IFoundation
     {
         public event Action Updated;
 
@@ -23,7 +23,7 @@ namespace BasicBasements
 
         protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
 
-        public AbstractBasement()
+        public TestFoundation2()
         {
             var prop = new Property<int>("01_basement_size", "basement_size", "Фундамент", ConfigFlags.None);
 

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatenaryCAD", "CatenaryCAD\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicMasts", "BasicMasts\BasicMasts.csproj", "{D2D0AEB1-9BA7-45CA-8DA9-2390FC6B77F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicBasements", "BasicBasements\BasicBasements.csproj", "{7BAE7CF6-6F28-420E-BC64-D567449900A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicFoundations", "BasicBasements\BasicFoundations.csproj", "{7BAE7CF6-6F28-420E-BC64-D567449900A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicAnchors", "BasicAnchors\BasicAnchors.csproj", "{0A32A616-27DA-40FF-BB55-3949D15EE011}"
 EndProject

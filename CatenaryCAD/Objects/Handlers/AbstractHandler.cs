@@ -13,12 +13,12 @@ using Matrix3d = Multicad.Geometry.Matrix3d;
 using Point3d = Multicad.Geometry.Point3d;
 using Vector3d = Multicad.Geometry.Vector3d;
 
-namespace CatenaryCAD.Objects
+namespace CatenaryCAD.Models
 {
     [Serializable]
     internal abstract class AbstractHandler : McCustomBase, IMcDynamicProperties, IHandler
     {
-        public IObject CatenaryObject { get; set; }
+        public IModel CatenaryObject { get; set; }
         public McObjectId Identifier => ID;
 
         #region Parent & Childrens region

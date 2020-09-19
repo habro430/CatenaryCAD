@@ -1,7 +1,7 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Objects.Attributes;
+using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Properties;
 
 using System;
@@ -11,8 +11,8 @@ using System.Linq;
 namespace BasicMasts
 {
     [Serializable]
-    [Name("Металлическая")]
-    [Description("Представляет базовую модель металлической стойки")]
+    [ModelName("Металлическая")]
+    [ModelDescription("Представляет базовую модель металлической стойки")]
 
     public class Metall : AbstractMast
     {

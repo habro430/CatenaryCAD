@@ -1,4 +1,4 @@
-﻿using CatenaryCAD.Objects;
+﻿using CatenaryCAD.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,7 +26,7 @@ namespace CatenaryCAD
 
             return asm_files.Select((file) => Assembly.Load(file).GetExportedTypes()
                             .Where(abstr => !abstr.IsAbstract)
-                            .Where(interf =>  typeof(IObject).IsAssignableFrom(interf)))
+                            .Where(interf =>  typeof(IModel).IsAssignableFrom(interf)))
                             .SelectMany((arr) => arr).ToArray();
         }
 

@@ -3,7 +3,7 @@ using Multicad;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Runtime;
-using CatenaryCAD.Objects.Attributes;
+using CatenaryCAD.Models.Attributes;
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Drawing;
 using System.Linq;
 using static CatenaryCAD.Extensions;
 
-namespace CatenaryCAD.Objects
+namespace CatenaryCAD.Models
 {
     [Serializable]
     [CustomEntity("{742ECCF0-0CEC-4791-B4BE-4E3568E2C43E}", "MAST", "Стойка опоры контактной сети")]
@@ -27,12 +27,12 @@ namespace CatenaryCAD.Objects
             Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", ConfigFlags.RefreshAfterChange);
 
             mast_type.DictionaryValues = Masts
-                .Where((type) => type.GetCustomAttributes(typeof(NonBrowsableAttribute), false).FirstOrDefault() == null)
+                .Where((type) => type.GetCustomAttributes(typeof(ModelNonBrowsableAttribute), false).FirstOrDefault() == null)
                 .Select((type) => new
                 {
                     type,
-                    atrr = (type.GetCustomAttributes(typeof(NameAttribute), false)
-                               .FirstOrDefault() as NameAttribute ?? new NameAttribute(type.Name)).Name
+                    atrr = (type.GetCustomAttributes(typeof(ModelNameAttribute), false)
+                               .FirstOrDefault() as ModelNameAttribute ?? new ModelNameAttribute(type.Name)).Name
                 }).ToDictionary(p => p.atrr, p => p.type);
 
             mast_type.Updated += (type) =>
