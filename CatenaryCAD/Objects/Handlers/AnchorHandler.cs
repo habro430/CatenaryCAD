@@ -34,13 +34,13 @@ namespace CatenaryCAD.Models
             anchor_type.Updated += (type) =>
             {
                 if (!TryModify()) return;
-                CatenaryObject = (IAnchor)Activator.CreateInstance(type);
-                CatenaryObject.Updated += () => { if (!TryModify()) return; };
+                Model = (IAnchor)Activator.CreateInstance(type);
+                Model.Updated += () => { if (!TryModify()) return; };
             };
 
             anchor_type.Value = anchor_type.DictionaryValues.Values.FirstOrDefault();
 
-            Properties.Add(anchor_type);
+            properties.Add(anchor_type);
         }
         public override void OnTransform(Matrix3d tfm)
         {
@@ -78,7 +78,7 @@ namespace CatenaryCAD.Models
 
                         input.MouseMove = (s, a) =>
                         {
-                            var shapes = mast.CatenaryObject.GetGeometryForScheme();
+                            var shapes = mast.Model.GetGeometryForScheme();
 
                             foreach(var shape in shapes)
                             {
@@ -114,37 +114,6 @@ namespace CatenaryCAD.Models
                         if (result.Result != InputResult.ResultCode.Normal) McObjectManager.Erase(anchor.ID);
 
                     }
-
-
-                    //    Anchor anchor = new Anchor(Anchor.AnchorCountEnumeration.SingleAnchor,
-                    //        Anchor.JointCountEnumeration.DoubleJoint);
-
-                    //    anchor.PlaceObject();
-
-                    //    selected_obj.AddChildren(anchor);
-
-                    //    using (InputJig input = new InputJig())
-                    //    {
-                    //        excluded_objs.Add(mast.ObjectHandler.ID);
-                    //        excluded_objs.Add(anchor.ObjectHandler.ID);
-
-                    //        input.ExcludeObjects(excluded_objs);
-
-                    //        input.MouseMove += (s, a) =>
-                    //        {
-                    //            Point position = (mast.ObjectHandler as MastHandler).GetPositionForChild(a.Point.ToCoustomPoint());
-                    //            if (!position.IsUnavalible())
-                    //            {
-                    //                anchor.Position = position;
-                    //                anchor.Direction = a.Point.ToCoustomPoint().GetVectorTo(mast.Position);
-
-                    //                anchor.Update();
-                    //            }
-                    //        };
-
-                    //        InputResult result = input.GetPoint("Выберите направление для размещения обьекта:");
-                    //        if (result.Result != InputResult.ResultCode.Normal) anchor.ObjectHandler.DbEntity.Erase();
-                    //    }
                 }
 
             } while (selected_obj != null);

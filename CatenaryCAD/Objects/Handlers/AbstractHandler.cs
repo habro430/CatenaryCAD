@@ -18,37 +18,36 @@ namespace CatenaryCAD.Models
     [Serializable]
     internal abstract class AbstractHandler : McCustomBase, IMcDynamicProperties, IHandler
     {
-        public IModel CatenaryObject { get; set; }
-        public McObjectId Identifier => ID;
+        public IModel Model { get; set; }
 
         #region Parent & Childrens region
 
         protected McObjectId parentid = McObjectId.Null;
-        protected ConcurrentHashSet<McObjectId> Childrens = new ConcurrentHashSet<McObjectId>();
+        protected ConcurrentHashSet<McObjectId> childrens = new ConcurrentHashSet<McObjectId>();
 
         public IHandler Parent => parentid.GetObjectOfType<AbstractHandler>();
-        public IHandler[] GetChildrens() => Childrens
+        public IHandler[] GetChildrens() => childrens
                     .Select(obj => obj.GetObjectOfType<AbstractHandler>())
                     .ToArray();
 
         #endregion
 
-        protected ConcurrentHashSet<McObjectId> Dependents = new ConcurrentHashSet<McObjectId>();
-        public IHandler[] GetDependents() => Dependents
+        protected ConcurrentHashSet<McObjectId> dependents = new ConcurrentHashSet<McObjectId>();
+        public IHandler[] GetDependents() => dependents
                                                     .Select(obj => obj.GetObjectOfType<AbstractHandler>())
                                                     .ToArray();
 
-        protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
+        protected ConcurrentHashSet<IProperty> properties = new ConcurrentHashSet<IProperty>();
         public IProperty[] GetProperties()
         {
-            if (CatenaryObject != null)
+            if (Model != null)
             {
-                var props = CatenaryObject.GetProperties();
+                var props = Model.GetProperties();
 
                 if (props != null)
-                    return Properties.Concat(props).ToArray();
+                    return properties.Concat(props).ToArray();
             }
-            return Properties.ToArray();
+            return properties.ToArray();
         }
 
         protected ConcurrentHashSet<IPart> Parts = new ConcurrentHashSet<IPart>();
@@ -56,27 +55,15 @@ namespace CatenaryCAD.Models
 
         #region Position & Direction region
 
-        private Point3d position = Point3d.Origin;
-        private Vector3d direction = Vector3d.XAxis;
-
         public Point3d Position
         {
-            get => position;
-            set
-            {
-                if (!TryModify()) return;
-                position = value;
-            }
-            //set => Transform(Matrix3d.Displacement(position.GetVectorTo(value)));
+            get => Model.Position.ToMultiCAD();
+            set => Model.Position = value.ToCatenaryCAD_3D();
         }
         public Vector3d Direction
         {
-            get => direction;
-            set
-            {
-                if (!TryModify()) return;
-                direction = value.GetNormal();
-            }
+            get => Model.Direction.ToMultiCAD();
+            set => Model.Direction = value.ToCatenaryCAD_3D();
         }
         #endregion
 
@@ -96,8 +83,8 @@ namespace CatenaryCAD.Models
         }
         public virtual hresult PlaceObject(Point3d position, Vector3d direction, AbstractHandler parent)
         {
-            var answer = parent.Childrens.Add(Identifier);
-            if (answer) this.parentid = parent.Identifier;
+            var answer = parent.childrens.Add(ID);
+            if (answer) this.parentid = parent.ID;
 
             return PlaceObject(position, direction);
         }
@@ -105,9 +92,9 @@ namespace CatenaryCAD.Models
         public override void OnErase()
         {
             if (Parent != null)
-                (Parent as AbstractHandler).Childrens.TryRemove(this.Identifier);
+                (Parent as AbstractHandler).childrens.TryRemove(ID);
             
-            foreach (var child in Childrens)
+            foreach (var child in childrens)
                 McObjectManager.Erase(child);
         }
 
@@ -118,14 +105,14 @@ namespace CatenaryCAD.Models
             if (!TryModify())
                 return;
 
-            direction = direction.TransformBy(m);
-            position = position.TransformBy(m);
+            Direction = Direction.TransformBy(m);
+            Position = Position.TransformBy(m);
 
             if (!ID.IsNull)
             {
-                ConcurrentHashSet<McObjectId>.ClearMcObjectIdNull(Childrens);
+                ConcurrentHashSet<McObjectId>.ClearMcObjectIdNull(childrens);
 
-                foreach (var child in Childrens)
+                foreach (var child in childrens)
                 {
                     var handler = child.GetObjectOfType<AbstractHandler>();
                     if (handler != null) handler.TransformBy(m);
@@ -141,7 +128,7 @@ namespace CatenaryCAD.Models
 
             return true;
         }
-        public override List<McObjectId> GetDependent() => Childrens.Concat(Dependents).ToList();
+        public override List<McObjectId> GetDependent() => childrens.Concat(dependents).ToList();
 
         public override bool OnGetOsnapPoints(OsnapMode osnapMode, Point3d pickPoint, Point3d lastPoint, List<Point3d> osnapPoints)
         {
@@ -161,7 +148,7 @@ namespace CatenaryCAD.Models
             dc.Color = Multicad.Constants.Colors.ByObject;
             dc.LineType = Multicad.Constants.LineTypes.ByObject;
 
-            if (CatenaryObject != null)
+            if (Model != null)
             {
                 var mode = (OperationalMode)(McDocument.ActiveDocument
                             .CustomProperties["OperationalMode"] ?? OperationalMode.Scheme);
@@ -170,7 +157,7 @@ namespace CatenaryCAD.Models
                 {
                     case OperationalMode.Scheme:
 
-                        var geometry_scheme = CatenaryObject.GetGeometryForScheme();
+                        var geometry_scheme = Model.GetGeometryForScheme();
 
                         if (geometry_scheme != null)
                         {
@@ -188,7 +175,7 @@ namespace CatenaryCAD.Models
 
                     case OperationalMode.Layout:
 
-                        var geometry_layout = CatenaryObject.GetGeometryForLayout(); ;
+                        var geometry_layout = Model.GetGeometryForLayout(); ;
 
                         if (geometry_layout != null)
                         {

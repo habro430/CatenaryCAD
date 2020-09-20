@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Models.Attributes;
+﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Properties;
 using Multicad.Geometry;
 using Multicad.Runtime;
@@ -10,17 +11,17 @@ namespace CatenaryCAD.Models
 {
     [Serializable]
     [CustomEntity("{36E13AC1-DF87-4158-8C7E-221A17AEB6E7}", "BASEMENT", "Фундамент опоры контактной сети")]
-    internal sealed class BasementHandler : AbstractHandler
+    internal sealed class FoundationHandler : AbstractHandler
     {
         [NonSerialized]
-        private static readonly Type[] Basements;
-        static BasementHandler() => Basements = Main.GetCatenaryObjects(typeof(IFoundation));
+        private static readonly Type[] Foundations;
+        static FoundationHandler() => Foundations = Main.GetCatenaryObjects(typeof(IFoundation));
 
-        public BasementHandler()
+        public FoundationHandler()
         {
-            Property<Type> basement_type = new Property<Type>("01_basement_type", "Тип фундамента", "Фундамент", ConfigFlags.RefreshAfterChange);
+            Property<Type> basement_type = new Property<Type>("01_foundation_type", "Тип фундамента", "Фундамент", ConfigFlags.RefreshAfterChange);
 
-            basement_type.DictionaryValues = Basements
+            basement_type.DictionaryValues = Foundations
                 .Where((type) => type.GetCustomAttributes(typeof(ModelNonBrowsableAttribute), false).FirstOrDefault() == null)
                 .Select((type) => new
                 {
@@ -38,7 +39,7 @@ namespace CatenaryCAD.Models
 
             basement_type.Value = basement_type.DictionaryValues.Values.FirstOrDefault();
 
-            properties.Add(basement_type);
+            Properties.Add(basement_type);
         }
 
         public override void OnTransform(Matrix3d tfm)

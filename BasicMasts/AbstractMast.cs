@@ -22,7 +22,29 @@ namespace BasicMasts
     [Serializable]
     public abstract class AbstractMast : IMast
     {
-        public abstract event Action Updated;
+        public virtual event Action Updated;
+
+        private Point3D position;
+        private Vector3D direction;
+
+        public Point3D Position 
+        { 
+            get => position;
+            set
+            {
+                position = value;
+                Updated?.Invoke();
+            }
+        }
+        public Vector3D Direction 
+        {
+            get => direction;
+            set
+            {
+                direction = value.Normalize();
+                Updated?.Invoke();
+            }
+        }
 
         protected IShape[] Geometry2D;
         protected IMesh[] Geometry3D;
@@ -30,11 +52,13 @@ namespace BasicMasts
         protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
 
         [NonSerialized]
-        private static ObjectCache GeometryCache = new MemoryCache(typeof(Armored).Name);
+        private static ObjectCache Cache = new MemoryCache(typeof(Armored).Name);
+
+
         internal static Mesh GetOrCreateFromCache(string key)
         {
             //есть ли 3d модель в кэше
-            if (!GeometryCache.Contains(key))
+            if (!Cache.Contains(key))
             {
                 //если нет то читаем 3d модель из ресурсов, генерируем и кэшируем 
                 ResourceManager rm = new ResourceManager(typeof(Resources));
@@ -43,11 +67,11 @@ namespace BasicMasts
                 string model = Encoding.Default.GetString(Convert.FromBase64String(rm.GetString(key)));
 
                 //генерируем модель и пишем в кэш
-                GeometryCache.Set(key, Mesh.FromObj(model), new CacheItemPolicy());
+                Cache.Set(key, Mesh.FromObj(model), new CacheItemPolicy());
             }
 
             //читаем модель из кэша и возвращаем
-            return GeometryCache.Get(key) as Mesh;
+            return Cache.Get(key) as Mesh;
         }
         internal static Dictionary<string, Type> GetInheritedMastsFor(Type abst_mast_type)
         {

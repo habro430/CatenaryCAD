@@ -18,6 +18,28 @@ namespace BasicFoundations
     {
         public event Action Updated;
 
+        private Point3D position;
+        private Vector3D direction;
+
+        public Point3D Position
+        {
+            get => position;
+            set
+            {
+                position = value;
+                Updated?.Invoke();
+            }
+        }
+        public Vector3D Direction
+        {
+            get => direction;
+            set
+            {
+                direction = value.Normalize();
+                Updated?.Invoke();
+            }
+        }
+
         IShape[] geom = new IShape[] { new Line(new Point2D(0, 0), new Point2D(900, 0)),
                                        new Rectangle(new Point2D(1000, 0), 200, 200) };
 

@@ -10,12 +10,7 @@ namespace CatenaryCAD.Models
         /// <summary>
         /// Объект <see cref="CatenaryCAD"/>
         /// </summary>
-        public IModel CatenaryObject { get; set; }
-
-        /// <summary>
-        /// Уникальный идентификатор <see cref="McObjectId"/> обработчика <see cref="IHandler"/>
-        /// </summary>
-        public McObjectId Identifier { get; }
+        public IModel Model { get; set; }
 
         /// <summary>
         /// Родительский обработчик <see cref="IHandler"/>

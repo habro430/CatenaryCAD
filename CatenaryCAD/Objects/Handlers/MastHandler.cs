@@ -38,13 +38,13 @@ namespace CatenaryCAD.Models
             mast_type.Updated += (type) =>
             {
                 if (!TryModify()) return;
-                CatenaryObject = (IMast)Activator.CreateInstance(type);
-                CatenaryObject.Updated += () => { if (!TryModify()) return; };
+                Model = (IMast)Activator.CreateInstance(type);
+                Model.Updated += () => { if (!TryModify()) return; };
             };
 
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
 
-            Properties.Add(mast_type);
+            properties.Add(mast_type);
         }
 
         public override ICollection<McDynamicProperty> GetProperties(out bool exclusive)

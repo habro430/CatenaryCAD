@@ -19,6 +19,17 @@ namespace CatenaryCAD.Models
         public event Action Updated;
 
         /// <summary>
+        /// Координаты расположения модели <see cref="IModel"/> в документе
+        /// </summary>
+        public Point3D Position { get; set; }
+
+        /// <summary>
+        /// Направление расположения модели <see cref="IModel"/> в документ
+        /// </summary>
+        public Vector3D Direction { get; set; }
+
+
+        /// <summary>
         /// Получить детали объекта <see cref="IModel"/> 
         /// </summary>
         /// <returns>Массив деталей <see cref="IPart"/>[]</returns>
