@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using static CatenaryCAD.Extensions;
+using CatenaryCAD.Geometry;
 
 namespace CatenaryCAD.Models
 {
@@ -37,9 +38,17 @@ namespace CatenaryCAD.Models
 
             mast_type.Updated += (type) =>
             {
+                Point3D position = Model?.Position ?? new Point3D(0, 0, 0);
+                Vector3D direction = Model?.Direction ?? new Vector3D(1, 0, 0);
+
                 if (!TryModify()) return;
                 Model = (IMast)Activator.CreateInstance(type);
-                Model.Updated += () => { if (!TryModify()) return; };
+
+                Model.Position = position;
+                Model.Direction = direction;
+
+                Model.TryModify += () => TryModify();
+                Model.Update += () => DbEntity.Update();
             };
 
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
@@ -92,7 +101,7 @@ namespace CatenaryCAD.Models
                     input.MouseMove = (s, a) =>
                     {
                         mast.TransformBy(Matrix3d.Displacement(mast.Position.GetVectorTo(a.Point)));
-                        
+
                         if (last_mast != null)
                         {
                             double angle = last_mast.Position

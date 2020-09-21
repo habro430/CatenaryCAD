@@ -33,7 +33,9 @@ namespace CatenaryCAD.Models
             {
                 if (!TryModify()) return;
                 Model = (IFoundation)Activator.CreateInstance(type);
-                Model.Updated += () => { if (!TryModify()) return; };
+
+                Model.Update += () => DbEntity.Update();
+                Model.TryModify += () => TryModify();
             };
 
             basement_type.Value = basement_type.DictionaryValues.Values.FirstOrDefault();

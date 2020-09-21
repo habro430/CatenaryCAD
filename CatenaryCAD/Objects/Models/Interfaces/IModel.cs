@@ -9,15 +9,12 @@ using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Models
 {
+
     public interface IModel
     {
-        /// <summary>
-        /// Событие сигнализируещее об обновлении <see cref="IModel"/>
-        /// </summary>
-        /// <remarks>При обновлении объекта, обработчик <see cref="IHandler"/> получает команду на сохранение 
-        /// изменений для undo и redo, а так же ставит объект <see cref="IModel"/> в очередь на перерисовку.</remarks>
-        public event Action Updated;
-
+        public event Func<bool> TryModify;
+        public event Action Update;
+        
         /// <summary>
         /// Координаты расположения модели <see cref="IModel"/> в документе
         /// </summary>
@@ -28,6 +25,11 @@ namespace CatenaryCAD.Models
         /// </summary>
         public Vector3D Direction { get; set; }
 
+        /// <summary>
+        /// Функция транформации модели <see cref="IModel"/>
+        /// </summary>
+        /// <param name="m">Матрица трансформации</param>
+        public void TransformBy(Matrix3D m);
 
         /// <summary>
         /// Получить детали объекта <see cref="IModel"/> 

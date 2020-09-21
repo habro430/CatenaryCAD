@@ -102,11 +102,9 @@ namespace CatenaryCAD.Models
 
         public virtual void TransformBy(Matrix3d m)
         {
-            if (!TryModify())
-                return;
+            if (!TryModify()) return;
 
-            Direction = Direction.TransformBy(m);
-            Position = Position.TransformBy(m);
+            Model.TransformBy(m.ToCatenaryCAD());
 
             if (!ID.IsNull)
             {

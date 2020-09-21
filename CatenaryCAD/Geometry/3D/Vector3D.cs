@@ -49,9 +49,9 @@ namespace CatenaryCAD.Geometry
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3D TransformBy(in Matrix3D m) => new Vector3D(X * m.M11 + Y * m.M21 + Z * m.M31 + m.M41,
-                                                                X * m.M12 + Y * m.M22 + Z * m.M32 + m.M42,
-                                                                X * m.M13 + Y * m.M23 + Z * m.M33 + m.M43);
+        public Vector3D TransformBy(in Matrix3D m) => new Vector3D(X * m.M11 + Y * m.M12 + Z * m.M13,
+                                                                   X * m.M21 + Y * m.M22 + Z * m.M23,
+                                                                   X * m.M31 + Y * m.M32 + Z * m.M33 );
 
         #endregion
 

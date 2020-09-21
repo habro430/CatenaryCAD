@@ -35,7 +35,9 @@ namespace CatenaryCAD.Models
             {
                 if (!TryModify()) return;
                 Model = (IAnchor)Activator.CreateInstance(type);
-                Model.Updated += () => { if (!TryModify()) return; };
+
+                Model.Update += () => { DbEntity.Update(); };
+                Model.TryModify += () => { return TryModify(); };
             };
 
             anchor_type.Value = anchor_type.DictionaryValues.Values.FirstOrDefault();

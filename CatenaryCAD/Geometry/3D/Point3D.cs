@@ -45,10 +45,9 @@ namespace CatenaryCAD.Geometry
         public override int GetHashCode() => HashCode.Combine(X, Y, Z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Point3D TransformBy(in Matrix3D m) => new Point3D(X * m.M11 + Y * m.M21 + Z * m.M31 + m.M41,
-                                                              X * m.M12 + Y * m.M22 + Z * m.M32 + m.M42,
-                                                              X * m.M13 + Y * m.M23 + Z * m.M33 + m.M43);
-
+        public Point3D TransformBy(Matrix3D m) => new Point3D(X * m.M11 + Y * m.M12 + Z + m.M13 + m.M14,
+                                                              X * m.M21 + Y * m.M22 + Z + m.M23 + m.M24,
+                                                              X * m.M31 + Y * m.M32 + Z + m.M33 + m.M34);
 
         #endregion
 

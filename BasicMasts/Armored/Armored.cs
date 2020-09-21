@@ -16,7 +16,7 @@ namespace BasicMasts
     
     public class Armored : AbstractMast
     {
-        public override event Action Updated;
+        public override event Action Update;
 
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
@@ -71,7 +71,7 @@ namespace BasicMasts
                         Geometry3D = new IMesh[] { GetOrCreateFromCache("a_15") };
                         break;
                 }
-                Updated?.Invoke();
+                Update?.Invoke();
             };
             m_len.Value = m_len.DictionaryValues.Values.FirstOrDefault();
 

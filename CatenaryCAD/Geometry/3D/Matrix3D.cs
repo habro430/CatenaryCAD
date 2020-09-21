@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Multicad.Geometry;
+using System;
 using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
@@ -123,6 +124,19 @@ namespace CatenaryCAD.Geometry
                                            0d, 0d, 0d, 1d);
             return result;
         }
+
+    }
+    public static partial class Extensions
+    {
+        //////////////////////////////////////////////////////////////////////////////////
+        internal static Matrix3d ToMultiCAD(this in Matrix3D m) => new Matrix3d(new double[] { m.M11, m.M12, m.M13, m.M14,
+                                                                                               m.M21, m.M22, m.M23, m.M24,
+                                                                                               m.M31, m.M32, m.M33, m.M34,
+                                                                                               m.M41, m.M42, m.M43, m.M44});
+        internal static Matrix3D ToCatenaryCAD(this in Matrix3d m) => new Matrix3D(m[0, 0], m[0, 1], m[0, 2], m[0, 3],
+                                                                                   m[1, 0], m[1, 1], m[1, 2], m[1, 3],
+                                                                                   m[2, 0], m[2, 1], m[2, 2], m[2, 3],
+                                                                                   m[3, 0], m[3, 1], m[3, 2], m[3, 3]);
 
     }
 }

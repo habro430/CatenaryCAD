@@ -5,6 +5,7 @@ using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Models;
+using CatenaryCAD.Models;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 
@@ -20,32 +21,8 @@ using static CatenaryCAD.Extensions;
 namespace BasicMasts
 {
     [Serializable]
-    public abstract class AbstractMast : IMast
+    public abstract class AbstractMast : Mast
     {
-        public virtual event Action Updated;
-
-        private Point3D position;
-        private Vector3D direction;
-
-        public Point3D Position 
-        { 
-            get => position;
-            set
-            {
-                position = value;
-                Updated?.Invoke();
-            }
-        }
-        public Vector3D Direction 
-        {
-            get => direction;
-            set
-            {
-                direction = value.Normalize();
-                Updated?.Invoke();
-            }
-        }
-
         protected IShape[] Geometry2D;
         protected IMesh[] Geometry3D;
 
@@ -91,11 +68,13 @@ namespace BasicMasts
             }).ToDictionary(p => p.atrr.Type, p => p.type);
         }
 
-        public IProperty[] GetProperties() => Properties.ToArray();
+        public override IProperty[] GetProperties() => Properties.ToArray();
 
-        public IPart[] GetParts() => throw new NotImplementedException();
+        public override IPart[] GetParts() => throw new NotImplementedException();
 
-        public IMesh[] GetGeometryForLayout() => Geometry3D;
-        public IShape[] GetGeometryForScheme() => Geometry2D;
+        public override IMesh[] GetGeometryForLayout() => Geometry3D;
+        public override IShape[] GetGeometryForScheme() => Geometry2D;
+
+
     }
 }
