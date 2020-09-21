@@ -26,6 +26,9 @@ namespace CatenaryCAD.Models
                 {
                     position = value;
                 }
+#if DEBUG
+                else throw new ArgumentException("TryModify вернул false");
+#endif
             }
         }
         public virtual Vector3D Direction
@@ -37,6 +40,10 @@ namespace CatenaryCAD.Models
                 {
                     direction = value.Normalize();
                 }
+#if DEBUG
+                else throw new ArgumentException("TryModify вернул false");
+#endif
+
             }
         }
 
@@ -47,6 +54,9 @@ namespace CatenaryCAD.Models
                 position = position.TransformBy(m);
                 direction = direction.TransformBy(m).Normalize();
             }
+#if DEBUG
+            else throw new ArgumentException("TryModify вернул false");
+#endif
         }
 
         public abstract IMesh[] GetGeometryForLayout();
