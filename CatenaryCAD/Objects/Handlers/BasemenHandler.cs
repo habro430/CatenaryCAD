@@ -6,17 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CatenaryCAD.Models
+namespace CatenaryCAD.Models.Handlers
 {
     [Serializable]
     [CustomEntity("{36E13AC1-DF87-4158-8C7E-221A17AEB6E7}", "BASEMENT", "Фундамент опоры контактной сети")]
-    internal sealed class BasementHandler : AbstractHandler
+    internal sealed class BasemenHandler : Handler
     {
         [NonSerialized]
         private static readonly Type[] Basements;
-        static BasementHandler() => Basements = Main.GetCatenaryObjects(typeof(IFoundation));
+        static BasemenHandler() => Basements = Main.GetCatenaryObjects(typeof(IFoundation));
 
-        public BasementHandler()
+        public BasemenHandler()
         {
             Property<Type> basement_type = new Property<Type>("01_basement_type", "Тип фундамента", "Фундамент", ConfigFlags.RefreshAfterChange);
 

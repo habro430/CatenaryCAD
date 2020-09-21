@@ -9,11 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CatenaryCAD.Models
+namespace CatenaryCAD.Models.Handlers
 {
     [Serializable]
     [CustomEntity("{2B1A1855-B183-4864-88F9-330AB06801EF}", "ANCHOR", "Анкер опоры контактной сети")]
-    internal class AnchorHandler : AbstractHandler
+    internal sealed class AnchorHandler : Handler
     {
         [NonSerialized]
         private static readonly Type[] Anchors;
@@ -33,11 +33,17 @@ namespace CatenaryCAD.Models
 
             anchor_type.Updated += (type) =>
             {
+                Point3D position = Model?.Position ?? new Point3D(0, 0, 0);
+                Vector3D direction = Model?.Direction ?? new Vector3D(1, 0, 0);
+
                 if (!TryModify()) return;
                 Model = (IAnchor)Activator.CreateInstance(type);
 
-                Model.Update += () => { DbEntity.Update(); };
-                Model.TryModify += () => { return TryModify(); };
+                Model.Position = position;
+                Model.Direction = direction;
+
+                Model.TryModify += () => TryModify();
+                Model.Update += () => DbEntity.Update();
             };
 
             anchor_type.Value = anchor_type.DictionaryValues.Values.FirstOrDefault();
@@ -57,10 +63,10 @@ namespace CatenaryCAD.Models
         [CommandMethod("insert_anchor", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void insert_anchor()
         {
-            AbstractHandler selected_obj;
+            Handler selected_obj;
             do
             {
-                selected_obj = (McObjectManager.SelectObject("Выберите ОПОРУ для размещения АНКЕРОВКИ:").GetObject() as AbstractHandler);
+                selected_obj = (McObjectManager.SelectObject("Выберите ОПОРУ для размещения АНКЕРОВКИ:").GetObject() as Handler);
 
                 if (selected_obj is MastHandler mast)
                 {

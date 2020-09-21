@@ -13,10 +13,10 @@ using Matrix3d = Multicad.Geometry.Matrix3d;
 using Point3d = Multicad.Geometry.Point3d;
 using Vector3d = Multicad.Geometry.Vector3d;
 
-namespace CatenaryCAD.Models
+namespace CatenaryCAD.Models.Handlers
 {
     [Serializable]
-    internal abstract class AbstractHandler : McCustomBase, IMcDynamicProperties, IHandler
+    internal abstract class Handler : McCustomBase, IMcDynamicProperties, IHandler
     {
         public IModel Model { get; set; }
 
@@ -25,16 +25,16 @@ namespace CatenaryCAD.Models
         protected McObjectId parentid = McObjectId.Null;
         protected ConcurrentHashSet<McObjectId> childrens = new ConcurrentHashSet<McObjectId>();
 
-        public IHandler Parent => parentid.GetObjectOfType<AbstractHandler>();
+        public IHandler Parent => parentid.GetObjectOfType<Handler>();
         public IHandler[] GetChildrens() => childrens
-                    .Select(obj => obj.GetObjectOfType<AbstractHandler>())
+                    .Select(obj => obj.GetObjectOfType<Handler>())
                     .ToArray();
 
         #endregion
 
         protected ConcurrentHashSet<McObjectId> dependents = new ConcurrentHashSet<McObjectId>();
         public IHandler[] GetDependents() => dependents
-                                                    .Select(obj => obj.GetObjectOfType<AbstractHandler>())
+                                                    .Select(obj => obj.GetObjectOfType<Handler>())
                                                     .ToArray();
 
         protected ConcurrentHashSet<IProperty> properties = new ConcurrentHashSet<IProperty>();
@@ -81,7 +81,7 @@ namespace CatenaryCAD.Models
 
             return PlaceObject();
         }
-        public virtual hresult PlaceObject(Point3d position, Vector3d direction, AbstractHandler parent)
+        public virtual hresult PlaceObject(Point3d position, Vector3d direction, Handler parent)
         {
             var answer = parent.childrens.Add(ID);
             if (answer) this.parentid = parent.ID;
@@ -92,7 +92,7 @@ namespace CatenaryCAD.Models
         public override void OnErase()
         {
             if (Parent != null)
-                (Parent as AbstractHandler).childrens.TryRemove(ID);
+                (Parent as Handler).childrens.TryRemove(ID);
             
             foreach (var child in childrens)
                 McObjectManager.Erase(child);
@@ -112,7 +112,7 @@ namespace CatenaryCAD.Models
 
                 foreach (var child in childrens)
                 {
-                    var handler = child.GetObjectOfType<AbstractHandler>();
+                    var handler = child.GetObjectOfType<Handler>();
                     if (handler != null) handler.TransformBy(m);
                 }
             }

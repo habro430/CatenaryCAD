@@ -1,9 +1,8 @@
 ﻿using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
-using Multicad;
 using Multicad.Geometry;
 
-namespace CatenaryCAD.Models
+namespace CatenaryCAD.Models.Handlers
 {
     internal interface IHandler
     {

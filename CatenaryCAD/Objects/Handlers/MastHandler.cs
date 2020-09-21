@@ -12,11 +12,11 @@ using System.Linq;
 using static CatenaryCAD.Extensions;
 using CatenaryCAD.Geometry;
 
-namespace CatenaryCAD.Models
+namespace CatenaryCAD.Models.Handlers
 {
     [Serializable]
     [CustomEntity("{742ECCF0-0CEC-4791-B4BE-4E3568E2C43E}", "MAST", "Стойка опоры контактной сети")]
-    internal sealed class MastHandler : AbstractHandler
+    internal sealed class MastHandler : Handler
     {
         [NonSerialized]
         private static readonly Type[] Masts;
@@ -60,7 +60,7 @@ namespace CatenaryCAD.Models
         {
             exclusive = true;
 
-            var basement = GetChildrens().Where(child => child is BasementHandler).FirstOrDefault();
+            var basement = GetChildrens().Where(child => child is FoundationHandler).FirstOrDefault();
             var basement_props =  basement?.GetProperties();
 
             //проверяем режим работы если режим работы не определен то по умолчанию используем OperationalMode.Scheme
@@ -91,7 +91,7 @@ namespace CatenaryCAD.Models
                 while (true)
                 {
                     MastHandler mast = new MastHandler();
-                    BasementHandler basement = new BasementHandler();
+                    FoundationHandler basement = new FoundationHandler();
 
                     mast.PlaceObject(Point3d.Origin, Vector3d.XAxis);
                     basement.PlaceObject(Point3d.Origin, Vector3d.XAxis, mast);

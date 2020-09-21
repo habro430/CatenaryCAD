@@ -1,6 +1,6 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Models;
-
+using CatenaryCAD.Models.Handlers;
 using Multicad;
 using Multicad.AplicationServices;
 using Multicad.DatabaseServices;
@@ -26,7 +26,7 @@ namespace CatenaryCAD
         public static void switch_3d()
         {
             ObjectFilter filter = ObjectFilter.Create(true);
-            filter.AddType(typeof(AbstractHandler));
+            filter.AddType(typeof(Handler));
 
             List<McObjectId> ids = filter.GetObjects();
 
@@ -37,7 +37,7 @@ namespace CatenaryCAD
 
             for (int i = 0; i < ids.Count; i++)
             {
-                AbstractHandler handler = ids[i].GetObjectOfType<AbstractHandler>();
+                Handler handler = ids[i].GetObjectOfType<Handler>();
                 if (handler != null)
                 {
                     handler.TryModify();
@@ -52,7 +52,7 @@ namespace CatenaryCAD
         public static void switch_2d()
         {
             ObjectFilter filter = ObjectFilter.Create(true);
-            filter.AddType(typeof(AbstractHandler));
+            filter.AddType(typeof(Handler));
 
             List<McObjectId> ids = filter.GetObjects();
 
@@ -63,7 +63,7 @@ namespace CatenaryCAD
 
             for (int i = 0; i < ids.Count; i++)
             {
-                AbstractHandler handler = ids[i].GetObjectOfType<AbstractHandler>();
+                Handler handler = ids[i].GetObjectOfType<Handler>();
 
                 if (handler != null)
                 {
