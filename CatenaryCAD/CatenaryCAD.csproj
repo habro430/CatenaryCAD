@@ -105,8 +105,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConcurrentHashSet.cs" />
+    <Compile Include="HandlerDependencies.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Objects\Handlers\FoundationHandler.cs" />
+    <Compile Include="Identifier.cs" />
+    <Compile Include="IDependencies.cs" />
+    <Compile Include="Objects\Handlers\MultiCAD\FoundationHandler.cs" />
     <Compile Include="Geometry\2D\Edge2D.cs" />
     <Compile Include="Geometry\2D\Matrix2D.cs" />
     <Compile Include="Geometry\2D\Point2D.cs" />
@@ -137,14 +140,14 @@
     <Compile Include="Objects\Attributes\ModelNonBrowsableAttribute.cs" />
     <Compile Include="Objects\Attributes\ModelDescriptionAttribute.cs" />
     <Compile Include="Objects\Attributes\ModelNameAttribute.cs" />
-    <Compile Include="Objects\Handlers\Handler.cs" />
-    <Compile Include="Objects\Handlers\AnchorHandler.cs" />
+    <Compile Include="Objects\Handlers\MultiCAD\Handler.cs" />
+    <Compile Include="Objects\Handlers\MultiCAD\AnchorHandler.cs" />
     <Compile Include="Objects\Handlers\Interfaces\IHandler.cs" />
     <Compile Include="Objects\Models\Interfaces\IAnchor.cs" />
     <Compile Include="Objects\Models\Interfaces\IFoundation.cs" />
     <Compile Include="Objects\Models\Interfaces\IBracket.cs" />
     <Compile Include="Objects\Models\Interfaces\IModel.cs" />
-    <Compile Include="Objects\Handlers\MastHandler.cs" />
+    <Compile Include="Objects\Handlers\MultiCAD\MastHandler.cs" />
     <Compile Include="Objects\Models\Interfaces\IMast.cs" />
     <Compile Include="HashCode.cs" />
     <Compile Include="Parts\IPart.cs" />

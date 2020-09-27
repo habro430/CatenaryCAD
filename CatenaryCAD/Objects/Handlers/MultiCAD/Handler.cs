@@ -8,7 +8,9 @@ using Multicad.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using static CatenaryCAD.Extensions;
+
 using Matrix3d = Multicad.Geometry.Matrix3d;
 using Point3d = Multicad.Geometry.Point3d;
 using Vector3d = Multicad.Geometry.Vector3d;
@@ -65,6 +67,7 @@ namespace CatenaryCAD.Models.Handlers
             get => Model.Direction.ToMultiCAD();
             set => Model.Direction = value.ToCatenaryCAD_3D();
         }
+
         #endregion
 
         public override hresult PlaceObject()
@@ -91,6 +94,7 @@ namespace CatenaryCAD.Models.Handlers
         
         public override void OnErase()
         {
+
             if (Parent != null)
                 (Parent as Handler).childrens.TryRemove(ID);
             

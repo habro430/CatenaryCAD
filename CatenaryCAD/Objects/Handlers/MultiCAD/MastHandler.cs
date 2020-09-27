@@ -60,7 +60,9 @@ namespace CatenaryCAD.Models.Handlers
         {
             exclusive = true;
 
-            var basement = GetChildrens().Where(child => child is FoundationHandler).FirstOrDefault();
+            var basement = childrens.Select(t => t.GetObjectOfType<Handler>())
+                                    .Where(child => child is FoundationHandler).FirstOrDefault();
+
             var basement_props =  basement?.GetProperties();
 
             //проверяем режим работы если режим работы не определен то по умолчанию используем OperationalMode.Scheme

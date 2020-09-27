@@ -29,7 +29,7 @@ namespace BasicMasts
         protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
 
         [NonSerialized]
-        private static ObjectCache Cache = new MemoryCache(typeof(Armored).Name);
+        private static ObjectCache Cache = new MemoryCache(typeof(AbstractMast).Name);
 
 
         internal static Mesh GetOrCreateFromCache(string key)
