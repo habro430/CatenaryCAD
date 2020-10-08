@@ -23,6 +23,13 @@ namespace CatenaryCAD.Geometry
             Z = z;
         }
 
+        #region Static members
+
+        private static Point3D origin = new Point3D(0, 0, 0);
+        public static ref readonly Point3D Origin => ref origin;
+
+        #endregion
+
         #region Operators
 
         public static Point3D operator +(Point3D a, Vector3D b) => new Point3D(a.X + b.X, a.Y + b.Y, a.Z + b.Z);

@@ -22,23 +22,6 @@ namespace CatenaryCAD.Models.Handlers
     {
         public IModel Model { get; set; }
 
-        #region Parent & Childrens region
-
-        protected McObjectId parentid = McObjectId.Null;
-        protected ConcurrentHashSet<McObjectId> childrens = new ConcurrentHashSet<McObjectId>();
-
-        public IHandler Parent => parentid.GetObjectOfType<Handler>();
-        public IHandler[] GetChildrens() => childrens
-                    .Select(obj => obj.GetObjectOfType<Handler>())
-                    .ToArray();
-
-        #endregion
-
-        protected ConcurrentHashSet<McObjectId> dependents = new ConcurrentHashSet<McObjectId>();
-        public IHandler[] GetDependents() => dependents
-                                                    .Select(obj => obj.GetObjectOfType<Handler>())
-                                                    .ToArray();
-
         protected ConcurrentHashSet<IProperty> properties = new ConcurrentHashSet<IProperty>();
         public IProperty[] GetProperties()
         {
@@ -51,9 +34,6 @@ namespace CatenaryCAD.Models.Handlers
             }
             return properties.ToArray();
         }
-
-        protected ConcurrentHashSet<IPart> Parts = new ConcurrentHashSet<IPart>();
-        public IPart[] GetParts() => throw new NotImplementedException();
 
         #region Position & Direction region
 
@@ -84,43 +64,17 @@ namespace CatenaryCAD.Models.Handlers
 
             return PlaceObject();
         }
-        public virtual hresult PlaceObject(Point3d position, Vector3d direction, Handler parent)
-        {
-            var answer = parent.childrens.Add(ID);
-            if (answer) this.parentid = parent.ID;
 
-            return PlaceObject(position, direction);
-        }
-        
         public override void OnErase()
         {
+            Model.Parent = null;
 
-            if (Parent != null)
-                (Parent as Handler).childrens.TryRemove(ID);
-            
-            foreach (var child in childrens)
-                McObjectManager.Erase(child);
+            foreach (var child in Model.Childrens)
+                McObjectManager.Erase((child.Identifier as McIdentifier).ToMcObjectId());
         }
 
         public override void OnTransform(Matrix3d tfm) =>TransformBy(tfm);
-
-        public virtual void TransformBy(Matrix3d m)
-        {
-            if (!TryModify()) return;
-
-            Model.TransformBy(m.ToCatenaryCAD());
-
-            if (!ID.IsNull)
-            {
-                ConcurrentHashSet<McObjectId>.ClearMcObjectIdNull(childrens);
-
-                foreach (var child in childrens)
-                {
-                    var handler = child.GetObjectOfType<Handler>();
-                    if (handler != null) handler.TransformBy(m);
-                }
-            }
-        }
+        public virtual void TransformBy(Matrix3d m) => Model.TransformBy(m.ToCatenaryCAD());
 
         public override bool GetECS(out Matrix3d tfm)
         {
@@ -130,7 +84,9 @@ namespace CatenaryCAD.Models.Handlers
 
             return true;
         }
-        public override List<McObjectId> GetDependent() => childrens.Concat(dependents).ToList();
+        public override List<McObjectId> GetDependent() => Model.Childrens.Concat(Model.Dependencies)
+                                                                .Select(m => (m.Identifier as McIdentifier).ToMcObjectId())
+                                                                .ToList();
 
         public override bool OnGetOsnapPoints(OsnapMode osnapMode, Point3d pickPoint, Point3d lastPoint, List<Point3d> osnapPoints)
         {

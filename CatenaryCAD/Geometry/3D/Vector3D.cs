@@ -28,6 +28,19 @@ namespace CatenaryCAD.Geometry
             Length = Math.Sqrt((X * X) + (Y * Y) + (Z * Z));
         }
 
+        #region Static members
+
+        private static Vector3D axisx = new Vector3D(1, 0, 0);
+        public static ref readonly Vector3D AxisX => ref axisx;
+
+        private static Vector3D axisy = new Vector3D(0, 1, 0);
+        public static ref readonly Vector3D AxisY => ref axisy;
+
+        private static Vector3D axisz = new Vector3D(0, 0, 1);
+        public static ref readonly Vector3D AxisZ => ref axisz;
+
+        #endregion
+
         #region Opearators
 
         public static Vector3D operator +(Vector3D a, Vector3D b) => new Vector3D(a.X + b.X, a.Y + b.Y, a.Z + b.Z);

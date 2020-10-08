@@ -38,17 +38,26 @@ namespace CatenaryCAD.Models.Handlers
 
             mast_type.Updated += (type) =>
             {
-                Point3D position = Model?.Position ?? new Point3D(0, 0, 0);
-                Vector3D direction = Model?.Direction ?? new Vector3D(1, 0, 0);
-
                 if (!TryModify()) return;
-                Model = (IMast)Activator.CreateInstance(type);
 
-                Model.Position = position;
-                Model.Direction = direction;
+                IIdentifier identifier = Model?.Identifier ?? new McIdentifier(ID);
+                Point3D position = Model?.Position ?? Point3D.Origin;
+                Vector3D direction = Model?.Direction ?? Vector3D.AxisX;
 
-                Model.TryModify += () => TryModify();
-                Model.Update += () => DbEntity.Update();
+                IModel parent = Model?.Parent;
+
+                var mast = Activator.CreateInstance(type) as Model;
+
+                mast.Identifier = identifier;
+                mast.Position = position;
+                mast.Direction = direction;
+
+                mast.Parent = parent;
+
+                mast.TryModifyHandler += () => TryModify();
+                mast.UpdateHandler += () => DbEntity.Update();
+
+                Model = mast;
             };
 
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
@@ -60,7 +69,7 @@ namespace CatenaryCAD.Models.Handlers
         {
             exclusive = true;
 
-            var basement = childrens.Select(t => t.GetObjectOfType<Handler>())
+            var basement = Model.Childrens.Select(t => (t.Identifier as McIdentifier).GetHandler())
                                     .Where(child => child is FoundationHandler).FirstOrDefault();
 
             var basement_props =  basement?.GetProperties();
@@ -93,12 +102,14 @@ namespace CatenaryCAD.Models.Handlers
                 while (true)
                 {
                     MastHandler mast = new MastHandler();
-                    FoundationHandler basement = new FoundationHandler();
+                    FoundationHandler foundation = new FoundationHandler();
 
                     mast.PlaceObject(Point3d.Origin, Vector3d.XAxis);
-                    basement.PlaceObject(Point3d.Origin, Vector3d.XAxis, mast);
+                    foundation.PlaceObject(Point3d.Origin, Vector3d.XAxis);
 
-                    input.ExcludeObjects(new McObjectId[] { mast.ID, basement.ID });
+                    foundation.Model.Parent = mast.Model;
+
+                    input.ExcludeObjects(new McObjectId[] { mast.ID, foundation.ID });
 
                     input.MouseMove = (s, a) =>
                     {
@@ -114,7 +125,7 @@ namespace CatenaryCAD.Models.Handlers
                         }
 
                         mast.DbEntity.Update();
-                        basement.DbEntity.Update();
+                        foundation.DbEntity.Update();
                     };
 
                     InputResult result = null;

@@ -31,8 +31,7 @@ namespace BasicMasts
         [NonSerialized]
         private static ObjectCache Cache = new MemoryCache(typeof(AbstractMast).Name);
 
-
-        internal static Mesh GetOrCreateFromCache(string key)
+        protected internal static Mesh GetOrCreateFromCache(string key)
         {
             //есть ли 3d модель в кэше
             if (!Cache.Contains(key))
@@ -50,7 +49,7 @@ namespace BasicMasts
             //читаем модель из кэша и возвращаем
             return Cache.Get(key) as Mesh;
         }
-        internal static Dictionary<string, Type> GetInheritedMastsFor(Type abst_mast_type)
+        protected internal static Dictionary<string, Type> GetInheritedMastsFor(Type abst_mast_type)
         {
             //получаем все не абстрактные обьекты производные от 'abst_mast_type' и имеющие атрибут MastTypeAttribute
             var masts = Assembly.GetExecutingAssembly().GetTypes()

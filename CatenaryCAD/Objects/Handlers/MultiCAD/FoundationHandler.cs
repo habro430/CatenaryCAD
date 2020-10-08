@@ -33,17 +33,26 @@ namespace CatenaryCAD.Models.Handlers
 
             basement_type.Updated += (type) =>
             {
-                Point3D position = Model?.Position ?? new Point3D(0, 0, 0);
-                Vector3D direction = Model?.Direction ?? new Vector3D(1, 0, 0);
-
                 if (!TryModify()) return;
-                Model = (IFoundation)Activator.CreateInstance(type);
 
-                Model.Position = position;
-                Model.Direction = direction;
+                IIdentifier identifier = Model?.Identifier ?? new McIdentifier(ID);
+                Point3D position = Model?.Position ?? Point3D.Origin;
+                Vector3D direction = Model?.Direction ?? Vector3D.AxisX;
 
-                Model.TryModify += () => TryModify();
-                Model.Update += () => DbEntity.Update();
+                IModel parent = Model?.Parent;
+
+                var foundation = Activator.CreateInstance(type) as Model;
+
+                foundation.Identifier = identifier;
+                foundation.Position = position;
+                foundation.Direction = direction;
+
+                foundation.Parent = parent;
+
+                foundation.TryModifyHandler += () => TryModify();
+                foundation.UpdateHandler += () => DbEntity.Update();
+
+                Model = foundation;
             };
 
             basement_type.Value = basement_type.DictionaryValues.Values.FirstOrDefault();
@@ -53,7 +62,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public override void OnTransform(Matrix3d tfm)
         {
-            if (Parent == null)
+            if (Model.Parent == null)
             {
                 if (ID.IsNull) 
                     return;

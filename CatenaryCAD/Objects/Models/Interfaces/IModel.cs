@@ -12,9 +12,12 @@ namespace CatenaryCAD.Models
 
     public interface IModel
     {
-        public event Func<bool> TryModify;
-        public event Action Update;
-        
+        public IIdentifier Identifier { get; }
+
+        public IModel Parent { get; set; }
+        public IModel[] Childrens { get; }
+        public IModel[] Dependencies { get; }
+
         /// <summary>
         /// Координаты расположения модели <see cref="IModel"/> в документе
         /// </summary>
@@ -55,5 +58,7 @@ namespace CatenaryCAD.Models
         /// <returns>2D геометрия</returns>
         public IShape[] GetGeometryForScheme();
 
+        public bool TryModifyModel();
+        public bool UpdateModel();
     }
 }

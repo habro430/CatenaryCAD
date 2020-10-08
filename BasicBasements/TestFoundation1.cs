@@ -18,9 +18,6 @@ namespace BasicFoundations
     [ModelDescription("")]
     public class TestFoundation1 : Foundation
     {
-        public override event Func<bool> TryModify;
-        public override event Action Update;
-
         IShape[] geom = new IShape[] { new Rectangle(new Point2D(), 100, 100) };
 
         protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
@@ -33,7 +30,7 @@ namespace BasicFoundations
             prop.Updated += (val) =>
             {
                 
-                if (TryModify?.Invoke() ?? true)
+                if (TryModifyModel())
                 {
                     geom[0] = new Rectangle(new Point2D(), val, val);
                 }

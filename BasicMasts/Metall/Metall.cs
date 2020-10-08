@@ -16,8 +16,6 @@ namespace BasicMasts
 
     public class Metall : AbstractMast
     {
-        public override event Action Update;
-
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
@@ -70,7 +68,8 @@ namespace BasicMasts
                         Geometry3D = new IMesh[] { GetOrCreateFromCache("m_15") };
                         break;
                 }
-                Update?.Invoke();
+
+                UpdateModel();
             };
 
             m_len.Value = m_len.DictionaryValues.Values.FirstOrDefault();

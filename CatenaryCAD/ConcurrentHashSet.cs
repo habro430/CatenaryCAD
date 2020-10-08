@@ -725,7 +725,7 @@ namespace CatenaryCAD
             }
         }
 
-        internal static void ClearMcObjectIdNull(ConcurrentHashSet<McObjectId> sets)
+        internal static void ClearNull(ConcurrentHashSet<IIdentifier> sets)
         {
             var buckets = sets._tables.Buckets;
             for (int i = 0; i < buckets.Length; i++)
@@ -733,7 +733,7 @@ namespace CatenaryCAD
                 var current = Volatile.Read(ref buckets[i]);
 
                 if (current == null) continue;
-                if (current.Item.IsNull) sets.TryRemoveByHashCode(current.Hashcode);
+                if (current.Item.GetModel() == null) sets.TryRemoveByHashCode(current.Hashcode);
 
             }
         }

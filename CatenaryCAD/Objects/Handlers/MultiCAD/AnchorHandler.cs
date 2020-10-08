@@ -33,17 +33,26 @@ namespace CatenaryCAD.Models.Handlers
 
             anchor_type.Updated += (type) =>
             {
-                Point3D position = Model?.Position ?? new Point3D(0, 0, 0);
-                Vector3D direction = Model?.Direction ?? new Vector3D(1, 0, 0);
-
                 if (!TryModify()) return;
-                Model = (IAnchor)Activator.CreateInstance(type);
 
-                Model.Position = position;
-                Model.Direction = direction;
+                IIdentifier identifier = Model?.Identifier ?? new McIdentifier(ID);
+                Point3D position = Model?.Position ?? Point3D.Origin;
+                Vector3D direction = Model?.Direction ?? Vector3D.AxisX;
 
-                Model.TryModify += () => TryModify();
-                Model.Update += () => DbEntity.Update();
+                IModel parent = Model?.Parent;
+
+                var anchor = Activator.CreateInstance(type) as Model;
+
+                anchor.Identifier = identifier;
+                anchor.Position = position;
+                anchor.Direction = direction;
+
+                anchor.Parent = parent;
+
+                anchor.TryModifyHandler += () => TryModify();
+                anchor.UpdateHandler += () => DbEntity.Update();
+
+                Model = anchor;
             };
 
             anchor_type.Value = anchor_type.DictionaryValues.Values.FirstOrDefault();
@@ -52,7 +61,7 @@ namespace CatenaryCAD.Models.Handlers
         }
         public override void OnTransform(Matrix3d tfm)
         {
-            if (Parent == null)
+            if (Model.Parent == null)
             {
                 if (ID.IsNull)
                     return;
@@ -71,7 +80,7 @@ namespace CatenaryCAD.Models.Handlers
                 if (selected_obj is MastHandler mast)
                 {
                     AnchorHandler anchor = new AnchorHandler();
-                    anchor.PlaceObject(mast.Position, Vector3d.XAxis, mast);
+                    anchor.PlaceObject(mast.Position, Vector3d.XAxis);
 
                     using (InputJig input = new InputJig())
                     {

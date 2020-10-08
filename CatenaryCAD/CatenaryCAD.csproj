@@ -107,8 +107,9 @@
     <Compile Include="ConcurrentHashSet.cs" />
     <Compile Include="HandlerDependencies.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Identifier.cs" />
+    <Compile Include="McIdentifier.cs" />
     <Compile Include="IDependencies.cs" />
+    <Compile Include="IIdentifier.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\FoundationHandler.cs" />
     <Compile Include="Geometry\2D\Edge2D.cs" />
     <Compile Include="Geometry\2D\Matrix2D.cs" />
