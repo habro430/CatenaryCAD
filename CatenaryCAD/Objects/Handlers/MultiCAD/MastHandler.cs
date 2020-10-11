@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Linq;
 using static CatenaryCAD.Extensions;
 using CatenaryCAD.Geometry;
+using System.Linq.Expressions;
 
 namespace CatenaryCAD.Models.Handlers
 {
@@ -48,14 +49,16 @@ namespace CatenaryCAD.Models.Handlers
 
                 var mast = Activator.CreateInstance(type) as Model;
 
-                mast.Identifier = identifier;
                 mast.Position = position;
                 mast.Direction = direction;
 
                 mast.Parent = parent;
 
-                mast.TryModifyHandler += () => TryModify();
-                mast.UpdateHandler += () => DbEntity.Update();
+                mast.TryModify += () => TryModify();
+                mast.Update += () => DbEntity.Update();
+                mast.Remove += () => McObjectManager.Erase(ID);
+
+                mast.Identifier = identifier;
 
                 Model = mast;
             };
@@ -97,35 +100,37 @@ namespace CatenaryCAD.Models.Handlers
                 input.DashLine = true;
                 input.AutoHighlight = false;
 
-                MastHandler last_mast = null;
+                Mast last_mast = null;
 
                 while (true)
                 {
-                    MastHandler mast = new MastHandler();
-                    FoundationHandler foundation = new FoundationHandler();
+                    var mhandler = new MastHandler();
+                    var fhandler = new FoundationHandler();
 
-                    mast.PlaceObject(Point3d.Origin, Vector3d.XAxis);
-                    foundation.PlaceObject(Point3d.Origin, Vector3d.XAxis);
+                    mhandler.PlaceObject(Point3d.Origin, Vector3d.XAxis);
+                    fhandler.PlaceObject(Point3d.Origin, Vector3d.XAxis);
 
-                    foundation.Model.Parent = mast.Model;
+                    Mast mast = mhandler.Model as Mast;
+                    Foundation foundation = fhandler.Model as Foundation;
 
-                    input.ExcludeObjects(new McObjectId[] { mast.ID, foundation.ID });
+                    foundation.Parent = mast;
+
+                    input.ExcludeObjects(new McObjectId[] { mhandler.ID, fhandler.ID });
 
                     input.MouseMove = (s, a) =>
                     {
-                        mast.TransformBy(Matrix3d.Displacement(mast.Position.GetVectorTo(a.Point)));
+                        Point3D mouse = a.Point.ToCatenaryCAD_3D();
+
+                        mast.TransformBy(Matrix3D.CreateTranslation(mast.Position.VectorTo(mouse)));
 
                         if (last_mast != null)
                         {
-                            double angle = last_mast.Position
-                                            .GetVectorTo(a.Point)
-                                            .GetAngleTo(mast.Direction, Vector3d.ZAxis);
-
-                            mast.TransformBy(Matrix3d.Rotation(-angle, Vector3d.ZAxis, mast.Position));
+                            double angle = last_mast.Position.VectorTo(mouse).AngleTo(mast.Direction, Vector3D.AxisZ);
+                            mast.TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
                         }
 
-                        mast.DbEntity.Update();
-                        foundation.DbEntity.Update();
+                        mast.SendMessageToHandler(HandlerMessages.Update);
+                        foundation.SendMessageToHandler(HandlerMessages.Update);
                     };
 
                     InputResult result = null;
@@ -133,12 +138,11 @@ namespace CatenaryCAD.Models.Handlers
                     if (last_mast == null)
                         result = input.GetPoint("Укажите точку для размещения обьекта:");
                     else
-                        result = input.GetDistance("Укажите точку для размещения обьекта:", last_mast.Position);
+                        result = input.GetDistance("Укажите точку для размещения обьекта:", last_mast.Position.ToMultiCAD());
 
                     if (result.Result != InputResult.ResultCode.Normal)
                     {
-                        McObjectManager.Erase(mast.ID);
-
+                        mast.SendMessageToHandler(HandlerMessages.Remove);
                         return;
                     }
 

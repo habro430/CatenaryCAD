@@ -1,6 +1,7 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
+using CatenaryCAD.Models;
 using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Properties;
 
@@ -56,6 +57,12 @@ namespace BasicMasts
 
             m_len.Updated += (val) =>
             {
+                if (Identifier != null)
+                {
+                    if (!SendMessageToHandler(HandlerMessages.TryModify))
+                        return;
+                }
+
                 //читаем и генериуем геометрию для 3D режима в зависимости от длинны
                 switch (val)
                 {
@@ -69,8 +76,6 @@ namespace BasicMasts
                         Geometry3D = new IMesh[] { GetOrCreateFromCache("a_15") };
                         break;
                 }
-
-                UpdateModel();
             };
             m_len.Value = m_len.DictionaryValues.Values.FirstOrDefault();
 

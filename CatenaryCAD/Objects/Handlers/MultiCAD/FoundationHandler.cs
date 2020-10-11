@@ -1,7 +1,7 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Properties;
-
+using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Runtime;
 
@@ -43,14 +43,16 @@ namespace CatenaryCAD.Models.Handlers
 
                 var foundation = Activator.CreateInstance(type) as Model;
 
-                foundation.Identifier = identifier;
                 foundation.Position = position;
                 foundation.Direction = direction;
 
                 foundation.Parent = parent;
 
-                foundation.TryModifyHandler += () => TryModify();
-                foundation.UpdateHandler += () => DbEntity.Update();
+                foundation.TryModify += () => TryModify();
+                foundation.Update += () => DbEntity.Update();
+                foundation.Remove += () => McObjectManager.Erase(ID);
+
+                foundation.Identifier = identifier;
 
                 Model = foundation;
             };
@@ -67,7 +69,7 @@ namespace CatenaryCAD.Models.Handlers
                 if (ID.IsNull) 
                     return;
 
-                TransformBy(tfm);
+                Model.TransformBy(tfm.ToCatenaryCAD());
             }
         }
 

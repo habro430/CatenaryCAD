@@ -28,7 +28,7 @@ namespace BasicFoundations
             prop.Value = 100;
             prop.Updated += (val) =>
             {
-                if (TryModifyModel())
+                if (SendMessageToHandler(HandlerMessages.TryModify))
                 {
                     geom[0] = new Rectangle(new Point2D(), val, val);
                 }

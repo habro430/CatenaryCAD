@@ -42,24 +42,20 @@ namespace CatenaryCAD.Geometry
         public override int GetHashCode() => HashCode.Combine(X, Y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Point2D TransformBy(in Matrix2D m) => new Point2D(X * m.M11 + Y * m.M21 + m.M31,
-                                                                 X * m.M12 + Y * m.M22 + m.M32);
+        public Point2D TransformBy(in Matrix2D m) => 
+            new Point2D(X * m.M11 + Y * m.M21 + m.M31, X * m.M12 + Y * m.M22 + m.M32);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Vector2D VectorTo(in Point2D p2) => p2 - this;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public double DistanceTo(in Point2D p2) => VectorTo(p2).Length;
 
         #endregion
 
     }
     public static partial class Extensions
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2D VectorTo(this in Point2D p1, in Point2D p2) => p2 - p1;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double DistanceTo(this in Point2D p1, in Point2D p2) => p1.VectorTo(p2).Length;
-
-
-
-
-        //////////////////////////////////////////////////////////////////////////////////
         internal static Point3d ToMultiCAD(this in Point2D p) => new Point3d(p.X, p.Y, 0);
         internal static Point2D ToCatenaryCAD_2D(this in Point3d p) => new Point2D(p.X, p.Y);
     }

@@ -79,49 +79,61 @@ namespace CatenaryCAD.Geometry
             0d, 0d, 0d, 1d
         );
 
-        public static Matrix3D CreateTranslation(in Point3D p)
+        public static Matrix3D CreateTranslation(in Vector3D translation)
         {
-            Matrix3D result = new Matrix3D(1d, 0d, 0d, 0d,
-                                           0d, 1d, 0d, 0d,
-                                           0d, 0d, 1d, 0d,
-                                           p.X, p.Y, p.Z, 1d);
+            Matrix3D result = new Matrix3D(1d, 0d, 0d, translation.X,
+                                           0d, 1d, 0d, translation.Y,
+                                           0d, 0d, 1d, translation.Z,
+                                           0d, 0d, 0d, 1d);
 
             return result;
         }
 
-        public static Matrix3D CreateScale(in Vector3D s)
+        public static Matrix3D CreateScale(in Vector3D scale)
         {
-            Matrix3D result = new Matrix3D(s.X, 0d, 0d, 0d,
-                                           0d, s.Y, 0d, 0d,
-                                           0d, 0d, s.Z, 0d,
+            Matrix3D result = new Matrix3D(scale.X, 0d, 0d, 0d,
+                                           0d, scale.Y, 0d, 0d,
+                                           0d, 0d, scale.Z, 0d,
                                            0d, 0d, 0d, 1d);
             return result;
         }
 
-        public static Matrix3D CreateScale(in Vector3D s, in Point3D c)
+        public static Matrix3D CreateScale(in Vector3D scale, in Point3D center)
         {
-            double tx = c.X * (1 - s.X);
-            double ty = c.Y * (1 - s.Y);
-            double tz = c.Z * (1 - s.Z);
+            double tx = center.X * (1 - scale.X);
+            double ty = center.Y * (1 - scale.Y);
+            double tz = center.Z * (1 - scale.Z);
 
-            Matrix3D result = new Matrix3D(s.X, 0d, 0d, 0d,
-                                           0d, s.Y, 0d, 0d,
-                                           0d, 0d, s.Z, 0d,
-                                           tx, ty, tz, 1d);
+            Matrix3D result = new Matrix3D(scale.X, 0d, 0d, tx,
+                                           0d, scale.Y, 0d, ty,
+                                           0d, 0d, scale.Z, tz,
+                                           0d, 0d, 0d, 1d);
             return result;
         }
 
-        public static Matrix3D CreateRotation(in Vector3D axis, double radians)
-        {
-            double x = axis.X, y = axis.Y, z = axis.Z;
-            double sa = Math.Sin(radians), ca = Math.Cos(radians);
-            double xx = x * x, yy = y * y, zz = z * z;
-            double xy = x * y, xz = x * z, yz = y * z;
 
-            Matrix3D result = new Matrix3D(xx + ca * (1.0f - xx),       xy - ca * xy + sa * z,      xz - ca * xz - sa * y, 0d,
-                                           xy - ca * xy - sa * z,       yy + ca * (1.0f - yy),      yz - ca * yz + sa * x, 0d,
-                                           xz - ca * xz + sa * y,       yz - ca * yz - sa * x,      zz + ca * (1.0f - zz), 0d,
-                                           0d, 0d, 0d, 1d);
+        public static Matrix3D CreateRotation(double radians, in Point3D center, in Vector3D axis)
+        {
+            var normalized = axis.Normalize();
+
+            double u = normalized.X, v = normalized.Y, w = normalized.Z,
+                   a = center.X, b = center.Y, c = center.Z;
+
+            double uu = u * u, vv = v * v, ww = w * w,
+                   uv = u * v, uw = u * w,
+                   vw = v * w;
+
+            double au = a * u, av = a * v, aw = a * w, 
+                   bu = b * u, bv = b * v, bw = b * w, 
+                   cu = c * u, cv = c * v, cw = c * w; 
+
+            double cos0 = Math.Cos(radians);
+            double sin0 = Math.Sin(radians);
+
+            var result = new Matrix3D(uu + (vv + ww) * cos0,         uv * (1 - cos0) - w * sin0,     uw * (1 - cos0) + v * sin0,     (a * (vv + ww) - u * (bv + cw)) * (1 - cos0) + (bw - cv) * sin0,
+                                      uv * (1 - cos0) + w * sin0,    vv + (uu + ww) * cos0,          vw * (1 - cos0) - u * sin0,     (b * (uu + ww) - v * (au + cw)) * (1 - cos0) + (cu - aw) * sin0,
+                                      uw * (1 - cos0) - v * sin0,    vw * (1 - sin0) + u * sin0,     ww + (uu + vv) * cos0,          (c * (uu + vv) - w * (au + bv)) * (1 - cos0) + (av - bu) * sin0,
+                                      0d,                            0d,                             0d,                             1d);
             return result;
         }
 

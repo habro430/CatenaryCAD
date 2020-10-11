@@ -46,33 +46,27 @@ namespace CatenaryCAD.Geometry
         public override int GetHashCode() => HashCode.Combine(X, Y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector2D TransformBy(in Matrix2D m) => new Vector2D(X * m.M11 + Y * m.M21 + m.M31,
-                                                                   X * m.M12 + Y * m.M22 + m.M32);
+        public Vector2D TransformBy(in Matrix2D m) => 
+            new Vector2D(X * m.M11 + Y * m.M21 + m.M31, X * m.M12 + Y * m.M22 + m.M32);
 
-        #endregion
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public double CrossProduct(in Vector2D v2) => (X * v2.Y) - (Y * v2.X);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public double DotProduct(in Vector2D v2) => (X * v2.X) + (Y * v2.Y);
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Vector2D Negate() => new Vector2D(-1 * X, -1 * Y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Vector2D Normalize() => new Vector2D(X / Length, Y / Length);
+
     }
 
     public static partial class Extensions
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double CrossProduct(this in Vector2D v1, in Vector2D v2) => (v1.X * v2.Y) - (v1.Y * v2.X);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static double DotProduct(this in Vector2D v1, in Vector2D v2) => (v1.X * v2.X) + (v1.Y * v2.Y);
-
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2D Negate(this in Vector2D vector) =>  new Vector2D(-1 * vector.X, -1 * vector.Y);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2D Normalize(this in Vector2D vector) => new Vector2D(vector.X / vector.Length, 
-                                                                                  vector.Y / vector.Length);
-
-
-
-        //////////////////////////////////////////////////////////////////////////////////
         internal static Vector3d ToMultiCAD(this in Vector2D v) => new Vector3d(v.X, v.Y, 0);
         internal static Vector2D ToCatenaryCAD_2D(this in Vector3d v) => new Vector2D(v.X, v.Y);
-
     }
 }

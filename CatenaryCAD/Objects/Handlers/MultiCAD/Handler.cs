@@ -35,20 +35,6 @@ namespace CatenaryCAD.Models.Handlers
             return properties.ToArray();
         }
 
-        #region Position & Direction region
-
-        public Point3d Position
-        {
-            get => Model.Position.ToMultiCAD();
-            set => Model.Position = value.ToCatenaryCAD_3D();
-        }
-        public Vector3d Direction
-        {
-            get => Model.Direction.ToMultiCAD();
-            set => Model.Direction = value.ToCatenaryCAD_3D();
-        }
-
-        #endregion
 
         public override hresult PlaceObject()
         {
@@ -59,8 +45,8 @@ namespace CatenaryCAD.Models.Handlers
         }
         public virtual hresult PlaceObject(Point3d position, Vector3d direction)
         {
-            Position = position;
-            Direction = direction;
+            Model.Position = position.ToCatenaryCAD_3D();
+            Model.Direction = direction.ToCatenaryCAD_3D();
 
             return PlaceObject();
         }
@@ -73,13 +59,12 @@ namespace CatenaryCAD.Models.Handlers
                 McObjectManager.Erase((child.Identifier as McIdentifier).ToMcObjectId());
         }
 
-        public override void OnTransform(Matrix3d tfm) =>TransformBy(tfm);
-        public virtual void TransformBy(Matrix3d m) => Model.TransformBy(m.ToCatenaryCAD());
+        public override void OnTransform(Matrix3d tfm) => Model.TransformBy(tfm.ToCatenaryCAD());
 
         public override bool GetECS(out Matrix3d tfm)
         {
-            double angle = Direction.GetAngleTo(Vector3d.XAxis,Vector3d.ZAxis);
-            tfm = Matrix3d.Displacement(Position.GetAsVector()).PostMultiplyBy(
+            double angle = Model.Direction.ToMultiCAD().GetAngleTo(Vector3d.XAxis,Vector3d.ZAxis);
+            tfm = Matrix3d.Displacement(Model.Position.ToMultiCAD().GetAsVector()).PostMultiplyBy(
                  Matrix3d.Rotation(-angle, Vector3d.ZAxis, Point3d.Origin));
 
             return true;
@@ -93,7 +78,7 @@ namespace CatenaryCAD.Models.Handlers
             switch (osnapMode)
             {
                 case OsnapMode.Center:
-                    osnapPoints.Add(Position);
+                    osnapPoints.Add(Model.Position.ToMultiCAD());
                     break;
             }
             return true;

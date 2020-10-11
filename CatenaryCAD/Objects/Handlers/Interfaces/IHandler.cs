@@ -17,21 +17,5 @@ namespace CatenaryCAD.Models.Handlers
         /// <returns>Массив параметров <see cref="IProperty"/>[]</returns>
         public IProperty[] GetProperties();
 
-        /// <summary>
-        /// Позиция текущего обработчика
-        /// </summary>
-        public Point3d Position { get; set; }
-
-        /// <summary>
-        /// Направление текущего обработчика
-        /// </summary>
-        public Vector3d Direction { get; set; }
-
-        /// <summary>
-        /// Функция транформации обработчика
-        /// </summary>
-        /// <param name="m">Матрица трансформации</param>
-        public void TransformBy(Matrix3d m);
-
     }
 }

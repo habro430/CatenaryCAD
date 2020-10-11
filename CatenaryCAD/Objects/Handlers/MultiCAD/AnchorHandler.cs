@@ -43,14 +43,16 @@ namespace CatenaryCAD.Models.Handlers
 
                 var anchor = Activator.CreateInstance(type) as Model;
 
-                anchor.Identifier = identifier;
                 anchor.Position = position;
                 anchor.Direction = direction;
 
                 anchor.Parent = parent;
 
-                anchor.TryModifyHandler += () => TryModify();
-                anchor.UpdateHandler += () => DbEntity.Update();
+                anchor.TryModify += () => TryModify();
+                anchor.Update += () => DbEntity.Update();
+                anchor.Remove += () => McObjectManager.Erase(ID);
+
+                anchor.Identifier = identifier;
 
                 Model = anchor;
             };
@@ -66,7 +68,7 @@ namespace CatenaryCAD.Models.Handlers
                 if (ID.IsNull)
                     return;
 
-                TransformBy(tfm);
+                Model.TransformBy(tfm.ToCatenaryCAD());
             }
         }
         [CommandMethod("insert_anchor", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
@@ -80,7 +82,7 @@ namespace CatenaryCAD.Models.Handlers
                 if (selected_obj is MastHandler mast)
                 {
                     AnchorHandler anchor = new AnchorHandler();
-                    anchor.PlaceObject(mast.Position, Vector3d.XAxis);
+                    anchor.PlaceObject(mast.Model.Position.ToMultiCAD(), Vector3d.XAxis);
 
                     using (InputJig input = new InputJig())
                     {
@@ -100,12 +102,12 @@ namespace CatenaryCAD.Models.Handlers
                             foreach(var shape in shapes)
                             {
                                 Point2D point = a.Point.ToCatenaryCAD_2D();
-                                Vector2D vector = a.Point.GetVectorTo(mast.Position).ToCatenaryCAD_2D();
+                                Vector2D vector = a.Point.GetVectorTo(mast.Model.Position.ToMultiCAD()).ToCatenaryCAD_2D();
 
                                 Ray2D ray = new Ray2D(point, vector - vector.Normalize()) ;
 
                                 var transofrmed_shape = 
-                                    shape.TransformBy(Matrix2D.CreateTranslation(mast.Position.ToCatenaryCAD_2D()));
+                                    shape.TransformBy(Matrix2D.CreateTranslation(mast.Model.Position.ToMultiCAD().ToCatenaryCAD_2D()));
 
 
                                 Point2D[] intersections;
@@ -118,9 +120,9 @@ namespace CatenaryCAD.Models.Handlers
                                         if (intersection.DistanceTo(control_point) < result.DistanceTo(control_point))
                                             result = intersection;
                                     }
-                                    anchor.Position = result.ToMultiCAD();
+                                    anchor.Model.Position = result.ToMultiCAD().ToCatenaryCAD_3D();
 
-                                    anchor.Direction = anchor.Position.GetVectorTo(a.Point);
+                                    anchor.Model.Direction = anchor.Model.Position.ToMultiCAD().GetVectorTo(a.Point).ToCatenaryCAD_3D();
                                     anchor.DbEntity.Update();
                                 }
 

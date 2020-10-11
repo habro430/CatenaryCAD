@@ -105,10 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConcurrentHashSet.cs" />
-    <Compile Include="HandlerDependencies.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="McIdentifier.cs" />
-    <Compile Include="IDependencies.cs" />
     <Compile Include="IIdentifier.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\FoundationHandler.cs" />
     <Compile Include="Geometry\2D\Edge2D.cs" />
@@ -137,7 +135,12 @@
     <Compile Include="Objects\Models\Bracket.cs" />
     <Compile Include="Objects\Models\Foundation.cs" />
     <Compile Include="Objects\Models\Mast.cs" />
-    <Compile Include="Objects\Models\Model.cs" />
+    <Compile Include="Objects\Models\Model\Dependencies.cs" />
+    <Compile Include="Objects\Models\Model\Geometry.cs" />
+    <Compile Include="Objects\Models\Model\Parts.cs" />
+    <Compile Include="Objects\Models\Model\Properties.cs" />
+    <Compile Include="Objects\Models\Model\Events.cs" />
+    <Compile Include="Objects\Models\Model\Model.cs" />
     <Compile Include="Objects\Attributes\ModelNonBrowsableAttribute.cs" />
     <Compile Include="Objects\Attributes\ModelDescriptionAttribute.cs" />
     <Compile Include="Objects\Attributes\ModelNameAttribute.cs" />

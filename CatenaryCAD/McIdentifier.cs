@@ -6,7 +6,7 @@ using System;
 namespace CatenaryCAD
 {
     [Serializable]
-    public class McIdentifier : IIdentifier
+    internal class McIdentifier : IIdentifier
     {
 
         private readonly McObjectId ObjectId;

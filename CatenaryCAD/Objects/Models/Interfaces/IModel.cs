@@ -9,13 +9,29 @@ using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Models
 {
-
     public interface IModel
     {
+        /// <summary>
+        /// Идентификатор модели
+        /// </summary>
         public IIdentifier Identifier { get; }
 
+        /// <summary>
+        /// Родительская модель <see cref="IModel"/>
+        /// </summary>
         public IModel Parent { get; set; }
+
+        /// <summary>
+        /// Дочерние модели <see cref="IModel"/>
+        /// </summary>
+        /// <remarks>Добавление и исключение моделий к числу дочерних происходит 
+        /// автоматически при изменении значения <see cref="Parent"/></remarks>
+
         public IModel[] Childrens { get; }
+
+        /// <summary>
+        /// Зависимые модели <see cref="IModel"/>
+        /// </summary>
         public IModel[] Dependencies { get; }
 
         /// <summary>
@@ -24,7 +40,7 @@ namespace CatenaryCAD.Models
         public Point3D Position { get; set; }
 
         /// <summary>
-        /// Направление расположения модели <see cref="IModel"/> в документ
+        /// Направление расположения модели <see cref="IModel"/> в документе
         /// </summary>
         public Vector3D Direction { get; set; }
 
@@ -35,13 +51,13 @@ namespace CatenaryCAD.Models
         public void TransformBy(Matrix3D m);
 
         /// <summary>
-        /// Получить детали объекта <see cref="IModel"/> 
+        /// Получить составные детали модели <see cref="IModel"/> 
         /// </summary>
         /// <returns>Массив деталей <see cref="IPart"/>[]</returns>
         public IPart[] GetParts();
 
         /// <summary>
-        /// Получить параметры объекта <see cref="IModel"/> 
+        /// Получить параметры модели <see cref="IModel"/> 
         /// </summary>
         /// <returns>Массив параметров <see cref="IProperty"/>[]</returns>
         public IProperty[] GetProperties();
@@ -58,7 +74,6 @@ namespace CatenaryCAD.Models
         /// <returns>2D геометрия</returns>
         public IShape[] GetGeometryForScheme();
 
-        public bool TryModifyModel();
-        public bool UpdateModel();
+        public bool SendMessageToHandler(HandlerMessages message);
     }
 }
