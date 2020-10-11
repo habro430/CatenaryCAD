@@ -1,13 +1,8 @@
 ﻿using BasicMasts.Properties;
-
-using CatenaryCAD;
-using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Models;
-using CatenaryCAD.Models;
 using CatenaryCAD.Parts;
-using CatenaryCAD.Properties;
 
 using System;
 using System.Collections.Generic;
@@ -16,7 +11,6 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.Caching;
 using System.Text;
-using static CatenaryCAD.Extensions;
 
 namespace BasicMasts
 {
@@ -25,8 +19,6 @@ namespace BasicMasts
     {
         protected IShape[] Geometry2D;
         protected IMesh[] Geometry3D;
-
-        protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
 
         [NonSerialized]
         private static ObjectCache Cache = new MemoryCache(typeof(AbstractMast).Name);
@@ -67,9 +59,6 @@ namespace BasicMasts
             }).ToDictionary(p => p.atrr.Type, p => p.type);
         }
 
-        public override IProperty[] GetProperties() => Properties.ToArray();
-
-        public override IPart[] GetParts() => throw new NotImplementedException();
 
         public override IMesh[] GetGeometryForLayout() => Geometry3D;
         public override IShape[] GetGeometryForScheme() => Geometry2D;

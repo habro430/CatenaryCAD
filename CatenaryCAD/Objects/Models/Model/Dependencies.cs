@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace CatenaryCAD.Models
 {
     public abstract partial class Model : IModel
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IIdentifier parent;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ConcurrentHashSet<IIdentifier> childrens = new ConcurrentHashSet<IIdentifier>();
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ConcurrentHashSet<IIdentifier> dependencies = new ConcurrentHashSet<IIdentifier>();
 
         public IModel Parent
@@ -14,8 +20,7 @@ namespace CatenaryCAD.Models
             get => parent?.GetModel() ?? null;//зачем "?? null" если он и так возвращает null 
             set
             {
-                if (identifier != null)
-                    if (!SendMessageToHandler(HandlerMessages.TryModify)) return;
+                if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false) return;
 
                 if (value?.Identifier.GetGuid() != Guid.Empty)
                 {

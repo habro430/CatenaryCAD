@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace CatenaryCAD.Properties
 {
@@ -9,18 +10,23 @@ namespace CatenaryCAD.Properties
     {
         public event Action<T> Updated;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private T value = default(T);
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private string id, name, category;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ConfigFlags properties;
 
         public Dictionary<string, T> DictionaryValues { set; get; }
 
-        private T _value = default(T);
         public T Value
         {
-            get => _value;
+            get => value;
             set
             {
-                _value = value;
+                this.value = value;
                 Updated?.Invoke(value);
             }
         }
@@ -70,7 +76,7 @@ namespace CatenaryCAD.Properties
 
             if (Properties.HasFlag(ConfigFlags.ReadOnly))
             {
-                if (_value == null)
+                if (value == null)
                 {
 
                     if (DictionaryValues != null)

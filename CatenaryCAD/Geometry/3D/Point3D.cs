@@ -1,11 +1,12 @@
 ﻿using Multicad.Geometry;
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
 {
-    [Serializable]
+    [Serializable, DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
     [StructLayout(LayoutKind.Explicit, Size = 24)]
     public readonly struct Point3D : IEquatable<Point3D>, IPoint
     {
@@ -53,7 +54,7 @@ namespace CatenaryCAD.Geometry
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Point3D TransformBy(Matrix3D m) => 
-            new Point3D(X * m.M11 + Y * m.M12 + Z + m.M13 + m.M14, X * m.M21 + Y * m.M22 + Z + m.M23 + m.M24, X * m.M31 + Y * m.M32 + Z + m.M33 + m.M34);
+            new Point3D(X * m.M11 + Y * m.M12 + Z * m.M13 + m.M14, X * m.M21 + Y * m.M22 + Z * m.M23 + m.M24, X * m.M31 + Y * m.M32 + Z * m.M33 + m.M34);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3D VectorTo(in Point3D p2) => p2 - this;

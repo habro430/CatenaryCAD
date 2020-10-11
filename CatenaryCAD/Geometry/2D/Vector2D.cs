@@ -1,11 +1,12 @@
 ﻿using Multicad.Geometry;
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
 {
-    [Serializable]
+    [Serializable, DebuggerDisplay("X = {X}, Y = {Y}")]
     [StructLayout(LayoutKind.Explicit, Size = 24)]
     public readonly struct Vector2D : IEquatable<Vector2D>
     {
@@ -62,6 +63,7 @@ namespace CatenaryCAD.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2D Normalize() => new Vector2D(X / Length, Y / Length);
 
+        #endregion
     }
 
     public static partial class Extensions

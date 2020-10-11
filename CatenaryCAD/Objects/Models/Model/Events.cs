@@ -14,18 +14,18 @@ namespace CatenaryCAD.Models
         internal event Func<bool> Update;
         internal event Func<bool> Remove;
 
-        public bool SendMessageToHandler(HandlerMessages message)
+        public bool? SendMessageToHandler(HandlerMessages message)
         {
             switch (message)
             {
                 case HandlerMessages.TryModify:
-                    return TryModify.Invoke();
+                    return TryModify?.Invoke();
 
                 case HandlerMessages.Update:
-                    return Update.Invoke();
+                    return Update?.Invoke();
 
                 case HandlerMessages.Remove:
-                    return Remove.Invoke();
+                    return Remove?.Invoke();
 
                 default:
                     throw new NotImplementedException();

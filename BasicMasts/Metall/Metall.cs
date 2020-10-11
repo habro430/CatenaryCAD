@@ -34,14 +34,14 @@ namespace BasicMasts
                 mast_subtype.DictionaryValues = InheritedMasts;
                 mast_subtype.Value = mast_subtype.DictionaryValues.Values.FirstOrDefault();
 
-                Properties.Add(mast_subtype);
+                PropertiesSet.Add(mast_subtype);
             }
             else
             {
                 Property<string> mast_subtype = new Property<string>("02_mast_metall_type", "Марка стойки", "Стойка");
                 mast_subtype.Value = string.Empty;
 
-                Properties.Add(mast_subtype);
+                PropertiesSet.Add(mast_subtype);
             }
 
             Property<int> m_len = new Property<int>("03_mast_len", "Длинна", "Стойка", ConfigFlags.RefreshAfterChange);
@@ -56,11 +56,9 @@ namespace BasicMasts
 
             m_len.Updated += (val) =>
             {
-                if (Identifier != null)
-                {
-                    if (!SendMessageToHandler(HandlerMessages.TryModify))
-                        return;
-                }
+
+                if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false)
+                    return;
 
                 //читаем и генериуем геометрию для 3D режима в зависимости от длинны
                 switch (val)
@@ -79,7 +77,7 @@ namespace BasicMasts
 
             m_len.Value = m_len.DictionaryValues.Values.FirstOrDefault();
 
-            Properties.Add(m_len);
+            PropertiesSet.Add(m_len);
         }
     }
 }

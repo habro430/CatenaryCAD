@@ -44,23 +44,15 @@ namespace CatenaryCAD.Models
         /// </summary>
         public Vector3D Direction { get; set; }
 
+        public IProperty[] Properties { get; }
+
+        public IPart[] Parts { get; }
+
         /// <summary>
         /// Функция транформации модели <see cref="IModel"/>
         /// </summary>
         /// <param name="m">Матрица трансформации</param>
         public void TransformBy(Matrix3D m);
-
-        /// <summary>
-        /// Получить составные детали модели <see cref="IModel"/> 
-        /// </summary>
-        /// <returns>Массив деталей <see cref="IPart"/>[]</returns>
-        public IPart[] GetParts();
-
-        /// <summary>
-        /// Получить параметры модели <see cref="IModel"/> 
-        /// </summary>
-        /// <returns>Массив параметров <see cref="IProperty"/>[]</returns>
-        public IProperty[] GetProperties();
 
         /// <summary>
         /// Получить 3D геометрию для режима работы <see cref="OperationalMode.Layout"/>
@@ -74,6 +66,6 @@ namespace CatenaryCAD.Models
         /// <returns>2D геометрия</returns>
         public IShape[] GetGeometryForScheme();
 
-        public bool SendMessageToHandler(HandlerMessages message);
+        public bool? SendMessageToHandler(HandlerMessages message);
     }
 }

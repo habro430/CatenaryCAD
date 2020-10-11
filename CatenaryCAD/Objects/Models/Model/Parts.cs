@@ -1,9 +1,14 @@
 ﻿using CatenaryCAD.Parts;
+using System.Diagnostics;
+using System.Linq;
 
 namespace CatenaryCAD.Models
 {
     public abstract partial class Model : IModel
     {
-        public abstract IPart[] GetParts();
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        protected ConcurrentHashSet<IPart> PartsSet = new ConcurrentHashSet<IPart>();
+
+        public virtual IPart[] Parts { get => PartsSet.ToArray(); }
     }
 }

@@ -27,7 +27,7 @@ namespace CatenaryCAD.Models.Handlers
         {
             if (Model != null)
             {
-                var props = Model.GetProperties();
+                var props = Model.Properties;
 
                 if (props != null)
                     return properties.Concat(props).ToArray();

@@ -1,11 +1,12 @@
 ﻿using Multicad.Geometry;
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
 {
-    [Serializable]
+    [Serializable, DebuggerDisplay("X = {X}, Y = {Y}")]
     [StructLayout(LayoutKind.Explicit, Size = 16)]
     public readonly struct Point2D : IEquatable<Point2D>, IPoint
     {

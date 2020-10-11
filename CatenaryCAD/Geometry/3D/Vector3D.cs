@@ -1,11 +1,12 @@
 ﻿using Multicad.Geometry;
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
 {
-    [Serializable]
+    [Serializable, DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
     [StructLayout(LayoutKind.Explicit, Size = 32)]
     public readonly struct Vector3D : IEquatable<Vector3D>, IVector
     {
@@ -69,7 +70,7 @@ namespace CatenaryCAD.Geometry
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3D TransformBy(in Matrix3D m) => 
-            new Vector3D(X * m.M11 + Y * m.M12 + Z * m.M13, X * m.M21 + Y * m.M22 + Z * m.M23, X * m.M31 + Y * m.M32 + Z * m.M33 );
+            new Vector3D(X * m.M11 + Y * m.M12 + Z * m.M13, X * m.M21 + Y * m.M22 + Z * m.M23, X * m.M31 + Y * m.M32 + Z * m.M33);
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3D CrossProduct(in Vector3D v2) => 

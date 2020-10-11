@@ -5,6 +5,7 @@ using CatenaryCAD.Models;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace CatenaryCAD.Models
@@ -12,9 +13,13 @@ namespace CatenaryCAD.Models
     [Serializable]
     public abstract partial class Model : IModel
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IIdentifier identifier;
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private Point3D position;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private Vector3D direction;
 
         public IIdentifier Identifier
@@ -26,24 +31,20 @@ namespace CatenaryCAD.Models
         public virtual Point3D Position
         {
             get => position;
-            set 
+            set
             {
-                if (identifier != null)
-                    if (!SendMessageToHandler(HandlerMessages.TryModify)) return;
-
-                position = value; 
+                if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false) return;
+                position = value;
             }
         }
 
         public virtual Vector3D Direction
         {
             get => direction;
-            set 
+            set
             {
-                if (identifier != null)
-                    if (!SendMessageToHandler(HandlerMessages.TryModify)) return;
-                
-                direction = value.Normalize(); 
+                if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false) return;
+                direction = value.Normalize();
             }
         }
 

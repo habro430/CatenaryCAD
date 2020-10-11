@@ -2,10 +2,11 @@
 using CatenaryCAD.Models.Handlers;
 using Multicad;
 using System;
+using System.Diagnostics;
 
 namespace CatenaryCAD
 {
-    [Serializable]
+    [Serializable, DebuggerDisplay("{GetGuid()}")]
     internal class McIdentifier : IIdentifier
     {
 

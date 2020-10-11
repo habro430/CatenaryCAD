@@ -26,9 +26,6 @@ namespace BasicFoundations
             
         }
 
-        public override IPart[] GetParts() => throw new NotImplementedException();
-        public override IProperty[] GetProperties() => Properties.ToArray();
-
         public override IMesh[] GetGeometryForLayout() => null;
         public override IShape[] GetGeometryForScheme() => geom;
     }
