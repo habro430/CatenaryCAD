@@ -82,10 +82,10 @@ namespace CatenaryCAD.Models.Handlers
 
             if (basement_props != null && mode == OperationalMode.Scheme)
                 //если режим работы OperationalMode.Scheme то выдаем отсортированные по ID параметры basement + mast
-                return GetProperties().Concat(basement_props).OrderBy(n => n.ID).ToAdapterProperty();
+                return GetProperties().Concat(basement_props).OrderBy(n => n.Identifier).ToAdapterProperty();
             else
                 //в противном случае только отсортированные по ID параметры mast
-                return GetProperties().OrderBy(n => n.ID).ToAdapterProperty();
+                return GetProperties().OrderBy(n => n.Identifier).ToAdapterProperty();
         }
 
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]

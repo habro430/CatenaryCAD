@@ -15,7 +15,7 @@ namespace CatenaryCAD.Properties
 
     public interface IProperty
     {
-        public string ID {  get; }
+        public string Identifier {  get; }
         public string Name { get; }
         public string Category { get; }
         public ConfigFlags Properties { get; }
