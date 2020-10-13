@@ -11,7 +11,7 @@ namespace CatenaryCAD.Properties
         public AdapterProperty(IProperty prop) => property = prop;
         public override Type PropertyType => property.GetValueType();
 
-        public override string Name => property.ID;
+        public override string Name => property.Identifier;
         public override string DisplayName => property.Name;
         public override string Category => property.Category;
 

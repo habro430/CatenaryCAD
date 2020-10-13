@@ -6,7 +6,9 @@ namespace CatenaryCAD.Models
 {
     public abstract partial class Model : IModel
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        /// <summary>
+        /// Коллекция деталей <see cref="IPart"/>
+        /// </summary>
         protected ConcurrentHashSet<IPart> PartsSet = new ConcurrentHashSet<IPart>();
 
         public virtual IPart[] Parts { get => PartsSet.ToArray(); }

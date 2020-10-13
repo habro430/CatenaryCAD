@@ -6,18 +6,24 @@ namespace CatenaryCAD.Models
 {
     public abstract partial class Model : IModel
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IIdentifier parent;
+        /// <summary>
+        /// Идентификатор <see cref="IIdentifier"/> родительской модели
+        /// </summary>
+        protected IIdentifier ParentIdentifier;
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private ConcurrentHashSet<IIdentifier> childrens = new ConcurrentHashSet<IIdentifier>();
+        /// <summary>
+        /// Коллекция идентификаторов <see cref="IIdentifier"/> дочерних моделей
+        /// </summary>
+        protected ConcurrentHashSet<IIdentifier> ChildrensSet = new ConcurrentHashSet<IIdentifier>();
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private ConcurrentHashSet<IIdentifier> dependencies = new ConcurrentHashSet<IIdentifier>();
+        /// <summary>
+        /// Коллекция идентификаторов <see cref="IIdentifier"/> зависимых моделей
+        /// </summary>
+        protected ConcurrentHashSet<IIdentifier> DependenciesSet = new ConcurrentHashSet<IIdentifier>();
 
         public IModel Parent
         {
-            get => parent?.GetModel() ?? null;//зачем "?? null" если он и так возвращает null 
+            get => ParentIdentifier?.GetModel() ?? null;//зачем "?? null" если он и так возвращает null 
             set
             {
                 if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false) return;
@@ -26,20 +32,20 @@ namespace CatenaryCAD.Models
                 {
                     if (value != null)
                     {
-                        var childrens = (value as Model).childrens;
+                        var childrens = (value as Model).ChildrensSet;
                         if (childrens.Add(identifier) || childrens.Contains(identifier))
-                            parent = value.Identifier;
+                            ParentIdentifier = value.Identifier;
                     }
                     else
                     {
-                        if (parent != null)
+                        if (ParentIdentifier != null)
                         {
-                            var model = parent.GetModel() as Model;
+                            var model = ParentIdentifier.GetModel() as Model;
 
                             if (model != null)
                             {
-                                if (model.childrens.TryRemove(identifier))
-                                    parent = null;
+                                if (model.ChildrensSet.TryRemove(identifier))
+                                    ParentIdentifier = null;
                             }
 
                         }
@@ -52,8 +58,8 @@ namespace CatenaryCAD.Models
         {
             get
             {
-                ConcurrentHashSet<IIdentifier>.ClearNull(childrens);
-                return childrens.Select(model => model.GetModel()).ToArray();
+                ConcurrentHashSet<IIdentifier>.ClearNull(ChildrensSet);
+                return ChildrensSet.Select(model => model.GetModel()).ToArray();
             }
         }
 
@@ -61,8 +67,8 @@ namespace CatenaryCAD.Models
         {
             get
             {
-                ConcurrentHashSet<IIdentifier>.ClearNull(dependencies);
-                return dependencies.Select(model => model.GetModel()).ToArray();
+                ConcurrentHashSet<IIdentifier>.ClearNull(DependenciesSet);
+                return DependenciesSet.Select(model => model.GetModel()).ToArray();
             }
         }
     }

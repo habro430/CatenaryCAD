@@ -44,8 +44,14 @@ namespace CatenaryCAD.Models
         /// </summary>
         public Vector3D Direction { get; set; }
 
+        /// <summary>
+        /// Массив параметров <see cref="IProperty"/> модели <see cref="IModel"/>
+        /// </summary>
         public IProperty[] Properties { get; }
 
+        /// <summary>
+        /// Массив деталей <see cref="IPart"/> модели <see cref="IModel"/>
+        /// </summary>
         public IPart[] Parts { get; }
 
         /// <summary>
