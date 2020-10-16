@@ -6,7 +6,6 @@ using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Runtime;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CatenaryCAD.Models.Handlers
@@ -20,7 +19,7 @@ namespace CatenaryCAD.Models.Handlers
         static AnchorHandler() => Anchors = Main.GetCatenaryObjects(typeof(IAnchor));
         public AnchorHandler()
         {
-            Property<Type> anchor_type = new Property<Type>("01_anchor_type", "Тип анкера", "Анкер", ConfigFlags.RefreshAfterChange);
+            Property<Type> anchor_type = new Property<Type>("01_anchor_type", "Тип анкера", "Анкер", props: ConfigFlags.RefreshAfterChange);
 
             anchor_type.DictionaryValues = Anchors
                 .Where((type) => type.GetCustomAttributes(typeof(ModelNonBrowsableAttribute), false).FirstOrDefault() == null)
@@ -31,32 +30,7 @@ namespace CatenaryCAD.Models.Handlers
                                .FirstOrDefault() as ModelNameAttribute ?? new ModelNameAttribute(type.Name)).Name
                 }).ToDictionary(p => p.atrr, p => p.type);
 
-            anchor_type.Updated += (type) =>
-            {
-                if (!TryModify()) return;
-
-                IIdentifier identifier = Model?.Identifier ?? new McIdentifier(ID);
-                Point3D position = Model?.Position ?? Point3D.Origin;
-                Vector3D direction = Model?.Direction ?? Vector3D.AxisX;
-
-                IModel parent = Model?.Parent;
-
-                var anchor = Activator.CreateInstance(type) as Model;
-
-                anchor.Position = position;
-                anchor.Direction = direction;
-
-                anchor.Parent = parent;
-
-                anchor.TryModify += () => TryModify();
-                anchor.Update += () => DbEntity.Update();
-                anchor.Remove += () => McObjectManager.Erase(ID);
-
-                anchor.Identifier = identifier;
-
-                Model = anchor;
-            };
-
+            anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
             anchor_type.Value = anchor_type.DictionaryValues.Values.FirstOrDefault();
 
             properties.Add(anchor_type);

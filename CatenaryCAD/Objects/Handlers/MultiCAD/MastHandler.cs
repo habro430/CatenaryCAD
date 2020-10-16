@@ -1,17 +1,14 @@
-﻿using CatenaryCAD.Properties;
+﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Models.Attributes;
+using CatenaryCAD.Properties;
 using Multicad;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Runtime;
-using CatenaryCAD.Models.Attributes;
-
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using static CatenaryCAD.Extensions;
-using CatenaryCAD.Geometry;
-using System.Linq.Expressions;
 
 namespace CatenaryCAD.Models.Handlers
 {
@@ -26,7 +23,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public MastHandler()
         {
-            Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", ConfigFlags.RefreshAfterChange);
+            Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", props: ConfigFlags.RefreshAfterChange);
 
             mast_type.DictionaryValues = Masts
                 .Where((type) => type.GetCustomAttributes(typeof(ModelNonBrowsableAttribute), false).FirstOrDefault() == null)
@@ -37,32 +34,8 @@ namespace CatenaryCAD.Models.Handlers
                                .FirstOrDefault() as ModelNameAttribute ?? new ModelNameAttribute(type.Name)).Name
                 }).ToDictionary(p => p.atrr, p => p.type);
 
-            mast_type.Updated += (type) =>
-            {
-                if (!TryModify()) return;
 
-                IIdentifier identifier = Model?.Identifier ?? new McIdentifier(ID);
-                Point3D position = Model?.Position ?? Point3D.Origin;
-                Vector3D direction = Model?.Direction ?? Vector3D.AxisX;
-
-                IModel parent = Model?.Parent;
-
-                var mast = Activator.CreateInstance(type) as Model;
-
-                mast.Position = position;
-                mast.Direction = direction;
-
-                mast.Parent = parent;
-
-                mast.TryModify += () => TryModify();
-                mast.Update += () => DbEntity.Update();
-                mast.Remove += () => McObjectManager.Erase(ID);
-
-                mast.Identifier = identifier;
-
-                Model = mast;
-            };
-
+            mast_type.Updated += (type) => Model = Activator.CreateInstance(type) as Mast;
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
 
             properties.Add(mast_type);

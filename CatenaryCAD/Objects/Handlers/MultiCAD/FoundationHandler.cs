@@ -1,7 +1,6 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Properties;
-using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Runtime;
 
@@ -20,7 +19,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public FoundationHandler()
         {
-            Property<Type> basement_type = new Property<Type>("01_foundation_type", "Тип фундамента", "Фундамент", ConfigFlags.RefreshAfterChange);
+            Property<Type> basement_type = new Property<Type>("01_foundation_type", "Тип фундамента", "Фундамент", props: ConfigFlags.RefreshAfterChange);
 
             basement_type.DictionaryValues = Foundations
                 .Where((type) => type.GetCustomAttributes(typeof(ModelNonBrowsableAttribute), false).FirstOrDefault() == null)
@@ -31,32 +30,7 @@ namespace CatenaryCAD.Models.Handlers
                                .FirstOrDefault() as ModelNameAttribute ?? new ModelNameAttribute(type.Name)).Name,
                 }).ToDictionary(p => p.name, p => p.type);
 
-            basement_type.Updated += (type) =>
-            {
-                if (!TryModify()) return;
-
-                IIdentifier identifier = Model?.Identifier ?? new McIdentifier(ID);
-                Point3D position = Model?.Position ?? Point3D.Origin;
-                Vector3D direction = Model?.Direction ?? Vector3D.AxisX;
-
-                IModel parent = Model?.Parent;
-
-                var foundation = Activator.CreateInstance(type) as Model;
-
-                foundation.Position = position;
-                foundation.Direction = direction;
-
-                foundation.Parent = parent;
-
-                foundation.TryModify += () => TryModify();
-                foundation.Update += () => DbEntity.Update();
-                foundation.Remove += () => McObjectManager.Erase(ID);
-
-                foundation.Identifier = identifier;
-
-                Model = foundation;
-            };
-
+            basement_type.Updated += (type) => Model = Activator.CreateInstance(type) as Foundation;
             basement_type.Value = basement_type.DictionaryValues.Values.FirstOrDefault();
 
             properties.Add(basement_type);

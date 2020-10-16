@@ -1,5 +1,4 @@
 ﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 using Multicad;
 using Multicad.CustomObjectBase;
@@ -20,7 +19,40 @@ namespace CatenaryCAD.Models.Handlers
     [Serializable]
     internal abstract class Handler : McCustomBase, IMcDynamicProperties, IHandler
     {
-        public IModel Model { get; set; }
+        private IModel model;
+        public IModel Model 
+        { 
+            get => model;
+            set
+            {
+                if (!TryModify()) return;
+
+                var newmodel = value as Model;
+
+                if (model != null)
+                {
+                    newmodel.Position = model.Position;
+                    newmodel.Direction = model.Direction;
+
+                    newmodel.Identifier = model.Identifier;
+
+                    newmodel.Parent = model.Parent;
+
+                    foreach (var chil in model.Childrens)
+                        chil.Parent = newmodel;
+                }
+                else
+                {
+                    newmodel.Identifier = new McIdentifier(ID);
+                }
+
+                newmodel.TryModify += () => TryModify();
+                newmodel.Update += () => DbEntity.Update();
+                newmodel.Remove += () => McObjectManager.Erase(ID);
+
+                model = newmodel;
+            }
+        }
 
         protected ConcurrentHashSet<IProperty> properties = new ConcurrentHashSet<IProperty>();
         public IProperty[] GetProperties()

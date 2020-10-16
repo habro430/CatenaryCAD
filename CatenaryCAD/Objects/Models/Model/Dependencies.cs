@@ -7,11 +7,6 @@ namespace CatenaryCAD.Models
     public abstract partial class Model : IModel
     {
         /// <summary>
-        /// Идентификатор <see cref="IIdentifier"/> родительской модели
-        /// </summary>
-        protected IIdentifier ParentIdentifier;
-
-        /// <summary>
         /// Коллекция идентификаторов <see cref="IIdentifier"/> дочерних моделей
         /// </summary>
         protected ConcurrentHashSet<IIdentifier> ChildrensSet = new ConcurrentHashSet<IIdentifier>();
@@ -21,9 +16,10 @@ namespace CatenaryCAD.Models
         /// </summary>
         protected ConcurrentHashSet<IIdentifier> DependenciesSet = new ConcurrentHashSet<IIdentifier>();
 
+        private IIdentifier parent;
         public IModel Parent
         {
-            get => ParentIdentifier?.GetModel() ?? null;//зачем "?? null" если он и так возвращает null 
+            get => parent?.GetModel();
             set
             {
                 if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false) return;
@@ -32,22 +28,18 @@ namespace CatenaryCAD.Models
                 {
                     if (value != null)
                     {
-                        var childrens = (value as Model).ChildrensSet;
-                        if (childrens.Add(identifier) || childrens.Contains(identifier))
-                            ParentIdentifier = value.Identifier;
+                        var parent_childrens = (value as Model).ChildrensSet;
+                        if (parent_childrens.Add(Identifier) || parent_childrens.Contains(Identifier))
+                            parent = value.Identifier;
                     }
                     else
                     {
-                        if (ParentIdentifier != null)
+                        var model = parent?.GetModel() as Model;
+
+                        if (model != null)
                         {
-                            var model = ParentIdentifier.GetModel() as Model;
-
-                            if (model != null)
-                            {
-                                if (model.ChildrensSet.TryRemove(identifier))
-                                    ParentIdentifier = null;
-                            }
-
+                            if (model.ChildrensSet.TryRemove(identifier))
+                                parent = null;
                         }
                     }
                 }

@@ -14,13 +14,13 @@ namespace CatenaryCAD.Models
     public abstract partial class Model : IModel
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IIdentifier identifier;
+        private IIdentifier identifier = null;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Point3D position;
+        private Point3D position = Point3D.Origin;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private Vector3D direction;
+        private Vector3D direction = Vector3D.AxisX;
 
         public IIdentifier Identifier
         {
@@ -56,6 +56,5 @@ namespace CatenaryCAD.Models
             foreach (var child in Childrens)
                 child.TransformBy(m);
         }
-
     }
 }
