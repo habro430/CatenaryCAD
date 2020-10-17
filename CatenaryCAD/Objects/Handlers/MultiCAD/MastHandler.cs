@@ -1,10 +1,12 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Properties;
+
 using Multicad;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Runtime;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +19,11 @@ namespace CatenaryCAD.Models.Handlers
     internal sealed class MastHandler : Handler
     {
         [NonSerialized]
-        private static readonly Type[] Masts;
+        private static readonly Dictionary<string, Type> Masts;
 
-        static MastHandler() => Masts = Main.GetCatenaryObjects(typeof(IMast));
-
-        public MastHandler()
+        static MastHandler()
         {
-            Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", props: ConfigFlags.RefreshAfterChange);
-
-            mast_type.DictionaryValues = Masts
+            Masts = Main.GetCatenaryObjects(typeof(IMast))
                 .Where((type) => type.GetCustomAttributes(typeof(ModelNonBrowsableAttribute), false).FirstOrDefault() == null)
                 .Select((type) => new
                 {
@@ -33,12 +31,17 @@ namespace CatenaryCAD.Models.Handlers
                     atrr = (type.GetCustomAttributes(typeof(ModelNameAttribute), false)
                                .FirstOrDefault() as ModelNameAttribute ?? new ModelNameAttribute(type.Name)).Name
                 }).ToDictionary(p => p.atrr, p => p.type);
+        }
 
+        public MastHandler()
+        {
+            Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", props: ConfigFlags.RefreshAfterChange);
+            mast_type.DictionaryValues = Masts;
 
             mast_type.Updated += (type) => Model = Activator.CreateInstance(type) as Mast;
-            mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
+            mast_type.Value = Masts.Values.FirstOrDefault(); ;
 
-            properties.Add(mast_type);
+            Properties.Add(mast_type);
         }
 
         public override ICollection<McDynamicProperty> GetProperties(out bool exclusive)

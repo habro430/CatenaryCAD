@@ -733,7 +733,7 @@ namespace CatenaryCAD
                 var current = Volatile.Read(ref buckets[i]);
 
                 if (current == null) continue;
-                if (current.Item?.GetModel() == null) sets.TryRemoveByHashCode(current.Hashcode);
+                if (current.Item?.GetGuid() == Guid.Empty) sets.TryRemoveByHashCode(current.Hashcode);
 
             }
         }

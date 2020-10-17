@@ -1,12 +1,6 @@
 ﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Models;
-using CatenaryCAD.Parts;
-using CatenaryCAD.Properties;
 using System;
 using System.Diagnostics;
-using System.Linq;
 
 namespace CatenaryCAD.Models
 {
@@ -53,8 +47,11 @@ namespace CatenaryCAD.Models
             Position = position.TransformBy(m);
             Direction = direction.TransformBy(m);
 
-            foreach (var child in Childrens)
-                child.TransformBy(m);
+            if (Identifier.GetGuid() != Guid.Empty)
+            {
+                foreach (var child in Childrens)
+                    child.TransformBy(m);
+            }
         }
     }
 }

@@ -54,7 +54,7 @@ namespace CatenaryCAD.Models.Handlers
             }
         }
 
-        protected ConcurrentHashSet<IProperty> properties = new ConcurrentHashSet<IProperty>();
+        protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
         public IProperty[] GetProperties()
         {
             if (Model != null)
@@ -62,9 +62,9 @@ namespace CatenaryCAD.Models.Handlers
                 var props = Model.Properties;
 
                 if (props != null)
-                    return properties.Concat(props).ToArray();
+                    return Properties.Concat(props).ToArray();
             }
-            return properties.ToArray();
+            return Properties.ToArray();
         }
 
 

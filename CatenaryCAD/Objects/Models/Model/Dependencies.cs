@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 
 namespace CatenaryCAD.Models
@@ -26,19 +25,19 @@ namespace CatenaryCAD.Models
 
                 if (value?.Identifier.GetGuid() != Guid.Empty)
                 {
+
                     if (value != null)
                     {
-                        var parent_childrens = (value as Model).ChildrensSet;
-                        if (parent_childrens.Add(Identifier) || parent_childrens.Contains(Identifier))
+                        var value_model = value as Model;
+                        if (value_model.ChildrensSet.Add(Identifier) || value_model.ChildrensSet.Contains(Identifier))
                             parent = value.Identifier;
                     }
                     else
                     {
-                        var model = parent?.GetModel() as Model;
-
-                        if (model != null)
+                        var parent_model = parent?.GetModel() as Model;
+                        if (parent_model != null)
                         {
-                            if (model.ChildrensSet.TryRemove(identifier))
+                            if (parent_model.ChildrensSet.TryRemove(identifier))
                                 parent = null;
                         }
                     }

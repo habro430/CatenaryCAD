@@ -1,5 +1,4 @@
-﻿using Multicad.Text.Embedding;
-using System;
+﻿using System;
 
 namespace CatenaryCAD.Models
 {

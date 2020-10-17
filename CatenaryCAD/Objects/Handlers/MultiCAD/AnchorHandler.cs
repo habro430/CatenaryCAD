@@ -33,7 +33,7 @@ namespace CatenaryCAD.Models.Handlers
             anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
             anchor_type.Value = anchor_type.DictionaryValues.Values.FirstOrDefault();
 
-            properties.Add(anchor_type);
+            Properties.Add(anchor_type);
         }
         public override void OnTransform(Matrix3d tfm)
         {
