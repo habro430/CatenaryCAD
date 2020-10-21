@@ -19,15 +19,20 @@ namespace CatenaryCAD.Models.Handlers
     internal sealed class MastHandler : Handler
     {
         [NonSerialized]
-        private static readonly Type[] Masts;
-        static MastHandler() => Masts = Main.GetCatenaryObjects(typeof(IMast));
+        private static readonly Dictionary<string, Type> Masts;
+
+        static MastHandler()
+        {
+            Masts = Main.GetCatenaryObjects(typeof(IMast))
+                        .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
+                        .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
+        }
 
         public MastHandler()
         {
             Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", props: ConfigFlags.RefreshAfterChange);
-            
-            mast_type.DictionaryValues = Masts.Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
-                                        .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
+
+            mast_type.DictionaryValues = Masts;
 
             mast_type.Updated += (type) => Model = Activator.CreateInstance(type) as Mast;
             mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();

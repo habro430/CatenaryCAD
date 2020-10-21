@@ -6,6 +6,7 @@ using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Runtime;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CatenaryCAD.Models.Handlers
@@ -15,15 +16,20 @@ namespace CatenaryCAD.Models.Handlers
     internal sealed class AnchorHandler : Handler
     {
         [NonSerialized]
-        private static readonly Type[] Anchors;
-        static AnchorHandler() => Anchors = Main.GetCatenaryObjects(typeof(IAnchor));
+        private static readonly Dictionary<string, Type> Anchors;
+
+        static AnchorHandler()
+        {
+            Anchors = Main.GetCatenaryObjects(typeof(IAnchor))
+                        .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
+                        .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
+        }
 
         public AnchorHandler()
         {
             Property<Type> anchor_type = new Property<Type>("01_anchor_type", "Тип анкера", "Анкер", props: ConfigFlags.RefreshAfterChange);
 
-            anchor_type.DictionaryValues = Anchors.Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
-                                           .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
+            anchor_type.DictionaryValues = Anchors;
 
             anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
             anchor_type.Value = anchor_type.DictionaryValues.Values.FirstOrDefault();

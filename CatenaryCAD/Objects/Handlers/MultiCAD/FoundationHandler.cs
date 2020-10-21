@@ -15,15 +15,20 @@ namespace CatenaryCAD.Models.Handlers
     internal sealed class FoundationHandler : Handler
     {
         [NonSerialized]
-        private static readonly Type[] Foundations;
-        static FoundationHandler() => Foundations = Main.GetCatenaryObjects(typeof(IFoundation));
+        private static readonly Dictionary<string, Type> Foundations;
+
+        static FoundationHandler()
+        {
+            Foundations = Main.GetCatenaryObjects(typeof(IFoundation))
+                            .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
+                            .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
+        }
 
         public FoundationHandler()
         {
             Property<Type> basement_type = new Property<Type>("01_foundation_type", "Тип фундамента", "Фундамент", props: ConfigFlags.RefreshAfterChange);
 
-            basement_type.DictionaryValues = Foundations.Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
-                                             .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
+            basement_type.DictionaryValues = Foundations;
 
             basement_type.Updated += (type) => Model = Activator.CreateInstance(type) as Foundation;
             basement_type.Value = basement_type.DictionaryValues.Values.FirstOrDefault();
