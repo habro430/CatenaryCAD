@@ -17,24 +17,20 @@ namespace CatenaryCAD.Models.Handlers
         [NonSerialized]
         private static readonly Type[] Anchors;
         static AnchorHandler() => Anchors = Main.GetCatenaryObjects(typeof(IAnchor));
+
         public AnchorHandler()
         {
             Property<Type> anchor_type = new Property<Type>("01_anchor_type", "Тип анкера", "Анкер", props: ConfigFlags.RefreshAfterChange);
 
-            anchor_type.DictionaryValues = Anchors
-                .Where((type) => type.GetCustomAttributes(typeof(ModelNonBrowsableAttribute), false).FirstOrDefault() == null)
-                .Select((type) => new
-                {
-                    type,
-                    atrr = (type.GetCustomAttributes(typeof(ModelNameAttribute), false)
-                               .FirstOrDefault() as ModelNameAttribute ?? new ModelNameAttribute(type.Name)).Name
-                }).ToDictionary(p => p.atrr, p => p.type);
+            anchor_type.DictionaryValues = Anchors.Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
+                                           .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
 
             anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
             anchor_type.Value = anchor_type.DictionaryValues.Values.FirstOrDefault();
 
             Properties.Add(anchor_type);
         }
+
         public override void OnTransform(Matrix3d tfm)
         {
             if (Model.Parent == null)

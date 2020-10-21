@@ -8,5 +8,6 @@ namespace CatenaryCAD.Models.Attributes
     {
         public string Description { get; private set; }
         public ModelDescriptionAttribute(string description) => Description = description;
+        public override string ToString() => Description;
     }
 }
