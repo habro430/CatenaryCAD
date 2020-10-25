@@ -41,17 +41,29 @@ namespace CatenaryCAD.Geometry
                 var r = first.VectorTo(second);
                 var s = edge.First.VectorTo(edge.Second);
 
-                var t = (q - p).CrossProduct(s) / r.CrossProduct(s);
+                var rxs = r.CrossProduct(s);
+                var qpxr = (q - p).CrossProduct(r);
 
-                if (0 <= t && t <= 1) points.Add(p + (r * t));
+                // Если r * s = 0 и (q - p) * r = 0, тогда два вектора коллинеарны.
+                if (rxs == 0 && qpxr == 0)
+                    continue;
+
+                // Если r * s = 0 и (q - p) * r != 0, тогда два вектора параллельны и не пересекаются.
+                if (rxs==0 && qpxr != 0)
+                    continue;
+
+                var t = (q - p).CrossProduct(s) / rxs;
+                var u = (q - p).CrossProduct(r) / rxs;
+
+                //Если r * s != 0 и 0 <= t <= 1 и 0 <= u <= 1,
+                //тогда два вектора пересекаються в точке p + t * r = q + u * s.
+                if (rxs != 0 && (0 <= t && t <= 1) && (0 <= u && u <= 1))
+                    points.Add(p + (r * t));
             }
 
             intersections = points.ToArray();
-
-            if (points.Count != 0) return true;
-            else return false;
+            return intersections.Length > 0 ? true : false;
         }
-
 
         public override bool Equals(object obj) => obj is Ray2D r && this.Equals(r);
 

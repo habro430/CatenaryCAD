@@ -125,6 +125,13 @@ namespace CatenaryCAD.Models.Handlers
 
             if (Model != null)
             {
+
+#if DEBUG
+                dc.DrawCircle(Point3d.Origin, 5);
+                dc.DrawLine(new Point3d(-15d, -15d, 0d), new Point3d(15d, 15d, 0d));
+                dc.DrawLine(new Point3d(-15d, 15d, 0d), new Point3d(15d, -15d, 0d));
+#endif
+
                 var mode = (OperationalMode)(McDocument.ActiveDocument
                             .CustomProperties["OperationalMode"] ?? OperationalMode.Scheme);
 

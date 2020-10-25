@@ -35,7 +35,7 @@ namespace CatenaryCAD.Models.Handlers
             mast_type.DictionaryValues = Masts;
 
             mast_type.Updated += (type) => Model = Activator.CreateInstance(type) as Mast;
-            mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
+            mast_type.Value = Masts.Values.FirstOrDefault();
 
             Properties.Add(mast_type);
         }

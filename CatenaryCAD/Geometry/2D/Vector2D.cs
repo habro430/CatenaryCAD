@@ -26,6 +26,16 @@ namespace CatenaryCAD.Geometry
             Length = Math.Sqrt((X * X) + (Y * Y));
         }
 
+        #region Static members
+
+        public static ref readonly Vector2D AxisX => ref axisx;
+        private static readonly Vector2D axisx = new Vector2D(1, 0);
+
+        public static ref readonly Vector2D AxisY => ref axisy;
+        private static readonly Vector2D axisy = new Vector2D(0, 1);
+
+        #endregion
+
         #region Operators
 
         public static Vector2D operator +(Vector2D a, Vector2D b) => new Vector2D(a.X + b.X, a.Y + b.Y);
@@ -48,7 +58,7 @@ namespace CatenaryCAD.Geometry
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2D TransformBy(in Matrix2D m) => 
-            new Vector2D(X * m.M11 + Y * m.M21 + m.M31, X * m.M12 + Y * m.M22 + m.M32);
+            new Vector2D(X * m.M11 + Y * m.M12 + m.M13, X * m.M21 + Y * m.M22 + m.M23);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double CrossProduct(in Vector2D v2) => (X * v2.Y) - (Y * v2.X);
@@ -56,6 +66,9 @@ namespace CatenaryCAD.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double DotProduct(in Vector2D v2) => (X * v2.X) + (Y * v2.Y);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public double AngleTo(in Vector2D destination) =>
+            Math.Atan2(CrossProduct(destination), DotProduct(destination));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2D Negate() => new Vector2D(-1 * X, -1 * Y);

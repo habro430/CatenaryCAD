@@ -20,7 +20,12 @@ namespace CatenaryCAD.Geometry
             X = x;
             Y = y;
         }
+        #region Static members
 
+        public static ref readonly Point2D Origin => ref origin;
+        private static readonly Point2D origin = new Point2D(0, 0);
+
+        #endregion
         #region Operators
 
         public static Point2D operator +(Point2D a, Vector2D b) => new Point2D(a.X + b.X, a.Y + b.Y);
@@ -44,7 +49,7 @@ namespace CatenaryCAD.Geometry
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Point2D TransformBy(in Matrix2D m) => 
-            new Point2D(X * m.M11 + Y * m.M21 + m.M31, X * m.M12 + Y * m.M22 + m.M32);
+            new Point2D(X * m.M11 + Y * m.M12 + m.M13, X * m.M21 + Y * m.M22 + m.M23);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2D VectorTo(in Point2D p2) => p2 - this;

@@ -31,7 +31,7 @@ namespace CatenaryCAD.Models.Handlers
             basement_type.DictionaryValues = Foundations;
 
             basement_type.Updated += (type) => Model = Activator.CreateInstance(type) as Foundation;
-            basement_type.Value = basement_type.DictionaryValues.Values.FirstOrDefault();
+            basement_type.Value = Foundations.Values.FirstOrDefault();
 
             Properties.Add(basement_type);
         }

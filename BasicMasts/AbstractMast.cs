@@ -64,6 +64,42 @@ namespace BasicMasts
         public override IMesh[] GetGeometryForLayout() => Geometry3D;
         public override IShape[] GetGeometryForScheme() => Geometry2D;
 
+        public override Point2D? GetDockingJointPoint(Ray2D ray)
+        {
+            var position = new Point2D(Position.X, Position.Y);
+            var direction = new Vector2D(Direction.X, Direction.Y);
+
+            List<Point2D> intersections = new List<Point2D>();
+
+            foreach (var shape in Geometry2D)
+            {
+                var sh = shape.TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.VectorTo(position)))
+                              .TransformBy(Matrix2D.CreateRotation(-direction.AngleTo(Vector2D.AxisX), position));
+
+                Point2D[] tmp_intersections = null;
+
+                if (ray.GetIntersections(sh, out tmp_intersections))
+                    intersections.AddRange(tmp_intersections);
+            }
+
+            if (intersections.Count > 0)
+            {
+                Point2D intersection = intersections[0];
+                Point2D control_point = ray.Origin + ray.Direction;
+
+                foreach (var point in intersections)
+                    if (point.DistanceTo(control_point) < intersection.DistanceTo(control_point))
+                        intersection = point;
+
+                return intersection;
+            }
+            else
+                return null;
+        }
+        public override Point3D? GetDockingJointPoint(Ray3D ray)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
