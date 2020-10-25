@@ -23,6 +23,16 @@ namespace CatenaryCAD.Geometry.Shapes
                                     new Edge2D(vertices[3], vertices[0]) };
         }
 
+        public Rectangle(Point2D p0, Point2D p1, Point2D p2, Point2D p3)
+        {
+            var vertices = new Point2D[] { p0, p1, p2, p3 };
+
+            Edges = new Edge2D[] {  new Edge2D(vertices[0], vertices[1]),
+                                    new Edge2D(vertices[1], vertices[2]),
+                                    new Edge2D(vertices[2], vertices[3]),
+                                    new Edge2D(vertices[3], vertices[0]) };
+        }
+
         public IShape TransformBy(in Matrix2D m)
         {
             int count = Edges.Length;

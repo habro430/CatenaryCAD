@@ -104,6 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Geometry\2D\Shapes\Triangle.cs" />
     <Compile Include="Helpers\ConcurrentHashSet.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\MultiCAD\McIdentifier.cs" />
