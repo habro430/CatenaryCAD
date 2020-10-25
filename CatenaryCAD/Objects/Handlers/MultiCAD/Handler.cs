@@ -127,6 +127,7 @@ namespace CatenaryCAD.Models.Handlers
             {
 
 #if DEBUG
+                //если скомпилировано в DEBUG то то отрисовываем центр модели
                 dc.DrawCircle(Point3d.Origin, 5);
                 dc.DrawLine(new Point3d(-15d, -15d, 0d), new Point3d(15d, 15d, 0d));
                 dc.DrawLine(new Point3d(-15d, 15d, 0d), new Point3d(15d, -15d, 0d));

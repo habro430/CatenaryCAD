@@ -55,12 +55,16 @@ namespace CatenaryCAD.Models.Handlers
             {
                 selected_obj = (McObjectManager.SelectObject("Выберите ОПОРУ для размещения АНКЕРОВКИ:").GetObject() as Handler);
 
-                if (selected_obj is MastHandler mast)
+                if (selected_obj is MastHandler mhandler)
                 {
-                    AnchorHandler anchor = new AnchorHandler();
-                    anchor.Model.Parent = mast.Model;
 
-                    anchor.PlaceObject(mast.Model.Position.ToMultiCAD(), Vector3d.XAxis);
+                    AnchorHandler ahandler = new AnchorHandler();
+                    ahandler.PlaceObject(mhandler.Model.Position.ToMultiCAD(), Vector3d.XAxis);
+
+                    Mast mast = mhandler.Model as Mast;
+                    Anchor anchor = ahandler.Model as Anchor;
+
+                    anchor.Parent = mast;
 
                     using (InputJig input = new InputJig())
                     {
@@ -71,27 +75,30 @@ namespace CatenaryCAD.Models.Handlers
                         input.DashLine = true;
                         input.AutoHighlight = false;
 
-                        input.ExcludeObjects(new McObjectId[]{ anchor.ID, mast.ID }); 
+                        input.ExcludeObjects(new McObjectId[]{ ahandler.ID, mhandler.ID }); 
 
                         input.MouseMove = (s, a) =>
                         {
                             const int distancetomast = 5000;
+
                             Point3D mouse = a.Point.ToCatenaryCAD_3D();
 
-                            anchor.Model.Direction = mast.Model.Position.VectorTo(mouse);
+                            anchor.Direction = mast.Position.VectorTo(mouse);
+                            double angle = mast.Position.VectorTo(mouse).AngleTo(Vector3D.AxisX, Vector3D.AxisZ);
 
-                            double angle = mast.Model.Position.VectorTo(mouse).AngleTo(Vector3D.AxisX, Vector3D.AxisZ);
-
-                            anchor.Model.Position = mast.Model.Position
+                            anchor.Position = mast.Position
                                             .TransformBy(Matrix3D.CreateTranslation(Vector3D.AxisX * distancetomast))
-                                            .TransformBy(Matrix3D.CreateRotation(-angle, mast.Model.Position, Vector3D.AxisZ));
+                                            .TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
 
-                            anchor.DbEntity.Update();
-
+                            anchor.SendMessageToHandler(HandlerMessages.Update);
                         };
 
                         InputResult result = input.GetPoint("Выберите направление для размещения обьекта:");
-                        if (result.Result != InputResult.ResultCode.Normal) McObjectManager.Erase(anchor.ID);
+                        if (result.Result != InputResult.ResultCode.Normal)
+                        {
+                            anchor.SendMessageToHandler(HandlerMessages.Remove);
+                            return;
+                        }
 
                     }
                 }
