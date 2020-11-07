@@ -27,7 +27,7 @@ namespace CatenaryCAD.Geometry
 
         #region Functions
 
-        public bool GetIntersections(IShape shape, out Point2D[] intersections)
+        public Point2D[] GetIntersections(IShape shape)
         {
             List<Point2D> points = new List<Point2D>();
 
@@ -61,8 +61,7 @@ namespace CatenaryCAD.Geometry
                     points.Add(p + (r * t));
             }
 
-            intersections = points.ToArray();
-            return intersections.Length > 0 ? true : false;
+            return points.Count > 0 ? points.ToArray() : null;
         }
 
         public override bool Equals(object obj) => obj is Ray2D r && this.Equals(r);

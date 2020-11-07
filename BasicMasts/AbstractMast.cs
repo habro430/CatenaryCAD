@@ -76,9 +76,9 @@ namespace BasicMasts
                 var sh = shape.TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.VectorTo(position)))
                               .TransformBy(Matrix2D.CreateRotation(-direction.AngleTo(Vector2D.AxisX), position));
 
-                Point2D[] tmp_intersections = null;
+                Point2D[] tmp_intersections = ray.GetIntersections(sh);
 
-                if (ray.GetIntersections(sh, out tmp_intersections))
+                if (tmp_intersections != null)
                     intersections.AddRange(tmp_intersections);
             }
 

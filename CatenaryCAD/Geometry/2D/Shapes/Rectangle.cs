@@ -7,7 +7,7 @@ namespace CatenaryCAD.Geometry.Shapes
     {
         public Edge2D[] Edges { private set; get; }
 
-        public Rectangle(Point2D center, double width, double height)
+        public Rectangle(in Point2D center, double width, double height)
         {
             var vertices = new Point2D[]
             {
@@ -42,7 +42,7 @@ namespace CatenaryCAD.Geometry.Shapes
             for(int i =0; i<count; i++)
                 edges[i] = Edges[i].TransformBy(m);
 
-            return new Rectangle(new Point2D(), 0, 0) { Edges = edges };
+            return new Rectangle(Point2D.Origin, Point2D.Origin, Point2D.Origin, Point2D.Origin) { Edges = edges };
         }
     }
 }

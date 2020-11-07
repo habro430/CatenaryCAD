@@ -79,42 +79,49 @@ namespace BasicMasts
 
             PropertiesSet.Add(m_len);
         }
-        public override Point2D? GetPointForDockingJoint(Ray2D ray)
-        {
-            var position = new Point2D(Position.X, Position.Y);
-            var direction = new Vector2D(Direction.X, Direction.Y);
+        //public override Point2D? GetPointForDockingJoint(Ray2D ray)
+        //{
+        //    var position = new Point2D(Position.X, Position.Y);
+        //    var direction = new Vector2D(Direction.X, Direction.Y);
 
-            List<Point2D> intersections = new List<Point2D>();
+        //    Circle circle = new Circle(position, 200d, 15);
 
-            foreach (var shape in Geometry2D)
-            {
-                var sh = shape.TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.VectorTo(position)))
-                              .TransformBy(Matrix2D.CreateRotation(-direction.AngleTo(Vector2D.AxisX), position));
+        //    IShape rect = Geometry2D[0].TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.VectorTo(position)))
+        //                               .TransformBy(Matrix2D.CreateRotation(-direction.AngleTo(Vector2D.AxisX), position));
 
-                Point2D[] tmp_intersections = null;
 
-                if (ray.GetIntersections(sh, out tmp_intersections))
-                    intersections.AddRange(tmp_intersections);
-            }
+        //    Triangle tr0 = new Triangle(position, rect.Edges[0].First, rect.Edges[0].Second);
+        //    Triangle tr1 = new Triangle(position, rect.Edges[1].First, rect.Edges[1].Second);
+        //    Triangle tr2 = new Triangle(position, rect.Edges[2].First, rect.Edges[2].Second);
+        //    Triangle tr3 = new Triangle(position, rect.Edges[3].First, rect.Edges[3].Second);
 
-            if (intersections.Count > 0)
-            {
-                Point2D intersection = intersections[0];
-                Point2D control_point = ray.Origin + ray.Direction;
+        //    Point2D[] intersections = ray.GetIntersections(circle);
 
-                foreach (var point in intersections)
-                    if (point.DistanceTo(control_point) < intersection.DistanceTo(control_point))
-                        intersection = point;
+        //    Point2D intersection = intersections[0];
+        //    Point2D control_point = ray.Origin + ray.Direction;
 
-                return intersection;
-            }
-            else
-                return null;
-        }
-        public override Point3D? GetPointForDockingJoint(Ray3D ray)
-        {
-            throw new NotImplementedException();
-        }
+        //    foreach (var point in intersections)
+        //        if (point.DistanceTo(control_point) < intersection.DistanceTo(control_point))
+        //            intersection = point;
+
+        //    if (tr0.IsInside(intersection)) return new Point2D((tr0.Edges[1].First.X + tr0.Edges[1].Second.X) / 2,
+        //                                                       (tr0.Edges[1].First.Y + tr0.Edges[1].Second.Y) / 2);
+
+        //    if (tr1.IsInside(intersection)) return new Point2D((tr1.Edges[1].First.X + tr1.Edges[1].Second.X) / 2,
+        //                                                       (tr1.Edges[1].First.Y + tr1.Edges[1].Second.Y) / 2);
+
+        //    if (tr2.IsInside(intersection)) return new Point2D((tr2.Edges[1].First.X + tr2.Edges[1].Second.X) / 2,
+        //                                                       (tr2.Edges[1].First.Y + tr2.Edges[1].Second.Y) / 2);
+
+        //    if (tr3.IsInside(intersection)) return new Point2D((tr3.Edges[1].First.X + tr3.Edges[1].Second.X) / 2,
+        //                                                       (tr3.Edges[1].First.Y + tr3.Edges[1].Second.Y) / 2);
+
+        //    return intersection;
+        //}
+        //public override Point3D? GetPointForDockingJoint(Ray3D ray)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
     }
 }

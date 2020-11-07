@@ -3,7 +3,7 @@
 namespace CatenaryCAD.Geometry.Shapes
 {
     [Serializable]
-    class Triangle : IShape
+    public class Triangle : IShape
     {
         public Edge2D[] Edges { private set; get; }
 
@@ -26,6 +26,22 @@ namespace CatenaryCAD.Geometry.Shapes
                 edges[i] = Edges[i].TransformBy(m);
 
             return new Triangle(Point2D.Origin, Point2D.Origin, Point2D.Origin) { Edges = edges };
+        }
+
+        public bool IsInside(in Point2D p)
+        {
+            Random rnd = new Random();
+            Vector2D rnd_vector = new Vector2D(rnd.NextDouble(), rnd.NextDouble()).Normalize() * 9999d;
+
+            #warning не определена макисмальная длинна вектора
+
+            Ray2D ray = new Ray2D(p, rnd_vector);
+            Point2D[] intesections = ray.GetIntersections(this);
+
+            if (intesections == null) return false;
+
+            if (intesections.Length % 2 == 0) return false;
+            else return true;
         }
     }
 }

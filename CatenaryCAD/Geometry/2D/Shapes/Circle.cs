@@ -7,7 +7,7 @@ namespace CatenaryCAD.Geometry.Shapes
     {
         public Edge2D[] Edges { private set; get; }
 
-        public Circle(Point2D center, double radius, int resolution)
+        public Circle(in Point2D center, double radius, int resolution)
         {
             var vertices = new Point2D[resolution];
             Edges = new Edge2D[resolution];
@@ -39,7 +39,7 @@ namespace CatenaryCAD.Geometry.Shapes
             for (int i = 0; i < count; i++)
                 edges[i] = Edges[i].TransformBy(m);
 
-            return new Circle(new Point2D(), 0, 0) { Edges = edges };
+            return new Circle(Point2D.Origin, 0, 0) { Edges = edges };
         }
     }
 
