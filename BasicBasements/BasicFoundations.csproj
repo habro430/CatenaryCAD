@@ -89,8 +89,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TestFoundation2.cs" />
-    <Compile Include="TestFoundation1.cs" />
+    <Compile Include="FoundationDirect.cs" />
+    <Compile Include="FoundationSubmersible.cs" />
     <Compile Include="FoundationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
