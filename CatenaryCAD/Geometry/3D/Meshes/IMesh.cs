@@ -2,7 +2,9 @@
 {
     public interface IMesh
     {
-        Face3D[] Faces { get; }
+        Point3D[] Vertices { get; }
+        Vector3D[] Normals { get; }
+        int[][] Indices { get; }
 
         IMesh TransformBy(in Matrix3D m);
 

@@ -105,6 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Geometry\2D\Shapes\Triangle.cs" />
+    <Compile Include="Geometry\3D\Meshes\IMesh.cs" />
+    <Compile Include="Geometry\3D\Meshes\Mesh.cs" />
     <Compile Include="Helpers\ConcurrentHashSet.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\MultiCAD\McIdentifier.cs" />
@@ -117,11 +119,9 @@
     <Compile Include="Geometry\2D\Shapes\Circle.cs" />
     <Compile Include="Geometry\2D\Shapes\Line.cs" />
     <Compile Include="Geometry\2D\Shapes\Rectangle.cs" />
-    <Compile Include="Geometry\3D\Meshes\IMesh.cs" />
     <Compile Include="Geometry\2D\Shapes\IShape.cs" />
     <Compile Include="Geometry\2D\Vector2D.cs" />
     <Compile Include="Geometry\3D\Matrix3D.cs" />
-    <Compile Include="Geometry\3D\Meshes\Mesh.cs" />
     <Compile Include="Geometry\3D\Point3D.cs" />
     <Compile Include="Geometry\3D\Ray3D.cs" />
     <Compile Include="Geometry\3D\Vector3D.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Geometry\IRay.cs" />
     <Compile Include="Geometry\IVector.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Objects\Handlers\MultiCAD\Sample3d.cs" />
     <Compile Include="Objects\Models\Anchor.cs" />
     <Compile Include="Objects\Models\Bracket.cs" />
     <Compile Include="Objects\Models\Foundation.cs" />
