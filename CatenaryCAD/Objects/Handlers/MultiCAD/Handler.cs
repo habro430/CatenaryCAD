@@ -153,9 +153,9 @@ namespace CatenaryCAD.Models.Handlers
                             {
                                 var geometry = geometry_scheme[igeom];
 
-                                foreach (var edge in geometry.Edges)
-                                    dc.DrawLine(edge.First.ToMultiCAD(),
-                                                edge.Second.ToMultiCAD());
+                                foreach (var edge in geometry.Indices)
+                                    dc.DrawLine(geometry.Vertices[edge[0]].ToMultiCAD(),
+                                                geometry.Vertices[edge[1]].ToMultiCAD());
                             }
                         }
 

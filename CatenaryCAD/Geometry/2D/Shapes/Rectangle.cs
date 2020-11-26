@@ -3,43 +3,36 @@
 namespace CatenaryCAD.Geometry.Shapes
 {
     [Serializable]
-    public sealed class Rectangle : IShape
+    public sealed class Rectangle : Shape
     {
-        public Edge2D[] Edges { private set; get; }
-
         public Rectangle(in Point2D center, double width, double height)
         {
-            var vertices = new Point2D[]
+            Vertices = new Point2D[]
             {
                 new Point2D(center.X - height / 2, center.Y + width / 2),
                 new Point2D(center.X + height / 2, center.Y + width / 2),
                 new Point2D(center.X + height / 2, center.Y - width / 2),
                 new Point2D(center.X - height / 2, center.Y - width / 2)
             };
-
-            Edges = new Edge2D[] {  new Edge2D(vertices[0], vertices[1]),
-                                    new Edge2D(vertices[1], vertices[2]),
-                                    new Edge2D(vertices[2], vertices[3]),
-                                    new Edge2D(vertices[3], vertices[0]) };
+            Indices = new int[][] 
+            {  
+                new int[]{ 0, 1 },
+                new int[]{ 1, 2 },
+                new int[]{ 2, 3 },
+                new int[]{ 3, 0 } 
+            };
         }
 
         public Rectangle(Point2D p0, Point2D p1, Point2D p2, Point2D p3)
         {
-            var vertices = new Point2D[] { p0, p1, p2, p3 };
-
-            Edges = new Edge2D[] {  new Edge2D(vertices[0], vertices[1]),
-                                    new Edge2D(vertices[1], vertices[2]),
-                                    new Edge2D(vertices[2], vertices[3]),
-                                    new Edge2D(vertices[3], vertices[0]) };
-        }
-
-        public IShape TransformBy(in Matrix2D m)
-        {
-            int count = Edges.Length;
-            for(int i =0; i<count; i++)
-                Edges[i] = Edges[i].TransformBy(m);
-
-            return this;
+            Vertices = new Point2D[] { p0, p1, p2, p3 };
+            Indices = new int[][]
+            {
+                new int[]{ 0, 1 },
+                new int[]{ 1, 2 },
+                new int[]{ 2, 3 },
+                new int[]{ 3, 0 }
+            };
         }
     }
 }

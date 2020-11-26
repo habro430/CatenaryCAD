@@ -31,15 +31,12 @@ namespace CatenaryCAD.Geometry
         {
             List<Point2D> intersections = new List<Point2D>();
 
-            Point2D first = Origin;
-            Point2D second = Origin + Direction;
-
-            foreach (var edge in shape.Edges)
+            foreach (var edge in shape.Indices)
             {
-                var p = first;
-                var q = edge.First;
-                var r = first.VectorTo(second);
-                var s = edge.First.VectorTo(edge.Second);
+                var p = Origin;
+                var q = shape.Vertices[edge[0]];
+                var r = p.VectorTo(p + Direction);
+                var s = q.VectorTo(shape.Vertices[edge[1]]);
 
                 var rxs = r.CrossProduct(s);
                 var qpxr = (q - p).CrossProduct(r);

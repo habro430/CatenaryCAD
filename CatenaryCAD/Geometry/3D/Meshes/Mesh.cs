@@ -20,21 +20,13 @@ namespace CatenaryCAD.Geometry.Meshes
 
         public IMesh TransformBy(in Matrix3D m)
         {
-            throw new NotImplementedException();
-        }        
+            int count = Vertices.Length;
+            for (int i = 0; i < count; i++)
+                Vertices[i] = Vertices[i].TransformBy(m);
+
+            return this;
+        }
         
-        //public IMesh TransformBy(in Matrix3D m)
-        //{
-        //    //int count = Faces.Length;
-
-        //    //Face3D[] new_faces = new Face3D[count];
-
-        //    //for (int i = 0; i < count; i++)
-        //    //    new_faces[i] = Faces[i].TransformBy(m);
-
-        //    //return new Mesh(new_faces);
-        //}
-
 
         public static Mesh FromObj(string obj)
         {
@@ -105,11 +97,7 @@ namespace CatenaryCAD.Geometry.Meshes
                 }
             }
 
-
             return new Mesh(vertices.ToArray(), normals.ToArray(), indices.ToArray());
         }
-
-
-
     }
 }
