@@ -45,8 +45,10 @@ namespace CatenaryCAD.Geometry
 
         #region Functions
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj) => obj is Point3D p && this.Equals(p);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Point3D n) => X.Equals(n.X) && Y.Equals(n.Y) && Z.Equals(n.Z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -57,10 +59,10 @@ namespace CatenaryCAD.Geometry
             new Point3D(X * m.M11 + Y * m.M12 + Z * m.M13 + m.M14, X * m.M21 + Y * m.M22 + Z * m.M23 + m.M24, X * m.M31 + Y * m.M32 + Z * m.M33 + m.M34);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3D VectorTo(in Point3D p2) => p2 - this;
+        public Vector3D GetVectorTo(in Point3D p2) => p2 - this;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double DistanceTo(in Point3D p2) => VectorTo(p2).Length;
+        public double GetDistanceTo(in Point3D p2) => GetVectorTo(p2).GetLength();
 
         #endregion
 

@@ -73,8 +73,8 @@ namespace BasicMasts
 
             foreach (var shape in Geometry2D)
             {
-                var sh = shape.TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.VectorTo(position)))
-                              .TransformBy(Matrix2D.CreateRotation(-direction.AngleTo(Vector2D.AxisX), position));
+                var sh = shape.TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position)))
+                              .TransformBy(Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position));
 
                 Point2D[] tmp_intersections = ray.GetIntersections(sh);
 
@@ -88,7 +88,7 @@ namespace BasicMasts
                 Point2D control_point = ray.Origin + ray.Direction;
 
                 foreach (var point in intersections)
-                    if (point.DistanceTo(control_point) < intersection.DistanceTo(control_point))
+                    if (point.GetDistanceTo(control_point) < intersection.GetDistanceTo(control_point))
                         intersection = point;
 
                 return intersection;

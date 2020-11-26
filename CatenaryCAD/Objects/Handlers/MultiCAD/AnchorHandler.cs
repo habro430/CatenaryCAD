@@ -83,8 +83,8 @@ namespace CatenaryCAD.Models.Handlers
 
                             Point3D mouse = a.Point.ToCatenaryCAD_3D();
 
-                            anchor.Direction = mast.Position.VectorTo(mouse);
-                            double angle = mast.Position.VectorTo(mouse).AngleTo(Vector3D.AxisX, Vector3D.AxisZ);
+                            anchor.Direction = mast.Position.GetVectorTo(mouse);
+                            double angle = mast.Position.GetVectorTo(mouse).GetAngleTo(Vector3D.AxisX, Vector3D.AxisZ);
 
                             anchor.Position = mast.Position
                                             .TransformBy(Matrix3D.CreateTranslation(Vector3D.AxisX * distancetomast))

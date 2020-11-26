@@ -1,12 +1,13 @@
 ﻿using CatenaryCAD.Geometry.Meshes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
 {
-    [Serializable]
+    [Serializable, DebuggerDisplay("Origin = {Origin}, Direction = {Direction}")]
     [StructLayout(LayoutKind.Explicit, Size = 56)]
     public readonly struct Ray3D : IEquatable<Ray3D>, IRay
     {
@@ -18,7 +19,7 @@ namespace CatenaryCAD.Geometry
         public Ray3D(Point3D origin, Vector3D direction)
         {
             Origin = origin;
-            Direction = direction.Normalize();
+            Direction = direction.GetNormalize();
         }
 
         #region Functions

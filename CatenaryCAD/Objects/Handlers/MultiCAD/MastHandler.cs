@@ -93,11 +93,11 @@ namespace CatenaryCAD.Models.Handlers
                     {
                         Point3D mouse = a.Point.ToCatenaryCAD_3D();
 
-                        mast.TransformBy(Matrix3D.CreateTranslation(mast.Position.VectorTo(mouse)));
+                        mast.TransformBy(Matrix3D.CreateTranslation(mast.Position.GetVectorTo(mouse)));
 
                         if (last_mast != null)
                         {
-                            double angle = last_mast.Position.VectorTo(mouse).AngleTo(mast.Direction, Vector3D.AxisZ);
+                            double angle = last_mast.Position.GetVectorTo(mouse).GetAngleTo(mast.Direction, Vector3D.AxisZ);
                             mast.TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
                         }
 

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace CatenaryCAD.Geometry
 {
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
-    [StructLayout(LayoutKind.Explicit, Size = 32)]
+    [StructLayout(LayoutKind.Explicit, Size = 24)]
     public readonly struct Vector3D : IEquatable<Vector3D>, IVector
     {
         [FieldOffset(0)]
@@ -17,16 +17,11 @@ namespace CatenaryCAD.Geometry
         [FieldOffset(16)]
         public readonly double Z;
 
-        [FieldOffset(24)]
-        public readonly double Length;
-
         public Vector3D(double x, double y, double z)
         {
             X = x;
             Y = y;
             Z = z;
-
-            Length = Math.Sqrt((X * X) + (Y * Y) + (Z * Z));
         }
 
         #region Static members
@@ -60,8 +55,10 @@ namespace CatenaryCAD.Geometry
 
         #region Functions
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj) => obj is Vector3D p && this.Equals(p);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Vector3D n) => X.Equals(n.X) && Y.Equals(n.Y) && Z.Equals(n.Z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -77,18 +74,25 @@ namespace CatenaryCAD.Geometry
             new Vector3D((Y * v2.Z) - (Z * v2.Y), (Z * v2.X) - (X * v2.Z), (X * v2.Y) - (Y * v2.X));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double DotProduct(in Vector3D v2) => 
-            (X * v2.X) + (Y * v2.Y) + (Z * v2.Z);
+        public double DotProduct(in Vector3D v2) => (X * v2.X) + (Y * v2.Y) + (Z * v2.Z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3D Negate() => new Vector3D(-1 * X, -1 * Y, -1 * Z);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector3D Normalize() => new Vector3D(X / Length, Y / Length, Z / Length);
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double AngleTo(in Vector3D destination, in Vector3D refrence) => 
+        public double GetAngleTo(in Vector3D destination, in Vector3D refrence) =>
             Math.Atan2(refrence.DotProduct(CrossProduct(destination)), DotProduct(destination));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public double GetLength() => Math.Sqrt((X * X) + (Y * Y) + (Z * Z));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Vector3D GetNegate() => new Vector3D(-1 * X, -1 * Y, -1 * Z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Vector3D GetNormalize()
+        {
+            var lenght = GetLength();
+            return new Vector3D(X / lenght, Y / lenght, Z / lenght);
+        }
+        
 
         #endregion
 

@@ -114,7 +114,7 @@ namespace CatenaryCAD.Geometry
 
         public static Matrix3D CreateRotation(double radians, in Point3D center, in Vector3D axis)
         {
-            var normalized = axis.Normalize();
+            var normalized = axis.GetNormalize();
 
             double u = normalized.X, v = normalized.Y, w = normalized.Z,
                    a = center.X, b = center.Y, c = center.Z;

@@ -38,14 +38,14 @@ namespace BasicAnchors
             var anchor_position = new Point2D(Position.X, Position.Y);
 
             Point2D dockingjoint = (Parent as Mast).GetPointForDockingJoint(
-                        new Ray2D(anchor_position, anchor_position.VectorTo(mast_position))) ?? mast_position;
+                        new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position))) ?? mast_position;
 
-            double angle = mast_position.VectorTo(dockingjoint).AngleTo(Vector2D.AxisX);
+            double angle = mast_position.GetVectorTo(dockingjoint).GetAngleTo(Vector2D.AxisX);
 
             dockingjoint = dockingjoint.TransformBy(Matrix2D.CreateRotation(angle, mast_position));
             anchor_position = anchor_position.TransformBy(Matrix2D.CreateRotation(angle, mast_position));
 
-            return Geometry2D.Select(s => s.TransformBy(Matrix2D.CreateTranslation(anchor_position.VectorTo(dockingjoint)))).ToArray();
+            return Geometry2D.Select(s => s.TransformBy(Matrix2D.CreateTranslation(anchor_position.GetVectorTo(dockingjoint)))).ToArray();
         }
     }
 }

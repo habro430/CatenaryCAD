@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace CatenaryCAD.Geometry
 {
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}")]
-    [StructLayout(LayoutKind.Explicit, Size = 24)]
+    [StructLayout(LayoutKind.Explicit, Size = 16)]
     public readonly struct Vector2D : IEquatable<Vector2D>
     {
         [FieldOffset(0)]
@@ -15,15 +15,10 @@ namespace CatenaryCAD.Geometry
         [FieldOffset(8)]
         public readonly double Y;
 
-        [FieldOffset(16)]
-        public readonly double Length;
-
         public Vector2D(double x, double y)
         {
             X = x;
             Y = y;
-
-            Length = Math.Sqrt((X * X) + (Y * Y));
         }
 
         #region Static members
@@ -49,15 +44,17 @@ namespace CatenaryCAD.Geometry
 
         #region Functions
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj) => obj is Vector2D p && this.Equals(p);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Vector2D n) => X.Equals(n.X) && Y.Equals(n.Y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() => HashCode.Combine(X, Y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector2D TransformBy(in Matrix2D m) => 
+        public Vector2D TransformBy(in Matrix2D m) =>
             new Vector2D(X * m.M11 + Y * m.M12 + m.M13, X * m.M21 + Y * m.M22 + m.M23);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -67,14 +64,20 @@ namespace CatenaryCAD.Geometry
         public double DotProduct(in Vector2D v2) => (X * v2.X) + (Y * v2.Y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double AngleTo(in Vector2D destination) =>
-            Math.Atan2(CrossProduct(destination), DotProduct(destination));
+        public double GetAngleTo(in Vector2D destination) => Math.Atan2(CrossProduct(destination), DotProduct(destination));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector2D Negate() => new Vector2D(-1 * X, -1 * Y);
+        public double GetLength() => Math.Sqrt((X * X) + (Y * Y));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector2D Normalize() => new Vector2D(X / Length, Y / Length);
+        public Vector2D GetNegate() => new Vector2D(-1 * X, -1 * Y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Vector2D GetNormalize()
+        {
+            var length = GetLength();
+            return new Vector2D(X / length, Y / length);
+        }
 
         #endregion
     }

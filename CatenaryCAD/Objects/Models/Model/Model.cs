@@ -38,7 +38,7 @@ namespace CatenaryCAD.Models
             set
             {
                 if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false) return;
-                direction = value.Normalize();
+                direction = value.GetNormalize();
             }
         }
 

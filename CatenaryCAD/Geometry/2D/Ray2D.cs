@@ -3,6 +3,7 @@ using CatenaryCAD.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Odbc;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace CatenaryCAD.Geometry
 {
-    [Serializable]
+    [Serializable, DebuggerDisplay("Origin = {Origin}, Direction = {Direction}")]
     [StructLayout(LayoutKind.Explicit, Size = 40)]
     public readonly struct Ray2D : IEquatable<Ray2D>, IRay
     {
@@ -35,8 +36,8 @@ namespace CatenaryCAD.Geometry
             {
                 var p = Origin;
                 var q = shape.Vertices[edge[0]];
-                var r = p.VectorTo(p + Direction);
-                var s = q.VectorTo(shape.Vertices[edge[1]]);
+                var r = p.GetVectorTo(p + Direction);
+                var s = q.GetVectorTo(shape.Vertices[edge[1]]);
 
                 var rxs = r.CrossProduct(s);
                 var qpxr = (q - p).CrossProduct(r);

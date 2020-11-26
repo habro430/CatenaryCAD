@@ -40,8 +40,10 @@ namespace CatenaryCAD.Geometry
 
         #region Functions
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj) => obj is Point2D p && this.Equals(p);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Point2D n) => X.Equals(n.X) && Y.Equals(n.Y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -52,10 +54,10 @@ namespace CatenaryCAD.Geometry
             new Point2D(X * m.M11 + Y * m.M12 + m.M13, X * m.M21 + Y * m.M22 + m.M23);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector2D VectorTo(in Point2D p2) => p2 - this;
+        public Vector2D GetVectorTo(in Point2D p2) => p2 - this;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double DistanceTo(in Point2D p2) => VectorTo(p2).Length;
+        public double GetDistanceTo(in Point2D p2) => GetVectorTo(p2).GetLength();
 
         #endregion
 
