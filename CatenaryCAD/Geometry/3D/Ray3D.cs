@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CatenaryCAD.Geometry.Meshes;
+using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -20,6 +22,13 @@ namespace CatenaryCAD.Geometry
         }
 
         #region Functions
+
+        public Point3D[] GetIntersections(IMesh mesh)
+        {
+            List<Point3D> intesections = new List<Point3D>();
+
+            throw new NotImplementedException();
+        }
 
         public override bool Equals(object obj) => obj is Ray3D r && this.Equals(r);
 

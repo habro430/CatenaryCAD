@@ -12,7 +12,7 @@ namespace BasicFoundations
     {
         public FoundationDirect()
         {
-            Geometry3D = new IMesh[] { GetOrCreateFromCache("test") };
+            Geometry3D = new IMesh[] { GetOrCreateFromCache("TSP4.5") };
         }
     }
 }

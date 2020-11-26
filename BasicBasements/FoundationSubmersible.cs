@@ -12,7 +12,7 @@ namespace BasicFoundations
     {
         public FoundationSubmersible()
         {
-            Geometry3D = new IMesh[] { GetOrCreateFromCache("test") };
+            Geometry3D = new IMesh[] { GetOrCreateFromCache("TSP5.0") };
         }
     }
 }

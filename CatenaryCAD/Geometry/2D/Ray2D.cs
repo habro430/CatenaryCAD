@@ -29,7 +29,7 @@ namespace CatenaryCAD.Geometry
 
         public Point2D[] GetIntersections(IShape shape)
         {
-            List<Point2D> points = new List<Point2D>();
+            List<Point2D> intersections = new List<Point2D>();
 
             Point2D first = Origin;
             Point2D second = Origin + Direction;
@@ -58,10 +58,10 @@ namespace CatenaryCAD.Geometry
                 //Если r * s != 0 и 0 <= t <= 1 и 0 <= u <= 1,
                 //тогда два вектора пересекаються в точке p + t * r = q + u * s.
                 if (rxs != 0 && (0 <= t && t <= 1) && (0 <= u && u <= 1))
-                    points.Add(p + (r * t));
+                    intersections.Add(p + (r * t));
             }
 
-            return points.Count > 0 ? points.ToArray() : null;
+            return intersections.Count > 0 ? intersections.ToArray() : null;
         }
 
         public override bool Equals(object obj) => obj is Ray2D r && this.Equals(r);

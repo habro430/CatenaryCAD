@@ -33,13 +33,10 @@ namespace CatenaryCAD.Geometry.Shapes
         public IShape TransformBy(in Matrix2D m)
         {
             int count = Edges.Length;
-
-            Edge2D[] edges = new Edge2D[count];
-
             for (int i = 0; i < count; i++)
-                edges[i] = Edges[i].TransformBy(m);
+                Edges[i] = Edges[i].TransformBy(m);
 
-            return new Circle(Point2D.Origin, 0, 0) { Edges = edges };
+            return this;
         }
     }
 

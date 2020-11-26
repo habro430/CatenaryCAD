@@ -61,11 +61,20 @@ namespace BasicBasements.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на diAzNTAuMDAwMDAwIC0zNTAuMDAwMDAwIC00MDAwLjAwMDAwMA0KdiAzNTAuMDAwMDAwIC0zNTAuMDAwMDAwIDAuMDAwMDAwDQp2IC0zNTAuMDAwMDAwIC0zNTAuMDAwMDAwIC00MDAwLjAwMDAwMA0KdiAtMzUwLjAwMDAwMCAtMzUwLjAwMDAwMCAwLjAwMDAwMA0KdiAzNTAuMDAwMDAwIDM1MC4wMDAwMDAgLTQwMDAuMDAwMDAwDQp2IDM1MC4wMDAwMDAgMzUwLjAwMDAwMCAwLjAwMDAwMA0KdiAtMzUwLjAwMDAwMCAzNTAuMDAwMDAwIC00MDAwLjAwMDAwMA0KdiAtMzUwLjAwMDAwMCAzNTAuMDAwMDAwIDAuMDAwMDAwDQp2biAwLjAwMDAgLTEuMDAwMCAwLjAwMDANCnZuIC0xLjAwMDAgMC4wMDAwIDAuMDAwMA0Kdm4gMC4wMDAwIDEuMDAwMCAwLjAwMDANCnZuIDEuMDAwMCAw [остаток строки не уместился]&quot;;.
+        ///   Ищет локализованную строку, похожую на IyBCbGVuZGVyIHYyLjkwLjEgT0JKIEZpbGU6ICfQotCh0J8uYmxlbmQnDQojIHd3dy5ibGVuZGVyLm9yZw0KdiAyNjcuNzg1NDkyIC0yMjkuNjAxOTkwIDEwMy40NTc5ODUNCnYgMjg0LjI4ODQ4MyAtMjAxLjAyMjk5NSAyMS4xNDY5ODINCnYgMjg0LjI4ODQ4MyAtMjAxLjAyMjk5NSAxMDMuNDU3OTg1DQp2IC0yMzIuMTg3NTAwIDIyNy42MzA5OTcgMTAzLjQ1Nzk4NQ0KdiAtMjY1LjE4NDQ3OSAyMjcuNjMwOTk3IDIxLjE0Njk4Mg0KdiAtMjY1LjE4NDQ3OSAyMjcuNjMwOTk3IDEwMy40NTc5ODUNCnYgMjY5LjM2MTUxMSAxOTkuMDUyMDAyIC0wLjYxMDYyMA0KdiAyNjAuMzI3NDg0IDIxNC42OTUwMDcgMTMyLjI1NTk5Nw0KdiAyNjAuMzI3NDg0IDIxNC42OTUwMDcgLTAuNjEw [остаток строки не уместился]&quot;;.
         /// </summary>
-        internal static string test {
+        internal static string TSP4_5 {
             get {
-                return ResourceManager.GetString("test", resourceCulture);
+                return ResourceManager.GetString("TSP4.5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на IyBCbGVuZGVyIHYyLjkwLjEgT0JKIEZpbGU6ICfQotCh0J8uYmxlbmQnDQojIHd3dy5ibGVuZGVyLm9yZw0KdiAyNjcuNzg1NDkyIC0yMjkuNjAxOTkwIDEwMy40NTc5ODUNCnYgMjg0LjI4ODQ4MyAtMjAxLjAyMjk5NSAyMS4xNDY5ODINCnYgMjg0LjI4ODQ4MyAtMjAxLjAyMjk5NSAxMDMuNDU3OTg1DQp2IC0yMzIuMTg3NTAwIDIyNy42MzA5OTcgMTAzLjQ1Nzk4NQ0KdiAtMjY1LjE4NDQ3OSAyMjcuNjMwOTk3IDIxLjE0Njk4Mg0KdiAtMjY1LjE4NDQ3OSAyMjcuNjMwOTk3IDEwMy40NTc5ODUNCnYgMjY5LjM2MTUxMSAxOTkuMDUyMDAyIC0wLjYxMDYyMA0KdiAyNjAuMzI3NDg0IDIxNC42OTUwMDcgMTMyLjI1NTk5Nw0KdiAyNjAuMzI3NDg0IDIxNC42OTUwMDcgLTAuNjEw [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string TSP5_0 {
+            get {
+                return ResourceManager.GetString("TSP5.0", resourceCulture);
             }
         }
     }
