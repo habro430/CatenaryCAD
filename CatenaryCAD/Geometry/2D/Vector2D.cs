@@ -8,10 +8,16 @@ namespace CatenaryCAD.Geometry
 {
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}")]
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public readonly struct Vector2D : IEquatable<Vector2D>
+    public readonly struct Vector2D : IEquatable<Vector2D>, IVector
     {
+        /// <summary>
+        /// X - составляющая компонента вектора.
+        /// </summary>
         [FieldOffset(0)]
         public readonly double X;
+        /// <summary>
+        /// Y - составляющая компонента вектора.
+        /// </summary>
         [FieldOffset(8)]
         public readonly double Y;
 
@@ -23,9 +29,15 @@ namespace CatenaryCAD.Geometry
 
         #region Static members
 
+        /// <summary>
+        /// Нормализованный <see cref="Vector2D"/> по направлению оси X.
+        /// </summary>
         public static ref readonly Vector2D AxisX => ref axisx;
         private static readonly Vector2D axisx = new Vector2D(1, 0);
 
+        /// <summary>
+        /// Нормализованный <see cref="Vector2D"/> по направлению оси Y.
+        /// </summary>
         public static ref readonly Vector2D AxisY => ref axisy;
         private static readonly Vector2D axisy = new Vector2D(0, 1);
 
@@ -53,25 +65,57 @@ namespace CatenaryCAD.Geometry
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() => HashCode.Combine(X, Y);
 
+
+        /// <summary>
+        /// Трансформирует этот <see cref="Vector2D"/>, умножая его на <paramref name = "m" />.
+        /// </summary>
+        /// <param name="m">Матрица для умножения.</param>
+        /// <returns>Новый трансформированный <see cref="Vector2D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2D TransformBy(in Matrix2D m) =>
             new Vector2D(X * m.M11 + Y * m.M12 + m.M13, X * m.M21 + Y * m.M22 + m.M23);
 
+        /// <summary>
+        /// Возвращает результат перекрестного произведения этого <see cref="Vector2D"/> и <paramref name = "v" />.
+        /// </summary>
+        /// <param name="v">Вектор для умножения.</param>
+        /// <returns>Результат кросс-произведения.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double CrossProduct(in Vector2D v2) => (X * v2.Y) - (Y * v2.X);
+        public double CrossProduct(in Vector2D v) => (X * v.Y) - (Y * v.X);
 
+        /// <summary>
+        /// Возвращает скалярное произведение этого <see cref="Vector2D"/> и <paramref name = "v"/>.
+        /// </summary>
+        /// <param name="v">Вектор для умножения.</param>
+        /// <returns>Результат скалярного произведения.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double DotProduct(in Vector2D v2) => (X * v2.X) + (Y * v2.Y);
+        public double DotProduct(in Vector2D v) => (X * v.X) + (Y * v.Y);
 
+        /// <summary>
+        /// Возвращает угол между текущим <see cref="Vector2D"/> и <paramref name = "v"/>.
+        /// </summary>
+        /// <param name="v">Вектор по отношению к которому расчитывается угол.</param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double GetAngleTo(in Vector2D destination) => Math.Atan2(CrossProduct(destination), DotProduct(destination));
+        public double GetAngleTo(in Vector2D v) => Math.Atan2(CrossProduct(v), DotProduct(v));
 
+        /// <summary>
+        /// Возвращает длинну этого <see cref="Vector2D"/>.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double GetLength() => Math.Sqrt((X * X) + (Y * Y));
 
+        /// <summary>
+        /// Инвертирует направление этого <see cref="Vector2D"/>, эквивалентно умножению на -1.
+        /// </summary>
+        /// <returns>Новый <see cref="Vector2D"/> указывающий в противоположное направление.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2D GetNegate() => new Vector2D(-1 * X, -1 * Y);
 
+        /// <summary>
+        /// Возвращает нормализованный <see cref="Vector2D"/> из этого <see cref="Vector2D"/>.
+        /// </summary>
+        /// <returns>Новый, нормализованный <see cref="Vector2D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2D GetNormalize()
         {
