@@ -1,4 +1,6 @@
-﻿namespace CatenaryCAD.Geometry.Shapes
+﻿using System;
+
+namespace CatenaryCAD.Geometry.Shapes
 {
     public interface IShape
     {
@@ -25,9 +27,8 @@
         /// <summary>
         /// Проверяет находится ли <paramref name = "p" /> внутри текущего экземпляра <see cref="IShape"/>.
         /// </summary>
-        /// <param name="p">Матрица для умножения.</param>
+        /// <param name="p">Точка для проверки на соответсвие.</param>
         /// <returns>Возвраящает true если <paramref name = "p" /> находиться внутри текущего экземпляра <see cref="IShape"/>, в противном случае возращает false.</returns>
         bool IsInside(in Point2D p);
-
     }
 }
