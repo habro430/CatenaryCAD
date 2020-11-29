@@ -70,7 +70,7 @@ namespace CatenaryCAD.Geometry
         /// Трансформирует этот <see cref="Vector2D"/>, умножая его на <paramref name = "m" />.
         /// </summary>
         /// <param name="m">Матрица для умножения.</param>
-        /// <returns>Новый трансформированный <see cref="Vector2D"/>.</returns>
+        /// <returns>Трансформированный экземпляр <see cref="Vector2D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector2D TransformBy(in Matrix2D m) =>
             new Vector2D(X * m.M11 + Y * m.M12 + m.M13, X * m.M21 + Y * m.M22 + m.M23);

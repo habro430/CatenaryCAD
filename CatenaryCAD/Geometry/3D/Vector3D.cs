@@ -34,21 +34,21 @@ namespace CatenaryCAD.Geometry
         }
 
         #region Static members
-        /// <summary>
+        /// <value>
         /// Нормализованный <see cref="Vector3D"/> по направлению оси X.
-        /// </summary>
+        /// </value>
         public static ref readonly Vector3D AxisX => ref axisx;
         private static readonly Vector3D axisx = new Vector3D(1, 0, 0);
 
-        /// <summary>
+        /// <value>
         /// Нормализованный <see cref="Vector3D"/> по направлению оси Y.
-        /// </summary>
+        /// </value>
         public static ref readonly Vector3D AxisY => ref axisy;
         private static readonly Vector3D axisy = new Vector3D(0, 1, 0);
 
-        /// <summary>
+        /// <value>
         /// Нормализованный <see cref="Vector3D"/> по направлению оси Z.
-        /// </summary>
+        /// </value>
         public static ref readonly Vector3D AxisZ => ref axisz;
         private static readonly Vector3D axisz = new Vector3D(0, 0, 1);
 
@@ -85,7 +85,7 @@ namespace CatenaryCAD.Geometry
         /// Трансформирует этот <see cref="Vector3D"/>, умножая его на <paramref name = "m" />.
         /// </summary>
         /// <param name="m">Матрица для умножения.</param>
-        /// <returns>Новый, трансформированный <see cref="Vector3D"/>.</returns>
+        /// <returns>Трансформированный экземпляр <see cref="Vector3D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3D TransformBy(in Matrix3D m) =>
             new Vector3D(X * m.M11 + Y * m.M12 + Z * m.M13, X * m.M21 + Y * m.M22 + Z * m.M23, X * m.M31 + Y * m.M32 + Z * m.M33);
