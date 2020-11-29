@@ -67,7 +67,7 @@ namespace CatenaryCAD.Geometry
 
 
         /// <summary>
-        /// Трансформирует этот <see cref="Vector2D"/>, умножая его на <paramref name = "m" />.
+        /// Трансформирует этот экземпляр <see cref="Vector2D"/>, умножая его на <paramref name = "m" />.
         /// </summary>
         /// <param name="m">Матрица для умножения.</param>
         /// <returns>Трансформированный экземпляр <see cref="Vector2D"/>.</returns>

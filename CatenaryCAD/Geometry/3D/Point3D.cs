@@ -67,7 +67,7 @@ namespace CatenaryCAD.Geometry
         public override int GetHashCode() => HashCode.Combine(X, Y, Z);
 
         /// <summary>
-        /// Трансформирует этот <see cref="Point3D"/>, умножая его на <paramref name = "m" />.
+        /// Трансформирует этот экземпляр <see cref="Point3D"/>, умножая его на <paramref name = "m" />.
         /// </summary>
         /// <param name="m">Матрица для умножения.</param>
         /// <returns>Трансформированный экземпляр <see cref="Point3D"/>.</returns>

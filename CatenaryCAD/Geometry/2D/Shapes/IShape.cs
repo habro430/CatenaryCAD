@@ -3,18 +3,30 @@
     public interface IShape
     {
         /// <summary>
-        /// Массив вершин фигуры
+        /// Вершины описывающие фигуру.
         /// </summary>
+        /// <value>Массив <see cref="Point2D"/> с вершинами.</value>
         Point2D[] Vertices { get; }
 
         /// <summary>
-        /// Массив индексов вершин образующих грани фигуры, 
-        /// где первый уровень массива - индекс грани, а второй - индекс вершины 
+        /// Индексы вешин и граней описывающие фигуру.
         /// </summary>
+        /// <value>Массив индексов, где первый уровень массива - индекс грани, а второй - индекс вершины .</value>
         int[][] Indices { get; }
 
 
+        /// <summary>
+        /// Трансформирует этот экземпляр <see cref="IShape"/>, умножая все его вершины на <paramref name = "m" />.
+        /// </summary>
+        /// <param name="m">Матрица для умножения.</param>
+        /// <returns>Трансформированный экземпляр <see cref="IShape"/>.</returns>
         IShape TransformBy(in Matrix2D m);
+
+        /// <summary>
+        /// Проверяет находится ли <paramref name = "p" /> внутри текущего экземпляра <see cref="IShape"/>.
+        /// </summary>
+        /// <param name="p">Матрица для умножения.</param>
+        /// <returns>Возвраящает true если <paramref name = "p" /> находиться внутри текущего экземпляра <see cref="IShape"/>, в противном случае возращает false.</returns>
         bool IsInside(in Point2D p);
 
     }

@@ -6,6 +6,7 @@ namespace CatenaryCAD.Geometry.Shapes
     public abstract class Shape : IShape
     {
         public virtual Point2D[] Vertices { get; protected set; }
+
         public virtual int[][] Indices { get; protected set; }
 
         public virtual IShape TransformBy(in Matrix2D m)
@@ -16,6 +17,7 @@ namespace CatenaryCAD.Geometry.Shapes
 
             return this;
         }
+
 
         public virtual bool IsInside(in Point2D p)
         {
