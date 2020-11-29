@@ -18,7 +18,7 @@ namespace CatenaryCAD.Geometry.Shapes
         /// <returns>Возвраящает true если <paramref name = "p" /> находиться на линии реализуемой текущим экземпляром <see cref="Line"/>, в противном случае возращает false.</returns>
         public override bool IsInside(in Point2D p)
         {
-            throw new NotImplementedException(0);
+            throw new NotImplementedException();
         }
     }
 }
