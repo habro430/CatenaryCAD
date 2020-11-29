@@ -125,14 +125,14 @@ namespace CatenaryCAD.Geometry
         /// <summary>
         /// Инвертирует направление этого <see cref="Vector3D"/>, эквивалентно умножению на -1.
         /// </summary>
-        /// <returns>Новый <see cref="Vector3D"/> указывающий в противоположное направление.</returns>
+        /// <returns>Экземпляр <see cref="Vector3D"/> указывающий в противоположное направление.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3D GetNegate() => new Vector3D(-1 * X, -1 * Y, -1 * Z);
 
         /// <summary>
         /// Возвращает нормализованный <see cref="Vector3D"/> из этого <see cref="Vector3D"/>.
         /// </summary>
-        /// <returns>Новый, нормализованный <see cref="Vector3D"/>.</returns>
+        /// <returns>Нормализованный экземпляр <see cref="Vector3D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3D GetNormalize()
         {
