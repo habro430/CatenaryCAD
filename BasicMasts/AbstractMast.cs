@@ -3,6 +3,7 @@ using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Models;
+using CatenaryCAD.Helpers;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 using System;
@@ -71,15 +72,12 @@ namespace BasicMasts
 
             List<Point2D> intersections = new List<Point2D>();
 
-            foreach (var shape in Geometry2D)
+            foreach (var shape in DeepClonerExtensions.DeepClone(Geometry2D))
             {
-                var sh = shape.TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position)))
-                              .TransformBy(Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position));
+                shape.TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position)))
+                     .TransformBy(Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position));
 
-                Point2D[] tmp_intersections = ray.GetIntersections(sh);
-
-                if (tmp_intersections != null)
-                    intersections.AddRange(tmp_intersections);
+                intersections.AddRange(ray.GetIntersections(shape));
             }
 
             if (intersections.Count > 0)

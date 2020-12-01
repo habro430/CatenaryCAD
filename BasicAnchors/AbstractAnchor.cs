@@ -2,6 +2,7 @@
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
+using CatenaryCAD.Helpers;
 using CatenaryCAD.Models;
 using System;
 using System.Linq;
@@ -45,7 +46,11 @@ namespace BasicAnchors
             dockingjoint = dockingjoint.TransformBy(Matrix2D.CreateRotation(angle, mast_position));
             anchor_position = anchor_position.TransformBy(Matrix2D.CreateRotation(angle, mast_position));
 
-            return Geometry2D.Select(s => s.TransformBy(Matrix2D.CreateTranslation(anchor_position.GetVectorTo(dockingjoint)))).ToArray();
+            var copy_geometry = Geometry2D.DeepClone();
+            foreach(var geometry in copy_geometry)
+                geometry.TransformBy(Matrix2D.CreateTranslation(anchor_position.GetVectorTo(dockingjoint)));
+
+            return copy_geometry;
         }
     }
 }

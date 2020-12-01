@@ -79,9 +79,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cloo.clSharp, Version=0.9.2.7, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cloo.clSharp.0.9.2.7\lib\net20\Cloo.clSharp.dll</HintPath>
-    </Reference>
     <Reference Include="imapimgd">
       <HintPath>..\..\..\..\..\..\Program Files\Nanosoft\nanoCAD x64 Plus 11.1\bin\imapimgd.dll</HintPath>
       <Private>False</Private>
@@ -113,6 +110,19 @@
     <Compile Include="Geometry\3D\Meshes\Mesh.cs" />
     <Compile Include="Helpers\ConcurrentHashSet.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Helpers\DeepCloner\DeepClonerExtensions.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\ClonerToExprGenerator.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\DeepClonerCache.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\DeepClonerExprGenerator.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\DeepClonerGenerator.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\DeepClonerMsilGenerator.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\DeepClonerMsilHelper.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\DeepClonerSafeTypes.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\DeepCloneState.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\ReflectionHelper.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\ShallowClonerGenerator.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\ShallowObjectCloner.cs" />
+    <Compile Include="Helpers\DeepCloner\Helpers\TypeCreationHelper.cs" />
     <Compile Include="Helpers\MultiCAD\McIdentifier.cs" />
     <Compile Include="Helpers\IIdentifier.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\FoundationHandler.cs" />
