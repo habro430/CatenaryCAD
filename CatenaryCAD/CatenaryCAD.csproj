@@ -105,7 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Geometry\2D\Shapes\Shape.cs" />
+    <Compile Include="Geometry\2D\Shapes\AbstractShape.cs" />
     <Compile Include="Geometry\2D\Shapes\Triangle.cs" />
     <Compile Include="Geometry\3D\Meshes\IMesh.cs" />
     <Compile Include="Geometry\3D\Meshes\Mesh.cs" />

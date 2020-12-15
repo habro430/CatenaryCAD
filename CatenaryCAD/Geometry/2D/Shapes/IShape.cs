@@ -18,17 +18,17 @@ namespace CatenaryCAD.Geometry.Shapes
 
 
         /// <summary>
-        /// Трансформирует этот экземпляр <see cref="IShape"/>, умножая все его вершины на <paramref name = "m" />.
+        /// Трансформирует данный экземпляр <see cref="IShape"/>, умножая все его вершины на <paramref name = "matrix" />.
         /// </summary>
-        /// <param name="m">Матрица для умножения.</param>
+        /// <param name="matrix">Матрица для умножения.</param>
         /// <returns>Трансформированный экземпляр <see cref="IShape"/>.</returns>
-        IShape TransformBy(in Matrix2D m);
+        IShape TransformBy(in Matrix2D matrix);
 
         /// <summary>
-        /// Проверяет находится ли <paramref name = "p" /> внутри текущего экземпляра <see cref="IShape"/>.
+        /// Проверяет находится ли <paramref name = "point" /> внутри данного экземпляра <see cref="IShape"/>.
         /// </summary>
-        /// <param name="p">Точка для проверки на соответсвие.</param>
-        /// <returns>Возвраящает true если <paramref name = "p" /> находиться внутри текущего экземпляра <see cref="IShape"/>, в противном случае возращает false.</returns>
-        bool IsInside(in Point2D p);
+        /// <param name="point">Точка для проверки на соответсвие.</param>
+        /// <returns><see langword="true"/> если <paramref name = "point" /> находиться внутри данного экземпляра <see cref="IShape"/>, в противном случае возращает - <see langword="false"/>.</returns>
+        bool IsInside(in Point2D point);
     }
 }

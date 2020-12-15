@@ -3,7 +3,7 @@
 namespace CatenaryCAD.Geometry.Shapes
 {
     [Serializable]
-    public sealed class Line : Shape
+    public sealed class Line : AbstractShape
     {
         public Line(in Point2D p0, in Point2D p1)
         {
@@ -12,11 +12,11 @@ namespace CatenaryCAD.Geometry.Shapes
         }
 
         /// <summary>
-        /// Проверяет находится ли <paramref name = "p" /> на линии реализуемой текущим экземпляра <see cref="Line"/>.
+        /// Проверяет находится ли <paramref name = "point" /> на линии реализуемой текущим экземпляра <see cref="Line"/>.
         /// </summary>
-        /// <param name="p">Точка для проверки на соответсвие.</param>
-        /// <returns>Возвраящает true если <paramref name = "p" /> находиться на линии реализуемой текущим экземпляром <see cref="Line"/>, в противном случае возращает false.</returns>
-        public override bool IsInside(in Point2D p)
+        /// <param name="point">Точка для проверки на соответсвие.</param>
+        /// <returns><see langword="true"/> если <paramref name = "point" /> находиться на линии реализуемой текущим экземпляром <see cref="Line"/>, в противном случае возращает - <see langword="false"/>.</returns>
+        public override bool IsInside(in Point2D point)
         {
             throw new NotImplementedException();
         }

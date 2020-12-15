@@ -7,6 +7,9 @@ using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
 {
+    /// <summary>
+    /// Структура, представляющая вектор в 3D пространстве.
+    /// </summary>
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
     [StructLayout(LayoutKind.Explicit, Size = 24)]
     public readonly struct Vector3D : IEquatable<Vector3D>
@@ -73,17 +76,32 @@ namespace CatenaryCAD.Geometry
 
         #region Functions
 
+        /// <summary>
+        /// Указывает, равен ли этот экземпляр заданному объекту.
+        /// </summary>
+        /// <param name="obj">Объект для сравнения с текущим экземпляром.</param>
+        /// <returns><see langword="true"/> если <paramref name="obj"/> и данный экземпляр относятся к одному типу
+        /// и представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj) => obj is Vector3D p && this.Equals(p);
 
+        /// <summary>
+        /// Указывает, эквивалентен ли текущий объект другому объекту того же типа.
+        /// </summary>
+        /// <param name="other">Объект для сравнения с текущим экземпляром.</param>
+        /// <returns><see langword="true"/> если <paramref name="other"/> и данный экземпляр 
+        /// представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Vector3D n) => X.Equals(n.X) && Y.Equals(n.Y) && Z.Equals(n.Z);
+        public bool Equals(Vector3D other) => X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z);
 
+        /// <summary>
+        /// Возвращает хэш-код данного экземпляра.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() => HashCode.Combine(X, Y, Z);
 
         /// <summary>
-        /// Трансформирует этот экземпляр <see cref="Vector3D"/>, умножая его на <paramref name = "m" />.
+        /// Трансформирует данный экземпляр <see cref="Vector3D"/>, умножая его на <paramref name = "m" />.
         /// </summary>
         /// <param name="m">Матрица для умножения.</param>
         /// <returns>Трансформированный экземпляр <see cref="Vector3D"/>.</returns>
@@ -92,7 +110,7 @@ namespace CatenaryCAD.Geometry
             new Vector3D(X * m.M11 + Y * m.M12 + Z * m.M13, X * m.M21 + Y * m.M22 + Z * m.M23, X * m.M31 + Y * m.M32 + Z * m.M33);
 
         /// <summary>
-        /// Возвращает результат перекрестного произведения этого <see cref="Vector3D"/> и <paramref name = "v" />.
+        /// Возвращает результат перекрестного произведения данного <see cref="Vector3D"/> и <paramref name = "v" />.
         /// </summary>
         /// <param name="v">Вектор для умножения.</param>
         /// <returns>Новый <see cref="Vector3D"/> с результатом кросс-произведения.</returns>
@@ -101,7 +119,7 @@ namespace CatenaryCAD.Geometry
             new Vector3D((Y * v.Z) - (Z * v.Y), (Z * v.X) - (X * v.Z), (X * v.Y) - (Y * v.X));
 
         /// <summary>
-        /// Возвращает скалярное произведение этого <see cref="Vector3D"/> и <paramref name = "v" />.
+        /// Возвращает скалярное произведение данного <see cref="Vector3D"/> и <paramref name = "v" />.
         /// </summary>
         /// <param name="v">Вектор для умножения.</param>
         /// <returns>Результат скалярного произведения.</returns>
@@ -118,20 +136,20 @@ namespace CatenaryCAD.Geometry
             Math.Atan2(r.DotProduct(CrossProduct(v)), DotProduct(v));
 
         /// <summary>
-        /// Возвращяет длинну этого <see cref="Vector3D"/>.
+        /// Возвращяет длинну данного <see cref="Vector3D"/>.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double GetLength() => Math.Sqrt((X * X) + (Y * Y) + (Z * Z));
 
         /// <summary>
-        /// Инвертирует направление этого <see cref="Vector3D"/>, эквивалентно умножению на -1.
+        /// Инвертирует направление данного <see cref="Vector3D"/>, эквивалентно умножению на -1.
         /// </summary>
         /// <returns>Экземпляр <see cref="Vector3D"/> указывающий в противоположное направление.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3D GetNegate() => new Vector3D(-1 * X, -1 * Y, -1 * Z);
 
         /// <summary>
-        /// Возвращает нормализованный <see cref="Vector3D"/> из этого <see cref="Vector3D"/>.
+        /// Возвращает нормализованный <see cref="Vector3D"/> из данного <see cref="Vector3D"/>.
         /// </summary>
         /// <returns>Нормализованный экземпляр <see cref="Vector3D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

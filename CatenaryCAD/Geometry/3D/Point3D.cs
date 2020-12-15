@@ -7,6 +7,9 @@ using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
 {
+    /// <summary>
+    /// Структура, представляющая точку в 3D пространстве.
+    /// </summary>
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
     [StructLayout(LayoutKind.Explicit, Size = 24)]
     public readonly struct Point3D : IEquatable<Point3D>
@@ -58,17 +61,32 @@ namespace CatenaryCAD.Geometry
 
         #region Functions
 
+        /// <summary>
+        /// Указывает, равен ли этот экземпляр заданному объекту.
+        /// </summary>
+        /// <param name="obj">Объект для сравнения с текущим экземпляром.</param>
+        /// <returns><see langword="true"/> если <paramref name="obj"/> и данный экземпляр относятся к одному типу
+        /// и представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj) => obj is Point3D p && this.Equals(p);
 
+        /// <summary>
+        /// Указывает, эквивалентен ли текущий объект другому объекту того же типа.
+        /// </summary>
+        /// <param name="other">Объект для сравнения с текущим экземпляром.</param>
+        /// <returns><see langword="true"/> если <paramref name="other"/> и данный экземпляр 
+        /// представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Point3D n) => X.Equals(n.X) && Y.Equals(n.Y) && Z.Equals(n.Z);
+        public bool Equals(Point3D other) => X.Equals(other.X) && Y.Equals(other.Y) && Z.Equals(other.Z);
 
+        /// <summary>
+        /// Возвращает хэш-код данного экземпляра.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() => HashCode.Combine(X, Y, Z);
 
         /// <summary>
-        /// Трансформирует этот экземпляр <see cref="Point3D"/>, умножая его на <paramref name = "m" />.
+        /// Трансформирует данный экземпляр <see cref="Point3D"/>, умножая его на <paramref name = "m" />.
         /// </summary>
         /// <param name="m">Матрица для умножения.</param>
         /// <returns>Трансформированный экземпляр <see cref="Point3D"/>.</returns>

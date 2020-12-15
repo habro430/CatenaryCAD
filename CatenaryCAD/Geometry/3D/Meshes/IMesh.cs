@@ -22,7 +22,7 @@
 
 
         /// <summary>
-        /// Трансформирует этот экземпляр <see cref="IMesh"/>, умножая все его вершины на <paramref name = "m" />.
+        /// Трансформирует данный экземпляр <see cref="IMesh"/>, умножая все его вершины на <paramref name = "m" />.
         /// </summary>
         /// <param name="m">Матрица для умножения.</param>
         /// <returns>Трансформированный экземпляр <see cref="IMesh"/>.</returns>

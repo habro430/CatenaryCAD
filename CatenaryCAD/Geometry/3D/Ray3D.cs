@@ -8,12 +8,22 @@ using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
 {
+    /// <summary>
+    /// Структура, представляющая луч в 3D пространстве.
+    /// </summary>
     [Serializable, DebuggerDisplay("Origin = {Origin}, Direction = {Direction}")]
     [StructLayout(LayoutKind.Explicit, Size = 56)]
     public readonly struct Ray3D : IEquatable<Ray3D>
     {
+        /// <summary>
+        /// Начальная точка луча.
+        /// </summary>
         [FieldOffset(0)]
         public readonly Point3D Origin;
+
+        /// <summary>
+        /// Направление луча
+        /// </summary>
         [FieldOffset(24)]
         public readonly Vector3D Direction;
 
@@ -65,16 +75,35 @@ namespace CatenaryCAD.Geometry
             return intesections.ToArray();
         }
 
-
+        /// <summary>
+        /// Указывает, равен ли этот экземпляр заданному объекту.
+        /// </summary>
+        /// <param name="obj">Объект для сравнения с текущим экземпляром.</param>
+        /// <returns><see langword="true"/> если <paramref name="obj"/> и данный экземпляр относятся к одному типу
+        /// и представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
         public override bool Equals(object obj) => obj is Ray3D r && this.Equals(r);
 
+        /// <summary>
+        /// Указывает, эквивалентен ли текущий объект другому объекту того же типа.
+        /// </summary>
+        /// <param name="other">Объект для сравнения с текущим экземпляром.</param>
+        /// <returns><see langword="true"/> если <paramref name="other"/> и данный экземпляр 
+        /// представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
         public bool Equals(Ray3D other) => other.Origin.Equals(Origin) && other.Direction.Equals(Direction);
 
+        /// <summary>
+        /// Возвращает хэш-код данного экземпляра.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() => HashCode.Combine(Origin, Direction);
 
+        /// <summary>
+        /// Трансформирует данный экземпляр <see cref="Ray3D"/>, умножая его на <paramref name = "matrix" />.
+        /// </summary>
+        /// <param name="matrix">Матрица для умножения.</param>
+        /// <returns>Трансформированный экземпляр <see cref="Ray3D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Ray3D TransformBy(in Matrix3D m) => new Ray3D(Origin.TransformBy(m), Direction.TransformBy(m));
+        public Ray3D TransformBy(in Matrix3D matrix) => new Ray3D(Origin.TransformBy(matrix), Direction.TransformBy(matrix));
     }
 
     #endregion

@@ -3,7 +3,7 @@
 namespace CatenaryCAD.Geometry.Shapes
 {
     [Serializable]
-    public sealed class Circle : Shape
+    public sealed class Circle : AbstractShape
     {
         public Circle(in Point2D center, double radius, int resolution)
         {

@@ -90,7 +90,7 @@ namespace CatenaryCAD.Helpers
         /// <summary>
         /// Получает значение, указывающее, является ли<see cref = "ConcurrentHashSet {T}" /> пустым.
         /// </summary>
-        /// <value>true - если в <see cref="ConcurrentHashSet{T}"/> отсутвуют объекты; в противном случае - false.</value>
+        /// <value><see langword="true"/> если в <see cref="ConcurrentHashSet{T}"/> отсутвуют объекты, в противном случае - <see langword="false"/>.</value>
         public bool IsEmpty
         {
             get
@@ -261,8 +261,8 @@ namespace CatenaryCAD.Helpers
         /// Добавляет указанный элемент в <see cref="ConcurrentHashSet{T}"/>.
         /// </summary>
         /// <param name="item">Добавляемый элемент.</param>
-        /// <returns>true - если элемент был успешно добавлен в <see cref="ConcurrentHashSet{T}"/>,
-        /// false - если он был добавлен ранее и существует в коллекции.</returns>
+        /// <returns><see langword="true"/> если элемент был успешно добавлен в <see cref="ConcurrentHashSet{T}"/>,
+        /// <see langword="false"/> если он был добавлен ранее и существует в коллекции.</returns>
         /// <exception cref="T:System.OverflowException"><see cref="ConcurrentHashSet{T}"/>
         /// содержит слишком много элементов.</exception>
         public bool Add(T item) =>
@@ -292,8 +292,8 @@ namespace CatenaryCAD.Helpers
         /// Определяет, содержит ли <see cref="ConcurrentHashSet{T}"/> указанный элемент в коллекции.
         /// </summary>
         /// <param name="item">Проверяемый элемент <see cref="ConcurrentHashSet{T}"/>.</param>
-        /// <returns>true - если элемент содержиться в коллекции <see cref="ConcurrentHashSet{T}"/>, 
-        /// в противном случае - false.</returns>
+        /// <returns><returns><see langword="true"/> если элемент содержиться в коллекции <see cref="ConcurrentHashSet{T}"/>, 
+        /// в противном случае - <returns><see langword="false"/>.</returns>
         public bool Contains(T item)
         {
             var hashcode = _comparer.GetHashCode(item);
@@ -323,8 +323,8 @@ namespace CatenaryCAD.Helpers
         /// Попытяться удалить элемент из коллекции <see cref="ConcurrentHashSet{T}"/>.
         /// </summary>
         /// <param name="item">Удаляемый эдемент.</param>
-        /// <returns>true - если элемент успешно удален из коллекции <see cref="ConcurrentHashSet{T}"/>, 
-        /// в противном случае - false.</returns>
+        /// <returns><returns><see langword="true"/> если элемент успешно удален из коллекции <see cref="ConcurrentHashSet{T}"/>, 
+        /// в противном случае - <returns><see langword="false"/>.</returns>
         public bool TryRemove(T item)
         {
             var hashcode = _comparer.GetHashCode(item);

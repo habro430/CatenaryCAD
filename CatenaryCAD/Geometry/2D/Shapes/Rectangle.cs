@@ -3,7 +3,7 @@
 namespace CatenaryCAD.Geometry.Shapes
 {
     [Serializable]
-    public sealed class Rectangle : Shape
+    public sealed class Rectangle : AbstractShape
     {
         public Rectangle(in Point2D center, double width, double height)
         {

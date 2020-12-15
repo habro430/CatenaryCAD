@@ -12,12 +12,22 @@ using System.Windows.Forms;
 
 namespace CatenaryCAD.Geometry
 {
+    /// <summary>
+    /// Структура, представляющая луч в 2D пространстве.
+    /// </summary>
     [Serializable, DebuggerDisplay("Origin = {Origin}, Direction = {Direction}")]
     [StructLayout(LayoutKind.Explicit, Size = 40)]
     public readonly struct Ray2D : IEquatable<Ray2D>
     {
+        /// <summary>
+        /// Начальная точка луча.
+        /// </summary>
         [FieldOffset(0)]
         public readonly Point2D Origin;
+
+        /// <summary>
+        /// Направление луча
+        /// </summary>
         [FieldOffset(16)]
         public readonly Vector2D Direction;
 
@@ -63,15 +73,35 @@ namespace CatenaryCAD.Geometry
             return intersections.Count > 0 ? intersections.ToArray() : null;
         }
 
+        /// <summary>
+        /// Указывает, равен ли этот экземпляр заданному объекту.
+        /// </summary>
+        /// <param name="obj">Объект для сравнения с текущим экземпляром.</param>
+        /// <returns><see langword="true"/> если <paramref name="obj"/> и данный экземпляр относятся к одному типу
+        /// и представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
         public override bool Equals(object obj) => obj is Ray2D r && this.Equals(r);
 
+        /// <summary>
+        /// Указывает, эквивалентен ли текущий объект другому объекту того же типа.
+        /// </summary>
+        /// <param name="other">Объект для сравнения с текущим экземпляром.</param>
+        /// <returns><see langword="true"/> если <paramref name="other"/> и данный экземпляр 
+        /// представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
         public bool Equals(Ray2D other) => other.Origin.Equals(Origin) && other.Direction.Equals(Direction);
 
+        /// <summary>
+        /// Возвращает хэш-код данного экземпляра.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode() => HashCode.Combine(Origin, Direction);
 
+        /// <summary>
+        /// Трансформирует данный экземпляр <see cref="Ray2D"/>, умножая его на <paramref name = "matrix" />.
+        /// </summary>
+        /// <param name="matrix">Матрица для умножения.</param>
+        /// <returns>Трансформированный экземпляр <see cref="Ray2D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Ray2D TransformBy(in Matrix2D m) => new Ray2D(Origin.TransformBy(m), Direction.TransformBy(m));
+        public Ray2D TransformBy(in Matrix2D matrix) => new Ray2D(Origin.TransformBy(matrix), Direction.TransformBy(matrix));
 
         #endregion
     }

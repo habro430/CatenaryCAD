@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
 {
+    /// <summary>
+    /// Структура, представляющая матрицу 3х3 для перобразований в 2D пространстве.
+    /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Explicit, Size = 64)]
     public readonly struct Matrix2D
