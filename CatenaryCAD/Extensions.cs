@@ -17,10 +17,10 @@ namespace CatenaryCAD
     {
         [Serializable]
         public enum OperationalMode
-        {
+    {
             Scheme,
             Layout,
-        }
+        }   
 
         [CommandMethod("switch_3d", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void switch_3d()

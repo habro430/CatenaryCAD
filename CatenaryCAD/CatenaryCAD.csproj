@@ -108,6 +108,7 @@
     <Compile Include="Geometry\2D\Shapes\Triangle.cs" />
     <Compile Include="Geometry\3D\Meshes\IMesh.cs" />
     <Compile Include="Geometry\3D\Meshes\Mesh.cs" />
+    <Compile Include="Geometry\GeometryType.cs" />
     <Compile Include="Helpers\ConcurrentHashSet.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\DeepCloner\DeepClonerExtensions.cs" />

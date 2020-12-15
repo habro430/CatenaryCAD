@@ -1,4 +1,5 @@
 ﻿using CatenaryCAD.Geometry.Meshes;
+using CatenaryCAD.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

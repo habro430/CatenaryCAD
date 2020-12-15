@@ -72,7 +72,7 @@ namespace BasicMasts
 
             List<Point2D> intersections = new List<Point2D>();
 
-            foreach (var shape in DeepClonerExtensions.DeepClone(Geometry2D))
+            foreach (var shape in Geometry2D.DeepClone())
             {
                 shape.TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position)))
                      .TransformBy(Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position));

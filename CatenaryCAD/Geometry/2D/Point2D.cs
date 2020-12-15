@@ -1,4 +1,5 @@
-﻿using Multicad.Geometry;
+﻿using CatenaryCAD.Helpers;
+using Multicad.Geometry;
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;

@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Properties;
+﻿using CatenaryCAD.Helpers;
+using CatenaryCAD.Properties;
 using System.Linq;
 
 namespace CatenaryCAD.Models

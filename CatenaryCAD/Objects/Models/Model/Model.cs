@@ -1,4 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Helpers;
 using System;
 using System.Diagnostics;
 

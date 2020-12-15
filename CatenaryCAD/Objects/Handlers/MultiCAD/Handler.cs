@@ -1,5 +1,6 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
+using CatenaryCAD.Helpers;
 using CatenaryCAD.Properties;
 using Multicad;
 using Multicad.CustomObjectBase;

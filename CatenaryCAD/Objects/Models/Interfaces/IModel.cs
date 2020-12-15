@@ -1,6 +1,7 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
+using CatenaryCAD.Helpers;
 using CatenaryCAD.Parts;
 using CatenaryCAD.Properties;
 

@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Models;
+﻿using CatenaryCAD.Helpers;
+using CatenaryCAD.Models;
 using CatenaryCAD.Models.Handlers;
 using Multicad;
 using System;

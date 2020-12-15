@@ -1,7 +1,7 @@
 ﻿using CatenaryCAD.Models;
 using System;
 
-namespace CatenaryCAD
+namespace CatenaryCAD.Helpers
 {
     public interface IIdentifier
     {

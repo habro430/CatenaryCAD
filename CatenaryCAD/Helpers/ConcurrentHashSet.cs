@@ -1,25 +1,47 @@
-﻿using Multicad;
+﻿// The contents of this file is taken from https://github.com/i3arnon/ConcurrentHashSet/blob/master/src/ConcurrentHashSet/ConcurrentHashSet.cs
+
+//MIT License
+//Copyright(c) 2019 Bar Arnon
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+
+//==============================================================================
+
+//CoreFX (https://github.com/dotnet/corefx)
+//The MIT License (MIT)
+//Copyright (c) .NET Foundation and Contributors
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
-namespace CatenaryCAD
+namespace CatenaryCAD.Helpers
 {
-    // The contents of this file is taken from https://github.com/i3arnon/ConcurrentHashSet/blob/master/src/ConcurrentHashSet/ConcurrentHashSet.cs
-    // To be replaced by the framework implementation when released for the appropriate builds
-
-    // Bar Arnon licenses this file to you under the MIT license.
-    // See the LICENSE file in the project root for more information.
-
     /// <summary>
-    /// Represents a thread-safe hash-based unique collection.
+    /// Представляет потокобезопасную уникальную хэш коллекцию.
     /// </summary>
-    /// <typeparam name="T">The type of the items in the collection.</typeparam>
+    /// <typeparam name="T">Тип объектов в коллекции.</typeparam>
     /// <remarks>
-    /// All public members of <see cref="ConcurrentHashSet{T}"/> are thread-safe and may be used
-    /// concurrently from multiple threads.
+    /// Все открытые члены <see cref = "ConcurrentHashSet {T}" /> являются потокобезопасными и могут использоваться 
+    /// одновременно из нескольких потоков.
     /// </remarks>
     [Serializable, DebuggerDisplay("Count = {Count}")]
     public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
@@ -36,14 +58,11 @@ namespace CatenaryCAD
         private static int DefaultConcurrencyLevel => PlatformHelper.ProcessorCount;
 
         /// <summary>
-        /// Gets the number of items contained in the <see
+        /// Возвращает количество элементов, содержащихся в <see
         /// cref="ConcurrentHashSet{T}"/>.
         /// </summary>
-        /// <value>The number of items contained in the <see
+        /// <value>Количество элементов, содержащихся в <see
         /// cref="ConcurrentHashSet{T}"/>.</value>
-        /// <remarks>Count has snapshot semantics and represents the number of items in the <see
-        /// cref="ConcurrentHashSet{T}"/>
-        /// at the moment when Count was accessed.</remarks>
         public int Count
         {
             get
@@ -69,10 +88,9 @@ namespace CatenaryCAD
         }
 
         /// <summary>
-        /// Gets a value that indicates whether the <see cref="ConcurrentHashSet{T}"/> is empty.
+        /// Получает значение, указывающее, является ли<see cref = "ConcurrentHashSet {T}" /> пустым.
         /// </summary>
-        /// <value>true if the <see cref="ConcurrentHashSet{T}"/> is empty; otherwise,
-        /// false.</value>
+        /// <value>true - если в <see cref="ConcurrentHashSet{T}"/> отсутвуют объекты; в противном случае - false.</value>
         public bool IsEmpty
         {
             get
@@ -100,10 +118,9 @@ namespace CatenaryCAD
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see
-        /// cref="ConcurrentHashSet{T}"/>
-        /// class that is empty, has the default concurrency level, has the default initial capacity, and
-        /// uses the default comparer for the item type.
+        /// Инициализирует новый экземпляр <see cref="ConcurrentHashSet{T}"/>, 
+        /// имеющий уровень параллелизма по умолчанию, начальную емкость по умолчанию и
+        /// использующий компаратор по умолчанию.
         /// </summary>
         public ConcurrentHashSet()
             : this(DefaultConcurrencyLevel, DefaultCapacity, true, null)
@@ -111,68 +128,58 @@ namespace CatenaryCAD
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see
-        /// cref="ConcurrentHashSet{T}"/>
-        /// class that is empty, has the specified concurrency level and capacity, and uses the default
-        /// comparer for the item type.
+        /// Инициализирует новый экземпляр <see cref="ConcurrentHashSet{T}"/>,
+        /// имеющий указанный уровень параллелизма, указанную начальную емкость и 
+        /// использующий компаратор по умолчанию.
         /// </summary>
-        /// <param name="concurrencyLevel">The estimated number of threads that will update the
-        /// <see cref="ConcurrentHashSet{T}"/> concurrently.</param>
-        /// <param name="capacity">The initial number of elements that the <see
-        /// cref="ConcurrentHashSet{T}"/>
-        /// can contain.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="concurrencyLevel"/> is
-        /// less than 1.</exception>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"> <paramref name="capacity"/> is less than
-        /// 0.</exception>
+        /// <param name="concurrencyLevel">Предполагаемое количество потоков, которые могут обновить
+        /// <see cref="ConcurrentHashSet{T}"/> одновременно.</param>
+        /// <param name="capacity">Начальное количество элементов, которое может содержать <see
+        /// cref="ConcurrentHashSet{T}"/>. </param>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="concurrencyLevel"/> меньше чем 1.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="capacity"/> меньше чем 0. </exception>
         public ConcurrentHashSet(int concurrencyLevel, int capacity)
             : this(concurrencyLevel, capacity, false, null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConcurrentHashSet{T}"/>
-        /// class that contains elements copied from the specified <see
-        /// cref="T:System.Collections.IEnumerable{T}"/>, has the default concurrency
-        /// level, has the default initial capacity, and uses the default comparer for the item type.
+        /// Инициализирует новый экземпляр <see cref="ConcurrentHashSet{T}"/>
+        /// содержащий элементы, скопированные из указанного <see cref="T:System.Collections.IEnumerable{T}"/>,
+        /// имеющий уровень параллелизма по умолчанию, начальную емкость по умолчанию и
+        /// использующий компаратор по умолчанию.
         /// </summary>
-        /// <param name="collection">The <see
-        /// cref="T:System.Collections.IEnumerable{T}"/> whose elements are copied to
-        /// the new
-        /// <see cref="ConcurrentHashSet{T}"/>.</param>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="collection"/> is a null reference.</exception>
+        /// <param name="collection"><see cref="T:System.Collections.IEnumerable{T}"/>, 
+        /// элементы которого копируются в новый экземпляр <see cref="ConcurrentHashSet{T}"/>.</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="collection"/> имеет пустую ссылку.</exception>
         public ConcurrentHashSet(IEnumerable<T> collection)
             : this(collection, null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConcurrentHashSet{T}"/>
-        /// class that is empty, has the specified concurrency level and capacity, and uses the specified
-        /// <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>.
+        /// Инициализирует новый экземпляр <see cref="ConcurrentHashSet{T}"/>
+        /// имеющий уровень параллелизма по умолчанию, начальную емкость по умолчанию и
+        /// использующий указанный компаратор <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>.
         /// </summary>
-        /// <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>
-        /// implementation to use when comparing items.</param>
+        /// <param name="comparer">Реализация <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/> 
+        /// для использования при сравнении элементов.</param>
         public ConcurrentHashSet(IEqualityComparer<T> comparer)
             : this(DefaultConcurrencyLevel, DefaultCapacity, true, comparer)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConcurrentHashSet{T}"/>
-        /// class that contains elements copied from the specified <see
-        /// cref="T:System.Collections.IEnumerable"/>, has the default concurrency level, has the default
-        /// initial capacity, and uses the specified
-        /// <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>.
+        /// Инициализирует новый экземпляр <see cref="ConcurrentHashSet{T}"/>
+        /// содержащий элементы, скопированные из указанного <see cref="T:System.Collections.IEnumerable"/>,
+        /// имеющий уровень параллелизма по умолчанию, начальную емкость по умолчанию и
+        /// использующий указанный компаратор <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>.
         /// </summary>
-        /// <param name="collection">The <see
-        /// cref="T:System.Collections.IEnumerable{T}"/> whose elements are copied to
-        /// the new
-        /// <see cref="ConcurrentHashSet{T}"/>.</param>
-        /// <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>
-        /// implementation to use when comparing items.</param>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="collection"/> is a null reference
-        /// (Nothing in Visual Basic).
+        /// <param name="collection"><see cref="T:System.Collections.IEnumerable{T}"/>, 
+        /// элементы которого копируются в новый экземпляр <see cref="ConcurrentHashSet{T}"/>.</param>
+        /// <param name="comparer">Реализация <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/> 
+        /// для использования при сравнении элементов.</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="collection"/> имеет пустую ссылку.
         /// </exception>
         public ConcurrentHashSet(IEnumerable<T> collection, IEqualityComparer<T> comparer)
             : this(comparer)
@@ -184,23 +191,19 @@ namespace CatenaryCAD
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConcurrentHashSet{T}"/> 
-        /// class that contains elements copied from the specified <see cref="T:System.Collections.IEnumerable"/>, 
-        /// has the specified concurrency level, has the specified initial capacity, and uses the specified 
-        /// <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>.
+        /// Инициализирует новый экземпляр <see cref="ConcurrentHashSet{T}"/> 
+        /// содержащий элементы, скопированные из указанного <see cref="T:System.Collections.IEnumerable"/>, 
+        /// имеющий указанный уровень параллелизма, начальную емкость по умолчанию и 
+        /// использующий указанный компаратор <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>.
         /// </summary>
-        /// <param name="concurrencyLevel">The estimated number of threads that will update the 
-        /// <see cref="ConcurrentHashSet{T}"/> concurrently.</param>
-        /// <param name="collection">The <see cref="T:System.Collections.IEnumerable{T}"/> whose elements are copied to the new 
-        /// <see cref="ConcurrentHashSet{T}"/>.</param>
-        /// <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/> implementation to use 
-        /// when comparing items.</param>
-        /// <exception cref="T:System.ArgumentNullException">
-        /// <paramref name="collection"/> is a null reference.
-        /// </exception>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
-        /// <paramref name="concurrencyLevel"/> is less than 1.
-        /// </exception>
+        /// <param name="concurrencyLevel">Предполагаемое количество потоков, которые могут обновить
+        /// <see cref="ConcurrentHashSet{T}"/> одновременно.</param>
+        /// <param name="collection">><see cref="T:System.Collections.IEnumerable{T}"/>, 
+        /// элементы которого копируются в новый экземпляр <see cref="ConcurrentHashSet{T}"/>.</param>
+        /// <param name="comparer">Реализация <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/> 
+        /// для использования при сравнении элементов.</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="collection"/> имеет пустую ссылку.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="concurrencyLevel"/> меньше чем 1.</exception>
         public ConcurrentHashSet(int concurrencyLevel, IEnumerable<T> collection, IEqualityComparer<T> comparer)
             : this(concurrencyLevel, DefaultCapacity, false, comparer)
         {
@@ -210,21 +213,18 @@ namespace CatenaryCAD
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConcurrentHashSet{T}"/>
-        /// class that is empty, has the specified concurrency level, has the specified initial capacity, and
-        /// uses the specified <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>.
+        /// Инициализирует новый экземпляр <see cref="ConcurrentHashSet{T}"/>
+        /// имеющий указанный уровень параллелизма, указанную начальную емкость и
+        /// использующий указанный компаратор <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>.
         /// </summary>
-        /// <param name="concurrencyLevel">The estimated number of threads that will update the
-        /// <see cref="ConcurrentHashSet{T}"/> concurrently.</param>
-        /// <param name="capacity">The initial number of elements that the <see
-        /// cref="ConcurrentHashSet{T}"/>
-        /// can contain.</param>
-        /// <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>
-        /// implementation to use when comparing items.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">
-        /// <paramref name="concurrencyLevel"/> is less than 1. -or-
-        /// <paramref name="capacity"/> is less than 0.
-        /// </exception>
+        /// <param name="concurrencyLevel">Предполагаемое количество потоков, которые могут обновить
+        /// <see cref="ConcurrentHashSet{T}"/> одновременно.</param>
+        /// <param name="capacity">Начальное количество элементов, которое может содержать <see
+        /// cref="ConcurrentHashSet{T}"/>.</param>
+        /// <param name="comparer">Реализация <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/> 
+        /// для использования при сравнении элементов.</param>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="concurrencyLevel"/> меньше чем 1.</exception>
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="capacity"/> меньше чем 0. </exception>
         public ConcurrentHashSet(int concurrencyLevel, int capacity, IEqualityComparer<T> comparer)
             : this(concurrencyLevel, capacity, false, comparer)
         {
@@ -258,18 +258,18 @@ namespace CatenaryCAD
         }
 
         /// <summary>
-        /// Adds the specified item to the <see cref="ConcurrentHashSet{T}"/>.
+        /// Добавляет указанный элемент в <see cref="ConcurrentHashSet{T}"/>.
         /// </summary>
-        /// <param name="item">The item to add.</param>
-        /// <returns>true if the items was added to the <see cref="ConcurrentHashSet{T}"/>
-        /// successfully; false if it already exists.</returns>
-        /// <exception cref="T:System.OverflowException">The <see cref="ConcurrentHashSet{T}"/>
-        /// contains too many items.</exception>
+        /// <param name="item">Добавляемый элемент.</param>
+        /// <returns>true - если элемент был успешно добавлен в <see cref="ConcurrentHashSet{T}"/>,
+        /// false - если он был добавлен ранее и существует в коллекции.</returns>
+        /// <exception cref="T:System.OverflowException"><see cref="ConcurrentHashSet{T}"/>
+        /// содержит слишком много элементов.</exception>
         public bool Add(T item) =>
             AddInternal(item, _comparer.GetHashCode(item), true);
 
         /// <summary>
-        /// Removes all items from the <see cref="ConcurrentHashSet{T}"/>.
+        /// Удаляет все элементы из <see cref="ConcurrentHashSet{T}"/>.
         /// </summary>
         public void Clear()
         {
@@ -289,11 +289,11 @@ namespace CatenaryCAD
         }
 
         /// <summary>
-        /// Determines whether the <see cref="ConcurrentHashSet{T}"/> contains the specified
-        /// item.
+        /// Определяет, содержит ли <see cref="ConcurrentHashSet{T}"/> указанный элемент в коллекции.
         /// </summary>
-        /// <param name="item">The item to locate in the <see cref="ConcurrentHashSet{T}"/>.</param>
-        /// <returns>true if the <see cref="ConcurrentHashSet{T}"/> contains the item; otherwise, false.</returns>
+        /// <param name="item">Проверяемый элемент <see cref="ConcurrentHashSet{T}"/>.</param>
+        /// <returns>true - если элемент содержиться в коллекции <see cref="ConcurrentHashSet{T}"/>, 
+        /// в противном случае - false.</returns>
         public bool Contains(T item)
         {
             var hashcode = _comparer.GetHashCode(item);
@@ -320,10 +320,11 @@ namespace CatenaryCAD
         }
 
         /// <summary>
-        /// Attempts to remove the item from the <see cref="ConcurrentHashSet{T}"/>.
+        /// Попытяться удалить элемент из коллекции <see cref="ConcurrentHashSet{T}"/>.
         /// </summary>
-        /// <param name="item">The item to remove.</param>
-        /// <returns>true if an item was removed successfully; otherwise, false.</returns>
+        /// <param name="item">Удаляемый эдемент.</param>
+        /// <returns>true - если элемент успешно удален из коллекции <see cref="ConcurrentHashSet{T}"/>, 
+        /// в противном случае - false.</returns>
         public bool TryRemove(T item)
         {
             var hashcode = _comparer.GetHashCode(item);
@@ -371,14 +372,13 @@ namespace CatenaryCAD
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        /// <summary>Returns an enumerator that iterates through the <see
-        /// cref="ConcurrentHashSet{T}"/>.</summary>
-        /// <returns>An enumerator for the <see cref="ConcurrentHashSet{T}"/>.</returns>
+        /// <summary>Возвращает перечислитель, который выполняет итерацию по <see cref="ConcurrentHashSet{T}"/>.</summary>
+        /// <returns>Перечислитель для <see cref="ConcurrentHashSet{T}"/>.</returns>
         /// <remarks>
-        /// The enumerator returned from the collection is safe to use concurrently with
-        /// reads and writes to the collection, however it does not represent a moment-in-time snapshot
-        /// of the collection.  The contents exposed through the enumerator may contain modifications
-        /// made to the collection after <see cref="GetEnumerator"/> was called.
+        /// Перечислитель, возвращенный из коллекции, можно безопасно использовать одновременно с 
+        /// чтением и записью в коллекцию, однако он не представляет собой моментальный снимок коллекции.
+        /// Содержимое перечислителя, может содержать изменения внесеные в коллекцию после вызова 
+        /// <see cref="GetEnumerator"/>.
         /// </remarks>
         public IEnumerator<T> GetEnumerator()
         {

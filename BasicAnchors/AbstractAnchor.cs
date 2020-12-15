@@ -46,11 +46,8 @@ namespace BasicAnchors
             dockingjoint = dockingjoint.TransformBy(Matrix2D.CreateRotation(angle, mast_position));
             anchor_position = anchor_position.TransformBy(Matrix2D.CreateRotation(angle, mast_position));
 
-            var copy_geometry = Geometry2D.DeepClone();
-            foreach(var geometry in copy_geometry)
-                geometry.TransformBy(Matrix2D.CreateTranslation(anchor_position.GetVectorTo(dockingjoint)));
-
-            return copy_geometry;
+            return Geometry2D.DeepClone().
+                Select(g => g.TransformBy(Matrix2D.CreateTranslation(anchor_position.GetVectorTo(dockingjoint)))).ToArray();
         }
     }
 }
