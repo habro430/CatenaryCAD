@@ -9,7 +9,7 @@ namespace CatenaryCAD.Geometry
 {
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}")]
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public readonly struct Vector2D : IEquatable<Vector2D>, IVector
+    public readonly struct Vector2D : IEquatable<Vector2D>
     {
         /// <summary>
         /// X - составляющая компонента вектора.

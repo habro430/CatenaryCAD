@@ -10,7 +10,7 @@ namespace CatenaryCAD.Geometry
 {
     [Serializable, DebuggerDisplay("Origin = {Origin}, Direction = {Direction}")]
     [StructLayout(LayoutKind.Explicit, Size = 56)]
-    public readonly struct Ray3D : IEquatable<Ray3D>, IRay
+    public readonly struct Ray3D : IEquatable<Ray3D>
     {
         [FieldOffset(0)]
         public readonly Point3D Origin;

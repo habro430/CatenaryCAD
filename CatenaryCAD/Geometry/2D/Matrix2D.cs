@@ -5,7 +5,7 @@ namespace CatenaryCAD.Geometry
 {
     [Serializable]
     [StructLayout(LayoutKind.Explicit, Size = 64)]
-    public readonly struct Matrix2D : IMatrix
+    public readonly struct Matrix2D
     {
         [FieldOffset(0)]
         public readonly double M11;

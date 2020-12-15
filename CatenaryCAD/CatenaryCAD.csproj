@@ -25,6 +25,7 @@
     <LangVersion>8.0</LangVersion>
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DocumentationFile>..\..\bin\CatenaryCAD.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -139,10 +140,6 @@
     <Compile Include="Geometry\3D\Point3D.cs" />
     <Compile Include="Geometry\3D\Ray3D.cs" />
     <Compile Include="Geometry\3D\Vector3D.cs" />
-    <Compile Include="Geometry\IMatrix.cs" />
-    <Compile Include="Geometry\IPoint.cs" />
-    <Compile Include="Geometry\IRay.cs" />
-    <Compile Include="Geometry\IVector.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Objects\Models\Anchor.cs" />
     <Compile Include="Objects\Models\Bracket.cs" />

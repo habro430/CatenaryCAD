@@ -9,7 +9,7 @@ namespace CatenaryCAD.Geometry
 {
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}")]
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public readonly struct Point2D : IEquatable<Point2D>, IPoint
+    public readonly struct Point2D : IEquatable<Point2D>
     {
         /// <summary>
         /// X - составляющая компонента точки.
