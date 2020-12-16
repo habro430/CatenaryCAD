@@ -36,7 +36,7 @@ using System.Threading;
 namespace CatenaryCAD.Helpers
 {
     /// <summary>
-    /// Представляет потокобезопасную уникальную хэш коллекцию.
+    /// Представляет класс, реализующий потокобезопасную уникальную хэш коллекцию.
     /// </summary>
     /// <typeparam name="T">Тип объектов в коллекции.</typeparam>
     /// <remarks>
