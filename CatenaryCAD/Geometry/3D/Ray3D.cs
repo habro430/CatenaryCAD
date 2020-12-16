@@ -22,7 +22,7 @@ namespace CatenaryCAD.Geometry
         public readonly Point3D Origin;
 
         /// <summary>
-        /// Направление луча
+        /// Направление луча.
         /// </summary>
         [FieldOffset(24)]
         public readonly Vector3D Direction;
@@ -35,6 +35,12 @@ namespace CatenaryCAD.Geometry
 
         #region Functions
 
+        /// <summary>
+        /// Возвращает точки пересечения <paramref name="mesh"/> и данного луча.
+        /// </summary>
+        /// <param name="mesh"><see cref="IMesh"/> для расчета пересечений.</param>
+        /// <returns>Массив <see cref="Point3D"/>[] с точками пересечений, 
+        /// если пересечения отсутствуют - пустой массив <see cref="Point3D"/>[].</returns>
         public Point3D[] GetIntersections(IMesh mesh)
         {
             List<Point3D> intesections = new List<Point3D>();

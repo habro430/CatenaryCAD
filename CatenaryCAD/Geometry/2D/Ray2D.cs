@@ -26,7 +26,7 @@ namespace CatenaryCAD.Geometry
         public readonly Point2D Origin;
 
         /// <summary>
-        /// Направление луча
+        /// Направление луча.
         /// </summary>
         [FieldOffset(16)]
         public readonly Vector2D Direction;
@@ -39,6 +39,12 @@ namespace CatenaryCAD.Geometry
 
         #region Functions
 
+        /// <summary>
+        /// Возвращает точки пересечения <paramref name="shape"/> и данного луча.
+        /// </summary>
+        /// <param name="shape"><see cref="IShape"/> для расчета пересечений.</param>
+        /// <returns>Массив <see cref="Point2D"/>[] с точками пересечений, 
+        /// если пересечения отсутствуют - пустой массив <see cref="Point2D"/>[].</returns>
         public Point2D[] GetIntersections(IShape shape)
         {
             List<Point2D> intersections = new List<Point2D>();
