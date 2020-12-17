@@ -1,14 +1,11 @@
 ﻿using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Helpers;
-using CatenaryCAD.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Odbc;
 using System.Diagnostics;
-using System.Linq;
+using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace CatenaryCAD.Geometry
 {
@@ -19,18 +16,16 @@ namespace CatenaryCAD.Geometry
     [StructLayout(LayoutKind.Explicit, Size = 40)]
     public readonly struct Ray2D : IEquatable<Ray2D>
     {
-        /// <summary>
-        /// Начальная точка луча.
-        /// </summary>
+        /// <value>Начальная точка луча.</value>
         [FieldOffset(0)]
         public readonly Point2D Origin;
 
-        /// <summary>
-        /// Направление луча.
-        /// </summary>
+        /// <value>Вектор направления луча.</value>
         [FieldOffset(16)]
         public readonly Vector2D Direction;
 
+        /// <param name="origin">Начальная точка нового луча.</param>
+        /// <param name="direction">Вектор направления нового луча.</param>
         public Ray2D(Point2D origin, Vector2D direction)
         {
             Origin = origin;
@@ -44,7 +39,7 @@ namespace CatenaryCAD.Geometry
         /// </summary>
         /// <param name="shape"><see cref="IShape"/> для расчета пересечений.</param>
         /// <returns>Массив <see cref="Point2D"/>[] с точками пересечений, 
-        /// если пересечения отсутствуют - пустой массив <see cref="Point2D"/>[].</returns>
+        /// если пересечения отсутствуют - <see langword="null"/>.</returns>
         public Point2D[] GetIntersections(IShape shape)
         {
             List<Point2D> intersections = new List<Point2D>();
@@ -82,10 +77,12 @@ namespace CatenaryCAD.Geometry
         /// <summary>
         /// Указывает, равен ли этот экземпляр заданному объекту.
         /// </summary>
-        /// <param name="obj">Объект для сравнения с текущим экземпляром.</param>
-        /// <returns><see langword="true"/> если <paramref name="obj"/> и данный экземпляр относятся к одному типу
+        /// <param name="other">Объект для сравнения с текущим экземпляром.</param>
+        /// <returns><see langword="true"/> если <paramref name="other"/> и данный экземпляр относятся к одному типу
         /// и представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
-        public override bool Equals(object obj) => obj is Ray2D r && this.Equals(r);
+        [MethodImpl(MethodImplOptions.AggressiveInlining),
+        TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
+        public override bool Equals(object other) => other is Ray2D r && this.Equals(r);
 
         /// <summary>
         /// Указывает, эквивалентен ли текущий объект другому объекту того же типа.
@@ -93,12 +90,16 @@ namespace CatenaryCAD.Geometry
         /// <param name="other">Объект для сравнения с текущим экземпляром.</param>
         /// <returns><see langword="true"/> если <paramref name="other"/> и данный экземпляр 
         /// представляют одинаковые значения, в противному случаее - <see langword="false"/></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining),
+        TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public bool Equals(Ray2D other) => other.Origin.Equals(Origin) && other.Direction.Equals(Direction);
 
         /// <summary>
         /// Возвращает хэш-код данного экземпляра.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        /// <returns>Хэш-код данного экземпляра.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining),
+        TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public override int GetHashCode() => HashCode.Combine(Origin, Direction);
 
         /// <summary>
@@ -106,8 +107,10 @@ namespace CatenaryCAD.Geometry
         /// </summary>
         /// <param name="matrix">Матрица для умножения.</param>
         /// <returns>Трансформированный экземпляр <see cref="Ray2D"/>.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Ray2D TransformBy(in Matrix2D matrix) => new Ray2D(Origin.TransformBy(matrix), Direction.TransformBy(matrix));
+        [MethodImpl(MethodImplOptions.AggressiveInlining),
+        TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
+        public Ray2D TransformBy(in Matrix2D matrix) => 
+            new Ray2D(Origin.TransformBy(matrix), Direction.TransformBy(matrix));
 
         #endregion
     }
