@@ -125,6 +125,7 @@
     <Compile Include="Helpers\DeepCloner\Helpers\ShallowClonerGenerator.cs" />
     <Compile Include="Helpers\DeepCloner\Helpers\ShallowObjectCloner.cs" />
     <Compile Include="Helpers\DeepCloner\Helpers\TypeCreationHelper.cs" />
+    <Compile Include="Helpers\MemoryCache.cs" />
     <Compile Include="Helpers\MultiCAD\McIdentifier.cs" />
     <Compile Include="Helpers\IIdentifier.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\FoundationHandler.cs" />

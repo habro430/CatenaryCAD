@@ -11,19 +11,21 @@ namespace CatenaryCAD.Helpers
     [DebuggerDisplay("Count = {Count}")]
     public sealed class MemoryCache<T> where T : class
     {
-        /// <summary>
-        /// Значение времени по умолчанию (в минутах), по истечению которого, объект удаляется из кэша, 
-        /// если к нему за это вермя не было обращений.
-        /// </summary>
-        public const double DefaultSlidingMinutes = 20;
+        private static readonly double DefaultSlidingMinutes = 20;
+        private static readonly double DefaultAbsoluteMinutes = 60;
 
         /// <summary>
-        /// Значение времени по умолчанию  (в минутах), по истечению которого, объект удаляется из кэша, 
-        /// независимо от скользящего таймера.
+        /// Время, по истечению которого, объект удаляется из данного экземпляра 
+        /// <see cref="MemoryCache{T}"/>, если к нему за это время не было обращений.
         /// </summary>
-        public const double DefaultAbsoluteMinutes = 60;
-
+        /// <value>Значение времени (в минутах)</value>
         public readonly double SlidingMinutes;
+
+        /// <summary>
+        /// Время, по истечению которого, объект удаляется из данного экземпляра 
+        /// <see cref="MemoryCache{T}"/>, независимо от скользящего таймера..
+        /// </summary>
+        /// <value>Значение времени (в минутах)</value>
         public readonly double AbsoluteMinutes;
 
         private ObjectCache cache;

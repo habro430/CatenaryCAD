@@ -141,9 +141,8 @@ namespace CatenaryCAD.Geometry
         }
 
     }
-    public static partial class Extensions
+    internal static partial class Extensions
     {
-        //////////////////////////////////////////////////////////////////////////////////
         internal static Matrix3d ToMultiCAD(this in Matrix3D m) => new Matrix3d(new double[] { m.M11, m.M12, m.M13, m.M14,
                                                                                                m.M21, m.M22, m.M23, m.M24,
                                                                                                m.M31, m.M32, m.M33, m.M34,
