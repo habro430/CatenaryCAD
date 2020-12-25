@@ -38,15 +38,25 @@ namespace CatenaryCAD.Helpers
         /// если к нему за это вермя не было обращений.</param>
         /// <param name="absolute">Значение времени (в минутах), по истечению которого, объект удаляется из кэша, 
         /// независимо от <paramref name="sliding"/>.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="sliding"/> меньше чем 0.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="absolute"/> меньше чем 0.</exception>
+        /// <remarks>Если требуеться указать что записи в кэше не должны иметь скользящего и/или абсолютного срока дейсвия, 
+        /// то аргументам <paramref name="sliding"/> и <paramref name="absolute"/> необходимо присвоить 0.</remarks>
         public MemoryCache(double sliding, double absolute)
         {
+            if (sliding < 0) throw new ArgumentOutOfRangeException(nameof(sliding));
+            if (absolute < 0) throw new ArgumentOutOfRangeException(nameof(absolute));
+
             SlidingMinutes = sliding;
             AbsoluteMinutes = absolute;
 
             policy = new CacheItemPolicy()
             {
-                SlidingExpiration = TimeSpan.FromMinutes(sliding),
-                AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(absolute)
+                
+                SlidingExpiration = sliding == 0 ? MemoryCache.NoSlidingExpiration : 
+                                                   TimeSpan.FromMinutes(sliding),
+                AbsoluteExpiration = absolute == 0 ? MemoryCache.InfiniteAbsoluteExpiration :
+                                                     DateTimeOffset.Now.AddMinutes(absolute)
             };
 
             cache = new MemoryCache(Guid.NewGuid().ToString());
@@ -60,31 +70,41 @@ namespace CatenaryCAD.Helpers
         {
         }
 
+
         /// <summary>
-        /// Возвращает объект из кэша используя уникальный идентификатор <paramref name="key"/>, 
-        /// в случаях когда объект отсутствует то, создается новый объект в кэше, сам объект
-        /// инициализируется через вызов метода <paramref name="create"/>.
+        /// Возвращает количество элементов, содержащихся в <see cref="MemoryCache{T}"/>.
+        /// </summary>
+        /// <value>Количество элементов, содержащихся в <see cref="MemoryCache{T}"/>.</value>
+        public int Count => (int)cache.GetCount();
+
+        /// <summary>
+        /// Индексатор обеспечивающий доступ к элементам, содержащихся в <see cref="MemoryCache{T}"/>.
         /// </summary>
         /// <param name="key">Ключ, уникальный идентификатор объекта в кэше.</param>
-        /// <param name="create">Делегат, инкапсулирующий метод создания объекта, 
-        /// в случаях если объект отсутствует в кэше.</param>
-        /// <returns>Объект <typeparamref name="T"/> представляющий значение записи из кэша.</returns>
-        public T GetOrCreate(string key, Func<T> create)
+        /// <returns>Объект <typeparamref name="T"/> представляющий значение записи из кэша, 
+        /// если запись с таким ключем имееться в кэше. В противном случае возвращает <see langword="null"/>.</returns>
+        /// <example>
+        /// </example>
+        public T this[string key]
         {
-            if (!cache.Contains(key))
-                cache.Set(key, create(), policy);
-
-            return cache.Get(key) as T;
+            get
+            {
+                if (cache.Contains(key))
+                    return cache.Get(key) as T;
+                else return null;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    cache.Remove(key);
+                }
+                else
+                {
+                    cache.Set(key, value, policy);
+                }
+            }
         }
-
-        /// <summary>
-        /// Возвращает количество элементов, содержащихся в <see
-        /// cref="MemoryCache{T}"/>.
-        /// </summary>
-        /// <value>Количество элементов, содержащихся в <see
-        /// cref="MemoryCache{T}"/>.</value>
-        /// 
-        public int Count => (int)cache.GetCount();
 
         /// <summary>
         ///  Проверяет, существует ли запись <paramref name="key"/> в кэше.
@@ -95,34 +115,23 @@ namespace CatenaryCAD.Helpers
         /// случае - <see langword="false"/>.</returns>
         public bool Contains(string key) => cache.Contains(key);
 
-        /// <summary>
-        /// Получает объект <typeparamref name="T"/> с уникальным идентификатором
-        /// <paramref name="key"/> из кэша.
-        /// </summary>
-        /// <param name="key">Ключ, уникальный идентификатор объекта в кэше.</param>
-        /// <returns>Объект <typeparamref name="T"/> представляющий значение записи из кэша.</returns>
-        public T Get(string key) => cache.Get(key) as T;
+        ///// <summary>
+        ///// Возвращает объект из кэша используя уникальный идентификатор <paramref name="key"/>, 
+        ///// в случаях когда объект отсутствует то, создается новый объект в кэше с уникальным 
+        ///// идентификатором <paramref name="key"/>, и со значением возвращаемым <paramref name="create"/>.
+        ///// </summary>
+        ///// <param name="key">Ключ, уникальный идентификатор объекта в кэше.</param>
+        ///// <param name="create">Делегат, инкапсулирующий метод создания объекта, 
+        ///// в случаях если объект отсутствует в кэше.</param>
+        ///// <returns>Объект <typeparamref name="T"/> представляющий значение записи из кэша.</returns>
+        //public T GetOrCreate(string key, Func<T> create)
+        //{
+        //     this["sad"] ??= new T();
+        //    if (!cache.Contains(key))
+        //        cache.Set(key, create(), policy);
 
-        /// <summary>
-        /// Удаляет объект <typeparamref name="T"/> с уникальным идентификатором
-        /// <paramref name="key"/> из кэша.
-        /// </summary>
-        /// <param name="key">Ключ, уникальный идентификатор объекта в кэше.</param>
-        /// <returns><see langword="true"/> если запись с уникальным идентификатором 
-        /// <paramref name="key"/> удалена из <see cref="MemoryCache{T}"/>, в противном 
-        /// случае - <see langword="false"/>.</returns>
-        public bool Remove(string key) => cache.Remove(key) != null ? true : false;
+        //    return cache.Get(key) as T;
+        //}
 
-        /// <summary>
-        /// Добавляет объект <typeparamref name="T"/> с уникальным идентификатором
-        /// <paramref name="key"/> и значением <paramref name="value"/> в кэш.
-        /// </summary>
-        /// <param name="key">Ключ, уникальный идентификатор объекта в кэше.</param>
-        /// <param name="value">Объект <typeparamref name="T"/> для добавления в кэш.</param>
-        /// <returns><see langword="true"/> если запись с уникальным идентификатором 
-        /// <paramref name="key"/> и значением <paramref name="value"/> добавлена в
-        /// <see cref="MemoryCache{T}"/>, в противном случае - <see langword="false"/>.</returns>
-        public bool Add(string key, T value) => cache.Add(key, value, policy);
-        
     }
 }

@@ -196,9 +196,8 @@ namespace CatenaryCAD.Helpers
         /// имеющий указанный уровень параллелизма, начальную емкость по умолчанию и 
         /// использующий указанный компаратор <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>.
         /// </summary>
-        /// <param name="concurrencyLevel">Предполагаемое количество потоков, которые могут обновить
-        /// <see cref="ConcurrentHashSet{T}"/> одновременно.</param>
-        /// <param name="collection">><see cref="T:System.Collections.IEnumerable{T}"/>, 
+        /// <param name="concurrencyLevel">Предполагаемое количество потоков, которые могут обновить <see cref="ConcurrentHashSet{T}"/> одновременно.</param>
+        /// <param name="collection"><see cref="T:System.Collections.IEnumerable{T}"/>, 
         /// элементы которого копируются в новый экземпляр <see cref="ConcurrentHashSet{T}"/>.</param>
         /// <param name="comparer">Реализация <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/> 
         /// для использования при сравнении элементов.</param>
@@ -292,8 +291,8 @@ namespace CatenaryCAD.Helpers
         /// Определяет, содержит ли <see cref="ConcurrentHashSet{T}"/> указанный элемент в коллекции.
         /// </summary>
         /// <param name="item">Проверяемый элемент <see cref="ConcurrentHashSet{T}"/>.</param>
-        /// <returns><returns><see langword="true"/> если элемент содержиться в коллекции <see cref="ConcurrentHashSet{T}"/>, 
-        /// в противном случае - <returns><see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> если элемент содержиться в коллекции <see cref="ConcurrentHashSet{T}"/>, 
+        /// в противном случае - <see langword="false"/>.</returns>
         public bool Contains(T item)
         {
             var hashcode = _comparer.GetHashCode(item);
@@ -320,11 +319,11 @@ namespace CatenaryCAD.Helpers
         }
 
         /// <summary>
-        /// Попытяться удалить элемент из коллекции <see cref="ConcurrentHashSet{T}"/>.
+        /// Пытаеться удалить элемент из коллекции <see cref="ConcurrentHashSet{T}"/>.
         /// </summary>
         /// <param name="item">Удаляемый эдемент.</param>
-        /// <returns><returns><see langword="true"/> если элемент успешно удален из коллекции <see cref="ConcurrentHashSet{T}"/>, 
-        /// в противном случае - <returns><see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> если элемент успешно удален из коллекции <see cref="ConcurrentHashSet{T}"/>, 
+        /// в противном случае - <see langword="false"/>.</returns>
         public bool TryRemove(T item)
         {
             var hashcode = _comparer.GetHashCode(item);
@@ -370,8 +369,6 @@ namespace CatenaryCAD.Helpers
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
         /// <summary>Возвращает перечислитель, который выполняет итерацию по <see cref="ConcurrentHashSet{T}"/>.</summary>
         /// <returns>Перечислитель для <see cref="ConcurrentHashSet{T}"/>.</returns>
         /// <remarks>
@@ -395,12 +392,35 @@ namespace CatenaryCAD.Helpers
                     current = current.Next;
                 }
             }
-        }
+        }        
+        
+        /// <inheritdoc cref="GetEnumerator"/>
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        /// <inheritdoc cref="Add(T)"/>
         void ICollection<T>.Add(T item) => Add(item);
 
+        /// <inheritdoc cref="TryRemove(T)"/>
+        bool ICollection<T>.Remove(T item) => TryRemove(item);
+
+        /// <summary>
+        /// Получает значение, указывающее, является ли объект <see cref="ConcurrentHashSet{T}"/> доступным только для чтения.
+        /// </summary>
+        /// <returns> Значение всегда равно <see langword="false"/>.</returns>
         bool ICollection<T>.IsReadOnly => false;
 
+        /// <summary>
+        /// Копирует элементы коллекции <see cref="ConcurrentHashSet{T}"/> в указанный массив,
+        /// начиная с указанного индекса массива.
+        /// </summary>
+        /// <param name="array">Одномерный массив, в который копируются элементы из <see cref="ConcurrentHashSet{T}"/>.
+        /// Массив должен иметь индексацию, начинающуюся с нуля.</param>
+        /// <param name="arrayIndex">Отсчитываемый от нуля индекс в массиве <paramref name="array"/>, указывающий начало копирования.</param>
+        /// <exception cref="ArgumentNullException">Свойство <paramref name="array"/> имеет значение <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Значение параметра <paramref name="arrayIndex"/> меньше 0.</exception>
+        /// <exception cref="ArgumentException">Число элементов в исходной коллекции <see cref="ConcurrentHashSet{T}"/>
+        /// больше доступного места от положения, заданного значением параметра <paramref name="arrayIndex"/>,
+        /// до конца массива назначения <paramref name="array"/>.</exception>
         void ICollection<T>.CopyTo(T[] array, int arrayIndex)
         {
             if (array == null) throw new ArgumentNullException(nameof(array));
@@ -431,7 +451,6 @@ namespace CatenaryCAD.Helpers
             }
         }
 
-        bool ICollection<T>.Remove(T item) => TryRemove(item);
 
         private void InitializeFromCollection(IEnumerable<T> collection)
         {

@@ -14,7 +14,7 @@ namespace CatenaryCAD.Helpers
 	/// <summary>
 	/// Расширения для клонирования объектов
 	/// </summary>
-	public static class DeepClonerExtensions
+	public static class Cloner
 	{
 		/// <summary>
 		/// Выполняет глубокую(полную) копию объекта и связанного графа.
@@ -25,8 +25,8 @@ namespace CatenaryCAD.Helpers
 		/// Выполняет глубокое (полное) копирование объекта и связанного графа в существующий объект.
 		/// </summary>
 		// <remarks>Method is valid only for classes, classes should be descendants in reality, not in declaration</remarks>
-		public static TTo DeepCloneTo<TFrom, TTo>(this TFrom objFrom, TTo objTo) where TTo : class, TFrom => 
-			(TTo)DeepClonerGenerator.CloneObjectTo(objFrom, objTo, true);
+		public static T DeepCloneTo<F, T>(this F from, T to) where T : class, F => 
+			(T)DeepClonerGenerator.CloneObjectTo(from, to, true);
 
 		/// <summary>
 		/// Выполняет неглубокую(возвращается только новый объект, без клонирования зависимостей) копию объекта.
@@ -37,11 +37,11 @@ namespace CatenaryCAD.Helpers
 		/// Выполняет неглубокую копию объекта в существующий объект.
 		/// </summary>
 		// <remarks>Method is valid only for classes, classes should be descendants in reality, not in declaration</remarks>
-		public static TTo ShallowCloneTo<TFrom, TTo>(this TFrom objFrom, TTo objTo) where TTo : class, TFrom => 
-			(TTo)DeepClonerGenerator.CloneObjectTo(objFrom, objTo, false);
+		public static T ShallowCloneTo<F, T>(this F from, T to) where T : class, F => 
+			(T)DeepClonerGenerator.CloneObjectTo(from, to, false);
 
 
-		static DeepClonerExtensions()
+		static Cloner()
 		{
 			if (!PermissionCheck())
 			{

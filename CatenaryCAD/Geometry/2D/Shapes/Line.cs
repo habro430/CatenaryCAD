@@ -2,9 +2,14 @@
 
 namespace CatenaryCAD.Geometry.Shapes
 {
+    /// <summary>
+    /// Класс, реализующий линию между двумя точками в 2D пространстве.
+    /// </summary>
     [Serializable]
-    public sealed class Line : AbstractShape
+    public sealed class Line : Shape
     {
+        /// <param name="p0">Первая точка линии.</param>
+        /// <param name="p1">Вторая точка линии.</param>
         public Line(in Point2D p0, in Point2D p1)
         {
             Vertices = new Point2D[] { p0, p1 };

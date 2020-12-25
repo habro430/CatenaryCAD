@@ -2,13 +2,19 @@
 
 namespace CatenaryCAD.Geometry.Shapes
 {
+    /// <summary>
+    /// Класс, реализующий произвольную фигуру в 2D пространстве.
+    /// </summary>
     [Serializable]
-    public abstract class AbstractShape : IShape
+    public abstract class Shape : IShape
     {
+        /// <inheritdoc/>
         public virtual Point2D[] Vertices { get; protected set; }
 
+        /// <inheritdoc/>
         public virtual int[][] Indices { get; protected set; }
 
+        /// <inheritdoc/>
         public virtual IShape TransformBy(in Matrix2D matrix)
         {
             int count = Vertices.Length;
@@ -19,6 +25,7 @@ namespace CatenaryCAD.Geometry.Shapes
             return this;
         }
 
+        /// <inheritdoc/>
         public virtual bool IsInside(in Point2D point)
         {
             int count = Vertices.Length;

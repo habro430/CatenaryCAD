@@ -2,8 +2,11 @@
 
 namespace CatenaryCAD.Geometry.Shapes
 {
+    /// <summary>
+    /// Класс, реализующий стандартный круг в 2D пространстве.
+    /// </summary>
     [Serializable]
-    public sealed class Rectangle : AbstractShape
+    public sealed class Rectangle : Shape
     {
         public Rectangle(in Point2D center, double width, double height)
         {

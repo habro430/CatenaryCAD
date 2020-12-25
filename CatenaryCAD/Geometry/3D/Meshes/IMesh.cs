@@ -24,7 +24,7 @@
         /// <summary>
         /// Трансформирует данный экземпляр <see cref="IMesh"/>, умножая все его вершины на <paramref name = "m" />.
         /// </summary>
-        /// <param name="m">Матрица для умножения.</param>
+        /// <param name="m">Матрица для трансформации.</param>
         /// <returns>Трансформированный экземпляр <see cref="IMesh"/>.</returns>
         IMesh TransformBy(in Matrix3D m);
 

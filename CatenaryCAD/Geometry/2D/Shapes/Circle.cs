@@ -2,9 +2,15 @@
 
 namespace CatenaryCAD.Geometry.Shapes
 {
+    /// <summary>
+    /// Класс, реализующий стандартный круг в 2D пространстве.
+    /// </summary>
     [Serializable]
-    public sealed class Circle : AbstractShape
+    public sealed class Circle : Shape
     {
+        /// <param name="center">Центр круга.</param>
+        /// <param name="radius">Радиус круга.</param>
+        /// <param name="resolution">Разрешение круга.</param>
         public Circle(in Point2D center, double radius, int resolution)
         {
             Vertices = new Point2D[resolution];

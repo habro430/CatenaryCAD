@@ -47,14 +47,14 @@ namespace CatenaryCAD.Geometry
 
         /// <param name="a">Первый операнд.</param>
         /// <param name="b">Второй операнд.</param>
-        /// <returns>Результат сложения вектора <paramref name="a"/> и вектора <paramref name="b"/>.</returns>
+        /// <returns>Результат сложения векторов <paramref name="a"/> и <paramref name="b"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining),
         TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static Vector2D operator +(Vector2D a, Vector2D b) => new Vector2D(a.X + b.X, a.Y + b.Y);
 
         /// <param name="a">Первый операнд.</param>
         /// <param name="b">Второй операнд.</param>
-        /// <returns>Результат разности вектора <paramref name="a"/> и вектора <paramref name="b"/>.</returns>
+        /// <returns>Результат разности векторов <paramref name="a"/> и <paramref name="b"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining),
         TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static Vector2D operator -(Vector2D a, Vector2D b) => new Vector2D(a.X - b.X, a.Y - b.Y);
@@ -124,7 +124,7 @@ namespace CatenaryCAD.Geometry
         /// <summary>
         /// Трансформирует данный экземпляр <see cref="Vector2D"/>, умножая его на <paramref name = "matrix" />.
         /// </summary>
-        /// <param name="matrix">Матрица для умножения.</param>
+        /// <param name="matrix">Матрица для трансформации.</param>
         /// <returns>Трансформированный экземпляр <see cref="Vector2D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining),
         TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]

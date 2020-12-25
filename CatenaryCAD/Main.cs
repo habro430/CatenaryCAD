@@ -42,11 +42,11 @@ namespace CatenaryCAD
             return Main.CatenaryObjects.Where(interf => iface.IsAssignableFrom(interf)).ToArray();
         }
 
-        /// <summary>
-        /// Возвращает словарь из числа кэшированных объектов в <see cref="CatenaryObjects"/> 
-        /// все не абстрактные обьекты, производные от интефейса <paramref name="iface"/>.
-        /// </summary>
-        /// <param name="iface">Базовый интерфейс</param>
+        ///// <summary>
+        ///// Возвращает словарь из числа кэшированных объектов в <see cref="CatenaryObjects"/> 
+        ///// все не абстрактные обьекты, производные от интефейса <paramref name="iface"/>.
+        ///// </summary>
+        ///// <param name="iface">Базовый интерфейс</param>
         //public static Dictionary<string,Type> GetDictionaryCatenaryObjects(Type iface)
         //{
 

@@ -125,7 +125,7 @@ namespace CatenaryCAD.Geometry
         /// <summary>
         /// Трансформирует данный экземпляр <see cref="Point2D"/>, умножая его на <paramref name = "matrix" />.
         /// </summary>
-        /// <param name="matrix">Матрица для умножения.</param>
+        /// <param name="matrix">Матрица для трансформации.</param>
         /// <returns>Трансформированный экземпляр <see cref="Point2D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining),
         TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
