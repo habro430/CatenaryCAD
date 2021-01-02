@@ -4,20 +4,39 @@ using System.Globalization;
 
 namespace CatenaryCAD.Geometry.Meshes
 {
+    /// <summary>
+    /// Класс, реализующий меш в 3D пространстве.
+    /// </summary>
     [Serializable]
     public class Mesh : IMesh
     {
+        /// <inheritdoc/>
         public Point3D[] Vertices { get; private set; }
+
+        /// <inheritdoc/>
         public Vector3D[] Normals { get; private set; }
+
+        /// <inheritdoc/>
         public int[][] Indices { get; private set; }
 
+        ///<summary>
+        /// Инициализирует новый экземпляр <see cref="Mesh"/>, с указанными 
+        /// вершинами <paramref name="vertices"/>, нормалями <paramref name="normals"/> 
+        /// и индексами <paramref name="indices"/>.
+        ///</summary>
+        ///<param name="vertices">Вершины образующие меш.</param>
+        ///<param name="normals">Массив нормалей меша.</param>
+        ///<param name="indices">Индексы полигонов и вершин описывающие меш.</param>
+
         public Mesh(Point3D[] vertices, Vector3D[] normals, int[][] indices)
+
         { 
             Vertices = vertices;
             Normals = normals;
             Indices = indices;
         }
 
+        /// <inheritdoc/>
         public IMesh TransformBy(in Matrix3D m)
         {
             int count = Vertices.Length;

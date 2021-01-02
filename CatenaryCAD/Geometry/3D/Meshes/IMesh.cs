@@ -1,5 +1,8 @@
 ﻿namespace CatenaryCAD.Geometry.Meshes
 {
+    /// <summary>
+    /// Интерфейс, описывающий контракты для мешей в 3D пространстве.
+    /// </summary>
     public interface IMesh
     {
         /// <summary>
