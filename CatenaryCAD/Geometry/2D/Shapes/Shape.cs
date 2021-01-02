@@ -40,6 +40,7 @@ namespace CatenaryCAD.Geometry.Shapes
             return c;
         }
 
-
+        /// <inheritdoc/>
+        public bool IsOutside(in Point2D point) => !IsInside(point);
     }
 }

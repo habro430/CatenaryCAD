@@ -8,6 +8,10 @@ namespace CatenaryCAD.Geometry.Shapes
     [Serializable]
     public sealed class Line : Shape
     {
+        ///<summary>
+        /// Инициализирует новый экземпляр <see cref="Line"/>, с указанными 
+        /// начальной точкой <paramref name="p0"/> и конечной точкой <paramref name="p1"/>.
+        ///</summary>
         /// <param name="p0">Первая точка линии.</param>
         /// <param name="p1">Вторая точка линии.</param>
         public Line(in Point2D p0, in Point2D p1)

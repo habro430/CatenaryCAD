@@ -32,5 +32,12 @@ namespace CatenaryCAD.Geometry.Shapes
         /// <param name="point">Точка для проверки на соответсвие.</param>
         /// <returns><see langword="true"/> если <paramref name = "point" /> находиться внутри данного экземпляра <see cref="IShape"/>, в противном случае возращает - <see langword="false"/>.</returns>
         bool IsInside(in Point2D point);
+
+        /// <summary>
+        /// Проверяет находится ли <paramref name = "point" /> снаружи данного экземпляра <see cref="IShape"/>.
+        /// </summary>
+        /// <param name="point">Точка для проверки на соответсвие.</param>
+        /// <returns><see langword="true"/> если <paramref name = "point" /> находиться снаружи данного экземпляра <see cref="IShape"/>, в противном случае возращает - <see langword="false"/>.</returns>
+        bool IsOutside(in Point2D point);
     }
 }
