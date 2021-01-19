@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatenaryCAD.Geometry.Interfaces;
+using System;
 using System.Runtime.InteropServices;
 
 namespace CatenaryCAD.Geometry
@@ -8,7 +9,7 @@ namespace CatenaryCAD.Geometry
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Explicit, Size = 64)]
-    public readonly struct Matrix2D
+    public readonly struct Matrix2D: IMatrix
     {
         /// <value>Первый элемент первой строки.</value>
         [FieldOffset(0)]

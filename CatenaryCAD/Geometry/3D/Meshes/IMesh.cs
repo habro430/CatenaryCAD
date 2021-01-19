@@ -1,9 +1,11 @@
-﻿namespace CatenaryCAD.Geometry.Meshes
+﻿using CatenaryCAD.Geometry.Interfaces;
+
+namespace CatenaryCAD.Geometry.Meshes
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для мешей в 3D пространстве.
     /// </summary>
-    public interface IMesh
+    public interface IMesh : ITransformable<Matrix3D, IMesh>
     {
         /// <summary>
         /// Вершины описывающие меш.
@@ -22,14 +24,5 @@
         /// </summary>
         /// <value>Массив индексов, где первый уровень массива - индекс полигона, а второй - индекс вершины .</value>
         int[][] Indices { get; }
-
-
-        /// <summary>
-        /// Трансформирует данный экземпляр <see cref="IMesh"/>, умножая все его вершины на <paramref name = "m" />.
-        /// </summary>
-        /// <param name="m">Матрица для трансформации.</param>
-        /// <returns>Трансформированный экземпляр <see cref="IMesh"/>.</returns>
-        IMesh TransformBy(in Matrix3D m);
-
     }
 }

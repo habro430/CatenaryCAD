@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Helpers;
+﻿using CatenaryCAD.Geometry.Interfaces;
+using CatenaryCAD.Helpers;
 using Multicad.Geometry;
 using System;
 using System.Diagnostics;
@@ -13,7 +14,7 @@ namespace CatenaryCAD.Geometry
     /// </summary>
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}")]
     [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public readonly struct Point2D : IEquatable<Point2D>
+    public readonly struct Point2D : IPoint, IEquatable<Point2D>, ITransformable<Matrix2D, Point2D>
     {
         /// <value> X - составляющая компонента точки.</value>
         [FieldOffset(0)]

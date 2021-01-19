@@ -146,7 +146,7 @@ namespace CatenaryCAD.Models.Handlers
                 {
                     case OperationalMode.Scheme:
 
-                        var geometry_scheme = Model.GetGeometryForScheme();
+                        var geometry_scheme = Model.GetGeometry();
 
                         if (geometry_scheme != null)
                         {

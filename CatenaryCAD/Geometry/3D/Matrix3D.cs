@@ -1,4 +1,5 @@
-﻿using Multicad.Geometry;
+﻿using CatenaryCAD.Geometry.Interfaces;
+using Multicad.Geometry;
 using System;
 using System.Runtime.InteropServices;
 
@@ -9,7 +10,7 @@ namespace CatenaryCAD.Geometry
     /// </summary>
     [Serializable]
     [StructLayout(LayoutKind.Explicit, Size = 128)]
-    public readonly struct Matrix3D
+    public readonly struct Matrix3D: IMatrix
     {
         /// <value>Первый элемент первой строки.</value>
         [FieldOffset(0)]

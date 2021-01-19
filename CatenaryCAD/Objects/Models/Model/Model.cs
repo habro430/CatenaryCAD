@@ -23,6 +23,7 @@ namespace CatenaryCAD.Models
             internal set => identifier = value;
         }
 
+        /// <inheritdoc/>
         public virtual Point3D Position
         {
             get => position;
@@ -33,6 +34,7 @@ namespace CatenaryCAD.Models
             }
         }
 
+        /// <inheritdoc/>
         public virtual Vector3D Direction
         {
             get => direction;
@@ -43,16 +45,19 @@ namespace CatenaryCAD.Models
             }
         }
 
-        public virtual void TransformBy(Matrix3D m)
+        /// <inheritdoc/>
+        public virtual IModel TransformBy(in Matrix3D matrix)
         {
-            Position = position.TransformBy(m);
-            Direction = direction.TransformBy(m);
+            Position = position.TransformBy(matrix);
+            Direction = direction.TransformBy(matrix);
 
             if (Identifier.GetGuid() != Guid.Empty)
             {
                 foreach (var child in Childrens)
-                    child.TransformBy(m);
+                    child.TransformBy(matrix);
             }
+
+            return this;
         }
     }
 }

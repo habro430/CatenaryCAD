@@ -36,7 +36,7 @@ namespace BasicBasements
             return Cache.Get(key) as Mesh;
         }
         public override IMesh[] GetGeometryForLayout() => Geometry3D;
-        public override IShape[] GetGeometryForScheme() => null;
+        public override IShape[] GetGeometry() => null;
 
     }
 }

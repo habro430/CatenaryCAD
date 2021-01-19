@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Helpers;
+﻿using CatenaryCAD.Geometry.Interfaces;
+using CatenaryCAD.Helpers;
 using Multicad.Geometry;
 using System;
 using System.Diagnostics;
@@ -13,7 +14,7 @@ namespace CatenaryCAD.Geometry
     /// </summary>
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
     [StructLayout(LayoutKind.Explicit, Size = 24)]
-    public readonly struct Vector3D : IEquatable<Vector3D>
+    public readonly struct Vector3D : IVector, IEquatable<Vector3D>, ITransformable<Matrix3D, Vector3D>
     {
         /// <value> X - составляющая компонента вектора.</value>
         [FieldOffset(0)]

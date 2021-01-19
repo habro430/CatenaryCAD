@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Helpers;
+﻿using CatenaryCAD.Geometry.Interfaces;
+using CatenaryCAD.Helpers;
 using Multicad.Geometry;
 using System;
 using System.Diagnostics;
@@ -13,7 +14,7 @@ namespace CatenaryCAD.Geometry
     /// </summary>
     [Serializable, DebuggerDisplay("X = {X}, Y = {Y}, Z = {Z}")]
     [StructLayout(LayoutKind.Explicit, Size = 24)]
-    public readonly struct Point3D : IEquatable<Point3D>
+    public readonly struct Point3D : IPoint, IEquatable<Point3D>, ITransformable<Matrix3D, Point3D>
     {
         /// <value> X - составляющая компонента точки.</value>
         [FieldOffset(0)]
@@ -136,7 +137,7 @@ namespace CatenaryCAD.Geometry
         /// <returns>Трансформированный экземпляр <see cref="Point3D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining),
         TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public Point3D TransformBy(Matrix3D matrix) => 
+        public Point3D TransformBy(in Matrix3D matrix) => 
             new Point3D(X * matrix.M11 + Y * matrix.M12 + Z * matrix.M13 + matrix.M14, 
                         X * matrix.M21 + Y * matrix.M22 + Z * matrix.M23 + matrix.M24, 
                         X * matrix.M31 + Y * matrix.M32 + Z * matrix.M33 + matrix.M34);

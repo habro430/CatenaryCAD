@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Geometry.Shapes;
+﻿using CatenaryCAD.Geometry.Interfaces;
+using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Helpers;
 using System;
 using System.Collections.Generic;
@@ -14,22 +15,33 @@ namespace CatenaryCAD.Geometry
     /// </summary>
     [Serializable, DebuggerDisplay("Origin = {Origin}, Direction = {Direction}")]
     [StructLayout(LayoutKind.Explicit, Size = 40)]
-    public readonly struct Ray2D : IEquatable<Ray2D>
+    public readonly struct Ray2D : IRay, IEquatable<Ray2D>, IOriginable<Point2D>, IDirectionable<Vector2D>, ITransformable<Matrix2D, Ray2D>
     {
-        /// <value>Начальная точка луча.</value>
         [FieldOffset(0)]
-        public readonly Point2D Origin;
+        private readonly Point2D origin;
+        [FieldOffset(16)]
+        private readonly Vector2D direction;
+
+        /// <value>Начальная точка луча.</value>
+        public Point2D Origin 
+        { 
+            get => origin; 
+            set => throw new NotSupportedException(); 
+        }
 
         /// <value>Вектор направления луча.</value>
-        [FieldOffset(16)]
-        public readonly Vector2D Direction;
+        public Vector2D Direction 
+        { 
+            get => direction; 
+            set => throw new NotSupportedException(); 
+        }
 
         /// <param name="origin">Начальная точка нового луча.</param>
         /// <param name="direction">Вектор направления нового луча.</param>
-        public Ray2D(Point2D origin, Vector2D direction)
+        public Ray2D(in Point2D origin, in Vector2D direction)
         {
-            Origin = origin;
-            Direction = direction;
+            this.origin = origin;
+            this.direction = direction;
         }
 
         #region Functions

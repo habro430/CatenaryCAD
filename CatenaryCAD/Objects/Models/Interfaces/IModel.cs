@@ -1,4 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Interfaces;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Helpers;
@@ -10,7 +11,7 @@ using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Models
 {
-    public interface IModel
+    public interface IModel : IPositionable<Point3D>, IDirectionable<Vector3D>, ITransformable<Matrix3D, IModel>
     {
         /// <summary>
         /// Идентификатор модели
@@ -36,16 +37,6 @@ namespace CatenaryCAD.Models
         public IModel[] Dependencies { get; }
 
         /// <summary>
-        /// Координаты расположения модели <see cref="IModel"/> в документе
-        /// </summary>
-        public Point3D Position { get; set; }
-
-        /// <summary>
-        /// Направление расположения модели <see cref="IModel"/> в документе
-        /// </summary>
-        public Vector3D Direction { get; set; }
-
-        /// <summary>
         /// Массив параметров <see cref="IProperty"/> модели <see cref="IModel"/>
         /// </summary>
         public IProperty[] Properties { get; }
@@ -54,12 +45,6 @@ namespace CatenaryCAD.Models
         /// Массив деталей <see cref="IPart"/> модели <see cref="IModel"/>
         /// </summary>
         public IPart[] Parts { get; }
-
-        /// <summary>
-        /// Функция транформации модели <see cref="IModel"/>
-        /// </summary>
-        /// <param name="m">Матрица трансформации</param>
-        public void TransformBy(Matrix3D m);
 
         /// <summary>
         /// Получить 3D геометрию для режима работы <see cref="OperationalMode.Layout"/>
@@ -71,7 +56,7 @@ namespace CatenaryCAD.Models
         /// Получить 2D геометрию для режима работы <see cref="OperationalMode.Scheme"/>
         /// </summary>
         /// <returns>2D геометрия</returns>
-        public IShape[] GetGeometryForScheme();
+        public IShape[] GetGeometry();
 
         public bool? SendMessageToHandler(HandlerMessages message);
     }

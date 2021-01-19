@@ -33,7 +33,7 @@ namespace BasicAnchors
             return Cache.Get(key) as Mesh;
         }
         public override IMesh[] GetGeometryForLayout() => Geometry3D;
-        public override IShape[] GetGeometryForScheme()
+        public override IShape[] GetGeometry()
         {
             var mast_position = new Point2D(Parent.Position.X, Parent.Position.Y);
             var anchor_position = new Point2D(Position.X, Position.Y);

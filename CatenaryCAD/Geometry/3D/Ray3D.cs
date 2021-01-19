@@ -1,4 +1,5 @@
-﻿using CatenaryCAD.Geometry.Meshes;
+﻿using CatenaryCAD.Geometry.Interfaces;
+using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Helpers;
 using System;
 using System.Collections.Generic;
@@ -14,22 +15,33 @@ namespace CatenaryCAD.Geometry
     /// </summary>
     [Serializable, DebuggerDisplay("Origin = {Origin}, Direction = {Direction}")]
     [StructLayout(LayoutKind.Explicit, Size = 56)]
-    public readonly struct Ray3D : IEquatable<Ray3D>
+    public readonly struct Ray3D : IRay, IEquatable<Ray3D>, IOriginable<Point3D>, IDirectionable<Vector3D>, ITransformable<Matrix3D, Ray3D>
     {
-        /// <value>Начальная точка луча.</value>
         [FieldOffset(0)]
-        public readonly Point3D Origin;
+        private readonly Point3D origin;
+        [FieldOffset(24)]
+        private readonly Vector3D direction;
+
+        /// <value>Начальная точка луча.</value>
+        public Point3D Origin
+        { 
+            get => origin; 
+            set => throw new NotSupportedException();
+        }
 
         /// <value>Вектор направления луча.</value>
-        [FieldOffset(24)]
-        public readonly Vector3D Direction;
+        public Vector3D Direction
+        {
+            get => direction;
+            set => throw new NotSupportedException();
+        }
 
         /// <param name="origin">Начальная точка нового луча.</param>
         /// <param name="direction">Вектор направления нового луча.</param>
         public Ray3D(Point3D origin, Vector3D direction)
         {
-            Origin = origin;
-            Direction = direction.GetNormalize();
+            this.origin = origin;
+            this.direction = direction.GetNormalize();
         }
 
         #region Functions

@@ -37,11 +37,11 @@ namespace CatenaryCAD.Geometry.Meshes
         }
 
         /// <inheritdoc/>
-        public IMesh TransformBy(in Matrix3D m)
+        public IMesh TransformBy(in Matrix3D matrix)
         {
             int count = Vertices.Length;
             for (int i = 0; i < count; i++)
-                Vertices[i] = Vertices[i].TransformBy(m);
+                Vertices[i] = Vertices[i].TransformBy(matrix);
 
             return this;
         }

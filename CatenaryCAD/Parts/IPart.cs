@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Interfaces;
+using CatenaryCAD.Geometry.Meshes;
 
 namespace CatenaryCAD.Parts
 {
-    public interface IPart
+    public interface IPart : IDirectionable<Vector3D>, IPositionable<Point3D>
     {
+        /// <summary>
+        /// 3D геометрия для режима работы <see cref="OperationalMode.Layout"/>
+        /// </summary>
+        /// <returns>Массив объектов <see cref="IMesh"/></returns>
+        public IMesh[] Geometry { get; }
     }
 }

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using CatenaryCAD.Geometry.Interfaces;
 
 namespace CatenaryCAD.Geometry.Shapes
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для фигур в 2D пространстве.
     /// </summary>
-    public interface IShape
+    public interface IShape : ITransformable<Matrix2D, IShape>
     {
         /// <summary>
         /// Вершины описывающие фигуру.
@@ -18,13 +18,6 @@ namespace CatenaryCAD.Geometry.Shapes
         /// </summary>
         /// <value>Массив индексов, где первый уровень массива - индекс грани, а второй - индекс вершины .</value>
         int[][] Indices { get; }
-
-        /// <summary>
-        /// Трансформирует данный экземпляр <see cref="IShape"/>, умножая все его вершины на <paramref name = "matrix" />.
-        /// </summary>
-        /// <param name="matrix">Матрица для трансформации.</param>
-        /// <returns>Трансформированный экземпляр <see cref="IShape"/>.</returns>
-        IShape TransformBy(in Matrix2D matrix);
 
         /// <summary>
         /// Проверяет находится ли <paramref name = "point" /> внутри данного экземпляра <see cref="IShape"/>.

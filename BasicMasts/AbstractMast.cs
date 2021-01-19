@@ -63,7 +63,7 @@ namespace BasicMasts
 
 
         public override IMesh[] GetGeometryForLayout() => Geometry3D;
-        public override IShape[] GetGeometryForScheme() => Geometry2D;
+        public override IShape[] GetGeometry() => Geometry2D;
 
         public override Point2D? GetPointForDockingJoint(Ray2D ray)
         {

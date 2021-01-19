@@ -107,9 +107,17 @@
   <ItemGroup>
     <Compile Include="Geometry\2D\Shapes\Shape.cs" />
     <Compile Include="Geometry\2D\Shapes\Triangle.cs" />
+    <Compile Include="Geometry\Interfaces\IDirectionable.cs" />
+    <Compile Include="Geometry\IMatrix.cs" />
+    <Compile Include="Geometry\Interfaces\IOriginable.cs" />
+    <Compile Include="Geometry\Interfaces\ITransformable.cs" />
+    <Compile Include="Geometry\IPoint.cs" />
+    <Compile Include="Geometry\Interfaces\IPositionable.cs" />
     <Compile Include="Geometry\3D\Meshes\IMesh.cs" />
     <Compile Include="Geometry\3D\Meshes\Mesh.cs" />
     <Compile Include="Geometry\GeometryType.cs" />
+    <Compile Include="Geometry\IRay.cs" />
+    <Compile Include="Geometry\IVector.cs" />
     <Compile Include="Helpers\ConcurrentHashSet.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\DeepCloner\Cloner.cs" />
