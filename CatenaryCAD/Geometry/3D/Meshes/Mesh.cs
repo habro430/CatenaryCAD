@@ -37,6 +37,7 @@ namespace CatenaryCAD.Geometry.Meshes
         }
 
         /// <inheritdoc/>
+        /// <param name="matrix">Матрица для преобразования объекта.</param>
         public IMesh TransformBy(in Matrix3D matrix)
         {
             int count = Vertices.Length;

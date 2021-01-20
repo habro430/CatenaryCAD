@@ -8,7 +8,7 @@ namespace CatenaryCAD.Models
     {
         public virtual Type[] Foundations => new Type[] { typeof(Foundation) };
 
-        public abstract Point2D? GetPointForDockingJoint(Ray2D ray);
-        public abstract Point3D? GetPointForDockingJoint(Ray3D ray);
+        public abstract Point2D? GetDockingPoint(Ray2D ray);
+        public abstract Point3D? GetDockingPoint(Ray3D ray);
     }
 }

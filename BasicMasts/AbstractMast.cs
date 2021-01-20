@@ -65,7 +65,7 @@ namespace BasicMasts
         public override IMesh[] GetGeometryForLayout() => Geometry3D;
         public override IShape[] GetGeometry() => Geometry2D;
 
-        public override Point2D? GetPointForDockingJoint(Ray2D ray)
+        public override Point2D? GetDockingPoint(Ray2D ray)
         {
             var position = new Point2D(Position.X, Position.Y);
             var direction = new Vector2D(Direction.X, Direction.Y);
@@ -94,7 +94,7 @@ namespace BasicMasts
             else
                 return null;
         }
-        public override Point3D? GetPointForDockingJoint(Ray3D ray)
+        public override Point3D? GetDockingPoint(Ray3D ray)
         {
             throw new NotImplementedException();
         }

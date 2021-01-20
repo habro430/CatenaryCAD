@@ -130,11 +130,8 @@ namespace CatenaryCAD.Geometry
         TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public override int GetHashCode() => HashCode.Combine(X, Y, Z);
 
-        /// <summary>
-        /// Трансформирует данный экземпляр <see cref="Vector3D"/>, умножая его на <paramref name = "matrix" />.
-        /// </summary>
+        /// <inheritdoc/>
         /// <param name="matrix">Матрица для трансформации.</param>
-        /// <returns>Трансформированный экземпляр <see cref="Vector3D"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining),
         TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public Vector3D TransformBy(in Matrix3D matrix) =>

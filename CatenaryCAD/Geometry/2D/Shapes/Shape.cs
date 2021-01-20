@@ -15,6 +15,8 @@ namespace CatenaryCAD.Geometry.Shapes
         public virtual int[][] Indices { get; protected set; }
 
         /// <inheritdoc/>
+        /// <param name="matrix">Матрица для преобразования объекта.</param>
+
         public virtual IShape TransformBy(in Matrix2D matrix)
         {
             int count = Vertices.Length;

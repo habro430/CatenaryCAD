@@ -16,7 +16,7 @@ namespace CatenaryCAD.Models
         /// <summary>
         /// Идентификатор модели
         /// </summary>
-        public IIdentifier Identifier { get; }
+        public IObjectID Identifier { get; }
 
         /// <summary>
         /// Родительская модель <see cref="IModel"/>

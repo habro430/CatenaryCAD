@@ -135,7 +135,7 @@
     <Compile Include="Helpers\DeepCloner\Helpers\TypeCreationHelper.cs" />
     <Compile Include="Helpers\MemoryCache.cs" />
     <Compile Include="Helpers\MultiCAD\McIdentifier.cs" />
-    <Compile Include="Helpers\IIdentifier.cs" />
+    <Compile Include="Helpers\IObjectID.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\FoundationHandler.cs" />
     <Compile Include="Geometry\2D\Matrix2D.cs" />
     <Compile Include="Geometry\2D\Point2D.cs" />
@@ -166,12 +166,12 @@
     <Compile Include="Objects\Handlers\MultiCAD\Handler.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\AnchorHandler.cs" />
     <Compile Include="Objects\Handlers\Interfaces\IHandler.cs" />
-    <Compile Include="Objects\Models\Interfaces\IAnchor.cs" />
-    <Compile Include="Objects\Models\Interfaces\IFoundation.cs" />
-    <Compile Include="Objects\Models\Interfaces\IBracket.cs" />
-    <Compile Include="Objects\Models\Interfaces\IModel.cs" />
+    <Compile Include="Objects\Models\IAnchor.cs" />
+    <Compile Include="Objects\Models\IFoundation.cs" />
+    <Compile Include="Objects\Models\IBracket.cs" />
+    <Compile Include="Objects\Models\IModel.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\MastHandler.cs" />
-    <Compile Include="Objects\Models\Interfaces\IMast.cs" />
+    <Compile Include="Objects\Models\IMast.cs" />
     <Compile Include="Helpers\HashCode.cs" />
     <Compile Include="Parts\IPart.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -193,6 +193,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Objects\Models\Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,7 +9,7 @@ namespace CatenaryCAD.Models
     public abstract partial class Model : IModel
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IIdentifier identifier = null;
+        private IObjectID identifier = null;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private Point3D position = Point3D.Origin;
@@ -17,7 +17,7 @@ namespace CatenaryCAD.Models
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private Vector3D direction = Vector3D.AxisX;
 
-        public IIdentifier Identifier
+        public IObjectID Identifier
         {
             get => identifier;
             internal set => identifier = value;
@@ -46,6 +46,7 @@ namespace CatenaryCAD.Models
         }
 
         /// <inheritdoc/>
+        /// <param name="matrix">Матрица для преобразования объекта.</param>
         public virtual IModel TransformBy(in Matrix3D matrix)
         {
             Position = position.TransformBy(matrix);

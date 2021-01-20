@@ -744,7 +744,7 @@ namespace CatenaryCAD.Helpers
             }
         }
 
-        internal static void ClearNull(ConcurrentHashSet<IIdentifier> sets)
+        internal static void ClearNull(ConcurrentHashSet<IObjectID> sets)
         {
             var buckets = sets._tables.Buckets;
             for (int i = 0; i < buckets.Length; i++)

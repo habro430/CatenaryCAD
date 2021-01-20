@@ -4,7 +4,7 @@ using CatenaryCAD.Geometry.Meshes;
 
 namespace CatenaryCAD.Parts
 {
-    public interface IPart : IDirectionable<Vector3D>, IPositionable<Point3D>
+    public interface IPart : IDirectionable<Vector3D>, IPositionable<Point3D>, ITransformable<Matrix3D, IPart>
     {
         /// <summary>
         /// 3D геометрия для режима работы <see cref="OperationalMode.Layout"/>

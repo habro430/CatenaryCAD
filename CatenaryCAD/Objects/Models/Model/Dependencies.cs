@@ -7,16 +7,16 @@ namespace CatenaryCAD.Models
     public abstract partial class Model : IModel
     {
         /// <summary>
-        /// Коллекция идентификаторов <see cref="IIdentifier"/> дочерних моделей
+        /// Коллекция идентификаторов <see cref="IObjectID"/> дочерних моделей
         /// </summary>
-        protected ConcurrentHashSet<IIdentifier> ChildrensSet = new ConcurrentHashSet<IIdentifier>();
+        protected ConcurrentHashSet<IObjectID> ChildrensSet = new ConcurrentHashSet<IObjectID>();
 
         /// <summary>
-        /// Коллекция идентификаторов <see cref="IIdentifier"/> зависимых моделей
+        /// Коллекция идентификаторов <see cref="IObjectID"/> зависимых моделей
         /// </summary>
-        protected ConcurrentHashSet<IIdentifier> DependenciesSet = new ConcurrentHashSet<IIdentifier>();
+        protected ConcurrentHashSet<IObjectID> DependenciesSet = new ConcurrentHashSet<IObjectID>();
 
-        private IIdentifier parent;
+        private IObjectID parent;
         public IModel Parent
         {
             get => parent?.GetModel();
@@ -50,7 +50,7 @@ namespace CatenaryCAD.Models
         {
             get
             {
-                ConcurrentHashSet<IIdentifier>.ClearNull(ChildrensSet);
+                ConcurrentHashSet<IObjectID>.ClearNull(ChildrensSet);
                 return ChildrensSet.Select(model => model.GetModel()).ToArray();
             }
         }
@@ -59,7 +59,7 @@ namespace CatenaryCAD.Models
         {
             get
             {
-                ConcurrentHashSet<IIdentifier>.ClearNull(DependenciesSet);
+                ConcurrentHashSet<IObjectID>.ClearNull(DependenciesSet);
                 return DependenciesSet.Select(model => model.GetModel()).ToArray();
             }
         }

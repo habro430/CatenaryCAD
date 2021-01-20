@@ -3,7 +3,7 @@ using System;
 
 namespace CatenaryCAD.Helpers
 {
-    public interface IIdentifier
+    public interface IObjectID
     {
         public Guid GetGuid();
         public IModel GetModel();

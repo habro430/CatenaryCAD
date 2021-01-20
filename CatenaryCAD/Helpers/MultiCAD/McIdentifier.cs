@@ -8,7 +8,7 @@ using System.Diagnostics;
 namespace CatenaryCAD
 {
     [Serializable, DebuggerDisplay("{GetGuid()}")]
-    internal class McIdentifier : IIdentifier
+    internal class McIdentifier : IObjectID
     {
 
         private readonly McObjectId ObjectId;
