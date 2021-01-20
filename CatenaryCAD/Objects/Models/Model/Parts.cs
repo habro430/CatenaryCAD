@@ -1,5 +1,5 @@
 ﻿using CatenaryCAD.Helpers;
-using CatenaryCAD.Parts;
+using CatenaryCAD.ComponentParts;
 using System.Linq;
 
 namespace CatenaryCAD.Models
@@ -7,10 +7,10 @@ namespace CatenaryCAD.Models
     public abstract partial class Model : IModel
     {
         /// <summary>
-        /// Коллекция деталей <see cref="IPart"/>
+        /// Коллекция деталей <see cref="IComponentPart"/>
         /// </summary>
-        protected ConcurrentHashSet<IPart> PartsSet = new ConcurrentHashSet<IPart>();
+        protected ConcurrentHashSet<IComponentPart> PartsSet = new ConcurrentHashSet<IComponentPart>();
 
-        public virtual IPart[] Parts { get => PartsSet.ToArray(); }
+        public virtual IComponentPart[] Parts { get => PartsSet.ToArray(); }
     }
 }

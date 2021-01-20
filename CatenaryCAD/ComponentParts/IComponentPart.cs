@@ -1,19 +1,20 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Interfaces;
 using CatenaryCAD.Geometry.Meshes;
+using CatenaryCAD.Maintenances;
 
-namespace CatenaryCAD.Parts
+namespace CatenaryCAD.ComponentParts
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для деталей моделей объектов контактной сети.
     /// </summary>
-    public interface IPart : IDirectionable<Vector3D>, IPositionable<Point3D>, ITransformable<Matrix3D, IPart>
+    public interface IComponentPart : IDirectionable<Vector3D>, IPositionable<Point3D>, ITransformable<Matrix3D, IComponentPart>
     {
         /// <summary>
         /// Возвращает массив 3D геометрии с оносительными для детали координатами.
         /// </summary>
         /// <value>
-        /// Массив с 3D геометрией .
+        /// Массив с 3D геометрией.
         /// </value>
         public IMesh[] Geometry { get; }
 
@@ -40,6 +41,14 @@ namespace CatenaryCAD.Parts
         /// Цетр массы детали.
         /// </value>
         public Point3D CenterOfMass { get; }
+
+        /// <summary>
+        /// Возвращает массив c необходимым набором видов технического облуживание детали.
+        /// </summary>
+        /// <value>
+        /// Массив с видами технического обслуживания.
+        /// </value>
+        public IMaintenance Maintenances { get; }
 
     }
 }

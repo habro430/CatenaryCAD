@@ -136,6 +136,7 @@
     <Compile Include="Helpers\MemoryCache.cs" />
     <Compile Include="Helpers\MultiCAD\McIdentifier.cs" />
     <Compile Include="Helpers\IObjectID.cs" />
+    <Compile Include="Maintenances\IMaintenance.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\FoundationHandler.cs" />
     <Compile Include="Geometry\2D\Matrix2D.cs" />
     <Compile Include="Geometry\2D\Point2D.cs" />
@@ -173,7 +174,7 @@
     <Compile Include="Objects\Handlers\MultiCAD\MastHandler.cs" />
     <Compile Include="Objects\Models\IMast.cs" />
     <Compile Include="Helpers\HashCode.cs" />
-    <Compile Include="Parts\IPart.cs" />
+    <Compile Include="ComponentParts\IComponentPart.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
