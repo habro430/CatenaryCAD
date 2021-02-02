@@ -1,6 +1,4 @@
-﻿using CatenaryCAD.Helpers;
-using CatenaryCAD.ComponentParts;
-using System.Collections;
+﻿using CatenaryCAD.ComponentParts;
 using System.Collections.Concurrent;
 
 using System.Linq;

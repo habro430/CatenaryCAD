@@ -1,5 +1,5 @@
-﻿using CatenaryCAD.Helpers;
-using CatenaryCAD.Properties;
+﻿using CatenaryCAD.Properties;
+using System.Collections.Concurrent;
 using System.Linq;
 
 namespace CatenaryCAD.Models
@@ -9,8 +9,10 @@ namespace CatenaryCAD.Models
         /// <summary>
         /// Коллекция параметров <see cref="IProperty"/>
         /// </summary>
-        protected ConcurrentHashSet<IProperty> PropertiesSet = new ConcurrentHashSet<IProperty>();
+        protected ConcurrentDictionary<string, IProperty> PropertiesDictionary = new ConcurrentDictionary<string, IProperty>();
 
-        public virtual IProperty[] Properties { get => PropertiesSet.ToArray(); }
+        //protected ConcurrentHashSet<IProperty> PropertiesSet = new ConcurrentHashSet<IProperty>();
+
+        public virtual IProperty[] Properties { get => PropertiesDictionary.Values.ToArray(); }
     }
 }

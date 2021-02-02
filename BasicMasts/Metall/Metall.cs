@@ -30,24 +30,24 @@ namespace BasicMasts
 
             if (InheritedMasts.Count > 0)
             {
-                Property<Type> mast_subtype = new Property<Type>("02_mast_metall_type", "Марка стойки", "Стойка", ConfigFlags.RefreshAfterChange);
+                Property<Type> mast_type = new Property<Type>("02_mast_metall_type", "Марка стойки", "Стойка", ConfigFlags.RefreshAfterChange);
 
-                mast_subtype.DictionaryValues = InheritedMasts;
-                mast_subtype.Value = mast_subtype.DictionaryValues.Values.FirstOrDefault();
+                mast_type.DictionaryValues = InheritedMasts;
+                mast_type.Value = mast_type.DictionaryValues.Values.FirstOrDefault();
 
-                PropertiesSet.Add(mast_subtype);
+                PropertiesDictionary.TryAdd("mast_type", mast_type);
             }
             else
             {
-                Property<string> mast_subtype = new Property<string>("02_mast_metall_type", "Марка стойки", "Стойка");
-                mast_subtype.Value = string.Empty;
-
-                PropertiesSet.Add(mast_subtype);
+                Property<string> mast_type = new Property<string>("02_mast_metall_type", "Марка стойки", "Стойка");
+                mast_type.Value = string.Empty;
+                
+                PropertiesDictionary.TryAdd("mast_type", mast_type);
             }
 
-            Property<int> m_len = new Property<int>("03_mast_len", "Длинна", "Стойка", ConfigFlags.RefreshAfterChange);
+            Property<int> mast_lenght = new Property<int>("03_mast_len", "Длинна", "Стойка", ConfigFlags.RefreshAfterChange);
 
-            m_len.DictionaryValues = new Dictionary<string, int>
+            mast_lenght.DictionaryValues = new Dictionary<string, int>
             {
                 ["10.0 м"] = 10000,
                 ["12.0 м"] = 12000,
@@ -55,7 +55,7 @@ namespace BasicMasts
 
             };
 
-            m_len.Updated += (val) =>
+            mast_lenght.Updated += (val) =>
             {
 
                 if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false)
@@ -79,10 +79,11 @@ namespace BasicMasts
                 }
             };
 
-            m_len.Value = m_len.DictionaryValues.Values.FirstOrDefault();
+            mast_lenght.Value = mast_lenght.DictionaryValues.Values.FirstOrDefault();
 
-            PropertiesSet.Add(m_len);
+            PropertiesDictionary.TryAdd("mast_lenght", mast_lenght);
         }
+
         //public override Point2D? GetPointForDockingJoint(Ray2D ray)
         //{
         //    var position = new Point2D(Position.X, Position.Y);
