@@ -105,8 +105,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComponentParts\ComponentPart.cs" />
     <Compile Include="Geometry\2D\Shapes\Shape.cs" />
     <Compile Include="Geometry\2D\Shapes\Triangle.cs" />
+    <Compile Include="Geometry\Interfaces\IRotationable.cs" />
     <Compile Include="Geometry\Interfaces\IDirectionable.cs" />
     <Compile Include="Geometry\IMatrix.cs" />
     <Compile Include="Geometry\Interfaces\IOriginable.cs" />

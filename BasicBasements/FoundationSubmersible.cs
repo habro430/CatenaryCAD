@@ -1,4 +1,5 @@
 ﻿using BasicBasements;
+using CatenaryCAD.ComponentParts;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Models.Attributes;
 using System;
@@ -12,7 +13,9 @@ namespace BasicFoundations
     {
         public FoundationSubmersible()
         {
-            Geometry3D = new IMesh[] { GetOrCreateFromCache("TSP5.0") };
+            ComponentPartsDictionary.AddOrUpdate("foundation", new ComponentPart(new IMesh[] { GetOrCreateFromCache("TSP5.0") }),
+                                    (name, value) => value = new ComponentPart(new IMesh[] { GetOrCreateFromCache("TSP5.0") }));
+
         }
     }
 }

@@ -20,7 +20,8 @@ namespace BasicMasts
     public abstract class AbstractMast : Mast
     {
         protected IShape[] Geometry2D;
-        protected IMesh[] Geometry3D;
+        //protected IMesh[] Geometry3D;
+
 
         [NonSerialized]
         private static ObjectCache Cache = new MemoryCache(typeof(AbstractMast).Name);
@@ -61,8 +62,6 @@ namespace BasicMasts
             }).ToDictionary(p => p.atrr.Type, p => p.type);
         }
 
-
-        public override IMesh[] GetGeometryForLayout() => Geometry3D;
         public override IShape[] GetGeometry() => Geometry2D;
 
         public override Point2D? GetDockingPoint(Ray2D ray)
@@ -74,8 +73,10 @@ namespace BasicMasts
 
             foreach (var shape in Geometry2D.DeepClone())
             {
-                shape.TransformBy(Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position)))
-                     .TransformBy(Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position));
+                Matrix2D translatiom = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position));
+                Matrix2D rotation = Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position);
+
+                shape.TransformBy(rotation * translatiom);
 
                 intersections.AddRange(ray.GetIntersections(shape));
             }

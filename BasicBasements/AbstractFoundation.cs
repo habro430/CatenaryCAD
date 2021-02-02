@@ -12,7 +12,7 @@ namespace BasicBasements
     [Serializable]
     public abstract class AbstractFoundation : Foundation
     {
-        protected IMesh[] Geometry3D;
+        //protected IMesh[] Geometry3D;
 
         [NonSerialized]
         private static ObjectCache Cache = new MemoryCache(typeof(AbstractFoundation).Name);
@@ -35,7 +35,7 @@ namespace BasicBasements
             //читаем модель из кэша и возвращаем
             return Cache.Get(key) as Mesh;
         }
-        public override IMesh[] GetGeometryForLayout() => Geometry3D;
+        //public override IMesh[] GetGeometryForLayout() => Geometry3D;
         public override IShape[] GetGeometry() => null;
 
     }

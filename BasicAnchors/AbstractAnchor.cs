@@ -17,7 +17,7 @@ namespace BasicAnchors
     {
         protected IShape[] Geometry2D = new IShape[] { new Line(new Point2D(0, 0), new Point2D(900, 0)),
                                                        new Triangle(new Point2D(900,0), new Point2D(1050, 100), new Point2D(1050,-100)) };
-        protected IMesh[] Geometry3D;
+        //protected IMesh[] Geometry3D;
 
         [NonSerialized]
         private static ObjectCache Cache = new MemoryCache(typeof(AbstractAnchor).Name);
@@ -32,7 +32,7 @@ namespace BasicAnchors
             }
             return Cache.Get(key) as Mesh;
         }
-        public override IMesh[] GetGeometryForLayout() => Geometry3D;
+        //public override IMesh[] GetGeometryForLayout() => Geometry3D;
         public override IShape[] GetGeometry()
         {
             var mast_position = new Point2D(Parent.Position.X, Parent.Position.Y);

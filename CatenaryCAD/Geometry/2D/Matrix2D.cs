@@ -142,5 +142,24 @@ namespace CatenaryCAD.Geometry
 
             return result;
         }
+
+        public static Matrix2D operator *(Matrix2D m1, Matrix2D m2)
+        {
+            double m11 = m1.M11 * m2.M11 + m1.M12 * m2.M21 + m1.M13 * m2.M31;
+            double m12 = m1.M11 * m2.M12 + m1.M12 * m2.M22 + m1.M13 * m2.M32;
+            double m13 = m1.M11 * m2.M13 + m1.M12 * m2.M23 + m1.M13 * m2.M33;
+
+            double m21 = m1.M21 * m2.M11 + m1.M22 * m2.M21 + m1.M23 * m2.M31;
+            double m22 = m1.M21 * m2.M12 + m1.M22 * m2.M22 + m1.M23 * m2.M32;
+            double m23 = m1.M21 * m2.M13 + m1.M22 * m2.M23 + m1.M23 * m2.M33;
+
+            double m31 = m1.M31 * m2.M11 + m1.M32 * m2.M21 + m1.M33 * m2.M31;
+            double m32 = m1.M31 * m2.M12 + m1.M32 * m2.M22 + m1.M33 * m2.M32;
+            double m33 = m1.M31 * m2.M13 + m1.M32 * m2.M23 + m1.M33 * m2.M33;
+
+            return new Matrix2D(m11, m12, m13, 
+                                m21, m22, m23, 
+                                m31, m32, m33);
+        }
     }
 }

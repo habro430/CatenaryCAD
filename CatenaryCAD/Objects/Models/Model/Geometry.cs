@@ -5,7 +5,7 @@ namespace CatenaryCAD.Models
 {
     public abstract partial class Model : IModel
     {
-        public abstract IMesh[] GetGeometryForLayout();
+        //public abstract IMesh[] GetGeometryForLayout();
         public abstract IShape[] GetGeometry();
 
     }

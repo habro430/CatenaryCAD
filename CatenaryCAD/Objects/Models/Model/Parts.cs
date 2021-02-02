@@ -1,5 +1,8 @@
 ﻿using CatenaryCAD.Helpers;
 using CatenaryCAD.ComponentParts;
+using System.Collections;
+using System.Collections.Concurrent;
+
 using System.Linq;
 
 namespace CatenaryCAD.Models
@@ -9,8 +12,8 @@ namespace CatenaryCAD.Models
         /// <summary>
         /// Коллекция деталей <see cref="IComponentPart"/>
         /// </summary>
-        protected ConcurrentHashSet<IComponentPart> PartsSet = new ConcurrentHashSet<IComponentPart>();
+        protected ConcurrentDictionary<string, IComponentPart> ComponentPartsDictionary = new ConcurrentDictionary<string, IComponentPart>();
 
-        public virtual IComponentPart[] Parts { get => PartsSet.ToArray(); }
+        public virtual IComponentPart[] ComponentParts { get => ComponentPartsDictionary.Values.ToArray(); }
     }
 }

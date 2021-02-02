@@ -1,4 +1,5 @@
 ﻿using BasicAnchors;
+using CatenaryCAD.ComponentParts;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Models.Attributes;
 using System;
@@ -12,7 +13,9 @@ namespace BasicFoundations
     {
         public TestAnchor2()
         {
-            Geometry3D = new IMesh[] { GetOrCreateFromCache("test") };
+            ComponentPartsDictionary.AddOrUpdate("anchor", new ComponentPart(new IMesh[] { GetOrCreateFromCache("test") }),
+                                                (name, value) => value = new ComponentPart(new IMesh[] { GetOrCreateFromCache("test") }));
+
         }
     }
 }

@@ -44,13 +44,13 @@ namespace CatenaryCAD.Models
         /// <summary>
         /// Массив деталей <see cref="IComponentPart"/> модели <see cref="IModel"/>
         /// </summary>
-        public IComponentPart[] Parts { get; }
+        public IComponentPart[] ComponentParts { get; }
 
         /// <summary>
         /// Получить 3D геометрию для режима работы <see cref="OperationalMode.Layout"/>
         /// </summary>
         /// <returns>3D геометрия</returns>
-        public IMesh[] GetGeometryForLayout();
+        //public IMesh[] GetGeometryForLayout();
 
         /// <summary>
         /// Получить 2D геометрию для режима работы <see cref="OperationalMode.Scheme"/>
