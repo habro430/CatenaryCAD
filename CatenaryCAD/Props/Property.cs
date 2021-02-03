@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace CatenaryCAD.Properties
 {
@@ -9,26 +10,19 @@ namespace CatenaryCAD.Properties
     /// Представляет параметр модели
     /// </summary>
     /// <typeparam name="T">Тип значения параметра</typeparam>
-    [Serializable, DebuggerDisplay("Name = {name}, Value = {value}")]
+    [Serializable, DebuggerDisplay("Name = {Name}, Value = {Value}")]
     public sealed class Property<T> : IProperty
     {
         public event Action<T> Updated;
-
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private T value = default(T);
-
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string identifier, name, category;
-
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private ConfigFlags properties;
-
 
         /// <summary>
         /// Коллеция стандартных значений для параметра
         /// </summary>
         public Dictionary<string, T> DictionaryValues { set; get; }
 
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private T value = default(T);
         /// <summary>
         /// Значение параметра
         /// </summary>
@@ -43,32 +37,67 @@ namespace CatenaryCAD.Properties
         }
 
         /// <summary>
-        /// Идентификатор параметра
-        /// </summary>
-        public string Identifier => identifier;
-
-        /// <summary>
         /// Имя параметра, отображаемое в свойствах объекта
         /// </summary>
-        public string Name => name;
+        public string Name { get; private set;  }
 
         /// <summary>
         /// Категория параметра, отображаемая в свойствах объекта
         /// </summary>
-        public string Category => category;
+        public string Category { get; private set; }
 
         /// <summary>
         /// Флаги конфигурации параметра
         /// </summary>
-        public ConfigFlags Properties => properties;
+        public PropertyAttributes Attributes { get; private set; }
 
-        public Property(string id, string name, string category, ConfigFlags props = ConfigFlags.None)
+        public Property(string name, string category, 
+            Action<T> update = null, PropertyAttributes attr = PropertyAttributes.None)
         {
-            this.identifier = id;
-            this.name = name;
-            this.category = category;
+            Name = name;
+            Category = category;
 
-            this.properties = props;
+            Attributes = attr;
+
+            Value = default;
+        }
+
+        public Property(string name, string category, T value,
+            Action<T> update = null, PropertyAttributes attr = PropertyAttributes.None)
+        {
+            Name = name;
+            Category = category;
+
+            Attributes = attr;
+            Updated = update;
+
+            Value = value;
+        }
+
+        public Property(string name, string category, Dictionary<string, T> dictionaryvalues, 
+            Action<T> update = null, PropertyAttributes attr = PropertyAttributes.None)
+        {
+            Name = name;
+            Category = category;
+
+            Attributes = attr;
+            Updated = update;
+
+            DictionaryValues = dictionaryvalues;
+            Value = DictionaryValues.Values.FirstOrDefault();
+        }
+
+        public Property(string name, string category, Dictionary<string, T> dictionaryvalues, T value,
+            Action<T> update = null, PropertyAttributes attr = PropertyAttributes.None)
+        {
+            Name = name;
+            Category = category;
+
+            Attributes = attr;
+            Updated = update;
+
+            DictionaryValues = dictionaryvalues;
+            Value = value;
         }
 
         public Type GetValueType() => typeof(T);
@@ -100,7 +129,7 @@ namespace CatenaryCAD.Properties
         public bool SetValue(object val)
         {
 
-            if (Properties.HasFlag(ConfigFlags.ReadOnly))
+            if (Attributes.HasFlag(PropertyAttributes.ReadOnly))
             {
                 if (value == null)
                 {

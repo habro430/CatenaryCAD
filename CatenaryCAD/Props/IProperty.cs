@@ -5,7 +5,7 @@ using System.Linq;
 namespace CatenaryCAD.Properties
 {
     [Serializable, Flags]
-    public enum ConfigFlags
+    public enum PropertyAttributes
     {
         None = 0,
         ReadOnly = 1,
@@ -15,10 +15,9 @@ namespace CatenaryCAD.Properties
 
     public interface IProperty
     {
-        public string Identifier {  get; }
         public string Name { get; }
         public string Category { get; }
-        public ConfigFlags Properties { get; }
+        public PropertyAttributes Attributes { get; }
 
         public object GetValue();
         public bool SetValue(object value);

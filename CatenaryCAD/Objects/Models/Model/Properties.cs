@@ -11,8 +11,6 @@ namespace CatenaryCAD.Models
         /// </summary>
         protected ConcurrentDictionary<string, IProperty> PropertiesDictionary = new ConcurrentDictionary<string, IProperty>();
 
-        //protected ConcurrentHashSet<IProperty> PropertiesSet = new ConcurrentHashSet<IProperty>();
-
         public virtual IProperty[] Properties { get => PropertiesDictionary.Values.ToArray(); }
     }
 }

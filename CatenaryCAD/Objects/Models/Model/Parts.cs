@@ -1,6 +1,5 @@
 ﻿using CatenaryCAD.ComponentParts;
 using System.Collections.Concurrent;
-
 using System.Linq;
 
 namespace CatenaryCAD.Models

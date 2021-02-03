@@ -30,7 +30,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public MastHandler()
         {
-            Property<Type> mast_type = new Property<Type>("01_mast_type", "Тип стойки", "Стойка", props: ConfigFlags.RefreshAfterChange);
+            Property<Type> mast_type = new Property<Type>("Тип стойки", "Стойка", attr: PropertyAttributes.RefreshAfterChange);
 
             mast_type.DictionaryValues = Masts;
 
@@ -53,11 +53,11 @@ namespace CatenaryCAD.Models.Handlers
             OperationalMode mode = (OperationalMode)(McDocument.ActiveDocument.CustomProperties["OperationalMode"] ?? OperationalMode.Scheme);
 
             if (basement_props != null && mode == OperationalMode.Scheme)
-                //если режим работы OperationalMode.Scheme то выдаем отсортированные по ID параметры basement + mast
-                return GetProperties().Concat(basement_props).OrderBy(n => n.Identifier).ToAdapterProperty();
+                //если режим работы OperationalMode.Scheme то выдаем отсортированные по Name параметры basement + mast
+                return GetProperties().Concat(basement_props).OrderBy(n => n.Name).ToAdapterProperty();
             else
-                //в противном случае только отсортированные по ID параметры mast
-                return GetProperties().OrderBy(n => n.Identifier).ToAdapterProperty();
+                //в противном случае только отсортированные по Name параметры mast
+                return GetProperties().OrderBy(n => n.Name).ToAdapterProperty();
         }
 
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]

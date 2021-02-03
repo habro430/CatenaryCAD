@@ -200,7 +200,7 @@ namespace CatenaryCAD.Models.Handlers
         public virtual ICollection<McDynamicProperty> GetProperties(out bool exclusive)
         {
             exclusive = true;
-            return GetProperties().OrderBy(n => n.Identifier).ToAdapterProperty();
+            return GetProperties().OrderBy(n => n.Name).ToAdapterProperty();
         }
         public McDynamicProperty GetProperty(string id) => null;
             //GetProperties().Where(n => n.ID == id).FirstOrDefault().ToAdapterProperty() ;

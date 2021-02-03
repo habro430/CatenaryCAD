@@ -26,7 +26,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public FoundationHandler()
         {
-            Property<Type> basement_type = new Property<Type>("01_foundation_type", "Тип фундамента", "Фундамент", props: ConfigFlags.RefreshAfterChange);
+            Property<Type> basement_type = new Property<Type>("Тип фундамента", "Фундамент", attr: PropertyAttributes.RefreshAfterChange);
 
             basement_type.DictionaryValues = Foundations;
 
