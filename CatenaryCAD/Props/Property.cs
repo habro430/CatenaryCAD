@@ -15,20 +15,17 @@ namespace CatenaryCAD.Properties
     {
         public event Action<T> Updated;
 
-        /// <value>
-        /// Коллекция стандартных значений для параметра.
-        /// </value>
+        /// <inheritdoc cref="IProperty.StandartValues"/>
         public Dictionary<string, T> StandartValues { set; get; }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        /// <inheritdoc/>
         ICollection IProperty.StandartValues => StandartValues != null ? StandartValues.Keys : null;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private T value = default(T);
 
-        /// <value>
-        /// Значение параметра.
-        /// </value>
+        /// <inheritdoc cref="IProperty.Value"/>
         public T Value
         {
             get => value;
@@ -40,6 +37,7 @@ namespace CatenaryCAD.Properties
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        /// <inheritdoc/>
         object IProperty.Value
         {
             get
@@ -80,25 +78,13 @@ namespace CatenaryCAD.Properties
             }
         }
 
-        /// <summary>
-        /// Имя параметра, отображаемое в свойствах объекта.
-        /// </summary>
-        /// <value>
-        /// Наименование параметра.
-        /// </value>
+        /// <inheritdoc/>
         public string Name { get; private set;  }
 
-        /// <summary>
-        /// Категория параметра, отображаемая в свойствах объекта.
-        /// </summary>
-        /// <value>
-        /// Наименование группы параметра.
-        /// </value>
+        /// <inheritdoc/>
         public string Category { get; private set; }
 
-        /// <value>
-        /// Флаги конфигурации параметра.
-        /// </value>
+        /// <inheritdoc/>
         public PropertyAttributes Attributes { get; private set; }
 
 
