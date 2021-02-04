@@ -15,17 +15,20 @@ namespace CatenaryCAD.Properties
     {
         public event Action<T> Updated;
 
-        /// <summary>
-        /// Коллеция стандартных значений для параметра
-        /// </summary>
-        public Dictionary<string, T> DictionaryValues { set; get; }
+        /// <value>
+        /// Коллекция стандартных значений для параметра.
+        /// </value>
+        public Dictionary<string, T> StandartValues { set; get; }
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        ICollection IProperty.StandartValues => StandartValues != null ? StandartValues.Keys : null;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private T value = default(T);
-        /// <summary>
-        /// Значение параметра
-        /// </summary>
+
+        /// <value>
+        /// Значение параметра.
+        /// </value>
         public T Value
         {
             get => value;
@@ -36,20 +39,68 @@ namespace CatenaryCAD.Properties
             }
         }
 
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        object IProperty.Value
+        {
+            get
+            {
+                if (StandartValues != null)
+                {
+                    foreach (var dict in StandartValues)
+                        if (dict.Value.Equals(Value))
+                            return dict.Key;
+                }
+                else
+                {
+                    return Value;
+                }
+
+                return null;
+            }
+            set
+            {
+                if (Attributes.HasFlag(PropertyAttributes.ReadOnly))
+                {
+                    if (value == null)
+                    {
+
+                        if (StandartValues != null)
+                            Value = StandartValues[value.ToString()];
+                        else
+                            Value = (T)Convert.ChangeType(value, typeof(T));
+                    }
+                }
+                else
+                {
+                    if (StandartValues != null)
+                        Value = StandartValues[value.ToString()];
+                    else
+                        Value = (T)Convert.ChangeType(value, typeof(T));
+                }
+            }
+        }
+
         /// <summary>
-        /// Имя параметра, отображаемое в свойствах объекта
+        /// Имя параметра, отображаемое в свойствах объекта.
         /// </summary>
+        /// <value>
+        /// Наименование параметра.
+        /// </value>
         public string Name { get; private set;  }
 
         /// <summary>
-        /// Категория параметра, отображаемая в свойствах объекта
+        /// Категория параметра, отображаемая в свойствах объекта.
         /// </summary>
+        /// <value>
+        /// Наименование группы параметра.
+        /// </value>
         public string Category { get; private set; }
 
-        /// <summary>
-        /// Флаги конфигурации параметра
-        /// </summary>
+        /// <value>
+        /// Флаги конфигурации параметра.
+        /// </value>
         public PropertyAttributes Attributes { get; private set; }
+
 
         public Property(string name, string category, 
             Action<T> update = null, PropertyAttributes attr = PropertyAttributes.None)
@@ -83,8 +134,8 @@ namespace CatenaryCAD.Properties
             Attributes = attr;
             Updated = update;
 
-            DictionaryValues = dictionaryvalues;
-            Value = DictionaryValues.Values.FirstOrDefault();
+            StandartValues = dictionaryvalues;
+            Value = StandartValues.Values.FirstOrDefault();
         }
 
         public Property(string name, string category, Dictionary<string, T> dictionaryvalues, T value,
@@ -96,81 +147,10 @@ namespace CatenaryCAD.Properties
             Attributes = attr;
             Updated = update;
 
-            DictionaryValues = dictionaryvalues;
+            StandartValues = dictionaryvalues;
             Value = value;
         }
 
         public Type GetValueType() => typeof(T);
-        public ICollection GetValuesCollection()
-        {
-            if (DictionaryValues != null)
-                return DictionaryValues.Keys;
-            else
-                return null;
-        }
-        public object GetValue()
-        {
-            if (DictionaryValues != null)
-            {
-                foreach (var dict in DictionaryValues)
-                {
-                    if (dict.Value.Equals(Value))
-                        return dict.Key;
-                }
-            }
-            else
-            {
-                return Value;
-            }
-
-            return null;
-        }
-
-        public bool SetValue(object val)
-        {
-
-            if (Attributes.HasFlag(PropertyAttributes.ReadOnly))
-            {
-                if (value == null)
-                {
-
-                    if (DictionaryValues != null)
-                        Value = DictionaryValues[val.ToString()];
-                    else
-                    {
-                        try
-                        {
-                            Value = (T)Convert.ChangeType(val, typeof(T));
-                        }
-                        catch (Exception)
-                        {
-                            return false;
-                        }
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (DictionaryValues != null)
-                    Value = DictionaryValues[val.ToString()];
-                else
-                {
-                    try
-                    {
-                        Value = (T)Convert.ChangeType(val, typeof(T));
-                    }
-                    catch (Exception)
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
     }
 }

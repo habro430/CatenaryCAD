@@ -19,11 +19,9 @@ namespace CatenaryCAD.Properties
         public string Category { get; }
         public PropertyAttributes Attributes { get; }
 
-        public object GetValue();
-        public bool SetValue(object value);
-
+        public object Value { get; set; }
+        public ICollection StandartValues { get; }
         public Type GetValueType();
-        public ICollection GetValuesCollection();
     }
 
     internal static partial class Extensions

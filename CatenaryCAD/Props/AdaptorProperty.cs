@@ -25,18 +25,22 @@ namespace CatenaryCAD.Properties
                 else return ExAttributesProperties.None;
             }
         }
-        
-        public override object GetValue() => property.GetValue();
 
-        public override ICollection GetStandardValues() => property.GetValuesCollection();
+        public override object GetValue() => property.Value;
+
+        public override ICollection GetStandardValues() => property.StandartValues;
         public override StandardValueTypeEnum GetStandardValueType()
         {
-            if (property.GetValuesCollection() != null)
+            if (property.StandartValues != null)
                 return StandardValueTypeEnum.Exclusive;
             else
                 return StandardValueTypeEnum.None;
         }
 
-        public override bool SetValue(object val) => property.SetValue(val);
+        public override bool SetValue(object val)
+        {
+            property.Value = val;
+            return true;
+        }
     }
 }

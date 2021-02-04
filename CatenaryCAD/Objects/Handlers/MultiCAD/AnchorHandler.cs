@@ -29,7 +29,7 @@ namespace CatenaryCAD.Models.Handlers
         {
             Property<Type> anchor_type = new Property<Type>("Тип анкера", "Анкер", attr: PropertyAttributes.RefreshAfterChange);
 
-            anchor_type.DictionaryValues = Anchors;
+            anchor_type.StandartValues = Anchors;
 
             anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
             anchor_type.Value = Anchors.Values.FirstOrDefault();
