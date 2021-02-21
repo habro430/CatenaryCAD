@@ -52,16 +52,16 @@ namespace BasicMasts
             switch (lenght)
             {
                 case 10000:
-                    ComponentPartsDictionary.AddOrUpdate("mast", new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_10") }),
-                        (name, component) => new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_10") }));
+                    ComponentPart m10 = new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_10") });
+                    ComponentPartsDictionary.AddOrUpdate("mast", m10, (name, component) => m10);
                     break;
                 case 12000:
-                    ComponentPartsDictionary.AddOrUpdate("mast", new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_12") }),
-                        (name, component) => new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_12") }));
+                    ComponentPart m12 = new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_12") });
+                    ComponentPartsDictionary.AddOrUpdate("mast", m12, (name, component) => m12);
                     break;
                 case 15000:
-                    ComponentPartsDictionary.AddOrUpdate("mast", new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_15") }),
-                        (name, component) => new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_15") }));
+                    ComponentPart m15 = new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_15") });
+                    ComponentPartsDictionary.AddOrUpdate("mast", m15, (name, component) => m15);
                     break;
             }
 

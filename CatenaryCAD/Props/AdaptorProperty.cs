@@ -28,10 +28,10 @@ namespace CatenaryCAD.Properties
 
         public override object GetValue() => property.Value;
 
-        public override ICollection GetStandardValues() => property.StandartValues;
+        public override ICollection GetStandardValues() => property.DropDownValues;
         public override StandardValueTypeEnum GetStandardValueType()
         {
-            if (property.StandartValues != null)
+            if (property.DropDownValues != null)
                 return StandardValueTypeEnum.Exclusive;
             else
                 return StandardValueTypeEnum.None;

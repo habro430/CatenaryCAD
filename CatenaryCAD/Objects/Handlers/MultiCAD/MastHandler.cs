@@ -32,7 +32,7 @@ namespace CatenaryCAD.Models.Handlers
         {
             Property<Type> mast_type = new Property<Type>("Тип стойки", "Стойка", attr: PropertyAttributes.RefreshAfterChange);
 
-            mast_type.StandartValues = Masts;
+            mast_type.DropDownValues = Masts;
 
             mast_type.Updated += (type) => Model = Activator.CreateInstance(type) as Mast;
             mast_type.Value = Masts.Values.FirstOrDefault();

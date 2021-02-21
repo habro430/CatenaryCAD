@@ -13,9 +13,8 @@ namespace BasicFoundations
     {
         public FoundationSubmersible()
         {
-            ComponentPartsDictionary.AddOrUpdate("foundation", new ComponentPart(new IMesh[] { GetOrCreateFromCache("TSP5.0") }),
-                                    (name, value) => value = new ComponentPart(new IMesh[] { GetOrCreateFromCache("TSP5.0") }));
-
+            ComponentPart tsp = new ComponentPart(new IMesh[] { GetOrCreateFromCache("TSP5.0") });
+            ComponentPartsDictionary.AddOrUpdate("foundation", tsp, (name, component) => tsp); 
         }
     }
 }

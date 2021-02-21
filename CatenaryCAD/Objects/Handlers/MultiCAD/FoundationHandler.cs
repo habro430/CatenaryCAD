@@ -28,7 +28,7 @@ namespace CatenaryCAD.Models.Handlers
         {
             Property<Type> basement_type = new Property<Type>("Тип фундамента", "Фундамент", attr: PropertyAttributes.RefreshAfterChange);
 
-            basement_type.StandartValues = Foundations;
+            basement_type.DropDownValues = Foundations;
 
             basement_type.Updated += (type) => Model = Activator.CreateInstance(type) as Foundation;
             basement_type.Value = Foundations.Values.FirstOrDefault();

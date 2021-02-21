@@ -7,9 +7,22 @@ namespace CatenaryCAD.Properties
     [Serializable, Flags]
     public enum PropertyAttributes
     {
+        /// <summary>
+        /// Атрибут по умолчанию.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Атриубут, указывающий на то, что параметр доступент только для чтения.
+        /// </summary>
         ReadOnly = 1,
+        /// <summary>
+        /// Атрибут, указаывающий на то, что после изменения текущего параметра необходимо 
+        /// обновить список параметров.
+        /// </summary>
         RefreshAfterChange = 2,
+        /// <summary>
+        /// Атрибут, указаывающий на то, что параметр не видим в списке параметров.
+        /// </summary>
         NotBrowsable = 4,
     }
 
@@ -47,7 +60,7 @@ namespace CatenaryCAD.Properties
         /// <value>
         /// Коллекция стандартных значений для параметра.
         /// </value>
-        public ICollection StandartValues { get; }
+        public ICollection DropDownValues { get; }
         public Type GetValueType();
     }
 

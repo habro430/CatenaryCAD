@@ -13,8 +13,8 @@ namespace BasicFoundations
     {
         public TestAnchor1()
         {
-            ComponentPartsDictionary.AddOrUpdate("anchor", new ComponentPart(new IMesh[] { GetOrCreateFromCache("test") }),
-                                                (name, value) => value = new ComponentPart(new IMesh[] { GetOrCreateFromCache("test") }));
+            ComponentPart tsp = new ComponentPart(new IMesh[] { GetOrCreateFromCache("test") });
+            ComponentPartsDictionary.AddOrUpdate("anchor", tsp, (name, component) => tsp);
         }
     }
 }

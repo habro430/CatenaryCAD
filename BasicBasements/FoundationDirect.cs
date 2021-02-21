@@ -13,9 +13,8 @@ namespace BasicFoundations
     {
         public FoundationDirect()
         {
-            ComponentPartsDictionary.AddOrUpdate("foundation", new ComponentPart(new IMesh[] { GetOrCreateFromCache("TSP4.5") }),
-                                                (name, value) => value = new ComponentPart(new IMesh[] { GetOrCreateFromCache("TSP4.5") }));
-
+            ComponentPart tsp = new ComponentPart(new IMesh[] { GetOrCreateFromCache("TSP4.5") });
+            ComponentPartsDictionary.AddOrUpdate("foundation", tsp, (name, component) => tsp);
         }
     }
 }
