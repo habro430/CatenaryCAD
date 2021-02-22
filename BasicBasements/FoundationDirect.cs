@@ -1,5 +1,5 @@
 ﻿using BasicBasements;
-using CatenaryCAD.ComponentParts;
+using CatenaryCAD.Components;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Models.Attributes;
 using System;
@@ -13,8 +13,8 @@ namespace BasicFoundations
     {
         public FoundationDirect()
         {
-            ComponentPart tsp = new ComponentPart(new IMesh[] { GetOrCreateFromCache("TSP4.5") });
-            ComponentPartsDictionary.AddOrUpdate("foundation", tsp, (name, component) => tsp);
+            Component tsp = new Component(new IMesh[] { GetOrCreateFromCache("TSP4.5") });
+            ComponentsDictionary.AddOrUpdate("foundation", tsp, (name, component) => tsp);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using CatenaryCAD.ComponentParts;
+﻿using CatenaryCAD.Components;
 using System.Collections.Concurrent;
 using System.Linq;
 
@@ -7,10 +7,10 @@ namespace CatenaryCAD.Models
     public abstract partial class Model : IModel
     {
         /// <summary>
-        /// Коллекция деталей <see cref="IComponentPart"/>
+        /// Коллекция деталей <see cref="IComponent"/>
         /// </summary>
-        protected ConcurrentDictionary<string, IComponentPart> ComponentPartsDictionary = new ConcurrentDictionary<string, IComponentPart>();
+        protected ConcurrentDictionary<string, IComponent> ComponentsDictionary = new ConcurrentDictionary<string, IComponent>();
 
-        public virtual IComponentPart[] ComponentParts { get => ComponentPartsDictionary.Values.ToArray(); }
+        public virtual IComponent[] ComponentParts { get => ComponentsDictionary.Values.ToArray(); }
     }
 }

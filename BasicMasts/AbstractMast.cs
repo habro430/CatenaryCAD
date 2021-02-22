@@ -4,7 +4,7 @@ using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Models;
 using CatenaryCAD.Helpers;
-using CatenaryCAD.ComponentParts;
+using CatenaryCAD.Components;
 using CatenaryCAD.Properties;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using CatenaryCAD.ComponentParts;
+﻿using CatenaryCAD.Components;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
@@ -52,16 +52,16 @@ namespace BasicMasts
             switch (lenght)
             {
                 case 10000:
-                    ComponentPart m10 = new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_10") });
-                    ComponentPartsDictionary.AddOrUpdate("mast", m10, (name, component) => m10);
+                    Component m10 = new Component(new IMesh[] { GetOrCreateFromCache("m_10") });
+                    ComponentsDictionary.AddOrUpdate("mast", m10, (name, component) => m10);
                     break;
                 case 12000:
-                    ComponentPart m12 = new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_12") });
-                    ComponentPartsDictionary.AddOrUpdate("mast", m12, (name, component) => m12);
+                    Component m12 = new Component(new IMesh[] { GetOrCreateFromCache("m_12") });
+                    ComponentsDictionary.AddOrUpdate("mast", m12, (name, component) => m12);
                     break;
                 case 15000:
-                    ComponentPart m15 = new ComponentPart(new IMesh[] { GetOrCreateFromCache("m_15") });
-                    ComponentPartsDictionary.AddOrUpdate("mast", m15, (name, component) => m15);
+                    Component m15 = new Component(new IMesh[] { GetOrCreateFromCache("m_15") });
+                    ComponentsDictionary.AddOrUpdate("mast", m15, (name, component) => m15);
                     break;
             }
 

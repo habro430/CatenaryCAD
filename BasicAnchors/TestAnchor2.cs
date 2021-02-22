@@ -1,5 +1,5 @@
 ﻿using BasicAnchors;
-using CatenaryCAD.ComponentParts;
+using CatenaryCAD.Components;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Models.Attributes;
 using System;
@@ -13,8 +13,8 @@ namespace BasicFoundations
     {
         public TestAnchor2()
         {
-            ComponentPart tsp = new ComponentPart(new IMesh[] { GetOrCreateFromCache("test") });
-            ComponentPartsDictionary.AddOrUpdate("anchor", tsp, (name, component) => tsp);
+            Component tsp = new Component(new IMesh[] { GetOrCreateFromCache("test") });
+            ComponentsDictionary.AddOrUpdate("anchor", tsp, (name, component) => tsp);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using CatenaryCAD.ComponentParts;
+﻿using CatenaryCAD.Components;
 using CatenaryCAD.Properties;
 using Multicad.Geometry;
 

@@ -105,7 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComponentParts\ComponentPart.cs" />
+    <Compile Include="Components\Component.cs" />
     <Compile Include="Geometry\2D\Shapes\Shape.cs" />
     <Compile Include="Geometry\2D\Shapes\Triangle.cs" />
     <Compile Include="Geometry\Interfaces\IRotationable.cs" />
@@ -176,7 +176,7 @@
     <Compile Include="Objects\Handlers\MultiCAD\MastHandler.cs" />
     <Compile Include="Objects\Models\IMast.cs" />
     <Compile Include="Helpers\HashCode.cs" />
-    <Compile Include="ComponentParts\IComponentPart.cs" />
+    <Compile Include="Components\IComponent.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

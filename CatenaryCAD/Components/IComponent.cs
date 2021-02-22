@@ -3,12 +3,12 @@ using CatenaryCAD.Geometry.Interfaces;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Maintenances;
 
-namespace CatenaryCAD.ComponentParts
+namespace CatenaryCAD.Components
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для деталей моделей объектов контактной сети.
     /// </summary>
-    public interface IComponentPart : IRotationable<Vector3D>, IOriginable<Point3D>
+    public interface IComponent : IRotationable<Vector3D>, IOriginable<Point3D>
     {
         /// <summary>
         /// Возвращает массив 3D геометрии с оносительными для детали координатами.

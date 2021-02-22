@@ -5,10 +5,10 @@ using CatenaryCAD.Maintenances;
 using System;
 using System.Linq;
 
-namespace CatenaryCAD.ComponentParts
+namespace CatenaryCAD.Components
 {
     [Serializable]
-    public class ComponentPart : IComponentPart
+    public class Component : IComponent
     {
 
         private IMesh[] geometry;
@@ -39,7 +39,7 @@ namespace CatenaryCAD.ComponentParts
         /// <inheritdoc/>
         public Point3D Origin { get; set; }
         
-        public ComponentPart(IMesh[] geometry)
+        public Component(IMesh[] geometry)
         {
             this.geometry = geometry;
         }
