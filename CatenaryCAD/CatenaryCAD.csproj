@@ -183,7 +183,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Props\IProperty.cs" />
-    <Compile Include="Props\AdaptorProperty.cs" />
+    <Compile Include="Props\McProperty.cs" />
     <Compile Include="Props\Property.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

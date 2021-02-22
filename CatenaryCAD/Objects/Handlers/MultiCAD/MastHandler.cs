@@ -30,7 +30,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public MastHandler()
         {
-            Property<Type> mast_type = new Property<Type>("Тип стойки", "Стойка", attr: PropertyAttributes.RefreshAfterChange);
+            Property<Type> mast_type = new Property<Type>("Тип стойки", "Стойка", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
 
             mast_type.DropDownValues = Masts;
 

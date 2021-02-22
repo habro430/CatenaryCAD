@@ -30,7 +30,7 @@ namespace BasicMasts
             Geometry2D = new IShape[] { new Circle(new Point2D(), 300, 20) };
 
             if (InheritedMasts.Count > 0)
-                PropertiesDictionary.TryAdd("mast_type", new Property<Type>("Марка стойки", "Стойка", InheritedMasts, attr: PropertyAttributes.RefreshAfterChange));
+                PropertiesDictionary.TryAdd("mast_type", new Property<Type>("Марка стойки", "Стойка", InheritedMasts, attr: Attributes.RefreshAfterChange));
             else
                 PropertiesDictionary.TryAdd("mast_type", new Property<string>("Марка стойки", "Стойка", string.Empty));
 
@@ -41,7 +41,7 @@ namespace BasicMasts
                 ["15.0 м"] = 15000
             };
 
-            PropertiesDictionary.TryAdd("mast_lenght", new Property<int>("Длинна", "Стойка", defaultlenghts, UpdateLenght, PropertyAttributes.RefreshAfterChange));
+            PropertiesDictionary.TryAdd("mast_lenght", new Property<int>("Длинна", "Стойка", defaultlenghts, UpdateLenght, Attributes.RefreshAfterChange));
         }
 
         private void UpdateLenght(int lenght)

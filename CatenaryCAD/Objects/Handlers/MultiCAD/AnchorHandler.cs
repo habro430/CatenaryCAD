@@ -27,7 +27,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public AnchorHandler()
         {
-            Property<Type> anchor_type = new Property<Type>("Тип анкера", "Анкер", attr: PropertyAttributes.RefreshAfterChange);
+            Property<Type> anchor_type = new Property<Type>("Тип анкера", "Анкер", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
 
             anchor_type.DropDownValues = Anchors;
 

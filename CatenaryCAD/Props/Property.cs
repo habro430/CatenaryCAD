@@ -13,12 +13,11 @@ namespace CatenaryCAD.Properties
     [Serializable, DebuggerDisplay("Name = {Name}, Value = {Value}")]
     public sealed class Property<T> : IProperty
     {
-
         /// <inheritdoc cref="IProperty.DropDownValues"/>
         public Dictionary<string, T> DropDownValues { set; get; }
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         /// <inheritdoc/>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         ICollection IProperty.DropDownValues => DropDownValues != null ? DropDownValues.Keys : null;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -35,8 +34,8 @@ namespace CatenaryCAD.Properties
             }
         }
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         /// <inheritdoc/>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         object IProperty.Value
         {
             get
@@ -56,7 +55,7 @@ namespace CatenaryCAD.Properties
             }
             set
             {
-                if (Attributes.HasFlag(PropertyAttributes.ReadOnly))
+                if(Attributes.HasValue ? Attributes.Value.HasFlag(Properties.Attributes.ReadOnly) : false)
                 {
                     if (value == null)
                     {
@@ -84,18 +83,19 @@ namespace CatenaryCAD.Properties
         public string Category { get; private set; }
 
         /// <inheritdoc/>
-        public PropertyAttributes Attributes { get; private set; }
+        public Attributes? Attributes { get; private set; }
 
         /// <summary>
         /// Событие, вызываемое после изменения значения <see cref="Value"></see>.
         /// </summary>
+        /// <value>
+        /// Метод, который принимает один параметр <typeparamref name="T"/>.
+        /// </value> 
         public event Action<T> Updated;
 
-        /// <summary>
-        /// Возвращает тип значения <see cref="Value"></see> .
-        /// </summary>
-        /// <returns>Тип значения параметра.</returns>
+        /// <inheritdoc/>
         public Type GetValueType() => typeof(T);
+
         /// <summary>
         /// Инициализирует новый экземпляр <see cref="Property{T}"/>, имеющий указанные имена 
         /// параметра <paramref name="name"/> и категории <paramref name="category"/>, указанный 
@@ -104,11 +104,11 @@ namespace CatenaryCAD.Properties
         /// </summary>
         /// <param name="name">Имя параметра, отображаемое в списке параметров.</param>
         /// <param name="category">Имя категории параметра, отображаемое в списке параметров.</param>
-        /// <param name="update">Делегат инкапсулирующий метод, который принимает один параметр <typeparamref name="T"/> и
-        /// выполняемый при изменении значения параметра.</param>
+        /// <param name="update">Метод, который принимает один параметр <typeparamref name="T"/> и выполняемый 
+        /// при изменении значения параметра.</param>
         /// <param name="attr">Атрибуты конфигурации параметра.</param>
         public Property(string name, string category, 
-            Action<T> update = null, PropertyAttributes attr = PropertyAttributes.None)
+            Action<T> update = null, Attributes? attr = null)
         {
             Name = name;
             Category = category;
@@ -118,6 +118,7 @@ namespace CatenaryCAD.Properties
 
             Value = default;
         }
+
         /// <summary>
         /// Инициализирует новый экземпляр <see cref="Property{T}"/>, имеющий указанные имена
         /// параметра <paramref name="name"/> и категории <paramref name="category"/>, указанное 
@@ -126,12 +127,12 @@ namespace CatenaryCAD.Properties
         /// </summary>
         /// <param name="name">Имя параметра, отображаемое в списке параметров.</param>
         /// <param name="category">Имя категории параметра, отображаемое в списке параметров.</param>
-        /// <param name="update">Делегат инкапсулирующий метод, который принимает один параметр <typeparamref name="T"/> и
-        /// выполняемый при изменении значения параметра.</param>
+        /// <param name="update">Метод, который принимает один параметр <typeparamref name="T"/> и выполняемый 
+        /// при изменении значения параметра.</param>
         /// <param name="defaultvalue">Значение параметра по умолчанию.</param>
         /// <param name="attr">Атрибуты конфигурации параметра.</param>
         public Property(string name, string category, T defaultvalue,
-            Action<T> update = null, PropertyAttributes attr = PropertyAttributes.None)
+            Action<T> update = null, Attributes? attr = null)
         {
             Name = name;
             Category = category;
@@ -141,6 +142,7 @@ namespace CatenaryCAD.Properties
 
             Value = defaultvalue;
         }
+
         /// <summary>
         /// Инициализирует новый экземпляр <see cref="Property{T}"/>, имеющий указанные имена 
         /// параметра <paramref name="name"/> и категории <paramref name="category"/>, 
@@ -153,11 +155,11 @@ namespace CatenaryCAD.Properties
         /// <param name="name">Имя параметра, отображаемое в списке параметров.</param>
         /// <param name="category">Имя категории параметра, отображаемое в списке параметров.</param>
         /// <param name="dropdownvalues">Стандартные значения парметра, выбираемые из списка.</param>
-        /// <param name="update">Делегат инкапсулирующий метод, который принимает один параметр <typeparamref name="T"/> и
-        /// выполняемый при изменении значения параметра.</param>
+        /// <param name="update">Метод, который принимает один параметр <typeparamref name="T"/> и выполняемый 
+        /// при изменении значения параметра.</param>
         /// <param name="attr">Атрибуты конфигурации параметра.</param>
         public Property(string name, string category, Dictionary<string, T> dropdownvalues, 
-            Action<T> update = null, PropertyAttributes attr = PropertyAttributes.None)
+            Action<T> update = null, Attributes? attr = null)
         {
             Name = name;
             Category = category;
@@ -181,11 +183,11 @@ namespace CatenaryCAD.Properties
         /// <param name="category">Имя категории параметра, отображаемое в списке параметров.</param>
         /// <param name="dropdownvalues">Стандартные значения парметра, выбираемые из списка.</param>
         /// <param name="defaultvalue">Значение параметра по умолчанию.</param>
-        /// <param name="update">Делегат инкапсулирующий метод, который принимает один параметр <typeparamref name="T"/> и
-        /// выполняемый при изменении значения параметра.</param>
+        /// <param name="update">Метод, который принимает один параметр <typeparamref name="T"/> и выполняемый 
+        /// при изменении значения параметра.</param>
         /// <param name="attr">Атрибуты конфигурации параметра.</param>
         public Property(string name, string category, Dictionary<string, T> dropdownvalues, T defaultvalue,
-            Action<T> update = null, PropertyAttributes attr = PropertyAttributes.None)
+            Action<T> update = null, Attributes? attr = null)
         {
             Name = name;
             Category = category;

@@ -4,24 +4,26 @@ using System.Collections;
 
 namespace CatenaryCAD.Properties
 {
-    internal class AdapterProperty : McDynamicProperty
+    internal class McProperty : McDynamicProperty
     {
         private IProperty property;
 
-        public AdapterProperty(IProperty prop) => property = prop;
+        public McProperty(IProperty prop) => property = prop;
         public override Type PropertyType => property.GetValueType();
 
         public override string Name => property.Name;
         public override string DisplayName => property.Name;
         public override string Category => property.Category;
 
-        public override bool IsBrowsable => !property.Attributes.HasFlag(PropertyAttributes.NotBrowsable);
-        public override bool IsReadOnly => property.Attributes.HasFlag(PropertyAttributes.ReadOnly);
+        public override bool IsBrowsable => property.Attributes.HasValue ? !property.Attributes.Value.HasFlag(Attributes.NotBrowsable) : true;
+
+        public override bool IsReadOnly => property.Attributes.HasValue ? property.Attributes.Value.HasFlag(Attributes.ReadOnly) : false;
         public override ExAttributesProperties ExtendedAtributes
         {
             get
             {
-                if (property.Attributes.HasFlag(PropertyAttributes.RefreshAfterChange)) return ExAttributesProperties.RefreshListAfterChange;
+                if (property.Attributes.HasValue ? property.Attributes.Value.HasFlag(Attributes.RefreshAfterChange) : false) 
+                    return ExAttributesProperties.RefreshListAfterChange;
                 else return ExAttributesProperties.None;
             }
         }
