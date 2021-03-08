@@ -8,6 +8,7 @@ using Multicad.DatabaseServices;
 using Multicad.Geometry;
 using Multicad.Mc3D;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -58,7 +59,8 @@ namespace CatenaryCAD.Models.Handlers
             }
         }
 
-        protected ConcurrentHashSet<IProperty> Properties = new ConcurrentHashSet<IProperty>();
+        protected ConcurrentDictionary<string, IProperty> PropertiesDictionary = new ConcurrentDictionary<string, IProperty>();
+        public virtual IProperty[] Properties { get => PropertiesDictionary.Values.ToArray(); }
         public IProperty[] GetProperties()
         {
             if (Model != null)

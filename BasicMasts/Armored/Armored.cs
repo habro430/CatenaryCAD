@@ -1,4 +1,6 @@
-﻿using CatenaryCAD.Components;
+﻿using BasicFoundations;
+
+using CatenaryCAD.Components;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
@@ -8,7 +10,6 @@ using CatenaryCAD.Properties;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BasicMasts
 {
@@ -23,6 +24,8 @@ namespace BasicMasts
 
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
         static Armored() => InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Armored));
+
+        public override Type[] Foundations => new Type[] { typeof(FoundationSubmersible) };
 
         public Armored()
         {

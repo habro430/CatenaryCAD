@@ -1,10 +1,9 @@
-﻿using BasicAnchors;
-using CatenaryCAD.Components;
+﻿using CatenaryCAD.Components;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Models.Attributes;
 using System;
 
-namespace BasicFoundations
+namespace BasicAnchors
 {
     [Serializable]
     [ModelName("TestAnchor1")]

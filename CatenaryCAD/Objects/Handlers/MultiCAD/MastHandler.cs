@@ -37,7 +37,7 @@ namespace CatenaryCAD.Models.Handlers
             mast_type.Updated += (type) => Model = Activator.CreateInstance(type) as Mast;
             mast_type.Value = Masts.Values.FirstOrDefault();
 
-            Properties.Add(mast_type);
+            PropertiesDictionary.TryAdd("mast_type", mast_type);
         }
 
         public override ICollection<McDynamicProperty> GetProperties(out bool exclusive)

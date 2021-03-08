@@ -16,12 +16,12 @@ namespace CatenaryCAD.Models.Handlers
     {
         [NonSerialized]
         private static readonly Dictionary<string, Type> Foundations;
-
         static FoundationHandler()
         {
             Foundations = Main.GetCatenaryObjects(typeof(IFoundation))
                             .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
                             .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
+
         }
 
         public FoundationHandler()
@@ -33,7 +33,21 @@ namespace CatenaryCAD.Models.Handlers
             basement_type.Updated += (type) => Model = Activator.CreateInstance(type) as Foundation;
             basement_type.Value = Foundations.Values.FirstOrDefault();
 
-            Properties.Add(basement_type);
+            PropertiesDictionary.TryAdd("basement_type", basement_type);
+        }
+
+        public void SetAllowableFoundations(Type[] foundations)
+        {
+            Dictionary<string, Type> allowable;
+
+            Property<Type> basement_type = new Property<Type>("Тип фундамента", "Фундамент", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
+
+            basement_type.DropDownValues = Foundations;
+
+            basement_type.Updated += (type) => Model = Activator.CreateInstance(type) as Foundation;
+            basement_type.Value = Foundations.Values.FirstOrDefault();
+
+            PropertiesDictionary.AddOrUpdate("basement_type", basement_type, (name, property) => basement_type);
         }
 
         public override void OnTransform(Matrix3d tfm)
