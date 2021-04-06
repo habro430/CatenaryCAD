@@ -20,7 +20,7 @@ namespace CatenaryCAD.Models
         /// являеться указанная модель и все не абстрактные, наследуемые от указанного класса модели. 
         /// </remarks>
         /// <value>По умолчанию возвращает все фундаменты, наследуемые от <seealso cref="Foundation"/>.</value>
-        Type[] Foundations { get; }
+        Type[] PossibleFoundations { get; }
 
         /// <summary>
         /// Возвращает точку присоединения <see cref="Point2D"/> арматуры к стойке в месте пересечения луча <see cref="Ray2D"/> и геометрии <see cref="IShape"/>.

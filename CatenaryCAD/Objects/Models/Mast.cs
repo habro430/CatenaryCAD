@@ -7,7 +7,7 @@ namespace CatenaryCAD.Models
     public abstract class Mast : Model, IMast
     {
         /// <inheritdoc/>
-        public virtual Type[] Foundations => new Type[] { typeof(Foundation) };
+        public virtual Type[] PossibleFoundations => new Type[] { typeof(Foundation) };
 
         /// <inheritdoc/>
         public abstract Point2D? GetDockingPoint(Ray2D ray);

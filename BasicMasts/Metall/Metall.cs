@@ -21,10 +21,11 @@ namespace BasicMasts
     {
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts;
+
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
         static Metall() => InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Metall));
 
-        public override Type[] Foundations => new Type[] { typeof(FoundationDirect) };
+        public override Type[] PossibleFoundations => new Type[] { typeof(FoundationDirect) };
 
         public Metall()
         {

@@ -25,7 +25,7 @@ namespace BasicMasts
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
         static Armored() => InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Armored));
 
-        public override Type[] Foundations => new Type[] { typeof(FoundationSubmersible) };
+        public override Type[] PossibleFoundations => new Type[] { typeof(FoundationSubmersible) };
 
         public Armored()
         {

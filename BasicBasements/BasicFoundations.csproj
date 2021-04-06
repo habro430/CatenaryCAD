@@ -84,6 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractFoundation.cs" />
+    <Compile Include="FoundationDirectTest1.cs" />
+    <Compile Include="FoundationSubmersibleTest2.cs" />
+    <Compile Include="FoundationSubmersibleTest1.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

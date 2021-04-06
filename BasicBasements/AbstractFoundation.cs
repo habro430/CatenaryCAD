@@ -7,7 +7,7 @@ using System.Resources;
 using System.Runtime.Caching;
 using System.Text;
 
-namespace BasicBasements
+namespace BasicFoundations
 {
     [Serializable]
     public abstract class AbstractFoundation : Foundation

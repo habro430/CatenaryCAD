@@ -24,6 +24,7 @@ namespace CatenaryCAD.Models.Handlers
         static MastHandler()
         {
             Masts = Main.GetCatenaryObjects(typeof(IMast))
+                        .Where((t) => !t.IsAbstract)
                         .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
                         .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
         }
@@ -34,7 +35,27 @@ namespace CatenaryCAD.Models.Handlers
 
             mast_type.DropDownValues = Masts;
 
-            mast_type.Updated += (type) => Model = Activator.CreateInstance(type) as Mast;
+            mast_type.Updated += (type) =>
+            {
+                var mast = Activator.CreateInstance(type) as Mast;
+                var mastfoundations = mast.PossibleFoundations;
+
+                var allfoundations = Main.GetCatenaryObjects(typeof(IFoundation));
+
+                var possiblefoundations = mastfoundations
+                    .SelectMany((all) => allfoundations
+                        .Where((sub) => sub.IsSubclassOf(all))
+                        .Union(mastfoundations)
+                    .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
+                    .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null) //отсеиваем объекты которые помечены как недоступные
+                    .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p); 
+                    
+                
+
+                Model = mast;
+                //IModel foundation = Model.Childrens.Where((child) => child is Foundation).FirstOrDefault();
+            };
+
             mast_type.Value = Masts.Values.FirstOrDefault();
 
             PropertiesDictionary.TryAdd("mast_type", mast_type);
