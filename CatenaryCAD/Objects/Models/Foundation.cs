@@ -1,7 +1,6 @@
 ﻿using CatenaryCAD.Models.Attributes;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CatenaryCAD.Models
@@ -14,21 +13,20 @@ namespace CatenaryCAD.Models
     {
 
         [NonSerialized]
-        internal static readonly Dictionary<string, Type> DefaultAllowableFoundations;
+        internal static readonly Type[] DefaultAllowableFoundations;
         static Foundation()
         {
             DefaultAllowableFoundations = Main.GetCatenaryObjects(typeof(IFoundation))
                 .Where((t) => !t.IsAbstract)
-                .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
-                .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
+                .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null).ToArray();
         }
 
         internal event Action AllowableModelsUpdated;
 
-        private Dictionary<string, Type> allowablemodels = DefaultAllowableFoundations;
+        private Type[] allowablemodels = DefaultAllowableFoundations;
 
         /// <inheritdoc/>
-        public Dictionary<string, Type> AllowableModels 
+        public Type[] AllowableModels 
         { 
             get => allowablemodels;
             set

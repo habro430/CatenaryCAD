@@ -1,4 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Models.Attributes;
 using CatenaryCAD.Properties;
 using Multicad.Geometry;
 using Multicad.Runtime;
@@ -22,14 +23,17 @@ namespace CatenaryCAD.Models.Handlers
 
                 foundation.AllowableModelsUpdated += () => 
                 {
-                    foudation_prop.DropDownValues = foundation.AllowableModels;
+                    foudation_prop.DropDownValues = foundation.AllowableModels
+                        .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
+
                     foudation_prop.Value = foudation_prop.DropDownValues.Values.FirstOrDefault(); 
                 };
 
                 Model = foundation;
             };
 
-            foudation_prop.DropDownValues = Foundation.DefaultAllowableFoundations;
+            foudation_prop.DropDownValues = Foundation.DefaultAllowableFoundations
+                .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
             foudation_prop.Value = foudation_prop.DropDownValues.Values.FirstOrDefault();
 
             PropertiesDictionary.AddOrUpdate("basement_type", foudation_prop, (name, property) => foudation_prop);

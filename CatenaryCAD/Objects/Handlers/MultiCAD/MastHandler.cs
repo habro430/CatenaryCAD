@@ -30,12 +30,8 @@ namespace CatenaryCAD.Models.Handlers
 
         public MastHandler()
         {
-            SetAllowableMasts(DefaultAllowableMasts);
-        }
-
-        public void SetAllowableMasts(Type[] masts)
-        {
-            var allowable = masts.ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p); ;
+            var allowable = DefaultAllowableMasts
+                .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p); ;
 
             Property<Type> mast_type = new Property<Type>("Тип стойки", "Стойка", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
 
@@ -54,7 +50,8 @@ namespace CatenaryCAD.Models.Handlers
                         .Union(mastfoundations)
                     .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
                     .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null) //отсеиваем объекты которые помечены как недоступные
-                    .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p); 
+                    .ToArray();
+                //.ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p); 
 
                 Model = mast;
 
@@ -63,7 +60,7 @@ namespace CatenaryCAD.Models.Handlers
 
             };
 
-            mast_type.Value = allowable.Values.FirstOrDefault();
+            mast_type.Value = mast_type.DropDownValues.Values.FirstOrDefault();
             PropertiesDictionary.TryAdd("mast_type", mast_type);
         }
 
