@@ -6,7 +6,7 @@ using System;
 namespace CatenaryCAD.Models
 {
     /// <summary>
-    /// Интерфейс, описывающий контракты для опор контактной сети.
+    /// Интерфейс, описывающий контракты для модели опоры контактной сети.
     /// </summary>
     public interface IMast : IModel
     {
@@ -19,7 +19,7 @@ namespace CatenaryCAD.Models
         /// При наличии класса определенной модели фундамента, то допустимым фундаментом 
         /// являеться указанная модель и все не абстрактные, наследуемые от указанного класса модели. 
         /// </remarks>
-        /// <value>По умолчанию возвращает все фундаменты, наследуемые от <seealso cref="Foundation"/>.</value>
+        /// <value>По умолчанию возвращает все модели, наследуемые от <seealso cref="Foundation"/>.</value>
         Type[] PossibleFoundations { get; }
 
         /// <summary>

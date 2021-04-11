@@ -3,6 +3,9 @@ using System;
 
 namespace CatenaryCAD.Models
 {
+    /// <summary>
+    /// Модель, описывающая опору контактной сети.
+    /// </summary>
     [Serializable]
     public abstract class Mast : Model, IMast
     {

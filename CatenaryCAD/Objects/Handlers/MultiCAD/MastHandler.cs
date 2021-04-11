@@ -19,21 +19,27 @@ namespace CatenaryCAD.Models.Handlers
     internal sealed class MastHandler : Handler
     {
         [NonSerialized]
-        private static readonly Dictionary<string, Type> Masts;
+        private static readonly Type[] DefaultAllowableMasts;
 
         static MastHandler()
         {
-            Masts = Main.GetCatenaryObjects(typeof(IMast))
-                        .Where((t) => !t.IsAbstract)
-                        .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
-                        .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
+            DefaultAllowableMasts = Main.GetCatenaryObjects(typeof(IMast))
+                .Where((t) => !t.IsAbstract)
+                .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null).ToArray();
         }
 
         public MastHandler()
         {
+            SetAllowableMasts(DefaultAllowableMasts);
+        }
+
+        public void SetAllowableMasts(Type[] masts)
+        {
+            var allowable = masts.ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p); ;
+
             Property<Type> mast_type = new Property<Type>("Тип стойки", "Стойка", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
 
-            mast_type.DropDownValues = Masts;
+            mast_type.DropDownValues = allowable;
 
             mast_type.Updated += (type) =>
             {
@@ -49,15 +55,15 @@ namespace CatenaryCAD.Models.Handlers
                     .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
                     .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null) //отсеиваем объекты которые помечены как недоступные
                     .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p); 
-                    
-                
 
                 Model = mast;
-                //IModel foundation = Model.Childrens.Where((child) => child is Foundation).FirstOrDefault();
+
+                Foundation foundation = Model.Childrens.OfType<Foundation>().FirstOrDefault();
+                if (foundation != null) foundation.AllowableModels = possiblefoundations;
+
             };
 
-            mast_type.Value = Masts.Values.FirstOrDefault();
-
+            mast_type.Value = allowable.Values.FirstOrDefault();
             PropertiesDictionary.TryAdd("mast_type", mast_type);
         }
 
@@ -102,9 +108,23 @@ namespace CatenaryCAD.Models.Handlers
 
                     mhandler.PlaceObject(Point3d.Origin, Vector3d.XAxis);
                     fhandler.PlaceObject(Point3d.Origin, Vector3d.XAxis);
-
+                    
                     Mast mast = mhandler.Model as Mast;
                     Foundation foundation = fhandler.Model as Foundation;
+
+                    /////////////////////////////////////////////////////////////////////
+                    //var possible_foundations = mast.PossibleFoundations;
+                    //var all_foundations = Main.GetCatenaryObjects(typeof(IFoundation));
+
+                    //var allowable_foundations = possible_foundations
+                    //    .SelectMany((all) => all_foundations
+                    //        .Where((sub) => sub.IsSubclassOf(all))
+                    //        .Union(possible_foundations)
+                    //    .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
+                    //    .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null); //отсеиваем объекты которые помечены как недоступные
+
+                    //fhandler.SetAllowableFoundations(allowable_foundations.ToArray());
+                    /////////////////////////////////////////////////////////////////////
 
                     foundation.Parent = mast;
 

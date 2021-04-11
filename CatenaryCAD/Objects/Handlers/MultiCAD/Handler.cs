@@ -1,16 +1,15 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Helpers;
 using CatenaryCAD.Properties;
+
 using Multicad;
 using Multicad.CustomObjectBase;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
-using Multicad.Mc3D;
+
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 using static CatenaryCAD.Extensions;
