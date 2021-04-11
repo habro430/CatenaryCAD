@@ -40,7 +40,7 @@ namespace CatenaryCAD.Models.Handlers
             mast_type.Updated += (type) =>
             {
                 var mast = Activator.CreateInstance(type) as Mast;
-                var mastfoundations = mast.PossibleFoundations;
+                var mastfoundations = mast.AllowableFoundations;
 
                 var allfoundations = Main.GetCatenaryObjects(typeof(IFoundation));
 
@@ -51,12 +51,11 @@ namespace CatenaryCAD.Models.Handlers
                     .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
                     .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null) //отсеиваем объекты которые помечены как недоступные
                     .ToArray();
-                //.ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p); 
 
                 Model = mast;
 
                 Foundation foundation = Model.Childrens.OfType<Foundation>().FirstOrDefault();
-                if (foundation != null) foundation.AllowableModels = possiblefoundations;
+                if (foundation != null) foundation.AvailableFoundations = possiblefoundations;
 
             };
 
@@ -109,22 +108,22 @@ namespace CatenaryCAD.Models.Handlers
                     Mast mast = mhandler.Model as Mast;
                     Foundation foundation = fhandler.Model as Foundation;
 
-                    /////////////////////////////////////////////////////////////////////
-                    //var possible_foundations = mast.PossibleFoundations;
-                    //var all_foundations = Main.GetCatenaryObjects(typeof(IFoundation));
-
-                    //var allowable_foundations = possible_foundations
-                    //    .SelectMany((all) => all_foundations
-                    //        .Where((sub) => sub.IsSubclassOf(all))
-                    //        .Union(possible_foundations)
-                    //    .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
-                    //    .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null); //отсеиваем объекты которые помечены как недоступные
-
-                    //fhandler.SetAllowableFoundations(allowable_foundations.ToArray());
-                    /////////////////////////////////////////////////////////////////////
-
                     foundation.Parent = mast;
 
+                    ///////////////////////////////////////////////////////////////////////
+                    //Устанваливаем возможные для пооры фндаменты 
+                    var mastfoundations = mast.AllowableFoundations;
+                    var allfoundations = Main.GetCatenaryObjects(typeof(IFoundation));
+
+                    foundation.AvailableFoundations = mastfoundations
+                        .SelectMany((all) => allfoundations
+                            .Where((sub) => sub.IsSubclassOf(all))
+                            .Union(mastfoundations)
+                        .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
+                        .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null) //отсеиваем объекты которые помечены как недоступные
+                        .ToArray();
+                    ////////////////////////////////////////////////////////////////////////
+                    
                     input.ExcludeObjects(new McObjectId[] { mhandler.ID, fhandler.ID });
 
                     input.MouseMove = (s, a) =>

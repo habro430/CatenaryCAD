@@ -165,7 +165,7 @@ namespace CatenaryCAD.Models.Handlers
 
                     case OperationalMode.Layout:
                         
-                        var geometry_layout = Model.ComponentParts
+                        var geometry_layout = Model.Components
                             .SelectMany(p => p.Geometry);
 
                         if (geometry_layout != null)

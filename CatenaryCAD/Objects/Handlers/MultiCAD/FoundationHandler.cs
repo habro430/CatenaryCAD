@@ -21,9 +21,9 @@ namespace CatenaryCAD.Models.Handlers
             {
                 var foundation = Activator.CreateInstance(type) as Foundation;
 
-                foundation.AllowableModelsUpdated += () => 
+                foundation.AvailableFoundationsUpdated += () => 
                 {
-                    foudation_prop.DropDownValues = foundation.AllowableModels
+                    foudation_prop.DropDownValues = foundation.AvailableFoundations
                         .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
 
                     foudation_prop.Value = foudation_prop.DropDownValues.Values.FirstOrDefault(); 
@@ -32,7 +32,7 @@ namespace CatenaryCAD.Models.Handlers
                 Model = foundation;
             };
 
-            foudation_prop.DropDownValues = Foundation.DefaultAllowableFoundations
+            foudation_prop.DropDownValues = Foundation.DefaultAvailableFoundations
                 .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
             foudation_prop.Value = foudation_prop.DropDownValues.Values.FirstOrDefault();
 

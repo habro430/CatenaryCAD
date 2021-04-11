@@ -11,7 +11,6 @@ namespace CatenaryCAD.Models
         /// <summary>
         /// Допустимые объекты <see cref="IFoundation"/> которые можно установить для данной модели.
         /// </summary>
-        /// <value>По умолчанию возвращает все модели, наследуемые от <seealso cref="IFoundation"/>.</value>
-        Type[] AllowableModels { get; set; }
+        Type[] AvailableFoundations { get; set; }
     }
 }

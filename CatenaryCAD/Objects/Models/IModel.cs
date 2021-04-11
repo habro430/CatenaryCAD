@@ -1,12 +1,9 @@
-﻿using CatenaryCAD.Geometry;
+﻿using CatenaryCAD.Components;
+using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Interfaces;
-using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Helpers;
-using CatenaryCAD.Components;
 using CatenaryCAD.Properties;
-
-using System;
 using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Models
@@ -44,13 +41,7 @@ namespace CatenaryCAD.Models
         /// <summary>
         /// Массив деталей <see cref="IComponent"/> модели <see cref="IModel"/>
         /// </summary>
-        public IComponent[] ComponentParts { get; }
-
-        /// <summary>
-        /// Получить 3D геометрию для режима работы <see cref="OperationalMode.Layout"/>
-        /// </summary>
-        /// <returns>3D геометрия</returns>
-        //public IMesh[] GetGeometryForLayout();
+        public IComponent[] Components { get; }
 
         /// <summary>
         /// Получить 2D геометрию для режима работы <see cref="OperationalMode.Scheme"/>

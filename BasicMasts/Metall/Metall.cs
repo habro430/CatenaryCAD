@@ -25,7 +25,7 @@ namespace BasicMasts
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
         static Metall() => InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Metall));
 
-        public override Type[] PossibleFoundations => new Type[] { typeof(FoundationDirect) };
+        public override Type[] AllowableFoundations => new Type[] { typeof(FoundationDirect) };
 
         public Metall()
         {

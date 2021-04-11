@@ -6,33 +6,34 @@ using System.Linq;
 namespace CatenaryCAD.Models
 {
     /// <summary>
-    /// Модель, описывающая фундамент опоры контактной сети.
+    /// Класс, описывающий модель фундамента опоры контактной сети.
     /// </summary>
     [Serializable]
     public abstract class Foundation : Model, IFoundation
     {
 
         [NonSerialized]
-        internal static readonly Type[] DefaultAllowableFoundations;
+        internal static readonly Type[] DefaultAvailableFoundations;
         static Foundation()
         {
-            DefaultAllowableFoundations = Main.GetCatenaryObjects(typeof(IFoundation))
+            DefaultAvailableFoundations = Main.GetCatenaryObjects(typeof(IFoundation))
                 .Where((t) => !t.IsAbstract)
                 .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null).ToArray();
         }
 
-        internal event Action AllowableModelsUpdated;
+        internal event Action AvailableFoundationsUpdated;
 
-        private Type[] allowablemodels = DefaultAllowableFoundations;
+        private Type[] avaliblefoundations = DefaultAvailableFoundations;
 
         /// <inheritdoc/>
-        public Type[] AllowableModels 
+        /// <value>По умолчанию возвращает все модели, наследуемые от <seealso cref="IFoundation"/>.</value>
+        public Type[] AvailableFoundations
         { 
-            get => allowablemodels;
+            get => avaliblefoundations;
             set
             {
-                allowablemodels = value;
-                AllowableModelsUpdated?.Invoke();
+                avaliblefoundations = value;
+                AvailableFoundationsUpdated?.Invoke();
             }
         }
     }
