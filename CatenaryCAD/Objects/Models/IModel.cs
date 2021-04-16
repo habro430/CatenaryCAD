@@ -3,6 +3,7 @@ using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Interfaces;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Helpers;
+using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
 using static CatenaryCAD.Extensions;
 
@@ -49,6 +50,6 @@ namespace CatenaryCAD.Models
         /// <returns>2D геометрия</returns>
         public IShape[] GetGeometry();
 
-        public bool? SendMessageToHandler(HandlerMessages message);
+        //public bool? SendMessageToHandler(HandlerMessages message);
     }
 }

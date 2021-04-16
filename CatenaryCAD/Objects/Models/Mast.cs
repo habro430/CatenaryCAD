@@ -23,11 +23,11 @@ namespace CatenaryCAD.Models
         /// <inheritdoc/>
         /// <returns>Если луч и геометрия на плане пересекаются, то возвращает <seealso cref="Point2D"/> 
         /// в месте пересечения, в противном случае возвращает <see langword="null"/>.</returns>
-        public abstract Point2D? GetDockingPoint(Ray2D ray);
+        public abstract Point2D? GetDockingPointForArmatory(Ray2D ray);
 
         /// <inheritdoc/>
         /// <returns>Если луч и геометрия на макете пересекаются, то возвращает <seealso cref="Point3D"/> 
         /// в месте пересечения, в противном случае возвращает <see langword="null"/>.</returns>
-        public abstract Point3D? GetDockingPoint(Ray3D ray);
+        public abstract Point3D? GetDockingPointForArmatory(Ray3D ray);
     }
 }

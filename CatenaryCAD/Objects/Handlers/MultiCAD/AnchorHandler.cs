@@ -1,5 +1,6 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Models.Attributes;
+using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
 using Multicad;
 using Multicad.DatabaseServices;
@@ -28,11 +29,9 @@ namespace CatenaryCAD.Models.Handlers
         public AnchorHandler()
         {
             Property<Type> anchor_type = new Property<Type>("Тип анкера", "Анкер", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
+            anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
 
             anchor_type.DropDownValues = Anchors;
-
-            anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
-            anchor_type.Value = Anchors.Values.FirstOrDefault();
 
             PropertiesDictionary.TryAdd("anchor_type", anchor_type);
         }
@@ -90,13 +89,13 @@ namespace CatenaryCAD.Models.Handlers
                                             .TransformBy(Matrix3D.CreateTranslation(Vector3D.AxisX * distancetomast))
                                             .TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
 
-                            anchor.SendMessageToHandler(HandlerMessages.Update);
+                            anchor.EventInvoke(ahandler, new Update());
                         };
 
                         InputResult result = input.GetPoint("Выберите направление для размещения обьекта:");
                         if (result.Result != InputResult.ResultCode.Normal)
                         {
-                            anchor.SendMessageToHandler(HandlerMessages.Remove);
+                            anchor.EventInvoke(ahandler, new Remove());
                             return;
                         }
 

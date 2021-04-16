@@ -155,6 +155,11 @@
     <Compile Include="Main.cs" />
     <Compile Include="Objects\Models\Anchor.cs" />
     <Compile Include="Objects\Models\Bracket.cs" />
+    <Compile Include="Objects\Models\Events\EventInput.cs" />
+    <Compile Include="Objects\Models\Events\EventOutput.cs" />
+    <Compile Include="Objects\Models\Events\Remove.cs" />
+    <Compile Include="Objects\Models\Events\TryModify.cs" />
+    <Compile Include="Objects\Models\Events\Update.cs" />
     <Compile Include="Objects\Models\Foundation.cs" />
     <Compile Include="Objects\Models\Mast.cs" />
     <Compile Include="Objects\Models\Model.cs" />

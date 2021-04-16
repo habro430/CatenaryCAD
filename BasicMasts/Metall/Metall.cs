@@ -6,6 +6,7 @@ using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Models;
 using CatenaryCAD.Models.Attributes;
+using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
 
 using System;
@@ -50,8 +51,7 @@ namespace BasicMasts
 
         private void UpdateLenght(int lenght)
         {
-            if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false)
-                return;
+            if (!(bool?)EventInvoke(this, new TryModify())?.Value ?? false) return;
 
             switch (lenght)
             {

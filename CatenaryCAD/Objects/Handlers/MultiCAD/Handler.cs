@@ -1,6 +1,7 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Properties;
+using CatenaryCAD.Models.Events;
 
 using Multicad;
 using Multicad.CustomObjectBase;
@@ -50,10 +51,28 @@ namespace CatenaryCAD.Models.Handlers
                     newmodel.Identifier = new McIdentifier(ID);
                 }
 
-                newmodel.TryModify += () => TryModify();
-                newmodel.Update += () => DbEntity.Update();
-                newmodel.Remove += () => McObjectManager.Erase(ID);
+                //newmodel.TryModify += () => TryModify();
+                //newmodel.Update += () => DbEntity.Update();
+                //newmodel.Remove += () => McObjectManager.Erase(ID);
+                
+                newmodel.Event += (sender, input) =>
+                {
+                    switch (input)
+                    {
+                        case TryModify tryModify:
+                            return new EventOutput(TryModify());
 
+                        case Update update:
+                            return new EventOutput(DbEntity.Update());
+
+                        case Remove remove:
+                            return new EventOutput(McObjectManager.Erase(ID));
+
+                        default:
+                            return null;
+                    }
+
+                };
                 model = newmodel;
             }
         }

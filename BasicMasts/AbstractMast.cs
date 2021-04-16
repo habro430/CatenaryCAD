@@ -64,7 +64,7 @@ namespace BasicMasts
 
         public override IShape[] GetGeometry() => Geometry2D;
 
-        public override Point2D? GetDockingPoint(Ray2D ray)
+        public override Point2D? GetDockingPointForArmatory(Ray2D ray)
         {
             var position = new Point2D(Position.X, Position.Y);
             var direction = new Vector2D(Direction.X, Direction.Y);
@@ -95,7 +95,7 @@ namespace BasicMasts
             else
                 return null;
         }
-        public override Point3D? GetDockingPoint(Ray3D ray)
+        public override Point3D? GetDockingPointForArmatory(Ray3D ray)
         {
             throw new NotImplementedException();
         }

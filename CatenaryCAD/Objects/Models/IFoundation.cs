@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CatenaryCAD.Geometry;
 
 namespace CatenaryCAD.Models
 {
@@ -9,8 +8,9 @@ namespace CatenaryCAD.Models
     public interface IFoundation : IModel
     {
         /// <summary>
-        /// Допустимые объекты <see cref="IFoundation"/> которые можно установить для данной модели.
+        /// Возвращает точку присоединения <see cref="Point3D"/> опоры <see cref="IMast"/> к фундаменту <see cref="IFoundation"/> .
         /// </summary>
-        Type[] AvailableFoundations { get; set; }
+        /// <returns>Точка присодинения <see cref="Point3D"/> опоры <see cref="IMast"/> к фундаменту <see cref="IFoundation"/>.</returns>
+        Point3D GetDockingPointForMast();
     }
 }

@@ -2,6 +2,7 @@
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Helpers;
+using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
 using System;
 using System.Collections.Concurrent;
@@ -10,11 +11,6 @@ using System.Linq;
 
 namespace CatenaryCAD.Models
 {
-    public enum HandlerMessages : byte
-    {
-        TryModify, Update, Remove
-    }
-
     [Serializable]
     public abstract class Model : IModel
     {
@@ -39,7 +35,7 @@ namespace CatenaryCAD.Models
             get => position;
             set
             {
-                if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false) return;
+                if (!(bool?)EventInvoke(this, new TryModify())?.Value ?? false) return;
                 position = value;
             }
         }
@@ -50,7 +46,7 @@ namespace CatenaryCAD.Models
             get => direction;
             set
             {
-                if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false) return;
+                if (!(bool?)EventInvoke(this, new TryModify())?.Value ?? false) return;
                 direction = value.GetNormalize();
             }
         }
@@ -71,27 +67,11 @@ namespace CatenaryCAD.Models
             return this;
         }
 
-        internal event Func<bool> TryModify;
-        internal event Func<bool> Update;
-        internal event Func<bool> Remove;
 
-        public bool? SendMessageToHandler(HandlerMessages message)
-        {
-            switch (message)
-            {
-                case HandlerMessages.TryModify:
-                    return TryModify?.Invoke();
+        internal delegate EventOutput EventHandler(object s, EventInput i);
+        internal event EventHandler Event;
 
-                case HandlerMessages.Update:
-                    return Update?.Invoke();
-
-                case HandlerMessages.Remove:
-                    return Remove?.Invoke();
-
-                default:
-                    throw new NotImplementedException();
-            }
-        }
+        public EventOutput EventInvoke(object sender, EventInput input) => Event?.Invoke(sender, input);
 
         /// <summary>
         /// Коллекция идентификаторов <see cref="IObjectID"/> дочерних моделей
@@ -109,7 +89,7 @@ namespace CatenaryCAD.Models
             get => parent?.GetModel();
             set
             {
-                if (!SendMessageToHandler(HandlerMessages.TryModify) ?? false) return;
+                if (!(bool?)EventInvoke(this, new TryModify())?.Value ?? false) return;
 
                 if (value?.Identifier.GetGuid() != Guid.Empty)
                 {

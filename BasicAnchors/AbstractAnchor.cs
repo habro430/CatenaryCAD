@@ -38,7 +38,7 @@ namespace BasicAnchors
             var mast_position = new Point2D(Parent.Position.X, Parent.Position.Y);
             var anchor_position = new Point2D(Position.X, Position.Y);
 
-            Point2D dockingjoint = (Parent as Mast).GetDockingPoint(
+            Point2D dockingjoint = (Parent as Mast).GetDockingPointForArmatory(
                         new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position))) ?? mast_position;
 
             double angle = mast_position.GetVectorTo(dockingjoint).GetAngleTo(Vector2D.AxisX);

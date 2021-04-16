@@ -1,5 +1,5 @@
-﻿using CatenaryCAD.Models.Attributes;
-
+﻿using CatenaryCAD.Geometry;
+using CatenaryCAD.Models.Attributes;
 using System;
 using System.Linq;
 
@@ -11,30 +11,25 @@ namespace CatenaryCAD.Models
     [Serializable]
     public abstract class Foundation : Model, IFoundation
     {
-
-        [NonSerialized]
-        internal static readonly Type[] DefaultAvailableFoundations;
-        static Foundation()
-        {
-            DefaultAvailableFoundations = Main.GetCatenaryObjects(typeof(IFoundation))
-                .Where((t) => !t.IsAbstract)
-                .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null).ToArray();
-        }
-
-        internal event Action AvailableFoundationsUpdated;
-
-        private Type[] avaliblefoundations = DefaultAvailableFoundations;
-
         /// <inheritdoc/>
-        /// <value>По умолчанию возвращает все модели, наследуемые от <seealso cref="IFoundation"/>.</value>
-        public Type[] AvailableFoundations
-        { 
-            get => avaliblefoundations;
-            set
-            {
-                avaliblefoundations = value;
-                AvailableFoundationsUpdated?.Invoke();
-            }
+        public virtual Point3D GetDockingPointForMast() => Point3D.Origin;
+
+
+        internal event Action<Type[]> AvailableFoundationsUpdated;
+        internal void SetAvailableFoundations(Type[] foundations)
+        {
+            //получаем все прокэшированные модели производные от IFoundation
+            var allfoundations = Main.GetCatenaryObjects(typeof(IFoundation));
+
+            var availablefoundations = foundations
+                .SelectMany((all) => allfoundations
+                    .Where((sub) => sub.IsSubclassOf(all))
+                    .Union(foundations)
+                .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
+                .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null) //отсеиваем объекты которые помечены как недоступные
+                .ToArray();
+
+            AvailableFoundationsUpdated?.Invoke(availablefoundations);
         }
     }
 }

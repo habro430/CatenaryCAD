@@ -13,8 +13,19 @@ namespace CatenaryCAD.Properties
     [Serializable, DebuggerDisplay("Name = {Name}, Value = {Value}")]
     public sealed class Property<T> : IProperty
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private Dictionary<string, T> dropdovnvalues;
+
         /// <inheritdoc cref="IProperty.DropDownValues"/>
-        public Dictionary<string, T> DropDownValues { set; get; }
+        public Dictionary<string, T> DropDownValues
+        {
+            get => dropdovnvalues;
+            set
+            {
+                dropdovnvalues = value;
+                Value = dropdovnvalues.Values.FirstOrDefault();
+            }
+        }
 
         /// <inheritdoc/>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -168,7 +179,7 @@ namespace CatenaryCAD.Properties
             Updated = update;
 
             DropDownValues = dropdownvalues;
-            Value = DropDownValues.Values.FirstOrDefault();
+            //Value = DropDownValues.Values.FirstOrDefault();
         }
 
         /// <summary>
@@ -196,7 +207,7 @@ namespace CatenaryCAD.Properties
             Updated = update;
 
             DropDownValues = dropdownvalues;
-            Value = defaultvalue;
+            //Value = defaultvalue;
         }
 
     }

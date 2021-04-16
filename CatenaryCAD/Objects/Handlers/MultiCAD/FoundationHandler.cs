@@ -5,6 +5,7 @@ using Multicad.Geometry;
 using Multicad.Runtime;
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CatenaryCAD.Models.Handlers
@@ -13,30 +14,35 @@ namespace CatenaryCAD.Models.Handlers
     [CustomEntity("{36E13AC1-DF87-4158-8C7E-221A17AEB6E7}", "BASEMENT", "Фундамент опоры контактной сети")]
     internal sealed class FoundationHandler : Handler
     {
+        [NonSerialized]
+        private static readonly Dictionary<string, Type> DefaultAvailableFoundations;
+        private readonly Property<Type> FoudationProperty;
+
+        static FoundationHandler()
+        {
+            DefaultAvailableFoundations = Main.GetCatenaryObjects(typeof(IFoundation))
+                .Where((t) => !t.IsAbstract)
+                .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
+                .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
+        }
+
         public FoundationHandler() 
         {
-            Property<Type> foudation_prop = new Property<Type>("Тип фундамента", "Фундамент", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
-
-            foudation_prop.Updated += (type) =>
+            FoudationProperty = new Property<Type>("Тип фундамента", "Фундамент", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
+            FoudationProperty.Updated += (type) =>
             {
                 var foundation = Activator.CreateInstance(type) as Foundation;
-
-                foundation.AvailableFoundationsUpdated += () => 
+                foundation.AvailableFoundationsUpdated += (types) =>
                 {
-                    foudation_prop.DropDownValues = foundation.AvailableFoundations
+                    FoudationProperty.DropDownValues = types
                         .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
-
-                    foudation_prop.Value = foudation_prop.DropDownValues.Values.FirstOrDefault(); 
                 };
 
                 Model = foundation;
             };
 
-            foudation_prop.DropDownValues = Foundation.DefaultAvailableFoundations
-                .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
-            foudation_prop.Value = foudation_prop.DropDownValues.Values.FirstOrDefault();
-
-            PropertiesDictionary.AddOrUpdate("basement_type", foudation_prop, (name, property) => foudation_prop);
+            FoudationProperty.DropDownValues = DefaultAvailableFoundations;
+            PropertiesDictionary.TryAdd("basement_type", FoudationProperty);
         }
 
         public override void OnTransform(Matrix3d tfm)

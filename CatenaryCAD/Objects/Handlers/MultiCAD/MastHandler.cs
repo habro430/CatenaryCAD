@@ -1,5 +1,6 @@
 ﻿using CatenaryCAD.Geometry;
 using CatenaryCAD.Models.Attributes;
+using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
 
 using Multicad;
@@ -19,48 +20,32 @@ namespace CatenaryCAD.Models.Handlers
     internal sealed class MastHandler : Handler
     {
         [NonSerialized]
-        private static readonly Type[] DefaultAllowableMasts;
+        private static readonly Dictionary<string, Type> DefaultAllowableMasts;
+        private readonly Property<Type> MastProperty;
 
         static MastHandler()
         {
             DefaultAllowableMasts = Main.GetCatenaryObjects(typeof(IMast))
                 .Where((t) => !t.IsAbstract)
-                .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null).ToArray();
+                .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
+                .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
         }
 
         public MastHandler()
         {
-            var allowable = DefaultAllowableMasts
-                .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p); ;
+            MastProperty = new Property<Type>("Тип стойки", "Стойка", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
 
-            Property<Type> mast_type = new Property<Type>("Тип стойки", "Стойка", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
-
-            mast_type.DropDownValues = allowable;
-
-            mast_type.Updated += (type) =>
+            MastProperty.Updated += (type) =>
             {
                 var mast = Activator.CreateInstance(type) as Mast;
-                var mastfoundations = mast.AllowableFoundations;
-
-                var allfoundations = Main.GetCatenaryObjects(typeof(IFoundation));
-
-                var possiblefoundations = mastfoundations
-                    .SelectMany((all) => allfoundations
-                        .Where((sub) => sub.IsSubclassOf(all))
-                        .Union(mastfoundations)
-                    .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
-                    .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null) //отсеиваем объекты которые помечены как недоступные
-                    .ToArray();
-
                 Model = mast;
 
                 Foundation foundation = Model.Childrens.OfType<Foundation>().FirstOrDefault();
-                if (foundation != null) foundation.AvailableFoundations = possiblefoundations;
-
+                foundation?.SetAvailableFoundations(mast.AllowableFoundations);
             };
 
-            mast_type.Value = mast_type.DropDownValues.Values.FirstOrDefault();
-            PropertiesDictionary.TryAdd("mast_type", mast_type);
+            MastProperty.DropDownValues = DefaultAllowableMasts;
+            PropertiesDictionary.TryAdd("mast_type", MastProperty);
         }
 
         public override ICollection<McDynamicProperty> GetProperties(out bool exclusive)
@@ -86,15 +71,12 @@ namespace CatenaryCAD.Models.Handlers
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void insert_mast()
         {
-            using (InputJig input = new InputJig())
+            using (InputJig input = new InputJig() { AutoSnap = AutoSnapMode.Magnet,
+                                                     SnapMode = OsnapModeMask.Center,
+                                                     SnapOverrideMode = InputJig.OsnapOverrideMode.Override,
+                                                     DashLine = true,
+                                                     AutoHighlight = false })
             {
-                input.AutoSnap = AutoSnapMode.Magnet;
-                input.SnapMode = OsnapModeMask.Center;
-                input.SnapOverrideMode = InputJig.OsnapOverrideMode.Override;
-
-                input.DashLine = true;
-                input.AutoHighlight = false;
-
                 Mast last_mast = null;
 
                 while (true)
@@ -109,23 +91,9 @@ namespace CatenaryCAD.Models.Handlers
                     Foundation foundation = fhandler.Model as Foundation;
 
                     foundation.Parent = mast;
+                    foundation.SetAvailableFoundations(mast.AllowableFoundations);//Устанваливаем возможные для опоры фундаменты 
 
-                    ///////////////////////////////////////////////////////////////////////
-                    //Устанваливаем возможные для пооры фндаменты 
-                    var mastfoundations = mast.AllowableFoundations;
-                    var allfoundations = Main.GetCatenaryObjects(typeof(IFoundation));
-
-                    foundation.AvailableFoundations = mastfoundations
-                        .SelectMany((all) => allfoundations
-                            .Where((sub) => sub.IsSubclassOf(all))
-                            .Union(mastfoundations)
-                        .Where((abs) => !abs.IsAbstract))//отсеиваем все абстрактые объекты
-                        .Where((non) => Attribute.GetCustomAttribute(non, typeof(ModelNonBrowsableAttribute), false) is null) //отсеиваем объекты которые помечены как недоступные
-                        .ToArray();
-                    ////////////////////////////////////////////////////////////////////////
-                    
                     input.ExcludeObjects(new McObjectId[] { mhandler.ID, fhandler.ID });
-
                     input.MouseMove = (s, a) =>
                     {
                         Point3D mouse = a.Point.ToCatenaryCAD_3D();
@@ -137,9 +105,8 @@ namespace CatenaryCAD.Models.Handlers
                             double angle = last_mast.Position.GetVectorTo(mouse).GetAngleTo(mast.Direction, Vector3D.AxisZ);
                             mast.TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
                         }
-
-                        mast.SendMessageToHandler(HandlerMessages.Update);
-                        foundation.SendMessageToHandler(HandlerMessages.Update);
+                        mast.EventInvoke(mhandler, new Update());
+                        foundation.EventInvoke(mhandler, new Update());
                     };
 
                     InputResult result = null;
@@ -151,7 +118,7 @@ namespace CatenaryCAD.Models.Handlers
 
                     if (result.Result != InputResult.ResultCode.Normal)
                     {
-                        mast.SendMessageToHandler(HandlerMessages.Remove);
+                        mast.EventInvoke(mhandler, new Remove());
                         return;
                     }
 
