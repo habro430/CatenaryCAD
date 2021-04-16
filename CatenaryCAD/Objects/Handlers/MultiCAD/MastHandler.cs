@@ -86,10 +86,10 @@ namespace CatenaryCAD.Models.Handlers
                 foundation.SetAvailableFoundations(mast.AllowableFoundations);//Устанавливаем возможные для опоры фундаменты 
 
                 //размещаем объекты
-                using (InputJig input_place = new InputJig() {  AutoSnap = AutoSnapMode.Magnet,
-                                                                SnapMode = OsnapModeMask.Center,
-                                                                SnapOverrideMode = InputJig.OsnapOverrideMode.Override,
- })
+                using (InputJig input_place = new InputJig() {  AutoSnap = AutoSnapMode.None,
+                                                                SnapMode = OsnapModeMask.Off,
+                                                                AutoHighlight = false
+                })
                 {
                     input_place.ExcludeObjects(new McObjectId[] { mhandler.ID, fhandler.ID });
                     input_place.MouseMove = (s, a) =>
