@@ -92,11 +92,9 @@ namespace CatenaryCAD.Models.Handlers
                 })
                 {
                     input_place.ExcludeObjects(new McObjectId[] { mhandler.ID, fhandler.ID });
-                    input_place.MouseMove = (s, a) =>
+                    input_place.MouseMove = (sender, args) =>
                     {
-                        Point3D mouse = a.Point.ToCatenaryCAD_3D();
-
-                        mast.TransformBy(Matrix3D.CreateTranslation(mast.Position.GetVectorTo(mouse)));
+                        mast.TransformBy(Matrix3D.CreateTranslation(mast.Position.GetVectorTo(args.Point.ToCatenaryCAD_3D())));
 
                         mast.EventInvoke(mhandler, new Update());
                         foundation.EventInvoke(mhandler, new Update());
@@ -117,11 +115,10 @@ namespace CatenaryCAD.Models.Handlers
                                                                 AutoHighlight = false })
                 {
                     input_rotate.ExcludeObjects(new McObjectId[] { mhandler.ID, fhandler.ID });
-                    input_rotate.MouseMove = (s, a) =>
+                    input_rotate.MouseMove = (sender, a) =>
                     {
-                        Point3D mouse = a.Point.ToCatenaryCAD_3D();
-
-                        double angle = mast.Position.GetVectorTo(mouse).GetAngleTo(mast.Direction, Vector3D.AxisZ);
+                        double angle = mast.Position.GetVectorTo(a.Point.ToCatenaryCAD_3D())
+                                                    .GetAngleTo(mast.Direction, Vector3D.AxisZ);
                         mast.TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
 
                         mast.EventInvoke(mhandler, new Update());

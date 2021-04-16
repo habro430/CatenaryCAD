@@ -46,16 +46,7 @@ namespace CatenaryCAD.Models.Handlers
             PropertiesDictionary.TryAdd("basement_type", FoudationProperty);
         }
 
-        public override void OnTransform(Matrix3d tfm)
-        {
-            if (Model.Parent == null)
-            {
-                if (ID.IsNull) 
-                    return;
-
-                Model.TransformBy(tfm.ToCatenaryCAD());
-            }
-        }
+        public override void OnTransform(Matrix3d tfm) { return; }
 
     }
 }
