@@ -37,16 +37,8 @@ namespace CatenaryCAD.Models.Handlers
             PropertiesDictionary.TryAdd("anchor_type", anchor_type);
         }
 
-        public override void OnTransform(Matrix3d tfm)
-        {
-            if (Model.Parent == null)
-            {
-                if (ID.IsNull)
-                    return;
+        public override void OnTransform(Matrix3d tfm) { return; }
 
-                Model.TransformBy(tfm.ToCatenaryCAD());
-            }
-        }
         [CommandMethod("insert_anchor", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void insert_anchor()
         {
