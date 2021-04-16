@@ -71,59 +71,70 @@ namespace CatenaryCAD.Models.Handlers
         [CommandMethod("insert_mast", CommandFlags.NoCheck | CommandFlags.NoPrefix)]
         public static void insert_mast()
         {
-            using (InputJig input = new InputJig() { AutoSnap = AutoSnapMode.Magnet,
-                                                     SnapMode = OsnapModeMask.Center,
-                                                     SnapOverrideMode = InputJig.OsnapOverrideMode.Override,
-                                                     DashLine = true,
-                                                     AutoHighlight = false })
+            while (true)
             {
-                Mast last_mast = null;
+                var mhandler = new MastHandler();
+                var fhandler = new FoundationHandler();
 
-                while (true)
+                mhandler.PlaceObject(Point3d.Origin, Vector3d.XAxis);
+                fhandler.PlaceObject(Point3d.Origin, Vector3d.XAxis);
+
+                Mast mast = mhandler.Model as Mast;
+                Foundation foundation = fhandler.Model as Foundation;
+
+                foundation.Parent = mast;
+                foundation.SetAvailableFoundations(mast.AllowableFoundations);//Устанавливаем возможные для опоры фундаменты 
+
+                //размещаем объекты
+                using (InputJig input_place = new InputJig() {  AutoSnap = AutoSnapMode.Magnet,
+                                                                SnapMode = OsnapModeMask.Center,
+                                                                SnapOverrideMode = InputJig.OsnapOverrideMode.Override,
+ })
                 {
-                    var mhandler = new MastHandler();
-                    var fhandler = new FoundationHandler();
-
-                    mhandler.PlaceObject(Point3d.Origin, Vector3d.XAxis);
-                    fhandler.PlaceObject(Point3d.Origin, Vector3d.XAxis);
-                    
-                    Mast mast = mhandler.Model as Mast;
-                    Foundation foundation = fhandler.Model as Foundation;
-
-                    foundation.Parent = mast;
-                    foundation.SetAvailableFoundations(mast.AllowableFoundations);//Устанваливаем возможные для опоры фундаменты 
-
-                    input.ExcludeObjects(new McObjectId[] { mhandler.ID, fhandler.ID });
-                    input.MouseMove = (s, a) =>
+                    input_place.ExcludeObjects(new McObjectId[] { mhandler.ID, fhandler.ID });
+                    input_place.MouseMove = (s, a) =>
                     {
                         Point3D mouse = a.Point.ToCatenaryCAD_3D();
 
                         mast.TransformBy(Matrix3D.CreateTranslation(mast.Position.GetVectorTo(mouse)));
 
-                        if (last_mast != null)
-                        {
-                            double angle = last_mast.Position.GetVectorTo(mouse).GetAngleTo(mast.Direction, Vector3D.AxisZ);
-                            mast.TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
-                        }
                         mast.EventInvoke(mhandler, new Update());
                         foundation.EventInvoke(mhandler, new Update());
                     };
 
-                    InputResult result = null;
-
-                    if (last_mast == null)
-                        result = input.GetPoint("Укажите точку для размещения обьекта:");
-                    else
-                        result = input.GetDistance("Укажите точку для размещения обьекта:", last_mast.Position.ToMultiCAD());
-
-                    if (result.Result != InputResult.ResultCode.Normal)
+                    if (input_place.GetPoint("Укажите точку для размещения обьекта:").Result != InputResult.ResultCode.Normal)
                     {
                         mast.EventInvoke(mhandler, new Remove());
                         return;
                     }
-
-                    last_mast = mast;
                 }
+
+                //поворачиваем объекты
+                using (InputJig input_rotate = new InputJig() { AutoSnap = AutoSnapMode.Magnet,
+                                                                SnapMode = OsnapModeMask.Center,
+                                                                SnapOverrideMode = InputJig.OsnapOverrideMode.Override,
+                                                                DashLine = true,
+                                                                AutoHighlight = false })
+                {
+                    input_rotate.ExcludeObjects(new McObjectId[] { mhandler.ID, fhandler.ID });
+                    input_rotate.MouseMove = (s, a) =>
+                    {
+                        Point3D mouse = a.Point.ToCatenaryCAD_3D();
+
+                        double angle = mast.Position.GetVectorTo(mouse).GetAngleTo(mast.Direction, Vector3D.AxisZ);
+                        mast.TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
+
+                        mast.EventInvoke(mhandler, new Update());
+                        foundation.EventInvoke(mhandler, new Update());
+                    };
+
+                    if (input_rotate.GetAngle("Укажите направление для обьекта:", mast.Position.ToMultiCAD()).Result != InputResult.ResultCode.Normal)
+                    {
+                        mast.EventInvoke(mhandler, new Remove());
+                        return;
+                    }
+                }
+
             }
         }
     }
