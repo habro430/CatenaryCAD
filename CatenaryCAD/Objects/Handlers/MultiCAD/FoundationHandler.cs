@@ -34,6 +34,7 @@ namespace CatenaryCAD.Models.Handlers
                 var foundation = Activator.CreateInstance(type) as Foundation;
                 foundation.AvailableFoundationsUpdated += (types) =>
                 {
+                    //модели имеющие атрибут ModelNonBrowsableAttribute уже отсеяны в AvailableFoundationsUpdated
                     FoudationProperty.DropDownValues = types
                         .ToDictionary(dict => Attribute.GetCustomAttribute(dict, typeof(ModelNameAttribute), false)?.ToString() ?? dict.Name, p => p);
                 };

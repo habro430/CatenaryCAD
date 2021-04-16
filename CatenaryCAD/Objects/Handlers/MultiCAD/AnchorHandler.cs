@@ -22,8 +22,9 @@ namespace CatenaryCAD.Models.Handlers
         static AnchorHandler()
         {
             Anchors = Main.GetCatenaryObjects(typeof(IAnchor))
-                        .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
-                        .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
+                .Where((t) => !t.IsAbstract)
+                .Where((t) => Attribute.GetCustomAttribute(t, typeof(ModelNonBrowsableAttribute), false) is null)
+                .ToDictionary(p => Attribute.GetCustomAttribute(p, typeof(ModelNameAttribute), false)?.ToString() ?? p.Name, p => p);
         }
 
         public AnchorHandler()
