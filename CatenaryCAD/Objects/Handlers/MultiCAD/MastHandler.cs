@@ -11,7 +11,7 @@ using Multicad.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static CatenaryCAD.Extensions;
+using static CatenaryCAD.OperationalCommands;
 
 namespace CatenaryCAD.Models.Handlers
 {

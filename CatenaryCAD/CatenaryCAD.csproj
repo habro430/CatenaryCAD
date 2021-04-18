@@ -121,7 +121,7 @@
     <Compile Include="Geometry\IRay.cs" />
     <Compile Include="Geometry\IVector.cs" />
     <Compile Include="Helpers\ConcurrentHashSet.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="OperationalCommands.cs" />
     <Compile Include="Helpers\DeepCloner\Cloner.cs" />
     <Compile Include="Helpers\DeepCloner\Helpers\ClonerToExprGenerator.cs" />
     <Compile Include="Helpers\DeepCloner\Helpers\DeepClonerCache.cs" />

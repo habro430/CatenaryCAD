@@ -13,7 +13,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-using static CatenaryCAD.Extensions;
+using static CatenaryCAD.OperationalCommands;
 
 using Matrix3d = Multicad.Geometry.Matrix3d;
 using Point3d = Multicad.Geometry.Point3d;

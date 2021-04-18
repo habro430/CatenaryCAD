@@ -1,25 +1,21 @@
-﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Models;
-using CatenaryCAD.Models.Handlers;
+﻿using CatenaryCAD.Models.Handlers;
 using Multicad;
 using Multicad.AplicationServices;
 using Multicad.DatabaseServices;
-using Multicad.Geometry;
 using Multicad.Runtime;
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace CatenaryCAD
 {
-    public static class Extensions
+    internal static class OperationalCommands
     {
         [Serializable]
-        internal enum OperationalMode
-    {
+        public enum OperationalMode
+        {
             Scheme,
-            Layout,
+            Layout
         }   
 
         [CommandMethod("switch_3d", CommandFlags.NoCheck | CommandFlags.NoPrefix)]

@@ -5,7 +5,6 @@ using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Helpers;
 using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
-using static CatenaryCAD.Extensions;
 
 namespace CatenaryCAD.Models
 {
