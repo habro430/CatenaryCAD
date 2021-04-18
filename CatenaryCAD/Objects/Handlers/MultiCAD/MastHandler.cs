@@ -1,5 +1,5 @@
 ﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Models.Attributes;
+using CatenaryCAD.Attributes;
 using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
 

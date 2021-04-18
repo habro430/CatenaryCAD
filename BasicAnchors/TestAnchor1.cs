@@ -1,6 +1,6 @@
 ﻿using CatenaryCAD.Components;
 using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Models.Attributes;
+using CatenaryCAD.Attributes;
 using System;
 
 namespace BasicAnchors

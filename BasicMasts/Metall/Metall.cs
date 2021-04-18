@@ -5,7 +5,7 @@ using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Models;
-using CatenaryCAD.Models.Attributes;
+using CatenaryCAD.Attributes;
 using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
 

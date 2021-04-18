@@ -16,7 +16,7 @@ namespace CatenaryCAD
     public static class Extensions
     {
         [Serializable]
-        public enum OperationalMode
+        internal enum OperationalMode
     {
             Scheme,
             Layout,

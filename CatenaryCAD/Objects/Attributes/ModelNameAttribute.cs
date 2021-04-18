@@ -1,12 +1,21 @@
-﻿using System;
+﻿using CatenaryCAD.Models;
+using System;
 
-namespace CatenaryCAD.Models.Attributes
+namespace CatenaryCAD.Attributes
 {
+    /// <summary>
+    /// Атрибут, представляющий имя объекта <see cref="IModel"/>.
+    /// </summary>
     [Serializable]
     [AttributeUsage(AttributeTargets.Class)]
     public class ModelNameAttribute : Attribute
     {
-        public string Name { get; private set; }
+        /// <returns>
+        /// Имя объекта <see cref="IModel"/>.
+        /// </returns>
+        public readonly string Name;
+
+        /// <param name="name">Имя объекта <see cref="IModel"/>.</param>
         public ModelNameAttribute(string name) => Name = name;
         public override string ToString() => Name;
     }
