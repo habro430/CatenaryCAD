@@ -19,10 +19,6 @@ namespace BasicMasts
     [Serializable]
     public abstract class AbstractMast : Mast
     {
-        protected IShape[] Geometry2D;
-        //protected IMesh[] Geometry3D;
-
-
         [NonSerialized]
         private static ObjectCache Cache = new MemoryCache(typeof(AbstractMast).Name);
 
@@ -62,8 +58,6 @@ namespace BasicMasts
             }).ToDictionary(p => p.atrr.Type, p => p.type);
         }
 
-        public override IShape[] GetGeometry() => Geometry2D;
-
         public override Point2D? GetDockingPointForArmatory(Ray2D ray)
         {
             var position = new Point2D(Position.X, Position.Y);
@@ -71,7 +65,7 @@ namespace BasicMasts
 
             List<Point2D> intersections = new List<Point2D>();
 
-            foreach (var shape in Geometry2D.DeepClone())
+            foreach (var shape in GetGeometry().DeepClone())
             {
                 Matrix2D translatiom = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position));
                 Matrix2D rotation = Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position);
