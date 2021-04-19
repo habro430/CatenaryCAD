@@ -24,7 +24,7 @@ namespace BasicMasts
         private static readonly Dictionary<string, Type> InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Metall));
         private static readonly Type[] allowablefoundations = new Type[] { typeof(FoundationDirect) };
         //генерируем геометрию для 2D режима
-        private static readonly IShape[] geometry2d = new IShape[] { new Rectangle(new Point2D(), 600, 600) };
+        private static readonly IShape[] geometry2d = new IShape[] { new Rectangle(new Point2D(), 600, 300) };
         //генерируем стандартные значения длинны стойки
         private static readonly Dictionary<string, int> defaultlenghts = new Dictionary<string, int> { ["10.0 м"] = 10000, ["12.0 м"] = 12000, ["15.0 м"] = 15000 };
 
@@ -33,10 +33,8 @@ namespace BasicMasts
 
         public Metall()
         {
-            if (InheritedMasts.Count > 0)
-                PropertiesDictionary.TryAdd("mast_type", new Property<Type>("Марка стойки", "Стойка", InheritedMasts, attr: Attributes.RefreshAfterChange));
-            else
-                PropertiesDictionary.TryAdd("mast_type", new Property<string>("Марка стойки", "Стойка", string.Empty));
+            PropertiesDictionary.TryAdd("mast_type", InheritedMasts.Count > 0 ? new Property<Type>("Марка стойки", "Стойка", InheritedMasts, attr: Attributes.RefreshAfterChange) as IProperty : 
+                                                                                new Property<string>("Марка стойки", "Стойка", string.Empty) as IProperty);
 
             PropertiesDictionary.TryAdd("mast_lenght", new Property<int>("Длинна", "Стойка", defaultlenghts, UpdateLenght, Attributes.RefreshAfterChange));
         }

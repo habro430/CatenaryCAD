@@ -65,14 +65,22 @@ namespace BasicMasts
 
             List<Point2D> intersections = new List<Point2D>();
 
+
             foreach (var shape in GetGeometry().DeepClone())
             {
-                Matrix2D translatiom = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position));
-                Matrix2D rotation = Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position);
+                //трансформируем геометрию из нулевых координат
+                Matrix2D translation_before = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position));
+                Matrix2D rotation_before = Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position);
+                shape.TransformBy(rotation_before * translation_before);
 
-                shape.TransformBy(rotation * translatiom);
-
+                //получаем пересечения
                 intersections.AddRange(ray.GetIntersections(shape));
+
+                ////трансформируем геометрию обратно в нулевые координаты
+                //Matrix2D translation_after = Matrix2D.CreateTranslation(position.GetVectorTo(Point2D.Origin));
+                //Matrix2D rotation_after = Matrix2D.CreateRotation(-Vector2D.AxisX.GetAngleTo(direction), position);
+                //shape.TransformBy(translation_after * rotation_after);
+
             }
 
             if (intersections.Count > 0)
