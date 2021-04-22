@@ -1,10 +1,12 @@
 ﻿using CatenaryCAD.Components;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Interfaces;
+using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Helpers;
 using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
+using static CatenaryCAD.OperationalCommands;
 
 namespace CatenaryCAD.Models
 {
@@ -49,6 +51,20 @@ namespace CatenaryCAD.Models
         /// <returns>2D геометрия</returns>
         public IShape[] GetGeometry();
 
-        //public bool? SendMessageToHandler(HandlerMessages message);
+        /// <summary>
+        /// Возвращает точку присоединения <see cref="Point2D"/> к объекту <see cref="IModel"/> в месте пересечения луча <see cref="Ray2D"/> и геометрии <see cref="IShape"/>.
+        /// </summary>
+        /// <param name="ray">Луч для определения пересечения.</param>
+        /// <param name="from">Тип обьекта <see cref="IModel"/> для которого выполняеться поиск точки присоединения.</param>
+        /// <returns>Точка присодинения <see cref="Point2D"/> к объекту <see cref="IModel"/></returns>
+        Point2D? GetDockingPoint(IModel from, Ray2D ray);
+
+        /// <summary>
+        /// Возвращает точку присоединения <see cref="Point3D"/> к объекту <see cref="IModel"/> в месте пересечения луча <see cref="Ray3D"/> и геометрии деталей <see cref="IMesh"/>.
+        /// </summary>
+        /// <param name="ray">Луч для определения пересечения.</param>
+        /// <param name="from">Тип обьекта <see cref="IModel"/> для которого выполняеться поиск точки присоединения.</param>
+        /// <returns>Точка присодинения <see cref="Point3D"/> к объекту <see cref="IModel"/></returns>
+        Point3D? GetDockingPoint(IModel from, Ray3D ray);
     }
 }

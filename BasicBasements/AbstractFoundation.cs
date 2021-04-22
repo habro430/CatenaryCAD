@@ -1,4 +1,5 @@
 ﻿using BasicBasements.Properties;
+using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Models;
@@ -35,8 +36,16 @@ namespace BasicFoundations
             //читаем модель из кэша и возвращаем
             return Cache.Get(key) as Mesh;
         }
-        //public override IMesh[] GetGeometryForLayout() => Geometry3D;
+
         public override IShape[] GetGeometry() => null;
 
+        public override Point2D? GetDockingPoint(IModel from, Ray2D ray)
+        {
+            throw new NotImplementedException();
+        }
+        public override Point3D? GetDockingPoint(IModel from, Ray3D ray)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

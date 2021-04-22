@@ -19,15 +19,5 @@ namespace CatenaryCAD.Models
         /// </summary>
         /// <remarks>По умолчанию возвращает все модели, наследуемые от <seealso cref="IFoundation"/>.</remarks>
         public virtual Type[] AllowableFoundations => new Type[] { typeof(IFoundation) };
-
-        /// <inheritdoc/>
-        /// <returns>Если луч и геометрия на плане пересекаются, то возвращает <seealso cref="Point2D"/> 
-        /// в месте пересечения, в противном случае возвращает <see langword="null"/>.</returns>
-        public abstract Point2D? GetDockingPointForArmatory(Ray2D ray);
-
-        /// <inheritdoc/>
-        /// <returns>Если луч и геометрия на макете пересекаются, то возвращает <seealso cref="Point3D"/> 
-        /// в месте пересечения, в противном случае возвращает <see langword="null"/>.</returns>
-        public abstract Point3D? GetDockingPointForArmatory(Ray3D ray);
     }
 }

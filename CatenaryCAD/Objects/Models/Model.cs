@@ -142,9 +142,19 @@ namespace CatenaryCAD.Models
         /// Коллекция параметров <see cref="IProperty"/>
         /// </summary>
         protected ConcurrentDictionary<string, IProperty> PropertiesDictionary = new ConcurrentDictionary<string, IProperty>();
+        
         /// <inheritdoc/>
         public virtual IProperty[] Properties { get => PropertiesDictionary.Values.ToArray(); }
 
+        /// <inheritdoc/>
         public abstract IShape[] GetGeometry();
+
+        /// <inheritdoc/>
+        public abstract Point2D? GetDockingPoint(IModel from, Ray2D ray);
+
+        /// <inheritdoc/>
+        public abstract Point3D? GetDockingPoint(IModel from, Ray3D ray);
+
+
     }
 }

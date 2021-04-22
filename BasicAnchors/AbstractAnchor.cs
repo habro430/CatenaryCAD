@@ -17,8 +17,8 @@ namespace BasicAnchors
     {
         protected IShape[] Geometry2D = new IShape[] { new Line(new Point2D(0, 0), new Point2D(900, 0)),
                                                        new Triangle(new Point2D(900,0), new Point2D(1050, 100), new Point2D(1050,-100)) };
-        //protected IMesh[] Geometry3D;
-
+        private IShape[] notavalible = new IShape[] { new Line(new Point2D(200, -300), new Point2D(700, 300)),
+                                                        new Line(new Point2D(200, 300), new Point2D(700, -300)) };
         [NonSerialized]
         private static ObjectCache Cache = new MemoryCache(typeof(AbstractAnchor).Name);
 
@@ -32,22 +32,29 @@ namespace BasicAnchors
             }
             return Cache.Get(key) as Mesh;
         }
-        //public override IMesh[] GetGeometryForLayout() => Geometry3D;
         public override IShape[] GetGeometry()
         {
             var mast_position = new Point2D(Parent.Position.X, Parent.Position.Y);
             var anchor_position = new Point2D(Position.X, Position.Y);
 
-            Point2D dockingjoint = (Parent as Mast).GetDockingPointForArmatory(
-                        new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position))) ?? mast_position;
+            var docking_point = Parent.GetDockingPoint(this, new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position)));
 
-            double angle = mast_position.GetVectorTo(dockingjoint).GetAngleTo(Vector2D.AxisX);
+            var anchor_to_mast = anchor_position.GetVectorTo(mast_position);
+            var anchor_to_docking = anchor_position.GetVectorTo(docking_point.Value);
 
-            dockingjoint = dockingjoint.TransformBy(Matrix2D.CreateRotation(angle, mast_position));
-            anchor_position = anchor_position.TransformBy(Matrix2D.CreateRotation(angle, mast_position));
+            var matrix = Matrix2D.CreateRotation(anchor_to_mast.GetAngleTo(anchor_to_docking), Point2D.Origin) * 
+                         Matrix2D.CreateTranslation(Vector2D.AxisX * -anchor_to_docking.GetLength());
 
-            return Geometry2D.DeepClone().
-                Select(g => g.TransformBy(Matrix2D.CreateTranslation(anchor_position.GetVectorTo(dockingjoint)))).ToArray();
+            var geom = Geometry2D.DeepClone();//.Union(notavalible.DeepClone());
+            return geom.Select(g => g.TransformBy(matrix)).ToArray();
+        }
+        public override Point2D? GetDockingPoint(IModel from, Ray2D ray)
+        {
+            throw new NotImplementedException();
+        }
+        public override Point3D? GetDockingPoint(IModel from, Ray3D ray)
+        {
+            throw new NotImplementedException();
         }
     }
 }
