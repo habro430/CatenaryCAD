@@ -63,6 +63,55 @@ namespace BasicMasts
             }
 
         }
+        public override bool CheckAvailableDocking(IModel from, Ray2D ray)
+        {
+            switch (from)
+            {
+                case IAnchor anchor:
+                    var position = new Point2D(Position.X, Position.Y);
+                    var direction = new Vector2D(Direction.X, Direction.Y);
+
+                    List<Point2D> intersections = new List<Point2D>();
+
+
+                    foreach (var shape in GetGeometry().DeepClone())
+                    {
+                        //трансформируем геометрию из нулевых координат
+
+                        Matrix2D translation_before = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position));
+                        Matrix2D rotation_before = Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position);
+                        shape.TransformBy(rotation_before * translation_before);
+
+                        //получаем пересечения
+                        intersections.AddRange(ray.GetIntersections(shape));
+
+                        var center = new Point2D((shape.Vertices[0].X + shape.Vertices[1].X + shape.Vertices[2].X + shape.Vertices[3].X) / 4,
+                                                 (shape.Vertices[0].Y + shape.Vertices[1].Y + shape.Vertices[2].Y + shape.Vertices[3].Y) / 4);
+
+                        shape.TransformBy(Matrix2D.CreateScale(new Vector2D(1.0001d, 1.0001d), center));
+
+                        Triangle[] triangles = new Triangle[]{ new Triangle(shape.Vertices[1], shape.Vertices[2], center),
+                                                               new Triangle(shape.Vertices[3], shape.Vertices[0], center) };
+
+                        var inside = triangles.Where((t) => t.IsInside(intersections[0]))
+                            .Select((t) => new Point2D((t.Vertices[0].X + t.Vertices[1].X) / 2, (t.Vertices[0].Y + t.Vertices[1].Y) / 2)).ToArray();
+
+                        intersections = new List<Point2D>();
+                        intersections.AddRange(inside);
+
+                    }
+
+
+                    if (intersections.Count > 0)
+                        return true;
+                    else
+                        return false;
+
+                default:
+                    return false;
+            }
+        }
+
 
         public override Point2D? GetDockingPoint(IModel from, Ray2D ray)
         {
@@ -91,9 +140,9 @@ namespace BasicMasts
 
                         shape.TransformBy(Matrix2D.CreateScale(new Vector2D(1.0001d, 1.0001d), center));
 
-                        Triangle[] triangles = new Triangle[]{ //new Triangle(shape.Vertices[0], shape.Vertices[1], center),
+                        Triangle[] triangles = new Triangle[]{ new Triangle(shape.Vertices[0], shape.Vertices[1], center),
                                                                new Triangle(shape.Vertices[1], shape.Vertices[2], center),
-                                                               //new Triangle(shape.Vertices[2], shape.Vertices[3], center),
+                                                               new Triangle(shape.Vertices[2], shape.Vertices[3], center),
                                                                new Triangle(shape.Vertices[3], shape.Vertices[0], center) };
 
                         var inside = triangles.Where((t) => t.IsInside(intersections[0]))
@@ -123,11 +172,16 @@ namespace BasicMasts
                     return null;
             }
         }
+        public override bool CheckAvailableDocking(IModel from, Ray3D ray)
+        {
+            throw new NotImplementedException();
+        }
 
         public override Point3D? GetDockingPoint(IModel from, Ray3D ray)
         {
             throw new NotImplementedException();
         }
+
 
     }
 }

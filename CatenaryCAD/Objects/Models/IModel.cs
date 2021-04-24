@@ -51,6 +51,9 @@ namespace CatenaryCAD.Models
         /// <returns>2D геометрия</returns>
         public IShape[] GetGeometry();
 
+        bool CheckAvailableDocking(IModel from, Ray2D ray);
+        bool CheckAvailableDocking(IModel from, Ray3D ray);
+
         /// <summary>
         /// Возвращает точку присоединения <see cref="Point2D"/> к объекту <see cref="IModel"/> в месте пересечения луча <see cref="Ray2D"/> и геометрии <see cref="IShape"/>.
         /// </summary>

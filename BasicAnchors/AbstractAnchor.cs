@@ -15,10 +15,10 @@ namespace BasicAnchors
     [Serializable]
     public abstract class AbstractAnchor : Anchor
     {
-        protected IShape[] Geometry2D = new IShape[] { new Line(new Point2D(0, 0), new Point2D(900, 0)),
+        private IShape[] geometry = new IShape[] { new Line(new Point2D(0, 0), new Point2D(900, 0)),
                                                        new Triangle(new Point2D(900,0), new Point2D(1050, 100), new Point2D(1050,-100)) };
-        private IShape[] notavalible = new IShape[] { new Line(new Point2D(200, -300), new Point2D(700, 300)),
-                                                        new Line(new Point2D(200, 300), new Point2D(700, -300)) };
+        private IShape[] geometry_notavalible = new IShape[] { new Line(new Point2D(300, -150), new Point2D(600, 150)),
+                                                        new Line(new Point2D(300, 150), new Point2D(600, -150)) };
         [NonSerialized]
         private static ObjectCache Cache = new MemoryCache(typeof(AbstractAnchor).Name);
 
@@ -45,9 +45,21 @@ namespace BasicAnchors
             var matrix = Matrix2D.CreateRotation(anchor_to_mast.GetAngleTo(anchor_to_docking), Point2D.Origin) * 
                          Matrix2D.CreateTranslation(Vector2D.AxisX * -anchor_to_docking.GetLength());
 
-            var geom = Geometry2D.DeepClone();//.Union(notavalible.DeepClone());
-            return geom.Select(g => g.TransformBy(matrix)).ToArray();
+            if(Parent.CheckAvailableDocking(this, new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position))))
+                return geometry.DeepClone().Select(g => g.TransformBy(matrix)).ToArray();
+            else
+                return geometry.DeepClone().Union(geometry_notavalible.DeepClone()).Select(g => g.TransformBy(matrix)).ToArray();
         }
+
+        public override bool CheckAvailableDocking(IModel from, Ray2D ray)
+        {
+            throw new NotImplementedException();
+        }
+        public override bool CheckAvailableDocking(IModel from, Ray3D ray)
+        {
+            throw new NotImplementedException();
+        }
+
         public override Point2D? GetDockingPoint(IModel from, Ray2D ray)
         {
             throw new NotImplementedException();
