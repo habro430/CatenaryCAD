@@ -45,17 +45,13 @@ namespace BasicAnchors
             var matrix = Matrix2D.CreateRotation(anchor_to_mast.GetAngleTo(anchor_to_docking), Point2D.Origin) * 
                          Matrix2D.CreateTranslation(Vector2D.AxisX * -anchor_to_docking.GetLength());
 
-            if(Parent.CheckAvailableDocking(this, new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position))))
+            if(Parent.CheckAvailableDocking(this))
                 return geometry.DeepClone().Select(g => g.TransformBy(matrix)).ToArray();
             else
                 return geometry.DeepClone().Union(geometry_notavalible.DeepClone()).Select(g => g.TransformBy(matrix)).ToArray();
         }
 
-        public override bool CheckAvailableDocking(IModel from, Ray2D ray)
-        {
-            throw new NotImplementedException();
-        }
-        public override bool CheckAvailableDocking(IModel from, Ray3D ray)
+        public override bool CheckAvailableDocking(IModel from)
         {
             throw new NotImplementedException();
         }

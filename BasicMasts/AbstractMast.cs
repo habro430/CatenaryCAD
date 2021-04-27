@@ -58,7 +58,7 @@ namespace BasicMasts
             }).ToDictionary(p => p.atrr.Type, p => p.type);
         }
 
-        public override bool CheckAvailableDocking(IModel from, Ray2D ray)
+        public override bool CheckAvailableDocking(IModel from)
         {
             return true;
         }
@@ -102,10 +102,7 @@ namespace BasicMasts
             else
                 return null;
         }
-        public override bool CheckAvailableDocking(IModel from, Ray3D ray)
-        {
-            throw new NotImplementedException();
-        }
+
         public override Point3D? GetDockingPoint(IModel from, Ray3D ray)
         {
             throw new NotImplementedException();

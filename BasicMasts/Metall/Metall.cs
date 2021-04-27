@@ -63,13 +63,15 @@ namespace BasicMasts
             }
 
         }
-        public override bool CheckAvailableDocking(IModel from, Ray2D ray)
+        public override bool CheckAvailableDocking(IModel from)
         {
             switch (from)
             {
                 case IAnchor anchor:
-                    var position = new Point2D(Position.X, Position.Y);
-                    var direction = new Vector2D(Direction.X, Direction.Y);
+                    var mast_position = new Point2D(Position.X, Position.Y);
+                    var mast_direction = new Vector2D(Direction.X, Direction.Y);
+
+                    var anchor_position = new Point2D(anchor.Position.X, anchor.Position.Y);
 
                     List<Point2D> intersections = new List<Point2D>();
 
@@ -78,12 +80,12 @@ namespace BasicMasts
                     {
                         //трансформируем геометрию из нулевых координат
 
-                        Matrix2D translation_before = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position));
-                        Matrix2D rotation_before = Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position);
+                        Matrix2D translation_before = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position));
+                        Matrix2D rotation_before = Matrix2D.CreateRotation(-mast_direction.GetAngleTo(Vector2D.AxisX), mast_position);
                         shape.TransformBy(rotation_before * translation_before);
 
                         //получаем пересечения
-                        intersections.AddRange(ray.GetIntersections(shape));
+                        intersections.AddRange(new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position)).GetIntersections(shape));
 
                         var center = new Point2D((shape.Vertices[0].X + shape.Vertices[1].X + shape.Vertices[2].X + shape.Vertices[3].X) / 4,
                                                  (shape.Vertices[0].Y + shape.Vertices[1].Y + shape.Vertices[2].Y + shape.Vertices[3].Y) / 4);
@@ -172,10 +174,7 @@ namespace BasicMasts
                     return null;
             }
         }
-        public override bool CheckAvailableDocking(IModel from, Ray3D ray)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public override Point3D? GetDockingPoint(IModel from, Ray3D ray)
         {

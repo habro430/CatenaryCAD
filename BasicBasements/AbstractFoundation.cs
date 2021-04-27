@@ -39,11 +39,7 @@ namespace BasicFoundations
 
         public override IShape[] GetGeometry() => null;
 
-        public override bool CheckAvailableDocking(IModel from, Ray2D ray)
-        {
-            throw new NotImplementedException();
-        }
-        public override bool CheckAvailableDocking(IModel from, Ray3D ray)
+        public override bool CheckAvailableDocking(IModel from)
         {
             throw new NotImplementedException();
         }

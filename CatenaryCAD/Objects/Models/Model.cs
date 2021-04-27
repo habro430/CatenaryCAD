@@ -155,8 +155,6 @@ namespace CatenaryCAD.Models
         /// <inheritdoc/>
         public abstract Point3D? GetDockingPoint(IModel from, Ray3D ray);
 
-        public abstract bool CheckAvailableDocking(IModel from, Ray2D ray);
-        public abstract bool CheckAvailableDocking(IModel from, Ray3D ray);
-
+        public abstract bool CheckAvailableDocking(IModel from);
     }
 }
