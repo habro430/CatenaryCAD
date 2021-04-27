@@ -65,42 +65,17 @@ namespace BasicMasts
 
         public override Point2D? GetDockingPoint(IModel from, Ray2D ray)
         {
-            var position = new Point2D(Position.X, Position.Y);
-            var direction = new Vector2D(Direction.X, Direction.Y);
+            var mast_position = new Point2D(Position.X, Position.Y);
+            var mast_direction = new Vector2D(Direction.X, Direction.Y);
 
-            List<Point2D> intersections = new List<Point2D>();
+            Matrix2D matrix = Matrix2D.CreateRotation(-mast_direction.GetAngleTo(Vector2D.AxisX), mast_position) *
+                              Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position));
 
+            var intersections = GetGeometry().DeepClone().SelectMany(sh => ray.GetIntersections(sh.TransformBy(matrix))).ToArray();
 
-            foreach (var shape in GetGeometry().DeepClone())
-            {
-                //трансформируем геометрию из нулевых координат
-                Matrix2D translation_before = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position));
-                Matrix2D rotation_before = Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position);
-                shape.TransformBy(rotation_before * translation_before);
+            Point2D control_point = ray.Origin + ray.Direction;
 
-                //получаем пересечения
-                intersections.AddRange(ray.GetIntersections(shape));
-
-                ////трансформируем геометрию обратно в нулевые координаты
-                //Matrix2D translation_after = Matrix2D.CreateTranslation(position.GetVectorTo(Point2D.Origin));
-                //Matrix2D rotation_after = Matrix2D.CreateRotation(-Vector2D.AxisX.GetAngleTo(direction), position);
-                //shape.TransformBy(translation_after * rotation_after);
-
-            }
-
-            if (intersections.Count > 0)
-            {
-                Point2D intersection = intersections[0];
-                Point2D control_point = ray.Origin + ray.Direction;
-
-                foreach (var point in intersections)
-                    if (point.GetDistanceTo(control_point) < intersection.GetDistanceTo(control_point))
-                        intersection = point;
-
-                return intersection;
-            }
-            else
-                return null;
+            return intersections.Length > 0 ? intersections.Aggregate((r, x) => r.GetDistanceTo(control_point) < x.GetDistanceTo(control_point) ? r : x) : null as Point2D?;
         }
 
         public override Point3D? GetDockingPoint(IModel from, Ray3D ray)
