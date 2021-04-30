@@ -1,18 +1,15 @@
 ﻿using BasicFoundations;
-
 using CatenaryCAD.Attributes;
 using CatenaryCAD.Components;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Helpers;
 using CatenaryCAD.Models;
 using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
-
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BasicMasts
 {
@@ -65,110 +62,43 @@ namespace BasicMasts
         }
         public override bool CheckAvailableDocking(IModel from)
         {
+            var mast_position = new Point2D(Position.X, Position.Y);
+            var mast_direction = new Vector2D(Direction.X, Direction.Y);
+
             switch (from)
             {
                 case IAnchor anchor:
-                    var mast_position = new Point2D(Position.X, Position.Y);
-                    var mast_direction = new Vector2D(Direction.X, Direction.Y);
-
                     var anchor_position = new Point2D(anchor.Position.X, anchor.Position.Y);
 
-                    List<Point2D> intersections = new List<Point2D>();
+                    Matrix2D matrix = Matrix2D.CreateTranslation(mast_position.GetVectorTo(Point2D.Origin))*
+                                      Matrix2D.CreateRotation(mast_direction.GetAngleTo(Vector2D.AxisX), mast_position);
 
+                    var intersection = GetDockingPoint(from, new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position))).Value.TransformBy(matrix);
 
-                    foreach (var shape in GetGeometry().DeepClone())
-                    {
-                        //трансформируем геометрию из нулевых координат
-
-                        Matrix2D translation_before = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position));
-                        Matrix2D rotation_before = Matrix2D.CreateRotation(-mast_direction.GetAngleTo(Vector2D.AxisX), mast_position);
-                        shape.TransformBy(rotation_before * translation_before);
-
-                        //получаем пересечения
-                        intersections.AddRange(new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position)).GetIntersections(shape));
-
-                        var center = new Point2D((shape.Vertices[0].X + shape.Vertices[1].X + shape.Vertices[2].X + shape.Vertices[3].X) / 4,
-                                                 (shape.Vertices[0].Y + shape.Vertices[1].Y + shape.Vertices[2].Y + shape.Vertices[3].Y) / 4);
-
-                        shape.TransformBy(Matrix2D.CreateScale(new Vector2D(1.0001d, 1.0001d), center));
-
-                        Triangle[] triangles = new Triangle[]{ new Triangle(shape.Vertices[1], shape.Vertices[2], center),
-                                                               new Triangle(shape.Vertices[3], shape.Vertices[0], center) };
-
-                        var inside = triangles.Where((t) => t.IsInside(intersections[0]))
-                            .Select((t) => new Point2D((t.Vertices[0].X + t.Vertices[1].X) / 2, (t.Vertices[0].Y + t.Vertices[1].Y) / 2)).ToArray();
-
-                        intersections = new List<Point2D>();
-                        intersections.AddRange(inside);
-
-                    }
-
-
-                    if (intersections.Count > 0)
-                        return true;
-                    else
-                        return false;
+                    return Math.Abs(intersection.X) > Math.Abs(intersection.Y);
 
                 default:
                     return false;
             }
         }
 
-
         public override Point2D? GetDockingPoint(IModel from, Ray2D ray)
         {
+            var mast_position = new Point2D(Position.X, Position.Y);
+            var mast_direction = new Vector2D(Direction.X, Direction.Y);
+            var control_point = ray.Origin + ray.Direction;
+
+            Matrix2D matrix = Matrix2D.CreateRotation(-mast_direction.GetAngleTo(Vector2D.AxisX), mast_position) *
+                              Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position));
+
+            var intersection = GetGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)))
+                                            .Aggregate((first, second) => first.GetDistanceTo(control_point) < second.GetDistanceTo(control_point) ? first : second);
+
             switch (from)
             {
                 case IAnchor anchor:
-                    var position = new Point2D(Position.X, Position.Y);
-                    var direction = new Vector2D(Direction.X, Direction.Y);
-
-                    List<Point2D> intersections = new List<Point2D>();
-
-
-                    foreach (var shape in GetGeometry().DeepClone())
-                    {
-                        //трансформируем геометрию из нулевых координат
-
-                        Matrix2D translation_before = Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(position));
-                        Matrix2D rotation_before = Matrix2D.CreateRotation(-direction.GetAngleTo(Vector2D.AxisX), position);
-                        shape.TransformBy(rotation_before * translation_before);
-
-                        //получаем пересечения
-                        intersections.AddRange(ray.GetIntersections(shape));
-
-                        var center = new Point2D((shape.Vertices[0].X + shape.Vertices[1].X + shape.Vertices[2].X + shape.Vertices[3].X) / 4,
-                                                 (shape.Vertices[0].Y + shape.Vertices[1].Y + shape.Vertices[2].Y + shape.Vertices[3].Y) / 4);
-
-                        shape.TransformBy(Matrix2D.CreateScale(new Vector2D(1.0001d, 1.0001d), center));
-
-                        Triangle[] triangles = new Triangle[]{ new Triangle(shape.Vertices[0], shape.Vertices[1], center),
-                                                               new Triangle(shape.Vertices[1], shape.Vertices[2], center),
-                                                               new Triangle(shape.Vertices[2], shape.Vertices[3], center),
-                                                               new Triangle(shape.Vertices[3], shape.Vertices[0], center) };
-
-                        var inside = triangles.Where((t) => t.IsInside(intersections[0]))
-                            .Select((t) => new Point2D((t.Vertices[0].X + t.Vertices[1].X)/2, (t.Vertices[0].Y + t.Vertices[1].Y) / 2)).ToArray();
-
-                        intersections = new List<Point2D>();
-                        intersections.AddRange(inside);
-
-                    }
-
-                    
-                    if (intersections.Count > 0)
-                    {
-                        //выбираем близжайнее пересечение
-                        Point2D intersection = intersections[0];
-                        Point2D control_point = ray.Origin + ray.Direction;
-
-                        foreach (var point in intersections)
-                            if (point.GetDistanceTo(control_point) < intersection.GetDistanceTo(control_point))
-                                intersection = point;
-                        return intersection;
-                    }
-                    else
-                        return null;
+                    var edges = GetGeometry().SelectMany(shape => shape.Indices.Select(index => new Line(shape.Vertices[index[0]], shape.Vertices[index[1]]).TransformBy(matrix)));                    
+                    return (edges.Where(line => line.IsInside(intersection)).Single() as Line).GetMiddlePoint();
 
                 default:
                     return null;

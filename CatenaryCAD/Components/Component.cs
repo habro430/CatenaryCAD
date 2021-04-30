@@ -24,7 +24,7 @@ namespace CatenaryCAD.Components
 
                 Matrix3D translation = Matrix3D.CreateTranslation(Point3D.Origin.GetVectorTo(Origin));
 
-                return geometry.DeepClone()
+                return geometry
                     .Select(m => m.TransformBy(rotationx * rotationy * rotationz * translation))
                     .ToArray();
             }

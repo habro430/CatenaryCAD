@@ -71,11 +71,10 @@ namespace BasicMasts
             Matrix2D matrix = Matrix2D.CreateRotation(-mast_direction.GetAngleTo(Vector2D.AxisX), mast_position) *
                               Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position));
 
-            var intersections = GetGeometry().DeepClone().SelectMany(sh => ray.GetIntersections(sh.TransformBy(matrix))).ToArray();
+            var intersections = GetGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)));
 
             Point2D control_point = ray.Origin + ray.Direction;
-
-            return intersections.Length > 0 ? intersections.Aggregate((r, x) => r.GetDistanceTo(control_point) < x.GetDistanceTo(control_point) ? r : x) : null as Point2D?;
+            return intersections.Aggregate((first, second) => first.GetDistanceTo(control_point) < second.GetDistanceTo(control_point) ? first : second);
         }
 
         public override Point3D? GetDockingPoint(IModel from, Ray3D ray)

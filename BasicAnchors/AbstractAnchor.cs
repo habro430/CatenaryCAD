@@ -2,7 +2,6 @@
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Helpers;
 using CatenaryCAD.Models;
 using System;
 using System.Linq;
@@ -46,9 +45,9 @@ namespace BasicAnchors
                          Matrix2D.CreateTranslation(Vector2D.AxisX * -anchor_to_docking.GetLength());
 
             if(Parent.CheckAvailableDocking(this))
-                return geometry.DeepClone().Select(g => g.TransformBy(matrix)).ToArray();
+                return geometry.Select(g => g.TransformBy(matrix)).ToArray();
             else
-                return geometry.DeepClone().Union(geometry_notavalible.DeepClone()).Select(g => g.TransformBy(matrix)).ToArray();
+                return geometry.Union(geometry_notavalible).Select(g => g.TransformBy(matrix)).ToArray();
         }
 
         public override bool CheckAvailableDocking(IModel from)

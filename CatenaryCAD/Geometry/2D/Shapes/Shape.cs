@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatenaryCAD.Helpers;
+using System;
 
 namespace CatenaryCAD.Geometry.Shapes
 {
@@ -19,12 +20,13 @@ namespace CatenaryCAD.Geometry.Shapes
 
         public virtual IShape TransformBy(in Matrix2D matrix)
         {
-            int count = Vertices.Length;
+            var clone = this.DeepClone();
+            int count = clone.Vertices.Length;
 
             for (int i = 0; i < count; i++)
-                Vertices[i] = Vertices[i].TransformBy(matrix);
+                clone.Vertices[i] = clone.Vertices[i].TransformBy(matrix);
 
-            return this;
+            return clone;
         }
 
         /// <inheritdoc/>
