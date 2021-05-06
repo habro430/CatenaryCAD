@@ -7,8 +7,8 @@
     <ProjectGuid>{7BAE7CF6-6F28-420E-BC64-D567449900A9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BasicBasements</RootNamespace>
-    <AssemblyName>BasicBasements</AssemblyName>
+    <RootNamespace>BasicFoundations</RootNamespace>
+    <AssemblyName>BasicFoundations</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
