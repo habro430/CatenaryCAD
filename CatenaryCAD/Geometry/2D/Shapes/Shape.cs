@@ -37,8 +37,11 @@ namespace CatenaryCAD.Geometry.Shapes
             bool c = false;
             for (int i = 0, j = count - 1; i < count; j = i++)
             {
-                if ((((Vertices[i].Y <= point.Y) && (point.Y < Vertices[j].Y)) || ((Vertices[j].Y <= point.Y) && (point.Y < Vertices[i].Y))) &&
-                  (((Vertices[j].Y - Vertices[i].Y) != 0) && (point.X > ((Vertices[j].X - Vertices[i].X) * (point.Y - Vertices[i].Y) / (Vertices[j].Y - Vertices[i].Y) + Vertices[i].X))))
+                var vi = Vertices[i];
+                var vj = Vertices[j];
+
+                if ((((vi.Y <= point.Y) && (point.Y < vj.Y)) || ((vj.Y <= point.Y) && (point.Y < vi.Y))) &&
+                  (((vj.Y - vi.Y) != 0) && (point.X > ((vj.X - vi.X) * (point.Y - vi.Y) / (vj.Y - vi.Y) + vi.X))))
                     c = !c;
             }
             return c;

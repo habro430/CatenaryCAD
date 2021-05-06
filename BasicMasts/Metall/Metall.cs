@@ -69,13 +69,19 @@ namespace BasicMasts
             {
                 case IAnchor anchor:
                     var anchor_position = new Point2D(anchor.Position.X, anchor.Position.Y);
+                    Matrix2D anchor_matrix = Matrix2D.CreateTranslation(mast_position.GetVectorTo(Point2D.Origin)) *
+                                             Matrix2D.CreateRotation(mast_direction.GetAngleTo(Vector2D.AxisX), mast_position);
 
-                    Matrix2D matrix = Matrix2D.CreateTranslation(mast_position.GetVectorTo(Point2D.Origin))*
-                                      Matrix2D.CreateRotation(mast_direction.GetAngleTo(Vector2D.AxisX), mast_position);
+                    var anchor_intersection = GetDockingPoint(from, new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position))).Value.TransformBy(anchor_matrix);
+                    return Math.Abs(anchor_intersection.X) > Math.Abs(anchor_intersection.Y);
 
-                    var intersection = GetDockingPoint(from, new Ray2D(anchor_position, anchor_position.GetVectorTo(mast_position))).Value.TransformBy(matrix);
+                case IBracket bracket:
+                    var bracket_position = new Point2D(bracket.Position.X, bracket.Position.Y);
+                    Matrix2D bracket_matrix = Matrix2D.CreateTranslation(mast_position.GetVectorTo(Point2D.Origin)) *
+                                              Matrix2D.CreateRotation(mast_direction.GetAngleTo(Vector2D.AxisX), mast_position);
 
-                    return Math.Abs(intersection.X) > Math.Abs(intersection.Y);
+                    var bracket_intersection = GetDockingPoint(from, new Ray2D(bracket_position, bracket_position.GetVectorTo(mast_position))).Value.TransformBy(bracket_matrix);
+                    return Math.Abs(bracket_intersection.X) < Math.Abs(bracket_intersection.Y);
 
                 default:
                     return false;
@@ -97,6 +103,7 @@ namespace BasicMasts
             switch (from)
             {
                 case IAnchor anchor:
+                case IBracket bracket:
                     var edges = GetGeometry().SelectMany(shape => shape.Indices.Select(index => new Line(shape.Vertices[index[0]], shape.Vertices[index[1]]).TransformBy(matrix)));                    
                     return (edges.Where(line => line.IsInside(intersection)).Single() as Line).GetMiddlePoint();
 
@@ -104,7 +111,6 @@ namespace BasicMasts
                     return null;
             }
         }
-
 
         public override Point3D? GetDockingPoint(IModel from, Ray3D ray)
         {

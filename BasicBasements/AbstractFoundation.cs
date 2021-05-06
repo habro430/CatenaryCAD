@@ -13,8 +13,6 @@ namespace BasicFoundations
     [Serializable]
     public abstract class AbstractFoundation : Foundation
     {
-        //protected IMesh[] Geometry3D;
-
         [NonSerialized]
         private static ObjectCache Cache = new MemoryCache(typeof(AbstractFoundation).Name);
 
@@ -39,18 +37,9 @@ namespace BasicFoundations
 
         public override IShape[] GetGeometry() => null;
 
-        public override bool CheckAvailableDocking(IModel from)
-        {
-            throw new NotImplementedException();
-        }
+        public override bool CheckAvailableDocking(IModel from) => true;
 
-        public override Point2D? GetDockingPoint(IModel from, Ray2D ray)
-        {
-            throw new NotImplementedException();
-        }
-        public override Point3D? GetDockingPoint(IModel from, Ray3D ray)
-        {
-            throw new NotImplementedException();
-        }
+        public override Point2D? GetDockingPoint(IModel from, Ray2D ray) => Point2D.Origin;
+        public override Point3D? GetDockingPoint(IModel from, Ray3D ray) => Point3D.Origin;
     }
 }
