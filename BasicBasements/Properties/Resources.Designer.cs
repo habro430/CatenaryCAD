@@ -70,15 +70,6 @@ namespace BasicBasements.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на IyBCbGVuZGVyIHYyLjkyLjAgT0JKIEZpbGU6ICdmb3VkYXRpb24uYmxlbmQnDQojIHd3dy5ibGVuZGVyLm9yZw0KdiAxNjQuOTk5OTU0IDAuMDAwMDE5IC04ODAuMDAwMjQ0DQp2IDE2MS44Mjk1MjkgLTMyLjE4OTg4NCAtODgwLjAwMDI0NA0KdiAxNTIuNDQwMDYzIC02My4xNDI3NTQgLTg4MC4wMDAyNDQNCnYgMTM3LjE5MjQ0NCAtOTEuNjY5MDc1IC04ODAuMDAwMjQ0DQp2IDExNi42NzI1NjkgLTExNi42NzI2MDAgLTg4MC4wMDAyNDQNCnYgOTEuNjY5MDM3IC0xMzcuMTkyNDc0IC04ODAuMDAwMjQ0DQp2IDYzLjE0MjcxNSAtMTUyLjQ0MDA5NCAtODgwLjAwMDI0NA0KdiAzMi4xODk4NjEgLTE2MS44Mjk1NTkgLTg4MC4wMDAyNDQNCnYgLTMyLjE4OTkzOCAtMTYxLjgyOTU1 [остаток строки не уместился]&quot;;.
-        /// </summary>
-        internal static string submersible {
-            get {
-                return ResourceManager.GetString("submersible", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на diAtMC4wMDAwMTkgMTY0Ljk5OTk1NCAtODgwLjAwMDI0NA0KdiAzMi4xODk4ODQgMTYxLjgyOTUyOSAtODgwLjAwMDI0NA0KdiA2My4xNDI3NTQgMTUyLjQ0MDA2MyAtODgwLjAwMDI0NA0KdiA5MS42NjkwNzUgMTM3LjE5MjQ0NCAtODgwLjAwMDI0NA0KdiAxMTYuNjcyNjAwIDExNi42NzI1NjkgLTg4MC4wMDAyNDQNCnYgMTM3LjE5MjQ3NCA5MS42NjkwMzcgLTg4MC4wMDAyNDQNCnYgMTUyLjQ0MDA5NCA2My4xNDI3MTUgLTg4MC4wMDAyNDQNCnYgMTYxLjgyOTU1OSAzMi4xODk4NjEgLTg4MC4wMDAyNDQNCnYgMTYxLjgyOTU1OSAtMzIuMTg5OTM4IC04ODAuMDAwMjQ0DQp2IDE1Mi40NDAxMDkgLTYzLjE0Mjc5MiAtODgwLjAwMDI0NA0KdiAxMzcuMTkyNDc0IC05MS42Njkx [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string tss_4_0 {
