@@ -61,9 +61,15 @@ namespace BasicMasts
         public override IMesh[] GetLayoutGeometry()
         {
             var basement = Childrens.Where(child => child is IFoundation).Single();
-            var matrix = Matrix3D.CreateTranslation(Point3D.Origin.GetVectorTo(basement.GetDockingPoint(this, new Ray3D()).Value));
+            var dockingpoint = basement.GetDockingPoint(this, new Ray3D());
 
-            return Components.SelectMany(p => p.Geometry.Select(g=> g.TransformBy(matrix))).ToArray();
+            if (dockingpoint.HasValue)
+            {
+                var matrix = Matrix3D.CreateTranslation(Point3D.Origin.GetVectorTo(dockingpoint.Value));
+                return Components.SelectMany(p => p.Geometry.Select(g => g.TransformBy(matrix))).ToArray();
+            }
+            else
+                return Components.SelectMany(p => p.Geometry).ToArray();
         }
 
         public override bool CheckAvailableDocking(IModel from) => true;
