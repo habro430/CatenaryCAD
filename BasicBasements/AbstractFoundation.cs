@@ -1,4 +1,4 @@
-﻿using BasicBasements.Properties;
+﻿using BasicFoundations.Properties;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
