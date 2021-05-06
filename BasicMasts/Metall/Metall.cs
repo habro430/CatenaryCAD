@@ -29,7 +29,7 @@ namespace BasicMasts
         private static readonly Dictionary<string, int> defaultlenghts = new Dictionary<string, int> { ["10.0 м"] = 10000, ["12.0 м"] = 12000, ["15.0 м"] = 15000 };
 
         public override Type[] AllowableFoundations => allowablefoundations;
-        public override IShape[] GetGeometry() => geometry2d;
+        public override IShape[] GetSchemeGeometry() => geometry2d;
 
         public Metall()
         {
@@ -97,14 +97,14 @@ namespace BasicMasts
             Matrix2D matrix = Matrix2D.CreateRotation(-mast_direction.GetAngleTo(Vector2D.AxisX), mast_position) *
                               Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position));
 
-            var intersection = GetGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)))
+            var intersection = GetSchemeGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)))
                                             .Aggregate((first, second) => first.GetDistanceTo(control_point) < second.GetDistanceTo(control_point) ? first : second);
 
             switch (from)
             {
                 case IAnchor anchor:
                 case IBracket bracket:
-                    var edges = GetGeometry().SelectMany(shape => shape.Indices.Select(index => new Line(shape.Vertices[index[0]], shape.Vertices[index[1]]).TransformBy(matrix)));                    
+                    var edges = GetSchemeGeometry().SelectMany(shape => shape.Indices.Select(index => new Line(shape.Vertices[index[0]], shape.Vertices[index[1]]).TransformBy(matrix)));                    
                     return (edges.Where(line => line.IsInside(intersection)).Single() as Line).GetMiddlePoint();
 
                 default:

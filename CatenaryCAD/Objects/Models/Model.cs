@@ -1,5 +1,6 @@
 ﻿using CatenaryCAD.Components;
 using CatenaryCAD.Geometry;
+using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Helpers;
 using CatenaryCAD.Models.Events;
@@ -147,7 +148,10 @@ namespace CatenaryCAD.Models
         public virtual IProperty[] Properties { get => PropertiesDictionary.Values.ToArray(); }
 
         /// <inheritdoc/>
-        public abstract IShape[] GetGeometry();
+        public abstract IShape[] GetSchemeGeometry();
+
+        /// <inheritdoc/>
+        public abstract IMesh[] GetLayoutGeometry();
 
         /// <inheritdoc/>
         public abstract Point2D? GetDockingPoint(IModel from, Ray2D ray);

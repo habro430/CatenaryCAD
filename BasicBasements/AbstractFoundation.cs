@@ -4,6 +4,7 @@ using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Models;
 using System;
+using System.Linq;
 using System.Resources;
 using System.Runtime.Caching;
 using System.Text;
@@ -35,7 +36,8 @@ namespace BasicFoundations
             return Cache.Get(key) as Mesh;
         }
 
-        public override IShape[] GetGeometry() => null;
+        public override IShape[] GetSchemeGeometry() => null;
+        public override IMesh[] GetLayoutGeometry() => Components.SelectMany(p => p.Geometry).ToArray();
 
         public override bool CheckAvailableDocking(IModel from) => true;
 

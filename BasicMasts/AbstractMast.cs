@@ -58,10 +58,15 @@ namespace BasicMasts
             }).ToDictionary(p => p.atrr.Type, p => p.type);
         }
 
-        public override bool CheckAvailableDocking(IModel from)
+        public override IMesh[] GetLayoutGeometry()
         {
-            return true;
+            var basement = Childrens.Where(child => child is IFoundation).Single();
+            var matrix = Matrix3D.CreateTranslation(Point3D.Origin.GetVectorTo(basement.GetDockingPoint(this, new Ray3D()).Value));
+
+            return Components.SelectMany(p => p.Geometry.Select(g=> g.TransformBy(matrix))).ToArray();
         }
+
+        public override bool CheckAvailableDocking(IModel from) => true;
 
         public override Point2D? GetDockingPoint(IModel from, Ray2D ray)
         {
@@ -71,7 +76,7 @@ namespace BasicMasts
             Matrix2D matrix = Matrix2D.CreateRotation(-mast_direction.GetAngleTo(Vector2D.AxisX), mast_position) *
                               Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position));
 
-            var intersections = GetGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)));
+            var intersections = GetSchemeGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)));
 
             Point2D control_point = ray.Origin + ray.Direction;
             return intersections.Aggregate((first, second) => first.GetDistanceTo(control_point) < second.GetDistanceTo(control_point) ? first : second);

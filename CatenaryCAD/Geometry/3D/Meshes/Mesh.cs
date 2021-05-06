@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatenaryCAD.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -30,7 +31,7 @@ namespace CatenaryCAD.Geometry.Meshes
 
         public Mesh(Point3D[] vertices, Vector3D[] normals, int[][] indices)
 
-        { 
+        {
             Vertices = vertices;
             Normals = normals;
             Indices = indices;
@@ -38,15 +39,16 @@ namespace CatenaryCAD.Geometry.Meshes
 
         /// <inheritdoc/>
         /// <param name="matrix">Матрица для преобразования объекта.</param>
-        public IMesh TransformBy(in Matrix3D matrix)
+        public virtual IMesh TransformBy(in Matrix3D matrix)
         {
-            int count = Vertices.Length;
-            for (int i = 0; i < count; i++)
-                Vertices[i] = Vertices[i].TransformBy(matrix);
+            var clone = this.DeepClone();
+            int count = clone.Vertices.Length;
 
-            return this;
+            for (int i = 0; i < count; i++)
+                clone.Vertices[i] = clone.Vertices[i].TransformBy(matrix);
+
+            return clone;
         }
-        
 
         public static Mesh FromObj(string obj)
         {

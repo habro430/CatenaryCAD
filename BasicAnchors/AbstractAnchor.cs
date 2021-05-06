@@ -31,7 +31,7 @@ namespace BasicAnchors
             }
             return Cache.Get(key) as Mesh;
         }
-        public override IShape[] GetGeometry()
+        public override IShape[] GetSchemeGeometry()
         {
             var mast_position = new Point2D(Parent.Position.X, Parent.Position.Y);
             var anchor_position = new Point2D(Position.X, Position.Y);
@@ -49,6 +49,8 @@ namespace BasicAnchors
             else
                 return geometry.Union(geometry_notavalible).Select(g => g.TransformBy(matrix)).ToArray();
         }
+
+        public override IMesh[] GetLayoutGeometry() => Components.SelectMany(p => p.Geometry).ToArray();
 
         public override bool CheckAvailableDocking(IModel from)
         {

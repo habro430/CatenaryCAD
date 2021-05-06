@@ -29,7 +29,7 @@ namespace BasicMasts
         private static readonly Dictionary<string, int> defaultlenghts = new Dictionary<string, int> { ["10.0 м"] = 10000, ["12.0 м"] = 12000, ["15.0 м"] = 15000 };
 
         public override Type[] AllowableFoundations => allowablefoundations;
-        public override IShape[] GetGeometry() => geometry2d;
+        public override IShape[] GetSchemeGeometry() => geometry2d;
 
         public Armored()
         {

@@ -166,7 +166,7 @@ namespace CatenaryCAD.Models.Handlers
                 {
                     case OperationalMode.Scheme:
 
-                        var geometry_scheme = Model.GetGeometry();
+                        var geometry_scheme = Model.GetSchemeGeometry();
 
                         if (geometry_scheme != null)
                         {
@@ -183,9 +183,11 @@ namespace CatenaryCAD.Models.Handlers
                         break;
 
                     case OperationalMode.Layout:
-                        
-                        var geometry_layout = Model.Components
-                            .SelectMany(p => p.Geometry);
+
+                        //var geometry_layout = Model.Components
+                        //    .SelectMany(p => p.Geometry);
+
+                        var geometry_layout = Model.GetLayoutGeometry();
 
                         if (geometry_layout != null)
                         {

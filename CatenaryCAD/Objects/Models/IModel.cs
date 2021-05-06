@@ -49,7 +49,13 @@ namespace CatenaryCAD.Models
         /// Получить 2D геометрию для режима работы <see cref="OperationalMode.Scheme"/>
         /// </summary>
         /// <returns>2D геометрия</returns>
-        public IShape[] GetGeometry();
+        public IShape[] GetSchemeGeometry();
+
+        /// <summary>
+        /// Получить 3D геометрию для режима работы <see cref="OperationalMode.Layout"/>
+        /// </summary>
+        /// <returns>2D геометрия</returns>
+        public IMesh[] GetLayoutGeometry();
 
         bool CheckAvailableDocking(IModel from);
 
