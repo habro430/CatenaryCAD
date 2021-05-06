@@ -13,7 +13,7 @@ namespace BasicFoundations
     {
         public FoundationDirectTest1()
         {
-            Component tsp = new Component(new IMesh[] { GetOrCreateFromCache("TSP4.5") });
+            Component tsp = new Component(new IMesh[] { GetOrCreateFromCache("direct") });
             ComponentsDictionary.AddOrUpdate("foundation", tsp, (name, component) => tsp);
         }
     }

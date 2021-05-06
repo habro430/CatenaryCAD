@@ -7,14 +7,14 @@ using System;
 namespace BasicFoundations
 {
     [Serializable]
-    [ModelName("FoundationSubmersible2")]
+    [ModelName("ТСС-5.0")]
     [ModelDescription("Представляет базовую модель фундамента со стаканным креплением стойки")]
-    public class FoundationSubmersibleTest2 : FoundationSubmersible
+    public class TSS50 : TSS
     {
-        public FoundationSubmersibleTest2()
+        public TSS50()
         {
-            Component tsp = new Component(new IMesh[] { GetOrCreateFromCache("TSP5.0") });
-            ComponentsDictionary.AddOrUpdate("foundation", tsp, (name, component) => tsp); 
+            Component tss = new Component(new IMesh[] { GetOrCreateFromCache("tss-5.0") });
+            ComponentsDictionary.AddOrUpdate("foundation", tss, (name, component) => tss); 
         }
     }
 }

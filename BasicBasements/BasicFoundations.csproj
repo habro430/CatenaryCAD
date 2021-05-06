@@ -85,15 +85,16 @@
   <ItemGroup>
     <Compile Include="AbstractFoundation.cs" />
     <Compile Include="FoundationDirectTest1.cs" />
-    <Compile Include="FoundationSubmersibleTest2.cs" />
-    <Compile Include="FoundationSubmersibleTest1.cs" />
+    <Compile Include="TSS\TSS50.cs" />
+    <Compile Include="TSS\TSS45.cs" />
+    <Compile Include="TSS\TSS40.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="FoundationDirect.cs" />
-    <Compile Include="FoundationSubmersible.cs" />
+    <Compile Include="TSS\TSS.cs" />
     <Compile Include="FoundationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
