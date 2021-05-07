@@ -84,7 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractFoundation.cs" />
-    <Compile Include="FoundationDirectTest1.cs" />
+    <Compile Include="TSP\TSP50.cs" />
+    <Compile Include="TSP\TSP45.cs" />
     <Compile Include="TSS\TSS50.cs" />
     <Compile Include="TSS\TSS45.cs" />
     <Compile Include="TSS\TSS40.cs" />
@@ -93,7 +94,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="FoundationDirect.cs" />
+    <Compile Include="TSP\TSP.cs" />
     <Compile Include="TSS\TSS.cs" />
     <Compile Include="FoundationAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

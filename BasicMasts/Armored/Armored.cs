@@ -1,5 +1,5 @@
-﻿using BasicFoundations;
-
+﻿
+using BasicFoundations;
 using CatenaryCAD.Components;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
@@ -10,6 +10,7 @@ using CatenaryCAD.Properties;
 
 using System;
 using System.Collections.Generic;
+using BasicFoundations;
 
 namespace BasicMasts
 {
@@ -30,7 +31,6 @@ namespace BasicMasts
 
         public override Type[] AllowableFoundations => allowablefoundations;
         public override IShape[] GetSchemeGeometry() => geometry2d;
-
         public Armored()
         {
             PropertiesDictionary.TryAdd("mast_type", InheritedMasts.Count > 0 ? new Property<Type>("Марка стойки", "Стойка", InheritedMasts, attr: Attributes.RefreshAfterChange) as IProperty :

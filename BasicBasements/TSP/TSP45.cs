@@ -6,13 +6,13 @@ using System;
 namespace BasicFoundations
 {
     [Serializable]
-    [ModelName("FoundationDirect2")]
+    [ModelName("ТСП-4.5")]
     [ModelDescription("Представляет базовую модель фундамента с анкерным креплением стойки")]
-    public class FoundationDirectTest1 : FoundationDirect
+    public class TSP45 : TSP
     {
-        public FoundationDirectTest1()
+        public TSP45()
         {
-            Component tsp = new Component(new IMesh[] { GetOrCreateFromCache("direct") });
+            Component tsp = new Component(new IMesh[] { GetOrCreateFromCache("tsp-4.5") });
             ComponentsDictionary.AddOrUpdate("foundation", tsp, (name, component) => tsp);
         }
     }

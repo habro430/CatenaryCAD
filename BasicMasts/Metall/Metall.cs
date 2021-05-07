@@ -22,7 +22,7 @@ namespace BasicMasts
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
         [NonSerialized]
         private static readonly Dictionary<string, Type> InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Metall));
-        private static readonly Type[] allowablefoundations = new Type[] { typeof(FoundationDirect) };
+        private static readonly Type[] allowablefoundations = new Type[] { typeof(TSP) };
         //генерируем геометрию для 2D режима
         private static readonly IShape[] geometry2d = new IShape[] { new Rectangle(new Point2D(), 600, 300) };
         //генерируем стандартные значения длинны стойки
