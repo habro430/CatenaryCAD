@@ -84,11 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractFoundation.cs" />
-    <Compile Include="TSP\TSP50.cs" />
-    <Compile Include="TSP\TSP45.cs" />
-    <Compile Include="TSS\TSS50.cs" />
-    <Compile Include="TSS\TSS45.cs" />
-    <Compile Include="TSS\TSS40.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

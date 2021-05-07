@@ -28,7 +28,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public FoundationHandler() 
         {
-            FoudationProperty = new Property<Type>("Тип фундамента", "Фундамент", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
+            FoudationProperty = new Property<Type>("Тип фундамента", "CatenaryCAD", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
             FoudationProperty.Updated += (type) =>
             {
                 var foundation = Activator.CreateInstance(type) as Foundation;

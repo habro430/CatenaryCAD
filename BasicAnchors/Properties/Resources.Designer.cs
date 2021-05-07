@@ -61,7 +61,34 @@ namespace BasicAnchors.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на diAzNTAuMDAwMDAwIC0zNTAuMDAwMDAwIDAuMDAwMDAwDQp2IDM1MC4wMDAwMDAgLTM1MC4wMDAwMDAgLTQwMDAuMDAwMDAwDQp2IC0zNTAuMDAwMDAwIC0zNTAuMDAwMDAwIDAuMDAwMDAwDQp2IC0zNTAuMDAwMDAwIC0zNTAuMDAwMDAwIC00MDAwLjAwMDAwMA0KdiAzNTAuMDAwMDAwIDM1MC4wMDAwMDAgMC4wMDAwMDANCnYgMzUwLjAwMDAwMCAzNTAuMDAwMDAwIC00MDAwLjAwMDAwMA0KdiAtMzUwLjAwMDAwMCAzNTAuMDAwMDAwIDAuMDAwMDAwDQp2IC0zNTAuMDAwMDAwIDM1MC4wMDAwMDAgLTQwMDAuMDAwMDAwDQpmIDUgMyAxDQpmIDMgOCA0DQpmIDcgNiA4DQpmIDIgOCA2DQpmIDEgNCAyDQpmIDUgMiA2DQpmIDUgNyAzDQpmIDMgNyA4DQpmIDcgNSA2DQpmIDIgNCA4 [остаток строки не уместился]&quot;;.
+        ///   Ищет локализованную строку, похожую на diAtNTQuNzUwMDA0IC05LjUwMDAwMCAwLjAwMDAwMA0KdiAtNTQuNzUwMDA0IC05LjUwMDAwMCAxNTAuMDAwMDAwDQp2IDU0Ljc1MDAwNCAtOS41MDAwMDAgMC4wMDAwMDANCnYgNTQuNzUwMDA0IC05LjUwMDAwMCAxNTAuMDAwMDAwDQp2IC01NC43NTAwMDQgLTE1LjUwMDAwMCAwLjAwMDAwMA0KdiAtNTQuNzUwMDA0IC0xNS41MDAwMDAgMTUwLjAwMDAwMA0KdiA1NC43NTAwMDQgLTE1LjUwMDAwMCAwLjAwMDAwMA0KdiA1NC43NTAwMDQgLTE1LjUwMDAwMCAxNTAuMDAwMDAwDQp2IC01NC43NTAwMDQgMTUuNTAwMDAwIDAuMDAwMDAwDQp2IC01NC43NTAwMDQgMTUuNTAwMDAwIDE1MC4wMDAwMDANCnYgNTQuNzUwMDA0IDE1LjUwMDAwMCAwLjAwMDAwMA0KdiA1NC43NTAwMDQg [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string tas_4_0 {
+            get {
+                return ResourceManager.GetString("tas-4.0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на diAtNTQuNzUwMDA0IC05LjUwMDAwMCAwLjAwMDAwMA0KdiAtNTQuNzUwMDA0IC05LjUwMDAwMCAxNTAuMDAwMDAwDQp2IDU0Ljc1MDAwNCAtOS41MDAwMDAgMC4wMDAwMDANCnYgNTQuNzUwMDA0IC05LjUwMDAwMCAxNTAuMDAwMDAwDQp2IC01NC43NTAwMDQgLTE1LjUwMDAwMCAwLjAwMDAwMA0KdiAtNTQuNzUwMDA0IC0xNS41MDAwMDAgMTUwLjAwMDAwMA0KdiA1NC43NTAwMDQgLTE1LjUwMDAwMCAwLjAwMDAwMA0KdiA1NC43NTAwMDQgLTE1LjUwMDAwMCAxNTAuMDAwMDAwDQp2IC01NC43NTAwMDQgMTUuNTAwMDAwIDAuMDAwMDAwDQp2IC01NC43NTAwMDQgMTUuNTAwMDAwIDE1MC4wMDAwMDANCnYgNTQuNzUwMDA0IDE1LjUwMDAwMCAwLjAwMDAwMA0KdiA1NC43NTAwMDQg [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string tas_4_5 {
+            get {
+                return ResourceManager.GetString("tas-4.5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на diAtNTQuNzUwMDA0IC05LjUwMDAwMCAwLjAwMDAwMA0KdiAtNTQuNzUwMDA0IC05LjUwMDAwMCAxNTAuMDAwMDAwDQp2IDU0Ljc1MDAwNCAtOS41MDAwMDAgMC4wMDAwMDANCnYgNTQuNzUwMDA0IC05LjUwMDAwMCAxNTAuMDAwMDAwDQp2IC01NC43NTAwMDQgLTE1LjUwMDAwMCAwLjAwMDAwMA0KdiAtNTQuNzUwMDA0IC0xNS41MDAwMDAgMTUwLjAwMDAwMA0KdiA1NC43NTAwMDQgLTE1LjUwMDAwMCAwLjAwMDAwMA0KdiA1NC43NTAwMDQgLTE1LjUwMDAwMCAxNTAuMDAwMDAwDQp2IC01NC43NTAwMDQgMTUuNTAwMDAwIDAuMDAwMDAwDQp2IC01NC43NTAwMDQgMTUuNTAwMDAwIDE1MC4wMDAwMDANCnYgNTQuNzUwMDA0IDE1LjUwMDAwMCAwLjAwMDAwMA0KdiA1NC43NTAwMDQg [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string tas_5_0 {
+            get {
+                return ResourceManager.GetString("tas-5.0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на IyBCbGVuZGVyIHYyLjkyLjAgT0JKIEZpbGU6ICdhbmNob3JzX21vZGVscy5ibGVuZCcNCiMgd3d3LmJsZW5kZXIub3JnDQp2IDU0Ljc1MDAwNCA5LjUwMDAwMCAwLjAwMDAwMA0KdiA1NC43NTAwMDQgOS41MDAwMDAgMTUwLjAwMDAwMA0KdiAtNTQuNzUwMDA0IDkuNTAwMDAwIDAuMDAwMDAwDQp2IC01NC43NTAwMDQgOS41MDAwMDAgMTUwLjAwMDAwMA0KdiA1NC43NTAwMDQgMTUuNTAwMDAwIDAuMDAwMDAwDQp2IDU0Ljc1MDAwNCAxNS41MDAwMDAgMTUwLjAwMDAwMA0KdiAtNTQuNzUwMDA0IDE1LjUwMDAwMCAwLjAwMDAwMA0KdiAtNTQuNzUwMDA0IDE1LjUwMDAwMCAxNTAuMDAwMDAwDQp2IDU0Ljc1MDAwNCAtMTUuNTAwMDAwIDAuMDAwMDAwDQp2IDU0Ljc1MDAwNCAtMTUu [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string test {
             get {

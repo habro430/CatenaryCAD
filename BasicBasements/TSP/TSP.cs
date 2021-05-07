@@ -1,19 +1,40 @@
 ﻿using CatenaryCAD.Attributes;
 using CatenaryCAD.Components;
 using CatenaryCAD.Geometry.Meshes;
+using CatenaryCAD.Models.Events;
+using CatenaryCAD.Properties;
 using System;
+using System.Collections.Generic;
 
 namespace BasicFoundations
 {
     [Serializable]
-    //[ModelName("FoundationDirect")]
-    //[ModelDescription("Представляет базовую модель фундамента с анкерным креплением стойки")]
-    public abstract class TSP : AbstractFoundation
+    [ModelName("ТСП")]
+    [ModelDescription("Фундамент с анкерным креплением стоек жестких поперечин")]
+    public class TSP : AbstractFoundation
     {
-        //public TSP()
-        //{
-        //    Component tsp = new Component(new IMesh[] { GetOrCreateFromCache("direct") });
-        //    ComponentsDictionary.AddOrUpdate("foundation", tsp, (name, component) => tsp);
-        //}
+        private static readonly Dictionary<string, int> defaultlenghts = new Dictionary<string, int> { ["4.5 м"] = 4500, ["5.0 м"] = 5000 };
+
+        public TSP()
+        {
+            PropertiesDictionary.TryAdd("foundation_lenght", new Property<int>("Длинна фундамента", "Фундамент", defaultlenghts, UpdateLenght, Attributes.RefreshAfterChange));
+        }
+        private void UpdateLenght(int lenght)
+        {
+            if (!(bool?)EventInvoke(this, new TryModify())?.Value ?? false) return;
+
+            switch (lenght)
+            {
+                case 4500:
+                    Component tsp45 = new Component(new IMesh[] { GetOrCreateFromCache("tsp-4.5") });
+                    ComponentsDictionary.AddOrUpdate("anchor", tsp45, (name, component) => tsp45);
+                    break;
+                case 5000:
+                    Component tsp50 = new Component(new IMesh[] { GetOrCreateFromCache("tsp-5.0") });
+                    ComponentsDictionary.AddOrUpdate("anchor", tsp50, (name, component) => tsp50);
+                    break;
+            }
+
+        }
     }
 }

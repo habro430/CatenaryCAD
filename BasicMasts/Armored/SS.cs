@@ -1,29 +1,29 @@
 ﻿
 using BasicFoundations;
+using CatenaryCAD.Attributes;
 using CatenaryCAD.Components;
 using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Attributes;
 using CatenaryCAD.Models.Events;
 using CatenaryCAD.Properties;
-
 using System;
 using System.Collections.Generic;
-using BasicFoundations;
 
 namespace BasicMasts
 {
     [Serializable]
-    [ModelName("Железобетонная")]
-    [ModelDescription("Представляет базовую модель железобетонной стойки")]
+    [ModelName("СС")]
+    [ModelDescription("Cтойка железобетонная с напрягаемой проволочной арматурой со смешанным армированием")]
     
-    public class Armored : AbstractMast
+    public class SS : AbstractMast
     {
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
         [NonSerialized]
-        private static readonly Dictionary<string, Type> InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Armored));
+        private static readonly Dictionary<string, Type> InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(SS));
+
         private static readonly Type[] allowablefoundations = new Type[] { typeof(TSS) };
+
         //генерируем геометрию для 2D режима
         private static readonly IShape[] geometry2d = new IShape[] { new Circle(new Point2D(), 300, 20) };
         //генерируем стандартные значения длинны стойки
@@ -31,12 +31,12 @@ namespace BasicMasts
 
         public override Type[] AllowableFoundations => allowablefoundations;
         public override IShape[] GetSchemeGeometry() => geometry2d;
-        public Armored()
+        public SS()
         {
             PropertiesDictionary.TryAdd("mast_type", InheritedMasts.Count > 0 ? new Property<Type>("Марка стойки", "Стойка", InheritedMasts, attr: Attributes.RefreshAfterChange) as IProperty :
                                                                                 new Property<string>("Марка стойки", "Стойка", string.Empty) as IProperty);
 
-            PropertiesDictionary.TryAdd("mast_lenght", new Property<int>("Длинна", "Стойка", defaultlenghts, UpdateLenght, Attributes.RefreshAfterChange));
+            PropertiesDictionary.TryAdd("mast_lenght", new Property<int>("Длинна стойки", "Стойка", defaultlenghts, UpdateLenght, Attributes.RefreshAfterChange));
         }
 
         private void UpdateLenght(int lenght)

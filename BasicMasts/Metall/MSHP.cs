@@ -14,15 +14,17 @@ using System.Linq;
 namespace BasicMasts
 {
     [Serializable]
-    [ModelName("Металлическая")]
+    [ModelName("МШП")]
     [ModelDescription("Представляет базовую модель металлической стойки")]
 
-    public class Metall : AbstractMast
+    public class MSHP : AbstractMast
     {
         //при первом вызове класса кэшируем в словарь производные от него опоры в статику
         [NonSerialized]
-        private static readonly Dictionary<string, Type> InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(Metall));
+        private static readonly Dictionary<string, Type> InheritedMasts = AbstractMast.GetInheritedMastsFor(typeof(MSHP));
+
         private static readonly Type[] allowablefoundations = new Type[] { typeof(TSP) };
+
         //генерируем геометрию для 2D режима
         private static readonly IShape[] geometry2d = new IShape[] { new Rectangle(new Point2D(), 600, 300) };
         //генерируем стандартные значения длинны стойки
@@ -31,12 +33,12 @@ namespace BasicMasts
         public override Type[] AllowableFoundations => allowablefoundations;
         public override IShape[] GetSchemeGeometry() => geometry2d;
 
-        public Metall()
+        public MSHP()
         {
             PropertiesDictionary.TryAdd("mast_type", InheritedMasts.Count > 0 ? new Property<Type>("Марка стойки", "Стойка", InheritedMasts, attr: Attributes.RefreshAfterChange) as IProperty : 
                                                                                 new Property<string>("Марка стойки", "Стойка", string.Empty) as IProperty);
 
-            PropertiesDictionary.TryAdd("mast_lenght", new Property<int>("Длинна", "Стойка", defaultlenghts, UpdateLenght, Attributes.RefreshAfterChange));
+            PropertiesDictionary.TryAdd("mast_lenght", new Property<int>("Длинна стойки", "Стойка", defaultlenghts, UpdateLenght, Attributes.RefreshAfterChange));
         }
 
         private void UpdateLenght(int lenght)

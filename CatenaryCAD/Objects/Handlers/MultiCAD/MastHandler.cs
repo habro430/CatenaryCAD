@@ -33,7 +33,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public MastHandler()
         {
-            MastProperty = new Property<Type>("Тип стойки", "Стойка", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
+            MastProperty = new Property<Type>("Тип стойки", "CatenaryCAD", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
 
             MastProperty.Updated += (type) =>
             {
