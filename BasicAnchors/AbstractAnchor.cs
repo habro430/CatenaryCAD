@@ -3,7 +3,6 @@ using CatenaryCAD.Geometry;
 using CatenaryCAD.Geometry.Meshes;
 using CatenaryCAD.Geometry.Shapes;
 using CatenaryCAD.Models;
-using CatenaryCAD.Properties;
 using System;
 using System.Linq;
 using System.Resources;
@@ -13,14 +12,14 @@ using System.Text;
 namespace BasicAnchors
 {
     [Serializable]
-    public abstract class DefaultAnchor: Anchor
+    public abstract class AbstractAnchor : Anchor
     {
         private IShape[] geometry = new IShape[] { new Line(new Point2D(0, 0), new Point2D(8, 0)),
                                                        new Triangle(new Point2D(8,0), new Point2D(10, 1), new Point2D(10,-1)) };
         private IShape[] geometry_notavalible = new IShape[] { new Line(new Point2D(3, -1.5d), new Point2D(6, 1.5d)),
                                                         new Line(new Point2D(3, 1.5d), new Point2D(6, -1.5d)) };
         [NonSerialized]
-        private static ObjectCache Cache = new MemoryCache(typeof(DefaultAnchor).Name);
+        private static ObjectCache Cache = new MemoryCache(typeof(AbstractAnchor).Name);
 
         protected internal static Mesh GetOrCreateFromCache(string key)
         {
@@ -33,12 +32,6 @@ namespace BasicAnchors
             return Cache.Get(key) as Mesh;
         }
         
-        public DefaultAnchor()
-        {
-            PropertiesDictionary.TryAdd("anchorguy_first_height", new Property<int>("Высота анкеровки НТ", "Анкеровка", 8650, null));
-            PropertiesDictionary.TryAdd("anchorguy_second_height", new Property<int>("Высота анкеровки КП", "Анкеровка", 7650, null));
-        }
-
         public override IShape[] GetSchemeGeometry()
         {
             var mast_position = new Point2D(Parent.Position.X, Parent.Position.Y);

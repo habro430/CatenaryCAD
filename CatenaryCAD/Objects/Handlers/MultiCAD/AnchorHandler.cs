@@ -29,18 +29,12 @@ namespace CatenaryCAD.Models.Handlers
 
         public AnchorHandler()
         {
-            if (Anchors.Count > 1)
-            {
-                //Если анкерных узлов больше одного то добавляем список-селектор в свойства объекта
-                Property<Type> anchor_type = new Property<Type>("Тип анкерного узла", "CatenaryCAD", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
-                anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
+            Property<Type> anchor_type = new Property<Type>("Тип анкера", "CatenaryCAD", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
+            anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
 
-                anchor_type.DropDownValues = Anchors;
-                PropertiesDictionary.TryAdd("anchor_type", anchor_type);
-            }
-            else
-                //в противном случае выставляем единственный узел по дефолту
-                Model = Activator.CreateInstance(Anchors.Single().Value) as Anchor;
+            anchor_type.DropDownValues = Anchors;
+
+            PropertiesDictionary.TryAdd("anchor_type", anchor_type);
         }
 
         public override void OnTransform(Matrix3d tfm) { return; }
