@@ -11,7 +11,7 @@ namespace BasicAnchors
     [Serializable]
     [ModelName("ТАС")]
     [ModelDescription("Трехлучевой анкер")]
-    public class TAS : AbstractAnchor
+    public class TAS : DefaultAnchor
     {
         private static readonly Dictionary<string, int> defaultlenghts = new Dictionary<string, int> { ["4.0 м"] = 4000, ["4.5 м"] = 4500, ["5.0 м"] = 5000 };
 
