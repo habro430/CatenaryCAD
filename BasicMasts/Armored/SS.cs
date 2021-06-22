@@ -25,7 +25,7 @@ namespace BasicMasts
         private static readonly Type[] allowablefoundations = new Type[] { typeof(TSS) };
 
         //генерируем геометрию для 2D режима
-        private static readonly IShape[] geometry2d = new IShape[] { new Circle(new Point2D(), 300, 20) };
+        private static readonly IShape[] geometry2d = new IShape[] { new Circle(new Point2D(), 1.5d, 20) };
         //генерируем стандартные значения длинны стойки
         private static readonly Dictionary<string, int> defaultlenghts = new Dictionary<string, int> { ["10.0 м"] = 10000, ["12.0 м"] = 12000, ["15.0 м"] = 15000 };
 

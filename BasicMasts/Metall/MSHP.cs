@@ -26,7 +26,7 @@ namespace BasicMasts
         private static readonly Type[] allowablefoundations = new Type[] { typeof(TSP) };
 
         //генерируем геометрию для 2D режима
-        private static readonly IShape[] geometry2d = new IShape[] { new Rectangle(new Point2D(), 600, 300) };
+        private static readonly IShape[] geometry2d = new IShape[] { new Rectangle(new Point2D(), 3, 1.5d) };
         //генерируем стандартные значения длинны стойки
         private static readonly Dictionary<string, int> defaultlenghts = new Dictionary<string, int> { ["10.0 м"] = 10000, ["12.0 м"] = 12000, ["15.0 м"] = 15000 };
 
@@ -97,20 +97,25 @@ namespace BasicMasts
             var control_point = ray.Origin + ray.Direction;
 
             Matrix2D matrix = Matrix2D.CreateRotation(-mast_direction.GetAngleTo(Vector2D.AxisX), mast_position) *
-                              Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position));
+                              Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position)) * 
+                              Matrix2D.CreateScale(Scale, Point2D.Origin);
 
-            var intersection = GetSchemeGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)))
-                                            .Aggregate((first, second) => first.GetDistanceTo(control_point) < second.GetDistanceTo(control_point) ? first : second);
+            var intersections = GetSchemeGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)) ?? Enumerable.Empty<Point2D>());
 
-            switch (from)
+            if (!(intersections?.Any() ?? false)) return null;
+            else
             {
-                case IAnchor anchor:
-                case IBracket bracket:
-                    var edges = GetSchemeGeometry().SelectMany(shape => shape.Indices.Select(index => new Line(shape.Vertices[index[0]], shape.Vertices[index[1]]).TransformBy(matrix)));                    
-                    return (edges.Where(line => line.IsInside(intersection)).Single() as Line).GetMiddlePoint();
+                switch (from)
+                {
+                    case IAnchor anchor:
+                    case IBracket bracket:
+                        var intersection = intersections.Aggregate((first, second) => first.GetDistanceTo(control_point) < second.GetDistanceTo(control_point) ? first : second);
+                        var edges = GetSchemeGeometry().SelectMany(shape => shape.Indices.Select(index => new Line(shape.Vertices[index[0]], shape.Vertices[index[1]]).TransformBy(matrix)));
+                        return (edges.Where(line => line.IsInside(intersection)).Single() as Line).GetMiddlePoint();
 
-                default:
-                    return null;
+                    default:
+                        return null;
+                }
             }
         }
 

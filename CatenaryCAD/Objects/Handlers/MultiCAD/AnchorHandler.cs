@@ -73,24 +73,18 @@ namespace CatenaryCAD.Models.Handlers
                         {
                             Point3D mouse = a.Point.ToCatenaryCAD_3D();
 
-                            const int distancetomast = 5000;
+                            const int distancetomast = 8000;
 
                             var mast_position = mast.Position;
                             double angle = mast_position.GetVectorTo(mouse).GetAngleTo(Vector3D.AxisX, Vector3D.AxisZ);
 
                             var anchor_position = mast_position.TransformBy(Matrix3D.CreateTranslation(Vector3D.AxisX * distancetomast))
-                                                                  .TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
+                                                               .TransformBy(Matrix3D.CreateRotation(-angle, mast.Position, Vector3D.AxisZ));
 
-                            //var mast_position_2d = new Point2D(mast_position.X, mast_position.Y);
-                            //var anchor_position_2d = new Point2D(anchor_position.X, anchor_position.Y);
+                            anchor.Direction = mast_position.GetVectorTo(mouse);
+                            anchor.Position = anchor_position;
 
-                            //if (mast.GetDockingPoint(anchor, new Ray2D(anchor_position_2d, anchor_position_2d.GetVectorTo(mast_position_2d))) != null)
-                            //{
-                                anchor.Direction = mast_position.GetVectorTo(mouse);
-                                anchor.Position = anchor_position;
-
-                                anchor.EventInvoke(ahandler, new Update());
-                            //}
+                            anchor.EventInvoke(ahandler, new Update());
                         };
 
                         InputResult result = input.GetPoint("Выберите направление для размещения обьекта:");

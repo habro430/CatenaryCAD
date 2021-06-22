@@ -15,6 +15,9 @@ namespace CatenaryCAD.Models
     [Serializable]
     public abstract class Model : IModel
     {
+        /// <inheritdoc/>
+        public double Scale { set; get; }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IObjectID identifier = null;
 

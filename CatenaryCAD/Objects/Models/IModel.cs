@@ -13,6 +13,11 @@ namespace CatenaryCAD.Models
     public interface IModel : IPositionable<Point3D>, IDirectionable<Vector3D>, ITransformable<Matrix3D, IModel>
     {
         /// <summary>
+        /// Масштаб модели
+        /// </summary>
+        public double Scale { get; set; }
+
+        /// <summary>
         /// Идентификатор модели
         /// </summary>
         public IObjectID Identifier { get; }

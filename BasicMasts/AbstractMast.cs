@@ -80,12 +80,17 @@ namespace BasicMasts
             var mast_direction = new Vector2D(Direction.X, Direction.Y);
 
             Matrix2D matrix = Matrix2D.CreateRotation(-mast_direction.GetAngleTo(Vector2D.AxisX), mast_position) *
-                              Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position));
+                              Matrix2D.CreateTranslation(Point2D.Origin.GetVectorTo(mast_position)) *
+                              Matrix2D.CreateScale(Scale, Point2D.Origin);
 
-            var intersections = GetSchemeGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)));
-
-            Point2D control_point = ray.Origin + ray.Direction;
-            return intersections.Aggregate((first, second) => first.GetDistanceTo(control_point) < second.GetDistanceTo(control_point) ? first : second);
+            var intersections = GetSchemeGeometry().SelectMany(shape => ray.GetIntersections(shape.TransformBy(matrix)) ?? Enumerable.Empty<Point2D>());
+            
+            if (!(intersections?.Any() ?? false)) return null;
+            else
+            {
+                Point2D control_point = ray.Origin + ray.Direction;
+                return intersections.Aggregate((first, second) => first.GetDistanceTo(control_point) < second.GetDistanceTo(control_point) ? first : second);
+            }
         }
 
         public override Point3D? GetDockingPoint(IModel from, Ray3D ray)

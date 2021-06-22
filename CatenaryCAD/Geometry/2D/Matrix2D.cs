@@ -91,6 +91,19 @@ namespace CatenaryCAD.Geometry
             return result;
         }
 
+
+        /// <summary>
+        /// Создает матрицу масштабирования на основе заданного масштаба<paramref name="scale"/>.
+        /// </summary>
+        /// <param name="scale">Значение масштабирования по каждой оси.</param>
+        /// <returns>Матрица масштабирования.</returns>
+        public static Matrix2D CreateScale(double scale)
+        {
+            Matrix2D result = new Matrix2D(scale, 0d, 0d,
+                                           0d, scale, 0d,
+                                           0d, 0d, 1d);
+            return result;
+        }
         /// <summary>
         /// Создает матрицу масштабирования на основе заданного масштаба вектора <paramref name="scale"/>.
         /// </summary>
@@ -101,6 +114,23 @@ namespace CatenaryCAD.Geometry
             Matrix2D result = new Matrix2D(scale.X,     0d,         0d,
                                            0d,          scale.Y,    0d,
                                            0d,          0d,         1d);
+            return result;
+        }
+
+        /// <summary>
+        /// Создает матрицу масштабирования на основе заданного масштаба вектора <paramref name="scale"/>
+        /// и относительно центральной точки <paramref name="center"/>.
+        /// </summary>
+        /// <param name="scale">Вектор, который содержит значение масштабирования по каждой оси.</param>
+        /// <param name="center">Центральная точка.</param>
+        /// <returns>Матрица масштабирования.</returns>
+        public static Matrix2D CreateScale(double scale, in Point2D center)
+        {
+
+            Matrix2D result = new Matrix2D(scale, 0d, center.X * (1 - scale),
+                                           0d, scale, center.Y * (1 - scale),
+                                           0d, 0d, 1d);
+
             return result;
         }
 

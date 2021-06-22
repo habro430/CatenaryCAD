@@ -38,6 +38,7 @@ namespace CatenaryCAD.Models.Handlers
                 {
                     newmodel.Position = model.Position;
                     newmodel.Direction = model.Direction;
+                    newmodel.Scale = model.Scale;
 
                     newmodel.Identifier = model.Identifier;
 
@@ -140,6 +141,21 @@ namespace CatenaryCAD.Models.Handlers
             return true;
         }
 
+        public override hresult OnEvent(Events ev, object param)
+        {
+            switch (ev)
+            {
+                case Events.ScaleChanged:
+                    Model.Scale = DbEntity.Scale;
+                    break;
+                case Events.BeforeAdd:
+                    Model.Scale = DbEntity.Scale;
+                    break;
+            }
+
+            return base.OnEvent(ev, param);
+        }
+
         public override void OnDraw(GeometryBuilder dc)
         {
 
@@ -172,7 +188,7 @@ namespace CatenaryCAD.Models.Handlers
                         {
                             for (int igeom = 0; igeom < geometry_scheme.Length; igeom++)
                             {
-                                var geometry = geometry_scheme[igeom];
+                                var geometry = geometry_scheme[igeom].TransformBy(Matrix2D.CreateScale(new Vector2D(Model.Scale, Model.Scale))); 
 
                                 foreach (var edge in geometry.Indices)
                                     dc.DrawLine(geometry.Vertices[edge[0]].ToMultiCAD(),
