@@ -125,6 +125,9 @@
     <Compile Include="Geometry\IRay.cs" />
     <Compile Include="Geometry\IVector.cs" />
     <Compile Include="Helpers\ConcurrentHashSet.cs" />
+    <Compile Include="Objects\Handlers\MultiCAD\AnchorTieHandler.cs" />
+    <Compile Include="Objects\Models\AnchorTie.cs" />
+    <Compile Include="Objects\Models\Interfaces\IAnchorTie.cs" />
     <Compile Include="OperationalCommands.cs" />
     <Compile Include="Helpers\DeepCloner\Cloner.cs" />
     <Compile Include="Helpers\DeepCloner\Helpers\ClonerToExprGenerator.cs" />
@@ -173,12 +176,12 @@
     <Compile Include="Objects\Handlers\MultiCAD\Handler.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\AnchorHandler.cs" />
     <Compile Include="Objects\Handlers\Interfaces\IHandler.cs" />
-    <Compile Include="Objects\Models\IAnchor.cs" />
-    <Compile Include="Objects\Models\IFoundation.cs" />
-    <Compile Include="Objects\Models\IBracket.cs" />
-    <Compile Include="Objects\Models\IModel.cs" />
+    <Compile Include="Objects\Models\Interfaces\IAnchor.cs" />
+    <Compile Include="Objects\Models\Interfaces\IFoundation.cs" />
+    <Compile Include="Objects\Models\Interfaces\IBracket.cs" />
+    <Compile Include="Objects\Models\Interfaces\IModel.cs" />
     <Compile Include="Objects\Handlers\MultiCAD\MastHandler.cs" />
-    <Compile Include="Objects\Models\IMast.cs" />
+    <Compile Include="Objects\Models\Interfaces\IMast.cs" />
     <Compile Include="Helpers\HashCode.cs" />
     <Compile Include="Components\IComponent.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -200,8 +203,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Objects\Models\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
