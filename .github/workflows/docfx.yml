@@ -18,7 +18,7 @@ jobs:
       name: Deploy to GitHub Pages
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/docs
+        publish_dir: ./Docs/docs
         allow_empty_commit: true
         enable_jekyll: true
         cname: catenary.nagikh.com
