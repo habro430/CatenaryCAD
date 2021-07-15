@@ -7,7 +7,7 @@ on:
 jobs:
   docfx_job:
     runs-on: ubuntu-latest
-    name: Create and deploy DocFX documentation
+    name: Build and deploy DocFX documentation
     steps:
     - uses: actions/checkout@v2
     - uses: nikeee/docfx-action@v1.0.0
