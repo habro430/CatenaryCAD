@@ -1,0 +1,932 @@
+{
+  "homepages": [],
+  "source_base_path": "/github/workspace/Docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Attributes.ModelDescriptionAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Attributes.ModelDescriptionAttribute.html",
+          "hash": "CiKBKT7TLP3aOcXINW5vRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Attributes.ModelNameAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Attributes.ModelNameAttribute.html",
+          "hash": "vYQCL1n2HBnamyS30jTRvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Attributes.ModelNonBrowsableAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Attributes.ModelNonBrowsableAttribute.html",
+          "hash": "LtYRMkJhKbBv6GvrV3D2zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Attributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Attributes.html",
+          "hash": "WRJ5p+6tJslN/mysHDbKog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Components.Component.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Components.Component.html",
+          "hash": "DfjqXqK+w14lwzrJliyhmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Components.IComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Components.IComponent.html",
+          "hash": "Qxn0aOAbEy0nqOuevDfN/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Components.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Components.html",
+          "hash": "MS+gm6BJUx9dmnccgfhrzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.GeometryType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.GeometryType.html",
+          "hash": "AKPupu3Mj0SX7W4qOPcXRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.IMatrix.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.IMatrix.html",
+          "hash": "9BPAz2sYn5BYmXcRl5duag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.IPoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.IPoint.html",
+          "hash": "np2fGBI5e4wQfH0OYFp61g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.IRay.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.IRay.html",
+          "hash": "tc2e7lEquVjkShVuEUnAUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.IVector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.IVector.html",
+          "hash": "W20w6K7NbCiCHBbhQbdCww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Interfaces.IDirectionable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Interfaces.IDirectionable-1.html",
+          "hash": "HIZw3eaCcf77C6/bWGICoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Interfaces.IOriginable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Interfaces.IOriginable-1.html",
+          "hash": "C0f/9fl4SLdF11VXLChZOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Interfaces.IPositionable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Interfaces.IPositionable-1.html",
+          "hash": "NlhO+G9ZWxIp7tUPW+OjPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Interfaces.IRotationable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Interfaces.IRotationable-1.html",
+          "hash": "O2wpTCsAYUB0Ge3RMZrHsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Interfaces.ITransformable-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Interfaces.ITransformable-2.html",
+          "hash": "hjgtOIxrnl9zExP5vSDfaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Interfaces.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Interfaces.html",
+          "hash": "w9AL0kf1W5M+ktaC5hX0uQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Matrix2D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Matrix2D.html",
+          "hash": "UvjWbwq18rkxXbBPWx3eEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Matrix3D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Matrix3D.html",
+          "hash": "E41nUISUE07wuW0JuXpkKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Meshes.IMesh.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Meshes.IMesh.html",
+          "hash": "dvMFEF378BuUcWhq9ZoT9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Meshes.Mesh.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Meshes.Mesh.html",
+          "hash": "4od1Ix/e2coSWmZ4z2lOrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Meshes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Meshes.html",
+          "hash": "vMeAWFdIO3LN/AVtli4H0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Point2D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Point2D.html",
+          "hash": "r7HWVx62rpjq7QguGzg9vQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Point3D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Point3D.html",
+          "hash": "4dRFOqmFOvWBZmPvxLSgpQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Ray2D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Ray2D.html",
+          "hash": "4fcWOVh8EC00VdtorbInVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Ray3D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Ray3D.html",
+          "hash": "UFvLh+OggmSc+xvjxkdYvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Shapes.Circle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Shapes.Circle.html",
+          "hash": "zy42eFrANl8wDTECmSQ4LQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Shapes.IShape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Shapes.IShape.html",
+          "hash": "iNBWJ96Bx9eS4TLLC440LA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Shapes.Line.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Shapes.Line.html",
+          "hash": "8LyxheNjxrNWxS9Oniuf4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Shapes.Rectangle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Shapes.Rectangle.html",
+          "hash": "To++4zZgdptnZZEfk+VeGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Shapes.Shape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Shapes.Shape.html",
+          "hash": "Cmq9L/oBhqxNKwzappW3Cg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Shapes.Triangle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Shapes.Triangle.html",
+          "hash": "izkcL+/FYVc8UDkIEBZ8Ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Shapes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Shapes.html",
+          "hash": "OOl86txe5d/ymHCb3hBcqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Vector2D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Vector2D.html",
+          "hash": "We9h5AXbV91LbZrL+UcJGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.Vector3D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.Vector3D.html",
+          "hash": "WFfZbcAVgDarqyu6mr5qKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Geometry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Geometry.html",
+          "hash": "XQ0eOnHpLHoDye5+dUddyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Helpers.Cloner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Helpers.Cloner.html",
+          "hash": "X3zlMmZz98SUBVgSPZw9KQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Helpers.ConcurrentHashSet-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Helpers.ConcurrentHashSet-1.html",
+          "hash": "7y1V5LAOudlMhM+Psu3kvg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Helpers.DeepCloner.ShallowObjectCloner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Helpers.DeepCloner.ShallowObjectCloner.html",
+          "hash": "Et/60/dCAY/hNCNHIaK7uQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Helpers.DeepCloner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Helpers.DeepCloner.html",
+          "hash": "88CPTED0YvR14tyVwkfWqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Helpers.IObjectID.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Helpers.IObjectID.html",
+          "hash": "qFOFDxYiIaXkR1IHkF2nCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Helpers.MemoryCache-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Helpers.MemoryCache-1.html",
+          "hash": "Tw7Ar4vM5K0jq3VTItKARA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Helpers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Helpers.html",
+          "hash": "A7L2r3JLgljHGvfLwlyGTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Main.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Main.html",
+          "hash": "JVxFVOiC8HhhoMwpQoLWzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Maintenances.IMaintenance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Maintenances.IMaintenance.html",
+          "hash": "6PaoKzzAXIy85Bo9+xW0gQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Maintenances.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Maintenances.html",
+          "hash": "y3/KoiqaZoF7fL4HOSwwzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Anchor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Anchor.html",
+          "hash": "1i1+DmiDTpemHwoiI/QT6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.AnchorTie.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.AnchorTie.html",
+          "hash": "xaGC7axPA4cSIqKxkCRYfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Bracket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Bracket.html",
+          "hash": "k0pVQXHp8K/N1UxyesSmuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Events.EventInput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Events.EventInput.html",
+          "hash": "JfHmzLChytjL5oIzXylhPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Events.EventOutput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Events.EventOutput.html",
+          "hash": "z2ltUNYedKH/KpW1AeaHag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Events.Remove.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Events.Remove.html",
+          "hash": "NvIzIIGLrEhixcKv6vH7aQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Events.TryModify.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Events.TryModify.html",
+          "hash": "s2oETTD7H2kIqxyKtXY1rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Events.Update.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Events.Update.html",
+          "hash": "59OldEQhom6EzKi5v1KcRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Events.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Events.html",
+          "hash": "gCm92rwrHuMPAzNXjTfgVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Foundation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Foundation.html",
+          "hash": "6fsi8CRocMswtFzZdyXIuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.IAnchor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.IAnchor.html",
+          "hash": "8unyG7xrQMTL/p1suQJ9/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.IAnchorTie.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.IAnchorTie.html",
+          "hash": "LcFjG0Hy8IcMjNeIwUSflQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.IBracket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.IBracket.html",
+          "hash": "0ttPo5HqI34PTBwkTPdT6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.IFoundation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.IFoundation.html",
+          "hash": "WB/AEhdt59SFgBmnRI38FQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.IMast.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.IMast.html",
+          "hash": "LtVqGeDrl7dRLFAauNe6Mg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.IModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.IModel.html",
+          "hash": "oqpEX7uVphk+Pt/0gu1CgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Mast.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Mast.html",
+          "hash": "iLbEsYPNdbN0iT62xM/wIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.Model.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.Model.html",
+          "hash": "wpsvbutTS6d6a2WtnwgX5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Models.html",
+          "hash": "XDHc3A10sPkRNAuNkfQnJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Properties.Attributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Properties.Attributes.html",
+          "hash": "VBJfNI0scFU+yR3VrORxUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Properties.IProperty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Properties.IProperty.html",
+          "hash": "T5JhUE5YKfTeNpEcBppSsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Properties.Property-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Properties.Property-1.html",
+          "hash": "9YVV4f7MKkUhR8VQZeZUjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.Properties.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.Properties.html",
+          "hash": "aeXsQsa9TGCbPz3LQCtE5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CatenaryCAD.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CatenaryCAD.html",
+          "hash": "RtS8fjosp8ZmjofWwP9UFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "zrMJOH57HcNicPQ8ERPFdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "AJbZH3IVov7n8My7nEOuNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 1,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 71,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
