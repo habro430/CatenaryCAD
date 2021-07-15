@@ -4,8 +4,9 @@
       "src": [
         {
           "files": [
-            "../CatenaryCAD/**.csproj"
-          ]
+            "CatenaryCAD/**.csproj"
+          ],
+          "src": ".."
         }
       ],
       "dest": "api",
