@@ -1,13 +1,13 @@
-﻿using CatenaryCAD.Components;
-using CatenaryCAD.Properties;
+﻿using Catenary.Components;
+using Catenary.Properties;
 using Multicad.Geometry;
 
-namespace CatenaryCAD.Models.Handlers
+namespace Catenary.Models.Handlers
 {
     internal interface IHandler
     {
         /// <summary>
-        /// Объект <see cref="CatenaryCAD"/>
+        /// Объект <see cref="Catenary"/>
         /// </summary>
         public IModel Model { get; set; }
 

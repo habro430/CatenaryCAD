@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 
-namespace CatenaryCAD.Helpers.DeepCloner
+namespace Catenary.Helpers.DeepCloner
 {
 	internal static class DeepClonerMsilHelper
 	{

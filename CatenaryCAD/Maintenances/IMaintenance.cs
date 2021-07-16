@@ -1,4 +1,4 @@
-﻿namespace CatenaryCAD.Maintenances
+﻿namespace Catenary.Maintenances
 {
     public interface IMaintenance
     {

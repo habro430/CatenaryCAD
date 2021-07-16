@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Security;
 
-using CatenaryCAD.Helpers.DeepCloner;
+using Catenary.Helpers.DeepCloner;
 
-namespace CatenaryCAD.Helpers
+namespace Catenary.Helpers
 {
 	// The contents of this file is taken from https://github.com/force-net/DeepCloner/blob/develop/DeepCloner/DeepClonerExtensions.cs
 	// To be replaced by the framework implementation when released for the appropriate builds

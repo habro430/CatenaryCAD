@@ -1,5 +1,5 @@
-﻿using CatenaryCAD.Geometry.Interfaces;
-using CatenaryCAD.Helpers;
+﻿using Catenary.Geometry.Interfaces;
+using Catenary.Helpers;
 using Multicad.Geometry;
 using System;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace CatenaryCAD.Geometry
+namespace Catenary.Geometry
 {
     /// <summary>
     /// Структура, представляющая вектор в 3D пространстве.

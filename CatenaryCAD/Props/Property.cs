@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace CatenaryCAD.Properties
+namespace Catenary.Properties
 {
     /// <summary>
     /// Класс, реализующий типизируемый параметр.

@@ -1,11 +1,11 @@
-﻿using CatenaryCAD.Models;
+﻿using Catenary.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace CatenaryCAD
+namespace Catenary
 {
     public sealed class Main
     {

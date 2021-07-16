@@ -1,6 +1,6 @@
-﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Attributes;
-using CatenaryCAD.Properties;
+﻿using Catenary.Geometry;
+using Catenary.Attributes;
+using Catenary.Properties;
 using Multicad.Geometry;
 using Multicad.Runtime;
 
@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CatenaryCAD.Models.Handlers
+namespace Catenary.Models.Handlers
 {
     [Serializable]
     [CustomEntity("{36E13AC1-DF87-4158-8C7E-221A17AEB6E7}", "BASEMENT", "Фундамент опоры контактной сети")]
@@ -28,7 +28,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public FoundationHandler() 
         {
-            FoudationProperty = new Property<Type>("Тип фундамента", "CatenaryCAD", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
+            FoudationProperty = new Property<Type>("Тип фундамента", "CatenaryCAD", attr: Catenary.Properties.Attributes.RefreshAfterChange);
             FoudationProperty.Updated += (type) =>
             {
                 var foundation = Activator.CreateInstance(type) as Foundation;

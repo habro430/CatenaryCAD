@@ -1,6 +1,6 @@
-﻿using CatenaryCAD.Geometry;
+﻿using Catenary.Geometry;
 
-namespace CatenaryCAD.Models
+namespace Catenary.Models
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для модели фундамента опоры контактной сети.

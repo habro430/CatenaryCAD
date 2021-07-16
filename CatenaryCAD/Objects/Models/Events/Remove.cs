@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CatenaryCAD.Models.Events
+namespace Catenary.Models.Events
 {
     [Serializable]
     public class Remove : EventInput

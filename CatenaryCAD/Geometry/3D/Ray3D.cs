@@ -1,6 +1,6 @@
-﻿using CatenaryCAD.Geometry.Interfaces;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Helpers;
+﻿using Catenary.Geometry.Interfaces;
+using Catenary.Geometry.Meshes;
+using Catenary.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace CatenaryCAD.Geometry
+namespace Catenary.Geometry
 {
     /// <summary>
     /// Структура, представляющая луч в 3D пространстве.

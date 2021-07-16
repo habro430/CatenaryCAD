@@ -1,7 +1,7 @@
-﻿using CatenaryCAD.Helpers;
+﻿using Catenary.Helpers;
 using System;
 
-namespace CatenaryCAD.Geometry.Shapes
+namespace Catenary.Geometry.Shapes
 {
     /// <summary>
     /// Класс, реализующий произвольную фигуру в 2D пространстве.

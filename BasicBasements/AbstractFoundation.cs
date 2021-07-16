@@ -1,8 +1,8 @@
 ﻿using BasicFoundations.Properties;
-using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Models;
+using Catenary.Geometry;
+using Catenary.Geometry.Meshes;
+using Catenary.Geometry.Shapes;
+using Catenary.Models;
 using System;
 using System.Linq;
 using System.Resources;

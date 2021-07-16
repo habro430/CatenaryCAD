@@ -1,6 +1,6 @@
-﻿using CatenaryCAD.Geometry.Interfaces;
+﻿using Catenary.Geometry.Interfaces;
 
-namespace CatenaryCAD.Geometry.Shapes
+namespace Catenary.Geometry.Shapes
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для фигур в 2D пространстве.

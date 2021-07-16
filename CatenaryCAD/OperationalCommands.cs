@@ -1,4 +1,4 @@
-﻿using CatenaryCAD.Models.Handlers;
+﻿using Catenary.Models.Handlers;
 using Multicad;
 using Multicad.AplicationServices;
 using Multicad.DatabaseServices;
@@ -7,7 +7,7 @@ using Multicad.Runtime;
 using System;
 using System.Collections.Generic;
 
-namespace CatenaryCAD
+namespace Catenary
 {
     internal static class OperationalCommands
     {

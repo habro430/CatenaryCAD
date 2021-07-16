@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CatenaryCAD.Geometry
+namespace Catenary.Geometry
 {
     [Serializable]
     public enum GeometryType : byte

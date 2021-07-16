@@ -1,11 +1,11 @@
-﻿using CatenaryCAD.Helpers;
-using CatenaryCAD.Models;
-using CatenaryCAD.Models.Handlers;
+﻿using Catenary.Helpers;
+using Catenary.Models;
+using Catenary.Models.Handlers;
 using Multicad;
 using System;
 using System.Diagnostics;
 
-namespace CatenaryCAD
+namespace Catenary
 {
     [Serializable, DebuggerDisplay("{GetGuid()}")]
     internal class McIdentifier : IObjectID

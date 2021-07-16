@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace CatenaryCAD.Helpers
+namespace Catenary.Helpers
 {
     // The contents of this file is taken from https://github.com/dotnet/coreclr/blob/master/src/mscorlib/shared/System/HashCode.cs
     // To be replaced by the framework implementation when released for the appropriate builds

@@ -1,9 +1,9 @@
-﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Interfaces;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Maintenances;
+﻿using Catenary.Geometry;
+using Catenary.Geometry.Interfaces;
+using Catenary.Geometry.Meshes;
+using Catenary.Maintenances;
 
-namespace CatenaryCAD.Components
+namespace Catenary.Components
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для деталей моделей объектов контактной сети.

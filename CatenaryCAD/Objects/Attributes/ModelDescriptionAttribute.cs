@@ -1,7 +1,7 @@
-﻿using CatenaryCAD.Models;
+﻿using Catenary.Models;
 using System;
 
-namespace CatenaryCAD.Attributes
+namespace Catenary.Attributes
 {
     /// <summary>
     /// Атрибут, представляющий описание объекта <see cref="IModel"/>.

@@ -1,10 +1,10 @@
-﻿using CatenaryCAD.Models;
+﻿using Catenary.Models;
 using System;
 
-namespace CatenaryCAD.Attributes
+namespace Catenary.Attributes
 {
     /// <summary>
-    /// Атрибут, указывающий на то что объект <see cref="IModel"/> не виден для <see cref="CatenaryCAD"/>.
+    /// Атрибут, указывающий на то что объект <see cref="IModel"/> не виден для <see cref="Catenary"/>.
     /// </summary>
     [Serializable]
     [AttributeUsage(AttributeTargets.Class)]
