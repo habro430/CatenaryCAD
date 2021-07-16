@@ -3005,6 +3005,19 @@ references:
   commentId: T:Catenary.Models.Bracket
   fullName: Catenary.Models.Bracket
   nameWithType: Bracket
+- uid: Catenary.Models.Bracket.AllowableMasts
+  name: AllowableMasts
+  href: api/Catenary.Models.Bracket.html#Catenary_Models_Bracket_AllowableMasts
+  commentId: P:Catenary.Models.Bracket.AllowableMasts
+  fullName: Catenary.Models.Bracket.AllowableMasts
+  nameWithType: Bracket.AllowableMasts
+- uid: Catenary.Models.Bracket.AllowableMasts*
+  name: AllowableMasts
+  href: api/Catenary.Models.Bracket.html#Catenary_Models_Bracket_AllowableMasts_
+  commentId: Overload:Catenary.Models.Bracket.AllowableMasts
+  isSpec: "True"
+  fullName: Catenary.Models.Bracket.AllowableMasts
+  nameWithType: Bracket.AllowableMasts
 - uid: Catenary.Models.Events
   name: Catenary.Models.Events
   href: api/Catenary.Models.Events.html
@@ -3097,6 +3110,19 @@ references:
   commentId: T:Catenary.Models.IBracket
   fullName: Catenary.Models.IBracket
   nameWithType: IBracket
+- uid: Catenary.Models.IBracket.AllowableMasts
+  name: AllowableMasts
+  href: api/Catenary.Models.IBracket.html#Catenary_Models_IBracket_AllowableMasts
+  commentId: P:Catenary.Models.IBracket.AllowableMasts
+  fullName: Catenary.Models.IBracket.AllowableMasts
+  nameWithType: IBracket.AllowableMasts
+- uid: Catenary.Models.IBracket.AllowableMasts*
+  name: AllowableMasts
+  href: api/Catenary.Models.IBracket.html#Catenary_Models_IBracket_AllowableMasts_
+  commentId: Overload:Catenary.Models.IBracket.AllowableMasts
+  isSpec: "True"
+  fullName: Catenary.Models.IBracket.AllowableMasts
+  nameWithType: IBracket.AllowableMasts
 - uid: Catenary.Models.IFoundation
   name: IFoundation
   href: api/Catenary.Models.IFoundation.html
