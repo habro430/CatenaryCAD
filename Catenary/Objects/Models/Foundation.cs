@@ -22,9 +22,6 @@ namespace Catenary.Models
         /// <remarks>По умолчанию возвращает все модели, наследуемые от <seealso cref="IMast"/>.</remarks>
         public virtual Type[] AllowableMasts => new Type[] { typeof(IMast) };
 
-        /// <inheritdoc/>
-        public virtual Point3D GetDockingPointForMast() => Point3D.Origin;
-
 
         internal event Action<Type[]> AvailableFoundationsUpdated;
         internal void SetAvailableFoundations(Type[] foundations)

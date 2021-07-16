@@ -13,11 +13,5 @@ namespace Catenary.Models
         /// </summary>
         /// <value>Модели, наследуемые от <seealso cref="IMast"/>.</value>
         Type[] AllowableMasts { get; }
-
-        /// <summary>
-        /// Возвращает точку присоединения <see cref="Point3D"/> опоры <see cref="IMast"/> к фундаменту <see cref="IFoundation"/> .
-        /// </summary>
-        /// <returns>Точка присодинения <see cref="Point3D"/> опоры <see cref="IMast"/> к фундаменту <see cref="IFoundation"/>.</returns>
-        Point3D GetDockingPointForMast();
     }
 }
