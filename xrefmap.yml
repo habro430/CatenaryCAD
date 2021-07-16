@@ -2986,6 +2986,19 @@ references:
   commentId: T:Catenary.Models.AnchorTie
   fullName: Catenary.Models.AnchorTie
   nameWithType: AnchorTie
+- uid: Catenary.Models.AnchorTie.AllowableMasts
+  name: AllowableMasts
+  href: api/Catenary.Models.AnchorTie.html#Catenary_Models_AnchorTie_AllowableMasts
+  commentId: P:Catenary.Models.AnchorTie.AllowableMasts
+  fullName: Catenary.Models.AnchorTie.AllowableMasts
+  nameWithType: AnchorTie.AllowableMasts
+- uid: Catenary.Models.AnchorTie.AllowableMasts*
+  name: AllowableMasts
+  href: api/Catenary.Models.AnchorTie.html#Catenary_Models_AnchorTie_AllowableMasts_
+  commentId: Overload:Catenary.Models.AnchorTie.AllowableMasts
+  isSpec: "True"
+  fullName: Catenary.Models.AnchorTie.AllowableMasts
+  nameWithType: AnchorTie.AllowableMasts
 - uid: Catenary.Models.Bracket
   name: Bracket
   href: api/Catenary.Models.Bracket.html
@@ -3065,6 +3078,19 @@ references:
   commentId: T:Catenary.Models.IAnchorTie
   fullName: Catenary.Models.IAnchorTie
   nameWithType: IAnchorTie
+- uid: Catenary.Models.IAnchorTie.AllowableMasts
+  name: AllowableMasts
+  href: api/Catenary.Models.IAnchorTie.html#Catenary_Models_IAnchorTie_AllowableMasts
+  commentId: P:Catenary.Models.IAnchorTie.AllowableMasts
+  fullName: Catenary.Models.IAnchorTie.AllowableMasts
+  nameWithType: IAnchorTie.AllowableMasts
+- uid: Catenary.Models.IAnchorTie.AllowableMasts*
+  name: AllowableMasts
+  href: api/Catenary.Models.IAnchorTie.html#Catenary_Models_IAnchorTie_AllowableMasts_
+  commentId: Overload:Catenary.Models.IAnchorTie.AllowableMasts
+  isSpec: "True"
+  fullName: Catenary.Models.IAnchorTie.AllowableMasts
+  nameWithType: IAnchorTie.AllowableMasts
 - uid: Catenary.Models.IBracket
   name: IBracket
   href: api/Catenary.Models.IBracket.html
