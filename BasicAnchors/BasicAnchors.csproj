@@ -94,7 +94,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CatenaryCAD\Catenary.csproj">
+    <ProjectReference Include="..\Catenary\Catenary.csproj">
       <Project>{40815505-2d4a-4e57-aeb1-d8b979586f7b}</Project>
       <Name>Catenary</Name>
     </ProjectReference>
