@@ -3066,19 +3066,6 @@ references:
   isSpec: "True"
   fullName: Catenary.Models.Foundation.AllowableMasts
   nameWithType: Foundation.AllowableMasts
-- uid: Catenary.Models.Foundation.GetDockingPointForMast
-  name: GetDockingPointForMast()
-  href: api/Catenary.Models.Foundation.html#Catenary_Models_Foundation_GetDockingPointForMast
-  commentId: M:Catenary.Models.Foundation.GetDockingPointForMast
-  fullName: Catenary.Models.Foundation.GetDockingPointForMast()
-  nameWithType: Foundation.GetDockingPointForMast()
-- uid: Catenary.Models.Foundation.GetDockingPointForMast*
-  name: GetDockingPointForMast
-  href: api/Catenary.Models.Foundation.html#Catenary_Models_Foundation_GetDockingPointForMast_
-  commentId: Overload:Catenary.Models.Foundation.GetDockingPointForMast
-  isSpec: "True"
-  fullName: Catenary.Models.Foundation.GetDockingPointForMast
-  nameWithType: Foundation.GetDockingPointForMast
 - uid: Catenary.Models.IAnchor
   name: IAnchor
   href: api/Catenary.Models.IAnchor.html
@@ -3116,19 +3103,6 @@ references:
   isSpec: "True"
   fullName: Catenary.Models.IFoundation.AllowableMasts
   nameWithType: IFoundation.AllowableMasts
-- uid: Catenary.Models.IFoundation.GetDockingPointForMast
-  name: GetDockingPointForMast()
-  href: api/Catenary.Models.IFoundation.html#Catenary_Models_IFoundation_GetDockingPointForMast
-  commentId: M:Catenary.Models.IFoundation.GetDockingPointForMast
-  fullName: Catenary.Models.IFoundation.GetDockingPointForMast()
-  nameWithType: IFoundation.GetDockingPointForMast()
-- uid: Catenary.Models.IFoundation.GetDockingPointForMast*
-  name: GetDockingPointForMast
-  href: api/Catenary.Models.IFoundation.html#Catenary_Models_IFoundation_GetDockingPointForMast_
-  commentId: Overload:Catenary.Models.IFoundation.GetDockingPointForMast
-  isSpec: "True"
-  fullName: Catenary.Models.IFoundation.GetDockingPointForMast
-  nameWithType: IFoundation.GetDockingPointForMast
 - uid: Catenary.Models.IMast
   name: IMast
   href: api/Catenary.Models.IMast.html
