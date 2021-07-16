@@ -10,6 +10,9 @@ using static CatenaryCAD.OperationalCommands;
 
 namespace CatenaryCAD.Models
 {
+    /// <summary>
+    /// Интерфейс, описывающий контракты для всех моделей.
+    /// </summary>
     public interface IModel : IPositionable<Point3D>, IDirectionable<Vector3D>, ITransformable<Matrix3D, IModel>
     {
         /// <summary>

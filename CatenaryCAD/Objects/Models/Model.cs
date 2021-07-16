@@ -12,6 +12,9 @@ using System.Linq;
 
 namespace CatenaryCAD.Models
 {
+    /// <summary>
+    /// Класс, описывающий общую логику для всех моделей.
+    /// </summary>
     [Serializable]
     public abstract class Model : IModel
     {
@@ -27,6 +30,7 @@ namespace CatenaryCAD.Models
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private Vector3D direction = Vector3D.AxisX;
 
+        /// <inheritdoc/>
         public IObjectID Identifier
         {
             get => identifier;
@@ -88,6 +92,8 @@ namespace CatenaryCAD.Models
         protected ConcurrentHashSet<IObjectID> DependenciesSet = new ConcurrentHashSet<IObjectID>();
 
         private IObjectID parent;
+
+        /// <inheritdoc/>
         public IModel Parent
         {
             get => parent?.GetModel();
@@ -117,6 +123,7 @@ namespace CatenaryCAD.Models
             }
         }
 
+        /// <inheritdoc/>
         public IModel[] Childrens
         {
             get
@@ -125,7 +132,7 @@ namespace CatenaryCAD.Models
                 return ChildrensSet.Select(model => model.GetModel()).ToArray();
             }
         }
-
+        /// <inheritdoc/>
         public IModel[] Dependencies
         {
             get
