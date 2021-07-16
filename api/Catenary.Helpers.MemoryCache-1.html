@@ -1,0 +1,477 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MemoryCache&lt;T&gt;
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MemoryCache&lt;T&gt;
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="&#1055;&#1086;&#1080;&#1089;&#1082;" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">&#1055;&#1086;&#1082;&#1072;&#1079;&#1072;&#1090;&#1100; / &#1057;&#1082;&#1088;&#1099;&#1090;&#1100; &#1089;&#1086;&#1076;&#1077;&#1088;&#1078;&#1072;&#1085;&#1080;&#1077;</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Catenary.Helpers.MemoryCache`1">
+  
+  
+  <h1 id="Catenary_Helpers_MemoryCache_1" data-uid="Catenary.Helpers.MemoryCache`1" class="text-break">Class MemoryCache&lt;T&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Представляет класс, реализующий кэш, расположенный в оперативной памяти.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>&#1044;&#1077;&#1088;&#1077;&#1074;&#1086; &#1085;&#1072;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1085;&#1080;&#1081;</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">MemoryCache&lt;T&gt;</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>&#1059;&#1085;&#1072;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1085;&#1085;&#1099;&#1077; &#1101;&#1083;&#1077;&#1084;&#1077;&#1085;&#1090;&#1099;</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>&#1055;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1086; &#1080;&#1084;&#1077;&#1085;</strong>: <a class="xref" href="Catenary.Helpers.html">Catenary.Helpers</a></h6>
+  <h6><strong>&#1057;&#1073;&#1086;&#1088;&#1082;&#1072;</strong>: Catenary.dll</h6>
+  <h5 id="Catenary_Helpers_MemoryCache_1_syntax">&#1057;&#1080;&#1085;&#1090;&#1072;&#1082;&#1089;&#1080;&#1089;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class MemoryCache&lt;T&gt;
+    where T : class</code></pre>
+  </div>
+  <h5 class="typeParameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099; &#1058;&#1080;&#1087;&#1072;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>Тип элементов хранящихся в кэше.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">&#1050;&#1086;&#1085;&#1089;&#1090;&#1088;&#1091;&#1082;&#1090;&#1086;&#1088;&#1099;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Helpers_MemoryCache_1__ctor.md&amp;value=---%0Auid%3A%20Catenary.Helpers.MemoryCache%601.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Helpers/MemoryCache.cs/#L68">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Helpers_MemoryCache_1__ctor_" data-uid="Catenary.Helpers.MemoryCache`1.#ctor*"></a>
+  <h4 id="Catenary_Helpers_MemoryCache_1__ctor" data-uid="Catenary.Helpers.MemoryCache`1.#ctor">MemoryCache()</h4>
+  <div class="markdown level1 summary"><p>Инициализирует новый экземпляр класса <a class="xref" href="Catenary.Helpers.MemoryCache-1.html">MemoryCache&lt;T&gt;</a>, с параметрами по умолчанию.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryCache()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Helpers_MemoryCache_1__ctor_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Catenary.Helpers.MemoryCache%601.%23ctor(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Helpers/MemoryCache.cs/#L45">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Helpers_MemoryCache_1__ctor_" data-uid="Catenary.Helpers.MemoryCache`1.#ctor*"></a>
+  <h4 id="Catenary_Helpers_MemoryCache_1__ctor_System_Double_System_Double_" data-uid="Catenary.Helpers.MemoryCache`1.#ctor(System.Double,System.Double)">MemoryCache(Double, Double)</h4>
+  <div class="markdown level1 summary"><p>Инициализирует новый экземпляр класса <a class="xref" href="Catenary.Helpers.MemoryCache-1.html">MemoryCache&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryCache(double sliding, double absolute)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">sliding</span></td>
+        <td><p>Значение времени (в минутах), по истечению которого, объект удаляется из кэша,
+если к нему за это вермя не было обращений.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">absolute</span></td>
+        <td><p>Значение времени (в минутах), по истечению которого, объект удаляется из кэша,
+независимо от <code data-dev-comment-type="paramref" class="paramref">sliding</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Catenary_Helpers_MemoryCache_1__ctor_System_Double_System_Double__remarks">&#1055;&#1088;&#1080;&#1084;&#1077;&#1095;&#1072;&#1085;&#1080;&#1077;</h5>
+  <div class="markdown level1 remarks"><p>Если требуеться указать что записи в кэше не должны иметь скользящего и/или абсолютного срока дейсвия,
+то аргументам <code data-dev-comment-type="paramref" class="paramref">sliding</code> и <code data-dev-comment-type="paramref" class="paramref">absolute</code> необходимо присвоить 0.</p>
+</div>
+  <h5 class="exceptions">&#1048;&#1089;&#1082;&#1083;&#1102;&#1095;&#1077;&#1085;&#1080;&#1103;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1057;&#1086;&#1089;&#1090;&#1086;&#1103;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p><code data-dev-comment-type="paramref" class="paramref">sliding</code> меньше чем 0.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p><code data-dev-comment-type="paramref" class="paramref">absolute</code> меньше чем 0.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">&#1055;&#1086;&#1083;&#1103;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Helpers_MemoryCache_1_AbsoluteMinutes.md&amp;value=---%0Auid%3A%20Catenary.Helpers.MemoryCache%601.AbsoluteMinutes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Helpers/MemoryCache.cs/#L29">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <h4 id="Catenary_Helpers_MemoryCache_1_AbsoluteMinutes" data-uid="Catenary.Helpers.MemoryCache`1.AbsoluteMinutes">AbsoluteMinutes</h4>
+  <div class="markdown level1 summary"><p>Время, по истечению которого, объект удаляется из данного экземпляра
+<a class="xref" href="Catenary.Helpers.MemoryCache-1.html">MemoryCache&lt;T&gt;</a>, независимо от скользящего таймера..</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly double AbsoluteMinutes</code></pre>
+  </div>
+  <h5 class="fieldValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1087;&#1086;&#1083;&#1103;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><p>Значение времени (в минутах)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Helpers_MemoryCache_1_SlidingMinutes.md&amp;value=---%0Auid%3A%20Catenary.Helpers.MemoryCache%601.SlidingMinutes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Helpers/MemoryCache.cs/#L22">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <h4 id="Catenary_Helpers_MemoryCache_1_SlidingMinutes" data-uid="Catenary.Helpers.MemoryCache`1.SlidingMinutes">SlidingMinutes</h4>
+  <div class="markdown level1 summary"><p>Время, по истечению которого, объект удаляется из данного экземпляра
+<a class="xref" href="Catenary.Helpers.MemoryCache-1.html">MemoryCache&lt;T&gt;</a>, если к нему за это время не было обращений.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly double SlidingMinutes</code></pre>
+  </div>
+  <h5 class="fieldValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1087;&#1086;&#1083;&#1103;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><p>Значение времени (в минутах)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">&#1057;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Helpers_MemoryCache_1_Count.md&amp;value=---%0Auid%3A%20Catenary.Helpers.MemoryCache%601.Count%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Helpers/MemoryCache.cs/#L78">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Helpers_MemoryCache_1_Count_" data-uid="Catenary.Helpers.MemoryCache`1.Count*"></a>
+  <h4 id="Catenary_Helpers_MemoryCache_1_Count" data-uid="Catenary.Helpers.MemoryCache`1.Count">Count</h4>
+  <div class="markdown level1 summary"><p>Возвращает количество элементов, содержащихся в <a class="xref" href="Catenary.Helpers.MemoryCache-1.html">MemoryCache&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>Количество элементов, содержащихся в <a class="xref" href="Catenary.Helpers.MemoryCache-1.html">MemoryCache&lt;T&gt;</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Helpers_MemoryCache_1_Item_System_String_.md&amp;value=---%0Auid%3A%20Catenary.Helpers.MemoryCache%601.Item(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Helpers/MemoryCache.cs/#L88">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Helpers_MemoryCache_1_Item_" data-uid="Catenary.Helpers.MemoryCache`1.Item*"></a>
+  <h4 id="Catenary_Helpers_MemoryCache_1_Item_System_String_" data-uid="Catenary.Helpers.MemoryCache`1.Item(System.String)">Item[String]</h4>
+  <div class="markdown level1 summary"><p>Индексатор обеспечивающий доступ к элементам, содержащихся в <a class="xref" href="Catenary.Helpers.MemoryCache-1.html">MemoryCache&lt;T&gt;</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T this[string key] { get; set; }</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>Ключ, уникальный идентификатор объекта в кэше.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>Объект <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> представляющий значение записи из кэша,
+если запись с таким ключем имееться в кэше. В противном случае возвращает <span class="xref">null</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h3 id="methods">&#1052;&#1077;&#1090;&#1086;&#1076;&#1099;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Helpers_MemoryCache_1_Contains_System_String_.md&amp;value=---%0Auid%3A%20Catenary.Helpers.MemoryCache%601.Contains(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Helpers/MemoryCache.cs/#L116">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Helpers_MemoryCache_1_Contains_" data-uid="Catenary.Helpers.MemoryCache`1.Contains*"></a>
+  <h4 id="Catenary_Helpers_MemoryCache_1_Contains_System_String_" data-uid="Catenary.Helpers.MemoryCache`1.Contains(System.String)">Contains(String)</h4>
+  <div class="markdown level1 summary"><p>Проверяет, существует ли запись <code data-dev-comment-type="paramref" class="paramref">key</code> в кэше.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(string key)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>Ключ, уникальный идентификатор объекта в кэше.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><span class="xref">true</span> если в <a class="xref" href="Catenary.Helpers.MemoryCache-1.html">MemoryCache&lt;T&gt;</a> существует
+запись с уникальным идентификатором <code data-dev-comment-type="paramref" class="paramref">key</code>, в противном
+случае - <span class="xref">false</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">&#1056;&#1072;&#1089;&#1096;&#1080;&#1088;&#1077;&#1085;&#1080;&#1103;</h3>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_DeepClone__1___0_">Cloner.DeepClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_DeepCloneTo__2___0___1_">Cloner.DeepCloneTo&lt;F, T&gt;(F, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_ShallowClone__1___0_">Cloner.ShallowClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_ShallowCloneTo__2___0___1_">Cloner.ShallowCloneTo&lt;F, T&gt;(F, T)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Helpers_MemoryCache_1.md&amp;value=---%0Auid%3A%20Catenary.Helpers.MemoryCache%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Helpers/MemoryCache.cs/#L11" class="contribution-link">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>&#1042; &#1101;&#1090;&#1086;&#1084; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;&#1077;</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">&#1042;&#1077;&#1088;&#1085;&#1091;&#1090;&#1100;&#1089;&#1103; &#1085;&#1072;&#1074;&#1077;&#1088;&#1093;</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

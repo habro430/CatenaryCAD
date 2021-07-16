@@ -1,0 +1,530 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Struct Ray2D
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Struct Ray2D
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="&#1055;&#1086;&#1080;&#1089;&#1082;" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">&#1055;&#1086;&#1082;&#1072;&#1079;&#1072;&#1090;&#1100; / &#1057;&#1082;&#1088;&#1099;&#1090;&#1100; &#1089;&#1086;&#1076;&#1077;&#1088;&#1078;&#1072;&#1085;&#1080;&#1077;</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Catenary.Geometry.Ray2D">
+  
+  
+  <h1 id="Catenary_Geometry_Ray2D" data-uid="Catenary.Geometry.Ray2D" class="text-break">Struct Ray2D
+  </h1>
+  <div class="markdown level0 summary"><p>Структура, представляющая луч в 2D пространстве.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div classs="implements">
+    <h5>&#1053;&#1072;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103;</h5>
+    <div><a class="xref" href="Catenary.Geometry.IRay.html">IRay</a></div>
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Catenary.Geometry.Ray2D.html">Ray2D</a>&gt;</div>
+    <div><a class="xref" href="Catenary.Geometry.Interfaces.IOriginable-1.html">IOriginable</a>&lt;<a class="xref" href="Catenary.Geometry.Point2D.html">Point2D</a>&gt;</div>
+    <div><a class="xref" href="Catenary.Geometry.Interfaces.IDirectionable-1.html">IDirectionable</a>&lt;<a class="xref" href="Catenary.Geometry.Vector2D.html">Vector2D</a>&gt;</div>
+    <div><a class="xref" href="Catenary.Geometry.Interfaces.ITransformable-2.html">ITransformable</a>&lt;<a class="xref" href="Catenary.Geometry.Matrix2D.html">Matrix2D</a>, <a class="xref" href="Catenary.Geometry.Ray2D.html">Ray2D</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>&#1059;&#1085;&#1072;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1085;&#1085;&#1099;&#1077; &#1101;&#1083;&#1077;&#1084;&#1077;&#1085;&#1090;&#1099;</h5>
+    <div>
+      <span class="xref">System.ValueType.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>&#1055;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1086; &#1080;&#1084;&#1077;&#1085;</strong>: <a class="xref" href="Catenary.Geometry.html">Catenary.Geometry</a></h6>
+  <h6><strong>&#1057;&#1073;&#1086;&#1088;&#1082;&#1072;</strong>: Catenary.dll</h6>
+  <h5 id="Catenary_Geometry_Ray2D_syntax">&#1057;&#1080;&#1085;&#1090;&#1072;&#1082;&#1089;&#1080;&#1089;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public struct Ray2D : IRay, IEquatable&lt;Ray2D&gt;, IOriginable&lt;Point2D&gt;, IDirectionable&lt;Vector2D&gt;, ITransformable&lt;Matrix2D, Ray2D&gt;</code></pre>
+  </div>
+  <h3 id="constructors">&#1050;&#1086;&#1085;&#1089;&#1090;&#1088;&#1091;&#1082;&#1090;&#1086;&#1088;&#1099;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Geometry_Ray2D__ctor_Catenary_Geometry_Point2D__Catenary_Geometry_Vector2D__.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Ray2D.%23ctor(Catenary.Geometry.Point2D%40%2CCatenary.Geometry.Vector2D%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Geometry/2D/Ray2D.cs/#L41">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Ray2D__ctor_" data-uid="Catenary.Geometry.Ray2D.#ctor*"></a>
+  <h4 id="Catenary_Geometry_Ray2D__ctor_Catenary_Geometry_Point2D__Catenary_Geometry_Vector2D__" data-uid="Catenary.Geometry.Ray2D.#ctor(Catenary.Geometry.Point2D@,Catenary.Geometry.Vector2D@)">Ray2D(Point2D, Vector2D)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Ray2D(in Point2D origin, in Vector2D direction)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Point2D.html">Point2D</a></td>
+        <td><span class="parametername">origin</span></td>
+        <td><p>Начальная точка нового луча.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector2D.html">Vector2D</a></td>
+        <td><span class="parametername">direction</span></td>
+        <td><p>Вектор направления нового луча.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">&#1057;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Geometry_Ray2D_Direction.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Ray2D.Direction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Geometry/2D/Ray2D.cs/#L33">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Ray2D_Direction_" data-uid="Catenary.Geometry.Ray2D.Direction*"></a>
+  <h4 id="Catenary_Geometry_Ray2D_Direction" data-uid="Catenary.Geometry.Ray2D.Direction">Direction</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2D Direction { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector2D.html">Vector2D</a></td>
+        <td><p>Вектор направления луча.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Geometry_Ray2D_Origin.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Ray2D.Origin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Geometry/2D/Ray2D.cs/#L26">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Ray2D_Origin_" data-uid="Catenary.Geometry.Ray2D.Origin*"></a>
+  <h4 id="Catenary_Geometry_Ray2D_Origin" data-uid="Catenary.Geometry.Ray2D.Origin">Origin</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Point2D Origin { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Point2D.html">Point2D</a></td>
+        <td><p>Начальная точка луча.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">&#1052;&#1077;&#1090;&#1086;&#1076;&#1099;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Geometry_Ray2D_Equals_Catenary_Geometry_Ray2D_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Ray2D.Equals(Catenary.Geometry.Ray2D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Geometry/2D/Ray2D.cs/#L105">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Ray2D_Equals_" data-uid="Catenary.Geometry.Ray2D.Equals*"></a>
+  <h4 id="Catenary_Geometry_Ray2D_Equals_Catenary_Geometry_Ray2D_" data-uid="Catenary.Geometry.Ray2D.Equals(Catenary.Geometry.Ray2D)">Equals(Ray2D)</h4>
+  <div class="markdown level1 summary"><p>Указывает, эквивалентен ли текущий объект другому объекту того же типа.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public bool Equals(Ray2D other)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Ray2D.html">Ray2D</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>Объект для сравнения с текущим экземпляром.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><span class="xref">true</span> если <code data-dev-comment-type="paramref" class="paramref">other</code> и данный экземпляр
+представляют одинаковые значения, в противному случаее - <span class="xref">false</span></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Geometry_Ray2D_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Ray2D.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Geometry/2D/Ray2D.cs/#L95">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Ray2D_Equals_" data-uid="Catenary.Geometry.Ray2D.Equals*"></a>
+  <h4 id="Catenary_Geometry_Ray2D_Equals_System_Object_" data-uid="Catenary.Geometry.Ray2D.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Указывает, равен ли этот экземпляр заданному объекту.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public override bool Equals(object other)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>Объект для сравнения с текущим экземпляром.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><span class="xref">true</span> если <code data-dev-comment-type="paramref" class="paramref">other</code> и данный экземпляр относятся к одному типу
+и представляют одинаковые значения, в противному случаее - <span class="xref">false</span></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">&#1055;&#1077;&#1088;&#1077;&#1075;&#1088;&#1091;&#1079;&#1082;&#1080;</h5>
+  <div><span class="xref">System.ValueType.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Geometry_Ray2D_GetHashCode.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Ray2D.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Geometry/2D/Ray2D.cs/#L113">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Ray2D_GetHashCode_" data-uid="Catenary.Geometry.Ray2D.GetHashCode*"></a>
+  <h4 id="Catenary_Geometry_Ray2D_GetHashCode" data-uid="Catenary.Geometry.Ray2D.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Возвращает хэш-код данного экземпляра.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>Хэш-код данного экземпляра.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">&#1055;&#1077;&#1088;&#1077;&#1075;&#1088;&#1091;&#1079;&#1082;&#1080;</h5>
+  <div><span class="xref">System.ValueType.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Geometry_Ray2D_GetIntersections_Catenary_Geometry_Shapes_IShape_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Ray2D.GetIntersections(Catenary.Geometry.Shapes.IShape)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Geometry/2D/Ray2D.cs/#L55">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Ray2D_GetIntersections_" data-uid="Catenary.Geometry.Ray2D.GetIntersections*"></a>
+  <h4 id="Catenary_Geometry_Ray2D_GetIntersections_Catenary_Geometry_Shapes_IShape_" data-uid="Catenary.Geometry.Ray2D.GetIntersections(Catenary.Geometry.Shapes.IShape)">GetIntersections(IShape)</h4>
+  <div class="markdown level1 summary"><p>Возвращает точки пересечения <code data-dev-comment-type="paramref" class="paramref">shape</code> и данного луча.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Point2D[] GetIntersections(IShape shape)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Shapes.IShape.html">IShape</a></td>
+        <td><span class="parametername">shape</span></td>
+        <td><p><a class="xref" href="Catenary.Geometry.Shapes.IShape.html">IShape</a> для расчета пересечений.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Point2D.html">Point2D</a>[]</td>
+        <td><p>Массив <a class="xref" href="Catenary.Geometry.Point2D.html">Point2D</a>[] с точками пересечений,
+если пересечения отсутствуют - <span class="xref">null</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Geometry_Ray2D_TransformBy_Catenary_Geometry_Matrix2D__.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Ray2D.TransformBy(Catenary.Geometry.Matrix2D%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Geometry/2D/Ray2D.cs/#L119">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Ray2D_TransformBy_" data-uid="Catenary.Geometry.Ray2D.TransformBy*"></a>
+  <h4 id="Catenary_Geometry_Ray2D_TransformBy_Catenary_Geometry_Matrix2D__" data-uid="Catenary.Geometry.Ray2D.TransformBy(Catenary.Geometry.Matrix2D@)">TransformBy(Matrix2D)</h4>
+  <div class="markdown level1 summary"><p>Преобразовывает объект с помощью заданной матрицы <code data-dev-comment-type="paramref" class="paramref">matrix</code> и возвращает результат.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public Ray2D TransformBy(in Matrix2D matrix)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Matrix2D.html">Matrix2D</a></td>
+        <td><span class="parametername">matrix</span></td>
+        <td><p>Матрица для трансформации.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Ray2D.html">Ray2D</a></td>
+        <td><p>Результат преобразования.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">&#1053;&#1072;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103;</h3>
+  <div>
+      <a class="xref" href="Catenary.Geometry.IRay.html">IRay</a>
+  </div>
+  <div>
+      <span class="xref">System.IEquatable&lt;T&gt;</span>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Geometry.Interfaces.IOriginable-1.html">IOriginable&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Geometry.Interfaces.IDirectionable-1.html">IDirectionable&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Geometry.Interfaces.ITransformable-2.html">ITransformable&lt;T, TResult&gt;</a>
+  </div>
+  <h3 id="extensionmethods">&#1056;&#1072;&#1089;&#1096;&#1080;&#1088;&#1077;&#1085;&#1080;&#1103;</h3>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_DeepClone__1___0_">Cloner.DeepClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_DeepCloneTo__2___0___1_">Cloner.DeepCloneTo&lt;F, T&gt;(F, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_ShallowClone__1___0_">Cloner.ShallowClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_ShallowCloneTo__2___0___1_">Cloner.ShallowCloneTo&lt;F, T&gt;(F, T)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/jensaymoo/CatenaryCAD/new/master/apiSpec/new?filename=Catenary_Geometry_Ray2D.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Ray2D%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/jensaymoo/CatenaryCAD/blob/master/CatenaryCAD/Geometry/2D/Ray2D.cs/#L16" class="contribution-link">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>&#1042; &#1101;&#1090;&#1086;&#1084; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;&#1077;</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">&#1042;&#1077;&#1088;&#1085;&#1091;&#1090;&#1100;&#1089;&#1103; &#1085;&#1072;&#1074;&#1077;&#1088;&#1093;</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
