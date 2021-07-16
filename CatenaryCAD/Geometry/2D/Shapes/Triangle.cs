@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CatenaryCAD.Geometry.Shapes
+namespace Catenary.Geometry.Shapes
 {
     /// <summary>
     /// Класс, реализующий треугольник в 2D пространстве.

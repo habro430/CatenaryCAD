@@ -1,7 +1,7 @@
-﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Attributes;
-using CatenaryCAD.Models.Events;
-using CatenaryCAD.Properties;
+﻿using Catenary.Geometry;
+using Catenary.Attributes;
+using Catenary.Models.Events;
+using Catenary.Properties;
 
 using Multicad;
 using Multicad.DatabaseServices;
@@ -11,9 +11,9 @@ using Multicad.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static CatenaryCAD.OperationalCommands;
+using static Catenary.OperationalCommands;
 
-namespace CatenaryCAD.Models.Handlers
+namespace Catenary.Models.Handlers
 {
     [Serializable]
     [CustomEntity("{742ECCF0-0CEC-4791-B4BE-4E3568E2C43E}", "MAST", "Стойка опоры контактной сети")]
@@ -33,7 +33,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public MastHandler()
         {
-            MastProperty = new Property<Type>("Тип стойки", "CatenaryCAD", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
+            MastProperty = new Property<Type>("Тип стойки", "CatenaryCAD", attr: Catenary.Properties.Attributes.RefreshAfterChange);
 
             MastProperty.Updated += (type) =>
             {

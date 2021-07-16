@@ -1,10 +1,10 @@
-﻿using CatenaryCAD.Attributes;
-using CatenaryCAD.Components;
-using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Models;
-using CatenaryCAD.Models.Events;
-using CatenaryCAD.Properties;
+﻿using Catenary.Attributes;
+using Catenary.Components;
+using Catenary.Geometry;
+using Catenary.Geometry.Meshes;
+using Catenary.Models;
+using Catenary.Models.Events;
+using Catenary.Properties;
 using System;
 using System.Collections.Generic;
 

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Linq;
 
-namespace CatenaryCAD.Properties
+namespace Catenary.Properties
 {
     [Serializable, Flags]
     public enum Attributes

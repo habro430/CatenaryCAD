@@ -1,7 +1,7 @@
-﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Attributes;
-using CatenaryCAD.Models.Events;
-using CatenaryCAD.Properties;
+﻿using Catenary.Geometry;
+using Catenary.Attributes;
+using Catenary.Models.Events;
+using Catenary.Properties;
 using Multicad;
 using Multicad.DatabaseServices;
 using Multicad.Geometry;
@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CatenaryCAD.Models.Handlers
+namespace Catenary.Models.Handlers
 {
     [Serializable]
     [CustomEntity("{2B1A1855-B183-4864-88F9-330AB06801EF}", "ANCHOR", "Анкер опоры контактной сети")]
@@ -29,7 +29,7 @@ namespace CatenaryCAD.Models.Handlers
 
         public AnchorHandler()
         {
-            Property<Type> anchor_type = new Property<Type>("Тип анкера", "CatenaryCAD", attr: CatenaryCAD.Properties.Attributes.RefreshAfterChange);
+            Property<Type> anchor_type = new Property<Type>("Тип анкера", "CatenaryCAD", attr: Catenary.Properties.Attributes.RefreshAfterChange);
             anchor_type.Updated += (type) => Model = Activator.CreateInstance(type) as Anchor;
 
             anchor_type.DropDownValues = Anchors;

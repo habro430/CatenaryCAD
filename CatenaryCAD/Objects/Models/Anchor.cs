@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CatenaryCAD.Models
+namespace Catenary.Models
 {
     /// <summary>
     /// Класс, описывающий модель анкера.

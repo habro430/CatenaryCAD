@@ -1,11 +1,11 @@
-﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Helpers;
-using CatenaryCAD.Maintenances;
+﻿using Catenary.Geometry;
+using Catenary.Geometry.Meshes;
+using Catenary.Helpers;
+using Catenary.Maintenances;
 using System;
 using System.Linq;
 
-namespace CatenaryCAD.Components
+namespace Catenary.Components
 {
     [Serializable]
     public class Component : IComponent

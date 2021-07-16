@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace CatenaryCAD.Helpers.DeepCloner
+namespace Catenary.Helpers.DeepCloner
 {
 	// The contents of this file is taken from https://github.com/force-net/DeepCloner/blob/develop/DeepCloner/Helpers/DeepCloneState.cs
 	// To be replaced by the framework implementation when released for the appropriate builds

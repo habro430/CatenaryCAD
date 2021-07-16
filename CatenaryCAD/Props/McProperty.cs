@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-namespace CatenaryCAD.Properties
+namespace Catenary.Properties
 {
     internal class McProperty : McDynamicProperty
     {

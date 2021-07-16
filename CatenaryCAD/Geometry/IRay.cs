@@ -1,4 +1,4 @@
-﻿namespace CatenaryCAD.Geometry
+﻿namespace Catenary.Geometry
 {
     /// <summary>
     /// Интерфейс определяющий принадлежность объекта к лучу.

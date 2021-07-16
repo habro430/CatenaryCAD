@@ -1,4 +1,4 @@
-﻿using CatenaryCAD.Attributes;
+﻿using Catenary.Attributes;
 using System;
 
 namespace BasicMasts.Armored

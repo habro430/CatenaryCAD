@@ -1,8 +1,8 @@
-﻿using CatenaryCAD.Attributes;
+﻿using Catenary.Attributes;
 using System;
 using System.Linq;
 
-namespace CatenaryCAD.Models
+namespace Catenary.Models
 {
     /// <summary>
     /// Класс, описывающий модель анкерной оттяжки.

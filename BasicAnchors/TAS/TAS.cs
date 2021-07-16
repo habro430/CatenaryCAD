@@ -1,9 +1,9 @@
-﻿using CatenaryCAD.Components;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Attributes;
+﻿using Catenary.Components;
+using Catenary.Geometry.Meshes;
+using Catenary.Attributes;
 using System;
-using CatenaryCAD.Properties;
-using CatenaryCAD.Models.Events;
+using Catenary.Properties;
+using Catenary.Models.Events;
 using System.Collections.Generic;
 
 namespace BasicAnchors

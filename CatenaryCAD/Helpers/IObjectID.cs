@@ -1,7 +1,7 @@
-﻿using CatenaryCAD.Models;
+﻿using Catenary.Models;
 using System;
 
-namespace CatenaryCAD.Helpers
+namespace Catenary.Helpers
 {
     public interface IObjectID
     {

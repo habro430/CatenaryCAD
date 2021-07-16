@@ -1,7 +1,7 @@
-﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Properties;
-using CatenaryCAD.Models.Events;
+﻿using Catenary.Geometry;
+using Catenary.Geometry.Meshes;
+using Catenary.Properties;
+using Catenary.Models.Events;
 
 using Multicad;
 using Multicad.CustomObjectBase;
@@ -13,13 +13,13 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-using static CatenaryCAD.OperationalCommands;
+using static Catenary.OperationalCommands;
 
 using Matrix3d = Multicad.Geometry.Matrix3d;
 using Point3d = Multicad.Geometry.Point3d;
 using Vector3d = Multicad.Geometry.Vector3d;
 
-namespace CatenaryCAD.Models.Handlers
+namespace Catenary.Models.Handlers
 {
     [Serializable]
     internal abstract class Handler : McCustomBase, IMcDynamicProperties, IHandler

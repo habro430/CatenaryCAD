@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatenaryCAD", "CatenaryCAD\CatenaryCAD.csproj", "{40815505-2D4A-4E57-AEB1-D8B979586F7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catenary", "CatenaryCAD\Catenary.csproj", "{40815505-2D4A-4E57-AEB1-D8B979586F7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicMasts", "BasicMasts\BasicMasts.csproj", "{D2D0AEB1-9BA7-45CA-8DA9-2390FC6B77F3}"
 EndProject

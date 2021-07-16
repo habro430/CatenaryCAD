@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.Caching;
 
-namespace CatenaryCAD.Helpers
+namespace Catenary.Helpers
 {
     /// <summary>
     /// Представляет класс, реализующий кэш, расположенный в оперативной памяти.

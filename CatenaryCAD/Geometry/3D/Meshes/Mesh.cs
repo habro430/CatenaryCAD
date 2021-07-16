@@ -1,9 +1,9 @@
-﻿using CatenaryCAD.Helpers;
+﻿using Catenary.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace CatenaryCAD.Geometry.Meshes
+namespace Catenary.Geometry.Meshes
 {
     /// <summary>
     /// Класс, реализующий меш в 3D пространстве.

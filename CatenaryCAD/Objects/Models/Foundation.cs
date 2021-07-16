@@ -1,9 +1,9 @@
-﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Attributes;
+﻿using Catenary.Geometry;
+using Catenary.Attributes;
 using System;
 using System.Linq;
 
-namespace CatenaryCAD.Models
+namespace Catenary.Models
 {
     /// <summary>
     /// Класс, описывающий модель фундамента опоры контактной сети.

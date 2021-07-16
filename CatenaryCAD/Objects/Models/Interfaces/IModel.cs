@@ -1,14 +1,14 @@
-﻿using CatenaryCAD.Components;
-using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Interfaces;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Helpers;
-using CatenaryCAD.Models.Events;
-using CatenaryCAD.Properties;
-using static CatenaryCAD.OperationalCommands;
+﻿using Catenary.Components;
+using Catenary.Geometry;
+using Catenary.Geometry.Interfaces;
+using Catenary.Geometry.Meshes;
+using Catenary.Geometry.Shapes;
+using Catenary.Helpers;
+using Catenary.Models.Events;
+using Catenary.Properties;
+using static Catenary.OperationalCommands;
 
-namespace CatenaryCAD.Models
+namespace Catenary.Models
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для всех моделей.

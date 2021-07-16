@@ -1,9 +1,9 @@
-﻿using CatenaryCAD.Geometry.Interfaces;
+﻿using Catenary.Geometry.Interfaces;
 using Multicad.Geometry;
 using System;
 using System.Runtime.InteropServices;
 
-namespace CatenaryCAD.Geometry
+namespace Catenary.Geometry
 {
     /// <summary>
     /// Структура, представляющая матрицу 4х4 для перобразований в 3D пространстве.

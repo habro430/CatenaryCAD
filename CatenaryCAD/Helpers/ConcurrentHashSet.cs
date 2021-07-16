@@ -33,7 +33,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
-namespace CatenaryCAD.Helpers
+namespace Catenary.Helpers
 {
     /// <summary>
     /// Представляет класс, реализующий потокобезопасную уникальную хэш коллекцию.

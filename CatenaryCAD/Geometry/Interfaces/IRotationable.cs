@@ -1,4 +1,4 @@
-﻿namespace CatenaryCAD.Geometry.Interfaces
+﻿namespace Catenary.Geometry.Interfaces
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для вращаемых объектов в пространстве.

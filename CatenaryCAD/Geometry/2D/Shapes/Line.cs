@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CatenaryCAD.Geometry.Shapes
+namespace Catenary.Geometry.Shapes
 {
     /// <summary>
     /// Класс, реализующий линию между двумя точками в 2D пространстве.

@@ -1,7 +1,7 @@
-﻿using CatenaryCAD.Geometry;
+﻿using Catenary.Geometry;
 using System;
 
-namespace CatenaryCAD.Models
+namespace Catenary.Models
 {
     /// <summary>
     /// Класс, описывающий модель опоры контактной сети.

@@ -1,16 +1,16 @@
-﻿using CatenaryCAD.Components;
-using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Geometry.Shapes;
-using CatenaryCAD.Helpers;
-using CatenaryCAD.Models.Events;
-using CatenaryCAD.Properties;
+﻿using Catenary.Components;
+using Catenary.Geometry;
+using Catenary.Geometry.Meshes;
+using Catenary.Geometry.Shapes;
+using Catenary.Helpers;
+using Catenary.Models.Events;
+using Catenary.Properties;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Linq;
 
-namespace CatenaryCAD.Models
+namespace Catenary.Models
 {
     /// <summary>
     /// Класс, описывающий общую логику для всех моделей.

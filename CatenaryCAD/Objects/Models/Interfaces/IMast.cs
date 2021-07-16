@@ -1,9 +1,9 @@
-﻿using CatenaryCAD.Geometry;
-using CatenaryCAD.Geometry.Meshes;
-using CatenaryCAD.Geometry.Shapes;
+﻿using Catenary.Geometry;
+using Catenary.Geometry.Meshes;
+using Catenary.Geometry.Shapes;
 using System;
 
-namespace CatenaryCAD.Models
+namespace Catenary.Models
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для модели опоры контактной сети.

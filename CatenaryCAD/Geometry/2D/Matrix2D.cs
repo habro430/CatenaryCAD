@@ -1,8 +1,8 @@
-﻿using CatenaryCAD.Geometry.Interfaces;
+﻿using Catenary.Geometry.Interfaces;
 using System;
 using System.Runtime.InteropServices;
 
-namespace CatenaryCAD.Geometry
+namespace Catenary.Geometry
 {
     /// <summary>
     /// Структура, представляющая матрицу 3х3 для перобразований в 2D пространстве.

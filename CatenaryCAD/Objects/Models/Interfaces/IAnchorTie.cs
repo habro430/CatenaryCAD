@@ -1,4 +1,4 @@
-﻿namespace CatenaryCAD.Models
+﻿namespace Catenary.Models
 {
     /// <summary>
     /// Интерфейс, описывающий контракты для модели анкерной оттяжки.
