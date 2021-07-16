@@ -94,7 +94,7 @@
       <Project>{7bae7cf6-6f28-420e-bc64-d567449900a9}</Project>
       <Name>BasicFoundations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CatenaryCAD\Catenary.csproj">
+    <ProjectReference Include="..\Catenary\Catenary.csproj">
       <Project>{40815505-2d4a-4e57-aeb1-d8b979586f7b}</Project>
       <Name>Catenary</Name>
     </ProjectReference>
