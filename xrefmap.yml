@@ -3109,6 +3109,19 @@ references:
   commentId: T:Catenary.Models.IMast
   fullName: Catenary.Models.IMast
   nameWithType: IMast
+- uid: Catenary.Models.IMast.AllowableFoundations
+  name: AllowableFoundations
+  href: api/Catenary.Models.IMast.html#Catenary_Models_IMast_AllowableFoundations
+  commentId: P:Catenary.Models.IMast.AllowableFoundations
+  fullName: Catenary.Models.IMast.AllowableFoundations
+  nameWithType: IMast.AllowableFoundations
+- uid: Catenary.Models.IMast.AllowableFoundations*
+  name: AllowableFoundations
+  href: api/Catenary.Models.IMast.html#Catenary_Models_IMast_AllowableFoundations_
+  commentId: Overload:Catenary.Models.IMast.AllowableFoundations
+  isSpec: "True"
+  fullName: Catenary.Models.IMast.AllowableFoundations
+  nameWithType: IMast.AllowableFoundations
 - uid: Catenary.Models.IModel
   name: IModel
   href: api/Catenary.Models.IModel.html
@@ -3270,6 +3283,19 @@ references:
   commentId: T:Catenary.Models.Mast
   fullName: Catenary.Models.Mast
   nameWithType: Mast
+- uid: Catenary.Models.Mast.AllowableFoundations
+  name: AllowableFoundations
+  href: api/Catenary.Models.Mast.html#Catenary_Models_Mast_AllowableFoundations
+  commentId: P:Catenary.Models.Mast.AllowableFoundations
+  fullName: Catenary.Models.Mast.AllowableFoundations
+  nameWithType: Mast.AllowableFoundations
+- uid: Catenary.Models.Mast.AllowableFoundations*
+  name: AllowableFoundations
+  href: api/Catenary.Models.Mast.html#Catenary_Models_Mast_AllowableFoundations_
+  commentId: Overload:Catenary.Models.Mast.AllowableFoundations
+  isSpec: "True"
+  fullName: Catenary.Models.Mast.AllowableFoundations
+  nameWithType: Mast.AllowableFoundations
 - uid: Catenary.Models.Model
   name: Model
   href: api/Catenary.Models.Model.html
