@@ -1,0 +1,1204 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Struct Vector3D
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Struct Vector3D
+   ">
+    <meta name="generator" content="docfx 2.56.7.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="&#1055;&#1086;&#1080;&#1089;&#1082;" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">&#1055;&#1086;&#1082;&#1072;&#1079;&#1072;&#1090;&#1100; / &#1057;&#1082;&#1088;&#1099;&#1090;&#1100; &#1089;&#1086;&#1076;&#1077;&#1088;&#1078;&#1072;&#1085;&#1080;&#1077;</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Catenary.Geometry.Vector3D">
+  
+  
+  <h1 id="Catenary_Geometry_Vector3D" data-uid="Catenary.Geometry.Vector3D" class="text-break">Struct Vector3D
+  </h1>
+  <div class="markdown level0 summary"><p>Структура, представляющая вектор в 3D пространстве.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div classs="implements">
+    <h5>&#1053;&#1072;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103;</h5>
+    <div><a class="xref" href="Catenary.Geometry.IVector.html">IVector</a></div>
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a>&gt;</div>
+    <div><a class="xref" href="Catenary.Geometry.Interfaces.ITransformable-2.html">ITransformable</a>&lt;<a class="xref" href="Catenary.Geometry.Matrix3D.html">Matrix3D</a>, <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>&#1059;&#1085;&#1072;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1085;&#1085;&#1099;&#1077; &#1101;&#1083;&#1077;&#1084;&#1077;&#1085;&#1090;&#1099;</h5>
+    <div>
+      <span class="xref">System.ValueType.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>&#1055;&#1088;&#1086;&#1089;&#1090;&#1088;&#1072;&#1085;&#1089;&#1090;&#1074;&#1086; &#1080;&#1084;&#1077;&#1085;</strong>: <a class="xref" href="Catenary.Geometry.html">Catenary.Geometry</a></h6>
+  <h6><strong>&#1057;&#1073;&#1086;&#1088;&#1082;&#1072;</strong>: Catenary.dll</h6>
+  <h5 id="Catenary_Geometry_Vector3D_syntax">&#1057;&#1080;&#1085;&#1090;&#1072;&#1082;&#1089;&#1080;&#1089;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public struct Vector3D : IVector, IEquatable&lt;Vector3D&gt;, ITransformable&lt;Matrix3D, Vector3D&gt;</code></pre>
+  </div>
+  <h3 id="constructors">&#1050;&#1086;&#1085;&#1089;&#1090;&#1088;&#1091;&#1082;&#1090;&#1086;&#1088;&#1099;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D__ctor_System_Double_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.%23ctor(System.Double%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L34">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D__ctor_" data-uid="Catenary.Geometry.Vector3D.#ctor*"></a>
+  <h4 id="Catenary_Geometry_Vector3D__ctor_System_Double_System_Double_System_Double_" data-uid="Catenary.Geometry.Vector3D.#ctor(System.Double,System.Double,System.Double)">Vector3D(Double, Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3D(double x, double y, double z)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X - составляющая компонента нового вектора.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y - составляющая компонента нового вектора.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">z</span></td>
+        <td><p>Z - составляющая компонента нового вектора.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">&#1055;&#1086;&#1083;&#1103;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_X.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.X%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L21">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <h4 id="Catenary_Geometry_Vector3D_X" data-uid="Catenary.Geometry.Vector3D.X">X</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly double X</code></pre>
+  </div>
+  <h5 class="fieldValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1087;&#1086;&#1083;&#1103;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><p>X - составляющая компонента вектора.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_Y.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.Y%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L25">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <h4 id="Catenary_Geometry_Vector3D_Y" data-uid="Catenary.Geometry.Vector3D.Y">Y</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly double Y</code></pre>
+  </div>
+  <h5 class="fieldValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1087;&#1086;&#1083;&#1103;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><p>Y - составляющая компонента вектора.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_Z.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.Z%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L29">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <h4 id="Catenary_Geometry_Vector3D_Z" data-uid="Catenary.Geometry.Vector3D.Z">Z</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly double Z</code></pre>
+  </div>
+  <h5 class="fieldValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1087;&#1086;&#1083;&#1103;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><p>Z - составляющая компонента вектора.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">&#1057;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_AxisX.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.AxisX%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L43">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_AxisX_" data-uid="Catenary.Geometry.Vector3D.AxisX*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_AxisX" data-uid="Catenary.Geometry.Vector3D.AxisX">AxisX</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3D AxisX { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Нормализованный, единичный <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> по направлению оси X.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_AxisY.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.AxisY%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L47">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_AxisY_" data-uid="Catenary.Geometry.Vector3D.AxisY*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_AxisY" data-uid="Catenary.Geometry.Vector3D.AxisY">AxisY</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3D AxisY { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Нормализованный, единичный <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> по направлению оси Y.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_AxisZ.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.AxisZ%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L51">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_AxisZ_" data-uid="Catenary.Geometry.Vector3D.AxisZ*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_AxisZ" data-uid="Catenary.Geometry.Vector3D.AxisZ">AxisZ</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Vector3D AxisZ { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">&#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1089;&#1074;&#1086;&#1081;&#1089;&#1090;&#1074;&#1072;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Нормализованный, единичный <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> по направлению оси Z.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">&#1052;&#1077;&#1090;&#1086;&#1076;&#1099;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_CrossProduct_Catenary_Geometry_Vector3D__.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.CrossProduct(Catenary.Geometry.Vector3D%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L147">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_CrossProduct_" data-uid="Catenary.Geometry.Vector3D.CrossProduct*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_CrossProduct_Catenary_Geometry_Vector3D__" data-uid="Catenary.Geometry.Vector3D.CrossProduct(Catenary.Geometry.Vector3D@)">CrossProduct(Vector3D)</h4>
+  <div class="markdown level1 summary"><p>Возвращает результат перекрестного произведения данного экземпляра
+<a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> и <code data-dev-comment-type="paramref" class="paramref">other</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public Vector3D CrossProduct(in Vector3D other)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>Вектор для кросс-произведения на данный экземпляр <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Результат кросс-произведения данного экземпляра
+<a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> и <code data-dev-comment-type="paramref" class="paramref">other</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_DotProduct_Catenary_Geometry_Vector3D__.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.DotProduct(Catenary.Geometry.Vector3D%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L159">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_DotProduct_" data-uid="Catenary.Geometry.Vector3D.DotProduct*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_DotProduct_Catenary_Geometry_Vector3D__" data-uid="Catenary.Geometry.Vector3D.DotProduct(Catenary.Geometry.Vector3D@)">DotProduct(Vector3D)</h4>
+  <div class="markdown level1 summary"><p>Возвращает скалярное произведение данного экземпляра
+<a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> и <code data-dev-comment-type="paramref" class="paramref">other</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public double DotProduct(in Vector3D other)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>Вектор для скалярного произведения на данный экземпляр <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><p>Результат скалярного произведения данного экземпляра
+<a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> и <code data-dev-comment-type="paramref" class="paramref">other</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_Equals_Catenary_Geometry_Vector3D_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.Equals(Catenary.Geometry.Vector3D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L121">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_Equals_" data-uid="Catenary.Geometry.Vector3D.Equals*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_Equals_Catenary_Geometry_Vector3D_" data-uid="Catenary.Geometry.Vector3D.Equals(Catenary.Geometry.Vector3D)">Equals(Vector3D)</h4>
+  <div class="markdown level1 summary"><p>Указывает, эквивалентен ли текущий объект другому объекту того же типа.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public bool Equals(Vector3D other)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>Объект для сравнения с текущим экземпляром.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><span class="xref">true</span> если <code data-dev-comment-type="paramref" class="paramref">other</code> и данный экземпляр
+представляют одинаковые значения, в противному случае - <span class="xref">false</span></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L111">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_Equals_" data-uid="Catenary.Geometry.Vector3D.Equals*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_Equals_System_Object_" data-uid="Catenary.Geometry.Vector3D.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Указывает, равен ли этот экземпляр заданному объекту.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public override bool Equals(object other)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>Объект для сравнения с текущим экземпляром.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><span class="xref">true</span> если <code data-dev-comment-type="paramref" class="paramref">other</code> и данный экземпляр относятся к одному типу
+и представляют одинаковые значения, в противному случае - <span class="xref">false</span></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">&#1055;&#1077;&#1088;&#1077;&#1075;&#1088;&#1091;&#1079;&#1082;&#1080;</h5>
+  <div><span class="xref">System.ValueType.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_GetAngleTo_Catenary_Geometry_Vector3D__Catenary_Geometry_Vector3D__.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.GetAngleTo(Catenary.Geometry.Vector3D%40%2CCatenary.Geometry.Vector3D%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L171">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_GetAngleTo_" data-uid="Catenary.Geometry.Vector3D.GetAngleTo*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_GetAngleTo_Catenary_Geometry_Vector3D__Catenary_Geometry_Vector3D__" data-uid="Catenary.Geometry.Vector3D.GetAngleTo(Catenary.Geometry.Vector3D@,Catenary.Geometry.Vector3D@)">GetAngleTo(Vector3D, Vector3D)</h4>
+  <div class="markdown level1 summary"><p>Возвращает угол между данным экземпляром <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> и
+<code data-dev-comment-type="paramref" class="paramref">other</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public double GetAngleTo(in Vector3D other, in Vector3D refrence)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>Вектор по отношению к которому расчитывается угол.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">refrence</span></td>
+        <td><p>Вектор оси для которой расчитывается угол.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><p>Угол между данным экземпляром <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> и
+<code data-dev-comment-type="paramref" class="paramref">other</code> в радианах.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_GetHashCode.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L129">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_GetHashCode_" data-uid="Catenary.Geometry.Vector3D.GetHashCode*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_GetHashCode" data-uid="Catenary.Geometry.Vector3D.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Возвращает хэш-код данного экземпляра.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>Хэш-код данного экземпляра.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">&#1055;&#1077;&#1088;&#1077;&#1075;&#1088;&#1091;&#1079;&#1082;&#1080;</h5>
+  <div><span class="xref">System.ValueType.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_GetLength.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.GetLength%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L180">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_GetLength_" data-uid="Catenary.Geometry.Vector3D.GetLength*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_GetLength" data-uid="Catenary.Geometry.Vector3D.GetLength">GetLength()</h4>
+  <div class="markdown level1 summary"><p>Возвращает длинну данного <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public double GetLength()</code></pre>
+  </div>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><p>Длинна вектора.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_GetNegate.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.GetNegate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L188">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_GetNegate_" data-uid="Catenary.Geometry.Vector3D.GetNegate*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_GetNegate" data-uid="Catenary.Geometry.Vector3D.GetNegate">GetNegate()</h4>
+  <div class="markdown level1 summary"><p>Инвертирует направление данного <a class="xref" href="Catenary.Geometry.Vector2D.html">Vector2D</a>, эквивалентно умножению на -1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public Vector3D GetNegate()</code></pre>
+  </div>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Экземпляр <a class="xref" href="Catenary.Geometry.Vector2D.html">Vector2D</a> указывающий в противоположное направление.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_GetNormalize.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.GetNormalize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L196">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_GetNormalize_" data-uid="Catenary.Geometry.Vector3D.GetNormalize*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_GetNormalize" data-uid="Catenary.Geometry.Vector3D.GetNormalize">GetNormalize()</h4>
+  <div class="markdown level1 summary"><p>Возвращает нормализованный <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a> из данного <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public Vector3D GetNormalize()</code></pre>
+  </div>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Нормализованный экземпляр <a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_TransformBy_Catenary_Geometry_Matrix3D__.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.TransformBy(Catenary.Geometry.Matrix3D%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L135">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_TransformBy_" data-uid="Catenary.Geometry.Vector3D.TransformBy*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_TransformBy_Catenary_Geometry_Matrix3D__" data-uid="Catenary.Geometry.Vector3D.TransformBy(Catenary.Geometry.Matrix3D@)">TransformBy(Matrix3D)</h4>
+  <div class="markdown level1 summary"><p>Преобразовывает объект с помощью заданной матрицы <code data-dev-comment-type="paramref" class="paramref">matrix</code> и возвращает результат.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public Vector3D TransformBy(in Matrix3D matrix)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Matrix3D.html">Matrix3D</a></td>
+        <td><span class="parametername">matrix</span></td>
+        <td><p>Матрица для трансформации.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Результат преобразования.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">&#1054;&#1087;&#1077;&#1088;&#1072;&#1090;&#1086;&#1088;&#1099;
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_op_Addition_Catenary_Geometry_Vector3D_Catenary_Geometry_Vector3D_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.op_Addition(Catenary.Geometry.Vector3D%2CCatenary.Geometry.Vector3D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L60">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_op_Addition_" data-uid="Catenary.Geometry.Vector3D.op_Addition*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_op_Addition_Catenary_Geometry_Vector3D_Catenary_Geometry_Vector3D_" data-uid="Catenary.Geometry.Vector3D.op_Addition(Catenary.Geometry.Vector3D,Catenary.Geometry.Vector3D)">Addition(Vector3D, Vector3D)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public static Vector3D operator +(Vector3D a, Vector3D b)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">a</span></td>
+        <td><p>Первый операнд.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">b</span></td>
+        <td><p>Второй операнд.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Результат сложения векторов <code data-dev-comment-type="paramref" class="paramref">a</code> и <code data-dev-comment-type="paramref" class="paramref">b</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_op_Division_Catenary_Geometry_Vector3D_System_Double_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.op_Division(Catenary.Geometry.Vector3D%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L81">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_op_Division_" data-uid="Catenary.Geometry.Vector3D.op_Division*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_op_Division_Catenary_Geometry_Vector3D_System_Double_" data-uid="Catenary.Geometry.Vector3D.op_Division(Catenary.Geometry.Vector3D,System.Double)">Division(Vector3D, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public static Vector3D operator /(Vector3D v, double s)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">v</span></td>
+        <td><p>Первый операнд.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">s</span></td>
+        <td><p>Второй операнд.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Результат деления вектора <code data-dev-comment-type="paramref" class="paramref">v</code> и числа <code data-dev-comment-type="paramref" class="paramref">s</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_op_Equality_Catenary_Geometry_Vector3D_Catenary_Geometry_Vector3D_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.op_Equality(Catenary.Geometry.Vector3D%2CCatenary.Geometry.Vector3D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L89">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_op_Equality_" data-uid="Catenary.Geometry.Vector3D.op_Equality*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_op_Equality_Catenary_Geometry_Vector3D_Catenary_Geometry_Vector3D_" data-uid="Catenary.Geometry.Vector3D.op_Equality(Catenary.Geometry.Vector3D,Catenary.Geometry.Vector3D)">Equality(Vector3D, Vector3D)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public static bool operator ==(Vector3D v1, Vector3D v2)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">v1</span></td>
+        <td><p>Первый операнд.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">v2</span></td>
+        <td><p>Второй операнд.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><span class="xref">true</span> если <code data-dev-comment-type="paramref" class="paramref">v1</code> и <code data-dev-comment-type="paramref" class="paramref">v2</code>
+представляют одинаковые значения, в противном случае - <span class="xref">false</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_op_Inequality_Catenary_Geometry_Vector3D_Catenary_Geometry_Vector3D_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.op_Inequality(Catenary.Geometry.Vector3D%2CCatenary.Geometry.Vector3D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L97">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_op_Inequality_" data-uid="Catenary.Geometry.Vector3D.op_Inequality*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_op_Inequality_Catenary_Geometry_Vector3D_Catenary_Geometry_Vector3D_" data-uid="Catenary.Geometry.Vector3D.op_Inequality(Catenary.Geometry.Vector3D,Catenary.Geometry.Vector3D)">Inequality(Vector3D, Vector3D)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public static bool operator !=(Vector3D v1, Vector3D v2)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">v1</span></td>
+        <td><p>Первый операнд.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">v2</span></td>
+        <td><p>Второй операнд.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><span class="xref">true</span> если <code data-dev-comment-type="paramref" class="paramref">v1</code> и <code data-dev-comment-type="paramref" class="paramref">v2</code>
+представляют разные значения, в противном случае - <span class="xref">false</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_op_Multiply_Catenary_Geometry_Vector3D_System_Double_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.op_Multiply(Catenary.Geometry.Vector3D%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L74">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_op_Multiply_" data-uid="Catenary.Geometry.Vector3D.op_Multiply*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_op_Multiply_Catenary_Geometry_Vector3D_System_Double_" data-uid="Catenary.Geometry.Vector3D.op_Multiply(Catenary.Geometry.Vector3D,System.Double)">Multiply(Vector3D, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public static Vector3D operator *(Vector3D v, double s)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">v</span></td>
+        <td><p>Первый операнд.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">s</span></td>
+        <td><p>Второй операнд.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Результат произведения вектора <code data-dev-comment-type="paramref" class="paramref">v</code> и числа <code data-dev-comment-type="paramref" class="paramref">s</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D_op_Subtraction_Catenary_Geometry_Vector3D_Catenary_Geometry_Vector3D_.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D.op_Subtraction(Catenary.Geometry.Vector3D%2CCatenary.Geometry.Vector3D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L67">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+  </span>
+  <a id="Catenary_Geometry_Vector3D_op_Subtraction_" data-uid="Catenary.Geometry.Vector3D.op_Subtraction*"></a>
+  <h4 id="Catenary_Geometry_Vector3D_op_Subtraction_Catenary_Geometry_Vector3D_Catenary_Geometry_Vector3D_" data-uid="Catenary.Geometry.Vector3D.op_Subtraction(Catenary.Geometry.Vector3D,Catenary.Geometry.Vector3D)">Subtraction(Vector3D, Vector3D)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">&#1054;&#1073;&#1098;&#1103;&#1074;&#1083;&#1077;&#1085;&#1080;&#1077;</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TargetedPatchingOptOut(&quot;Performance critical to inline across NGen image boundaries&quot;)]
+public static Vector3D operator -(Vector3D a, Vector3D b)</code></pre>
+  </div>
+  <h5 class="parameters">&#1055;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1099;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1048;&#1084;&#1103;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">a</span></td>
+        <td><p>Первый операнд.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><span class="parametername">b</span></td>
+        <td><p>Второй операнд.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">&#1042;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1084;&#1086;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>&#1058;&#1080;&#1087;</th>
+        <th>&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Catenary.Geometry.Vector3D.html">Vector3D</a></td>
+        <td><p>Результат разности векторов <code data-dev-comment-type="paramref" class="paramref">a</code> и <code data-dev-comment-type="paramref" class="paramref">b</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">&#1053;&#1072;&#1089;&#1083;&#1077;&#1076;&#1086;&#1074;&#1072;&#1085;&#1080;&#1103;</h3>
+  <div>
+      <a class="xref" href="Catenary.Geometry.IVector.html">IVector</a>
+  </div>
+  <div>
+      <span class="xref">System.IEquatable&lt;T&gt;</span>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Geometry.Interfaces.ITransformable-2.html">ITransformable&lt;T, TResult&gt;</a>
+  </div>
+  <h3 id="extensionmethods">&#1056;&#1072;&#1089;&#1096;&#1080;&#1088;&#1077;&#1085;&#1080;&#1103;</h3>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_DeepClone__1___0_">Cloner.DeepClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_DeepCloneTo__2___0___1_">Cloner.DeepCloneTo&lt;F, T&gt;(F, T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_ShallowClone__1___0_">Cloner.ShallowClone&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Catenary.Helpers.Cloner.html#Catenary_Helpers_Cloner_ShallowCloneTo__2___0___1_">Cloner.ShallowCloneTo&lt;F, T&gt;(F, T)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/jensaymoo/Catenary/new/master/apiSpec/new?filename=Catenary_Geometry_Vector3D.md&amp;value=---%0Auid%3A%20Catenary.Geometry.Vector3D%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">&#1059;&#1083;&#1091;&#1095;&#1096;&#1080;&#1090;&#1100; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/jensaymoo/Catenary/blob/master/Catenary/Geometry/3D/Vector3D.cs/#L15" class="contribution-link">&#1057;&#1084;. &#1080;&#1089;&#1093;&#1086;&#1076;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076;</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>&#1042; &#1101;&#1090;&#1086;&#1084; &#1076;&#1086;&#1082;&#1091;&#1084;&#1077;&#1085;&#1090;&#1077;</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">&#1042;&#1077;&#1088;&#1085;&#1091;&#1090;&#1100;&#1089;&#1103; &#1085;&#1072;&#1074;&#1077;&#1088;&#1093;</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
